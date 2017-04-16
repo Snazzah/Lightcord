@@ -1,5 +1,12 @@
 var emojiData = [];
-var bot = new Discord.Client();
+var bot = new Discord.Client({
+	autoReconnect: true,
+	bot: true,
+	userAgent: {
+		url: 'https://github.com/SnazzyPine25/Lightcord',
+		version: '1.0.2'
+	},
+});
 DiscordClientConverter(bot);
 var converter = new showdown.Converter();
 converter.setOption('headerLevelStart', '10');
@@ -441,7 +448,6 @@ let App = {
 			if(!$(".friends")[0]) $(".chat")[0].outerHTML = `<div class="friends flex-vertical flex-spacer"></div>`;
 			if (bot.user.bot){
 				$('.friends').addClass("bot");
-				//$('.friends').append('<img src="https://discordapp.com/assets/c7d26cb2902f21277d32ad03e7a21139.gif"><p>Bots cant have friends, unfortunetly...</p>');
 			}
 		},
 		chatMode: function(){
@@ -461,17 +467,20 @@ let App = {
 			})
 			document.getElementById('file-input').addEventListener("change", function() {
 				if(App.disableUploading) return;
-				let files = document.getElementById('file-input').files;
-				console.debug('%c[FileDrop] %cRetrieved files.', 'color:#c4e8f7; font-weight: bold;', 'color:#000;', files);
+				let filelist = document.getElementById('file-input').files;
+				let files = [];
+				Object.keys(filelist).map(i=>files.push(filelist[i]))
+				console.debug('%c[FileDrop] %cRetrieved files.', 'color:#c4e8f7; font-weight: bold;', 'color:#000;', filelist, files);
 				let next = (file)=>{
 					if(files.length === 0){
 						App.filePrompt.dropped();
 						return;
 					}
 					console.debug('%c[FileDrop] %cData for file ' + file.name + '.', 'color:#c4e8f7; font-weight: bold;', 'color:#000;', file);
+					let reader = new FileReader();
 					reader.readAsDataURL(file);
 					reader.onloadend = ()=>{
-						console.debug('%c[FileDrop] %cSending file to queue ' + file.name + '.', 'color:#c4e8f7; font-weight: bold;', 'color:#000;', {file:file.nativeFile,url:url,name:file.name,type:file.type,size:file.size});
+						console.debug('%c[FileDrop] %cSending file to queue ' + file.name + '.', 'color:#c4e8f7; font-weight: bold;', 'color:#000;', {file:file.nativeFile,url:reader.result,name:file.name,type:file.type,size:file.size});
 						App.queuedFiles.push({file:file,url:reader.result,name:file.name,type:file.type,size:file.size});
 						files.shift();
 						next(files[0]);
@@ -590,6 +599,10 @@ let App = {
 			$('.modal-inner').append(dom);
 			displayHandler.showModal();
 			$(".upload-input")[0].focus();
+			$(".upload-input").keypress(function (e) {
+				var code = (e.keyCode ? e.keyCode : e.which);
+				if (code === 13 && !e.shiftKey) App.filePrompt.upload();
+			});
 		}
 	},
 	filePrompt: {
