@@ -11,7 +11,7 @@ html, body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	background: url('img/loading.gif');
+	background: url('img/loading-compressed.gif');
 	height: 100%;
 	width: 100%;
 	background-size: contain;
@@ -41,24 +41,14 @@ html, body {
     display: table;
     position: fixed;
 }
-.landing footer {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	text-align: center;
-	background-color: rgba(255,255,255,0.25);
-	padding: 10px;
-	font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.landing footer a {
+.landing a {
 	color: #0270e0;
 	text-decoration: none;
 	font-weight: bold;
 	display: inline-block;
 	transition: all .2s ease;
 }
-.landing footer a:hover {
+.landing a:hover {
 	transform: scale(1.2);
 	transition: all .2s ease;
 	display: inline-block;
