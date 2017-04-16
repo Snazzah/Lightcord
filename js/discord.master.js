@@ -1,69 +1,69 @@
 /******/ (function(modules) { // webpackBootstrap
-/******/  // The module cache
-/******/  var installedModules = {};
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
 
-/******/  // The require function
-/******/  function __webpack_require__(moduleId) {
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
 
-/******/    // Check if module is in cache
-/******/    if(installedModules[moduleId])
-/******/      return installedModules[moduleId].exports;
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
 
-/******/    // Create a new module (and put it into the cache)
-/******/    var module = installedModules[moduleId] = {
-/******/      i: moduleId,
-/******/      l: false,
-/******/      exports: {}
-/******/    };
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
 
-/******/    // Execute the module function
-/******/    modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 
-/******/    // Flag the module as loaded
-/******/    module.l = true;
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
 
-/******/    // Return the exports of the module
-/******/    return module.exports;
-/******/  }
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
 
 
-/******/  // expose the modules object (__webpack_modules__)
-/******/  __webpack_require__.m = modules;
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
 
-/******/  // expose the module cache
-/******/  __webpack_require__.c = installedModules;
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
 
-/******/  // identity function for calling harmony imports with the correct context
-/******/  __webpack_require__.i = function(value) { return value; };
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
 
-/******/  // define getter function for harmony exports
-/******/  __webpack_require__.d = function(exports, name, getter) {
-/******/    if(!__webpack_require__.o(exports, name)) {
-/******/      Object.defineProperty(exports, name, {
-/******/        configurable: false,
-/******/        enumerable: true,
-/******/        get: getter
-/******/      });
-/******/    }
-/******/  };
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
 
-/******/  // getDefaultExport function for compatibility with non-harmony modules
-/******/  __webpack_require__.n = function(module) {
-/******/    var getter = module && module.__esModule ?
-/******/      function getDefault() { return module['default']; } :
-/******/      function getModuleExports() { return module; };
-/******/    __webpack_require__.d(getter, 'a', getter);
-/******/    return getter;
-/******/  };
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
 
-/******/  // Object.prototype.hasOwnProperty.call
-/******/  __webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 
-/******/  // __webpack_public_path__
-/******/  __webpack_require__.p = "";
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
 
-/******/  // Load entry module and return exports
-/******/  return __webpack_require__(__webpack_require__.s = 182);
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 182);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -3645,16 +3645,16 @@ var g;
 
 // This works in non-strict mode
 g = (function() {
-  return this;
+	return this;
 })();
 
 try {
-  // This works if eval is allowed (see CSP)
-  g = g || Function("return this")() || (1,eval)("this");
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
 } catch(e) {
-  // This works if the window reference is available
-  if(typeof window === "object")
-    g = window;
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
 }
 
 // g can still be undefined, but nothing to do about it...
@@ -9147,9 +9147,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     /* AMD */ if (true)
         !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-        __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-        (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-        __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
     /* CommonJS */ else if (typeof require === 'function' && typeof module === "object" && module && module["exports"])
         module["exports"] = factory();
     /* Global */ else
@@ -11671,96 +11671,96 @@ module.exports = ClientDataResolver;
 /***/ (function(module, exports) {
 
 module.exports = {
-  "name": "discord.js",
-  "version": "11.1.0",
-  "description": "A powerful library for interacting with the Discord API",
-  "main": "./src/index",
-  "types": "./typings/index.d.ts",
-  "scripts": {
-    "test": "npm run lint && npm run docs:test",
-    "docs": "docgen --source src --custom docs/index.yml --output docs/docs.json",
-    "docs:test": "docgen --source src --custom docs/index.yml",
-    "lint": "eslint src",
-    "lint:fix": "eslint --fix src",
-    "webpack": "parallel-webpack"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hydrabolt/discord.js.git"
-  },
-  "keywords": [
-    "discord",
-    "api",
-    "bot",
-    "client",
-    "node",
-    "discordapp"
-  ],
-  "author": "Amish Shah <amishshah.2k@gmail.com>",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/hydrabolt/discord.js/issues"
-  },
-  "homepage": "https://github.com/hydrabolt/discord.js#readme",
-  "runkitExampleFilename": "./docs/examples/ping.js",
-  "dependencies": {
-    "@types/node": "^7.0.0",
-    "long": "^3.2.0",
-    "prism-media": "^0.0.1",
-    "snekfetch": "^2.2.0",
-    "tweetnacl": "^0.14.0",
-    "ws": "^2.0.0"
-  },
-  "peerDependencies": {
-    "bufferutil": "^2.0.0",
-    "erlpack": "hammerandchisel/erlpack",
-    "node-opus": "^0.2.5",
-    "opusscript": "^0.0.3",
-    "sodium": "^2.0.1",
-    "uws": "^0.14.1"
-  },
-  "devDependencies": {
-    "discord.js-docgen": "hydrabolt/discord.js-docgen",
-    "eslint": "^3.17.0",
-    "parallel-webpack": "^1.6.0",
-    "uglify-js": "mishoo/UglifyJS2#harmony",
-    "webpack": "^2.2.0"
-  },
-  "engines": {
-    "node": ">=6.0.0"
-  },
-  "browser": {
-    "ws": false,
-    "uws": false,
-    "erlpack": false,
-    "prism-media": false,
-    "opusscript": false,
-    "node-opus": false,
-    "tweetnacl": false,
-    "sodium": false,
-    "src/sharding/Shard.js": false,
-    "src/sharding/ShardClientUtil.js": false,
-    "src/sharding/ShardingManager.js": false,
-    "src/client/voice/dispatcher/StreamDispatcher.js": false,
-    "src/client/voice/opus/BaseOpusEngine.js": false,
-    "src/client/voice/opus/NodeOpusEngine.js": false,
-    "src/client/voice/opus/OpusEngineList.js": false,
-    "src/client/voice/opus/OpusScriptEngine.js": false,
-    "src/client/voice/pcm/ConverterEngine.js": false,
-    "src/client/voice/pcm/ConverterEngineList.js": false,
-    "src/client/voice/pcm/FfmpegConverterEngine.js": false,
-    "src/client/voice/player/AudioPlayer.js": false,
-    "src/client/voice/receiver/VoiceReadable.js": false,
-    "src/client/voice/receiver/VoiceReceiver.js": false,
-    "src/client/voice/util/Secretbox.js": false,
-    "src/client/voice/util/SecretKey.js": false,
-    "src/client/voice/util/VolumeInterface.js": false,
-    "src/client/voice/ClientVoiceManager.js": false,
-    "src/client/voice/VoiceBroadcast.js": false,
-    "src/client/voice/VoiceConnection.js": false,
-    "src/client/voice/VoiceUDPClient.js": false,
-    "src/client/voice/VoiceWebSocket.js": false
-  }
+	"name": "discord.js",
+	"version": "11.1.0",
+	"description": "A powerful library for interacting with the Discord API",
+	"main": "./src/index",
+	"types": "./typings/index.d.ts",
+	"scripts": {
+		"test": "npm run lint && npm run docs:test",
+		"docs": "docgen --source src --custom docs/index.yml --output docs/docs.json",
+		"docs:test": "docgen --source src --custom docs/index.yml",
+		"lint": "eslint src",
+		"lint:fix": "eslint --fix src",
+		"webpack": "parallel-webpack"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hydrabolt/discord.js.git"
+	},
+	"keywords": [
+		"discord",
+		"api",
+		"bot",
+		"client",
+		"node",
+		"discordapp"
+	],
+	"author": "Amish Shah <amishshah.2k@gmail.com>",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/hydrabolt/discord.js/issues"
+	},
+	"homepage": "https://github.com/hydrabolt/discord.js#readme",
+	"runkitExampleFilename": "./docs/examples/ping.js",
+	"dependencies": {
+		"@types/node": "^7.0.0",
+		"long": "^3.2.0",
+		"prism-media": "^0.0.1",
+		"snekfetch": "^2.2.0",
+		"tweetnacl": "^0.14.0",
+		"ws": "^2.0.0"
+	},
+	"peerDependencies": {
+		"bufferutil": "^2.0.0",
+		"erlpack": "hammerandchisel/erlpack",
+		"node-opus": "^0.2.5",
+		"opusscript": "^0.0.3",
+		"sodium": "^2.0.1",
+		"uws": "^0.14.1"
+	},
+	"devDependencies": {
+		"discord.js-docgen": "hydrabolt/discord.js-docgen",
+		"eslint": "^3.17.0",
+		"parallel-webpack": "^1.6.0",
+		"uglify-js": "mishoo/UglifyJS2#harmony",
+		"webpack": "^2.2.0"
+	},
+	"engines": {
+		"node": ">=6.0.0"
+	},
+	"browser": {
+		"ws": false,
+		"uws": false,
+		"erlpack": false,
+		"prism-media": false,
+		"opusscript": false,
+		"node-opus": false,
+		"tweetnacl": false,
+		"sodium": false,
+		"src/sharding/Shard.js": false,
+		"src/sharding/ShardClientUtil.js": false,
+		"src/sharding/ShardingManager.js": false,
+		"src/client/voice/dispatcher/StreamDispatcher.js": false,
+		"src/client/voice/opus/BaseOpusEngine.js": false,
+		"src/client/voice/opus/NodeOpusEngine.js": false,
+		"src/client/voice/opus/OpusEngineList.js": false,
+		"src/client/voice/opus/OpusScriptEngine.js": false,
+		"src/client/voice/pcm/ConverterEngine.js": false,
+		"src/client/voice/pcm/ConverterEngineList.js": false,
+		"src/client/voice/pcm/FfmpegConverterEngine.js": false,
+		"src/client/voice/player/AudioPlayer.js": false,
+		"src/client/voice/receiver/VoiceReadable.js": false,
+		"src/client/voice/receiver/VoiceReceiver.js": false,
+		"src/client/voice/util/Secretbox.js": false,
+		"src/client/voice/util/SecretKey.js": false,
+		"src/client/voice/util/VolumeInterface.js": false,
+		"src/client/voice/ClientVoiceManager.js": false,
+		"src/client/voice/VoiceBroadcast.js": false,
+		"src/client/voice/VoiceConnection.js": false,
+		"src/client/voice/VoiceUDPClient.js": false,
+		"src/client/voice/VoiceWebSocket.js": false
+	}
 };
 
 /***/ }),
@@ -14845,42 +14845,42 @@ var url = __webpack_require__(62)
 var http = exports
 
 http.request = function (opts, cb) {
-  if (typeof opts === 'string')
-    opts = url.parse(opts)
-  else
-    opts = extend(opts)
+	if (typeof opts === 'string')
+		opts = url.parse(opts)
+	else
+		opts = extend(opts)
 
-  // Normally, the page is loaded from http or https, so not specifying a protocol
-  // will result in a (valid) protocol-relative url. However, this won't work if
-  // the protocol is something else, like 'file:'
-  var defaultProtocol = global.location.protocol.search(/^https?:$/) === -1 ? 'http:' : ''
+	// Normally, the page is loaded from http or https, so not specifying a protocol
+	// will result in a (valid) protocol-relative url. However, this won't work if
+	// the protocol is something else, like 'file:'
+	var defaultProtocol = global.location.protocol.search(/^https?:$/) === -1 ? 'http:' : ''
 
-  var protocol = opts.protocol || defaultProtocol
-  var host = opts.hostname || opts.host
-  var port = opts.port
-  var path = opts.path || '/'
+	var protocol = opts.protocol || defaultProtocol
+	var host = opts.hostname || opts.host
+	var port = opts.port
+	var path = opts.path || '/'
 
-  // Necessary for IPv6 addresses
-  if (host && host.indexOf(':') !== -1)
-    host = '[' + host + ']'
+	// Necessary for IPv6 addresses
+	if (host && host.indexOf(':') !== -1)
+		host = '[' + host + ']'
 
-  // This may be a relative url. The browser should always be able to interpret it correctly.
-  opts.url = (host ? (protocol + '//' + host) : '') + (port ? ':' + port : '') + path
-  opts.method = (opts.method || 'GET').toUpperCase()
-  opts.headers = opts.headers || {}
+	// This may be a relative url. The browser should always be able to interpret it correctly.
+	opts.url = (host ? (protocol + '//' + host) : '') + (port ? ':' + port : '') + path
+	opts.method = (opts.method || 'GET').toUpperCase()
+	opts.headers = opts.headers || {}
 
-  // Also valid opts.auth, opts.mode
+	// Also valid opts.auth, opts.mode
 
-  var req = new ClientRequest(opts)
-  if (cb)
-    req.on('response', cb)
-  return req
+	var req = new ClientRequest(opts)
+	if (cb)
+		req.on('response', cb)
+	return req
 }
 
 http.get = function get (opts, cb) {
-  var req = http.request(opts, cb)
-  req.end()
-  return req
+	var req = http.request(opts, cb)
+	req.end()
+	return req
 }
 
 http.Agent = function () {}
@@ -14889,32 +14889,32 @@ http.Agent.defaultMaxSockets = 4
 http.STATUS_CODES = statusCodes
 
 http.METHODS = [
-  'CHECKOUT',
-  'CONNECT',
-  'COPY',
-  'DELETE',
-  'GET',
-  'HEAD',
-  'LOCK',
-  'M-SEARCH',
-  'MERGE',
-  'MKACTIVITY',
-  'MKCOL',
-  'MOVE',
-  'NOTIFY',
-  'OPTIONS',
-  'PATCH',
-  'POST',
-  'PROPFIND',
-  'PROPPATCH',
-  'PURGE',
-  'PUT',
-  'REPORT',
-  'SEARCH',
-  'SUBSCRIBE',
-  'TRACE',
-  'UNLOCK',
-  'UNSUBSCRIBE'
+	'CHECKOUT',
+	'CONNECT',
+	'COPY',
+	'DELETE',
+	'GET',
+	'HEAD',
+	'LOCK',
+	'M-SEARCH',
+	'MERGE',
+	'MKACTIVITY',
+	'MKCOL',
+	'MOVE',
+	'NOTIFY',
+	'OPTIONS',
+	'PATCH',
+	'POST',
+	'PROPFIND',
+	'PROPPATCH',
+	'PURGE',
+	'PUT',
+	'REPORT',
+	'SEARCH',
+	'SUBSCRIBE',
+	'TRACE',
+	'UNLOCK',
+	'UNSUBSCRIBE'
 ]
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
@@ -14926,8 +14926,8 @@ http.METHODS = [
 
 exports.blobConstructor = false
 try {
-  new Blob([new ArrayBuffer(1)])
-  exports.blobConstructor = true
+	new Blob([new ArrayBuffer(1)])
+	exports.blobConstructor = true
 } catch (e) {}
 
 // The xhr request to example.com may violate some restrictive CSP configurations,
@@ -14935,34 +14935,34 @@ try {
 // and assume support for certain features below.
 var xhr
 function getXHR () {
-  // Cache the xhr value
-  if (xhr !== undefined) return xhr
+	// Cache the xhr value
+	if (xhr !== undefined) return xhr
 
-  if (global.XMLHttpRequest) {
-    xhr = new global.XMLHttpRequest()
-    // If XDomainRequest is available (ie only, where xhr might not work
-    // cross domain), use the page location. Otherwise use example.com
-    // Note: this doesn't actually make an http request.
-    try {
-      xhr.open('GET', global.XDomainRequest ? '/' : 'https://example.com')
-    } catch(e) {
-      xhr = null
-    }
-  } else {
-    // Service workers don't have XHR
-    xhr = null
-  }
-  return xhr
+	if (global.XMLHttpRequest) {
+		xhr = new global.XMLHttpRequest()
+		// If XDomainRequest is available (ie only, where xhr might not work
+		// cross domain), use the page location. Otherwise use example.com
+		// Note: this doesn't actually make an http request.
+		try {
+			xhr.open('GET', global.XDomainRequest ? '/' : 'https://example.com')
+		} catch(e) {
+			xhr = null
+		}
+	} else {
+		// Service workers don't have XHR
+		xhr = null
+	}
+	return xhr
 }
 
 function checkTypeSupport (type) {
-  var xhr = getXHR()
-  if (!xhr) return false
-  try {
-    xhr.responseType = type
-    return xhr.responseType === type
-  } catch (e) {}
-  return false
+	var xhr = getXHR()
+	if (!xhr) return false
+	try {
+		xhr.responseType = type
+		return xhr.responseType === type
+	} catch (e) {}
+	return false
 }
 
 // For some strange reason, Safari 7.0 reports typeof global.ArrayBuffer === 'object'.
@@ -14978,7 +14978,7 @@ exports.arraybuffer = exports.fetch || (haveArrayBuffer && checkTypeSupport('arr
 // be used if it's available, just return false for these to avoid the warnings.
 exports.msstream = !exports.fetch && haveSlice && checkTypeSupport('ms-stream')
 exports.mozchunkedarraybuffer = !exports.fetch && haveArrayBuffer &&
-  checkTypeSupport('moz-chunked-arraybuffer')
+	checkTypeSupport('moz-chunked-arraybuffer')
 
 // If fetch is supported, then overrideMimeType will be supported too. Skip calling
 // getXHR().
@@ -14987,7 +14987,7 @@ exports.overrideMimeType = exports.fetch || (getXHR() ? isFunction(getXHR().over
 exports.vbArray = isFunction(global.VBArray)
 
 function isFunction (value) {
-  return typeof value === 'function'
+	return typeof value === 'function'
 }
 
 xhr = null // Help gc
@@ -17414,533 +17414,533 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
 ;(function(root) {
 
-  /** Detect free variables */
-  var freeExports = typeof exports == 'object' && exports &&
-    !exports.nodeType && exports;
-  var freeModule = typeof module == 'object' && module &&
-    !module.nodeType && module;
-  var freeGlobal = typeof global == 'object' && global;
-  if (
-    freeGlobal.global === freeGlobal ||
-    freeGlobal.window === freeGlobal ||
-    freeGlobal.self === freeGlobal
-  ) {
-    root = freeGlobal;
-  }
+	/** Detect free variables */
+	var freeExports = typeof exports == 'object' && exports &&
+		!exports.nodeType && exports;
+	var freeModule = typeof module == 'object' && module &&
+		!module.nodeType && module;
+	var freeGlobal = typeof global == 'object' && global;
+	if (
+		freeGlobal.global === freeGlobal ||
+		freeGlobal.window === freeGlobal ||
+		freeGlobal.self === freeGlobal
+	) {
+		root = freeGlobal;
+	}
 
-  /**
-   * The `punycode` object.
-   * @name punycode
-   * @type Object
-   */
-  var punycode,
+	/**
+	 * The `punycode` object.
+	 * @name punycode
+	 * @type Object
+	 */
+	var punycode,
 
-  /** Highest positive signed 32-bit float value */
-  maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
+	/** Highest positive signed 32-bit float value */
+	maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
 
-  /** Bootstring parameters */
-  base = 36,
-  tMin = 1,
-  tMax = 26,
-  skew = 38,
-  damp = 700,
-  initialBias = 72,
-  initialN = 128, // 0x80
-  delimiter = '-', // '\x2D'
+	/** Bootstring parameters */
+	base = 36,
+	tMin = 1,
+	tMax = 26,
+	skew = 38,
+	damp = 700,
+	initialBias = 72,
+	initialN = 128, // 0x80
+	delimiter = '-', // '\x2D'
 
-  /** Regular expressions */
-  regexPunycode = /^xn--/,
-  regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
-  regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
+	/** Regular expressions */
+	regexPunycode = /^xn--/,
+	regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
+	regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
 
-  /** Error messages */
-  errors = {
-    'overflow': 'Overflow: input needs wider integers to process',
-    'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
-    'invalid-input': 'Invalid input'
-  },
+	/** Error messages */
+	errors = {
+		'overflow': 'Overflow: input needs wider integers to process',
+		'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
+		'invalid-input': 'Invalid input'
+	},
 
-  /** Convenience shortcuts */
-  baseMinusTMin = base - tMin,
-  floor = Math.floor,
-  stringFromCharCode = String.fromCharCode,
+	/** Convenience shortcuts */
+	baseMinusTMin = base - tMin,
+	floor = Math.floor,
+	stringFromCharCode = String.fromCharCode,
 
-  /** Temporary variable */
-  key;
+	/** Temporary variable */
+	key;
 
-  /*--------------------------------------------------------------------------*/
+	/*--------------------------------------------------------------------------*/
 
-  /**
-   * A generic error utility function.
-   * @private
-   * @param {String} type The error type.
-   * @returns {Error} Throws a `RangeError` with the applicable error message.
-   */
-  function error(type) {
-    throw new RangeError(errors[type]);
-  }
+	/**
+	 * A generic error utility function.
+	 * @private
+	 * @param {String} type The error type.
+	 * @returns {Error} Throws a `RangeError` with the applicable error message.
+	 */
+	function error(type) {
+		throw new RangeError(errors[type]);
+	}
 
-  /**
-   * A generic `Array#map` utility function.
-   * @private
-   * @param {Array} array The array to iterate over.
-   * @param {Function} callback The function that gets called for every array
-   * item.
-   * @returns {Array} A new array of values returned by the callback function.
-   */
-  function map(array, fn) {
-    var length = array.length;
-    var result = [];
-    while (length--) {
-      result[length] = fn(array[length]);
-    }
-    return result;
-  }
+	/**
+	 * A generic `Array#map` utility function.
+	 * @private
+	 * @param {Array} array The array to iterate over.
+	 * @param {Function} callback The function that gets called for every array
+	 * item.
+	 * @returns {Array} A new array of values returned by the callback function.
+	 */
+	function map(array, fn) {
+		var length = array.length;
+		var result = [];
+		while (length--) {
+			result[length] = fn(array[length]);
+		}
+		return result;
+	}
 
-  /**
-   * A simple `Array#map`-like wrapper to work with domain name strings or email
-   * addresses.
-   * @private
-   * @param {String} domain The domain name or email address.
-   * @param {Function} callback The function that gets called for every
-   * character.
-   * @returns {Array} A new string of characters returned by the callback
-   * function.
-   */
-  function mapDomain(string, fn) {
-    var parts = string.split('@');
-    var result = '';
-    if (parts.length > 1) {
-      // In email addresses, only the domain name should be punycoded. Leave
-      // the local part (i.e. everything up to `@`) intact.
-      result = parts[0] + '@';
-      string = parts[1];
-    }
-    // Avoid `split(regex)` for IE8 compatibility. See #17.
-    string = string.replace(regexSeparators, '\x2E');
-    var labels = string.split('.');
-    var encoded = map(labels, fn).join('.');
-    return result + encoded;
-  }
+	/**
+	 * A simple `Array#map`-like wrapper to work with domain name strings or email
+	 * addresses.
+	 * @private
+	 * @param {String} domain The domain name or email address.
+	 * @param {Function} callback The function that gets called for every
+	 * character.
+	 * @returns {Array} A new string of characters returned by the callback
+	 * function.
+	 */
+	function mapDomain(string, fn) {
+		var parts = string.split('@');
+		var result = '';
+		if (parts.length > 1) {
+			// In email addresses, only the domain name should be punycoded. Leave
+			// the local part (i.e. everything up to `@`) intact.
+			result = parts[0] + '@';
+			string = parts[1];
+		}
+		// Avoid `split(regex)` for IE8 compatibility. See #17.
+		string = string.replace(regexSeparators, '\x2E');
+		var labels = string.split('.');
+		var encoded = map(labels, fn).join('.');
+		return result + encoded;
+	}
 
-  /**
-   * Creates an array containing the numeric code points of each Unicode
-   * character in the string. While JavaScript uses UCS-2 internally,
-   * this function will convert a pair of surrogate halves (each of which
-   * UCS-2 exposes as separate characters) into a single code point,
-   * matching UTF-16.
-   * @see `punycode.ucs2.encode`
-   * @see <https://mathiasbynens.be/notes/javascript-encoding>
-   * @memberOf punycode.ucs2
-   * @name decode
-   * @param {String} string The Unicode input string (UCS-2).
-   * @returns {Array} The new array of code points.
-   */
-  function ucs2decode(string) {
-    var output = [],
-        counter = 0,
-        length = string.length,
-        value,
-        extra;
-    while (counter < length) {
-      value = string.charCodeAt(counter++);
-      if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
-        // high surrogate, and there is a next character
-        extra = string.charCodeAt(counter++);
-        if ((extra & 0xFC00) == 0xDC00) { // low surrogate
-          output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
-        } else {
-          // unmatched surrogate; only append this code unit, in case the next
-          // code unit is the high surrogate of a surrogate pair
-          output.push(value);
-          counter--;
-        }
-      } else {
-        output.push(value);
-      }
-    }
-    return output;
-  }
+	/**
+	 * Creates an array containing the numeric code points of each Unicode
+	 * character in the string. While JavaScript uses UCS-2 internally,
+	 * this function will convert a pair of surrogate halves (each of which
+	 * UCS-2 exposes as separate characters) into a single code point,
+	 * matching UTF-16.
+	 * @see `punycode.ucs2.encode`
+	 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+	 * @memberOf punycode.ucs2
+	 * @name decode
+	 * @param {String} string The Unicode input string (UCS-2).
+	 * @returns {Array} The new array of code points.
+	 */
+	function ucs2decode(string) {
+		var output = [],
+		    counter = 0,
+		    length = string.length,
+		    value,
+		    extra;
+		while (counter < length) {
+			value = string.charCodeAt(counter++);
+			if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
+				// high surrogate, and there is a next character
+				extra = string.charCodeAt(counter++);
+				if ((extra & 0xFC00) == 0xDC00) { // low surrogate
+					output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
+				} else {
+					// unmatched surrogate; only append this code unit, in case the next
+					// code unit is the high surrogate of a surrogate pair
+					output.push(value);
+					counter--;
+				}
+			} else {
+				output.push(value);
+			}
+		}
+		return output;
+	}
 
-  /**
-   * Creates a string based on an array of numeric code points.
-   * @see `punycode.ucs2.decode`
-   * @memberOf punycode.ucs2
-   * @name encode
-   * @param {Array} codePoints The array of numeric code points.
-   * @returns {String} The new Unicode string (UCS-2).
-   */
-  function ucs2encode(array) {
-    return map(array, function(value) {
-      var output = '';
-      if (value > 0xFFFF) {
-        value -= 0x10000;
-        output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
-        value = 0xDC00 | value & 0x3FF;
-      }
-      output += stringFromCharCode(value);
-      return output;
-    }).join('');
-  }
+	/**
+	 * Creates a string based on an array of numeric code points.
+	 * @see `punycode.ucs2.decode`
+	 * @memberOf punycode.ucs2
+	 * @name encode
+	 * @param {Array} codePoints The array of numeric code points.
+	 * @returns {String} The new Unicode string (UCS-2).
+	 */
+	function ucs2encode(array) {
+		return map(array, function(value) {
+			var output = '';
+			if (value > 0xFFFF) {
+				value -= 0x10000;
+				output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
+				value = 0xDC00 | value & 0x3FF;
+			}
+			output += stringFromCharCode(value);
+			return output;
+		}).join('');
+	}
 
-  /**
-   * Converts a basic code point into a digit/integer.
-   * @see `digitToBasic()`
-   * @private
-   * @param {Number} codePoint The basic numeric code point value.
-   * @returns {Number} The numeric value of a basic code point (for use in
-   * representing integers) in the range `0` to `base - 1`, or `base` if
-   * the code point does not represent a value.
-   */
-  function basicToDigit(codePoint) {
-    if (codePoint - 48 < 10) {
-      return codePoint - 22;
-    }
-    if (codePoint - 65 < 26) {
-      return codePoint - 65;
-    }
-    if (codePoint - 97 < 26) {
-      return codePoint - 97;
-    }
-    return base;
-  }
+	/**
+	 * Converts a basic code point into a digit/integer.
+	 * @see `digitToBasic()`
+	 * @private
+	 * @param {Number} codePoint The basic numeric code point value.
+	 * @returns {Number} The numeric value of a basic code point (for use in
+	 * representing integers) in the range `0` to `base - 1`, or `base` if
+	 * the code point does not represent a value.
+	 */
+	function basicToDigit(codePoint) {
+		if (codePoint - 48 < 10) {
+			return codePoint - 22;
+		}
+		if (codePoint - 65 < 26) {
+			return codePoint - 65;
+		}
+		if (codePoint - 97 < 26) {
+			return codePoint - 97;
+		}
+		return base;
+	}
 
-  /**
-   * Converts a digit/integer into a basic code point.
-   * @see `basicToDigit()`
-   * @private
-   * @param {Number} digit The numeric value of a basic code point.
-   * @returns {Number} The basic code point whose value (when used for
-   * representing integers) is `digit`, which needs to be in the range
-   * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
-   * used; else, the lowercase form is used. The behavior is undefined
-   * if `flag` is non-zero and `digit` has no uppercase form.
-   */
-  function digitToBasic(digit, flag) {
-    //  0..25 map to ASCII a..z or A..Z
-    // 26..35 map to ASCII 0..9
-    return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
-  }
+	/**
+	 * Converts a digit/integer into a basic code point.
+	 * @see `basicToDigit()`
+	 * @private
+	 * @param {Number} digit The numeric value of a basic code point.
+	 * @returns {Number} The basic code point whose value (when used for
+	 * representing integers) is `digit`, which needs to be in the range
+	 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
+	 * used; else, the lowercase form is used. The behavior is undefined
+	 * if `flag` is non-zero and `digit` has no uppercase form.
+	 */
+	function digitToBasic(digit, flag) {
+		//  0..25 map to ASCII a..z or A..Z
+		// 26..35 map to ASCII 0..9
+		return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
+	}
 
-  /**
-   * Bias adaptation function as per section 3.4 of RFC 3492.
-   * https://tools.ietf.org/html/rfc3492#section-3.4
-   * @private
-   */
-  function adapt(delta, numPoints, firstTime) {
-    var k = 0;
-    delta = firstTime ? floor(delta / damp) : delta >> 1;
-    delta += floor(delta / numPoints);
-    for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
-      delta = floor(delta / baseMinusTMin);
-    }
-    return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
-  }
+	/**
+	 * Bias adaptation function as per section 3.4 of RFC 3492.
+	 * https://tools.ietf.org/html/rfc3492#section-3.4
+	 * @private
+	 */
+	function adapt(delta, numPoints, firstTime) {
+		var k = 0;
+		delta = firstTime ? floor(delta / damp) : delta >> 1;
+		delta += floor(delta / numPoints);
+		for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
+			delta = floor(delta / baseMinusTMin);
+		}
+		return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
+	}
 
-  /**
-   * Converts a Punycode string of ASCII-only symbols to a string of Unicode
-   * symbols.
-   * @memberOf punycode
-   * @param {String} input The Punycode string of ASCII-only symbols.
-   * @returns {String} The resulting string of Unicode symbols.
-   */
-  function decode(input) {
-    // Don't use UCS-2
-    var output = [],
-        inputLength = input.length,
-        out,
-        i = 0,
-        n = initialN,
-        bias = initialBias,
-        basic,
-        j,
-        index,
-        oldi,
-        w,
-        k,
-        digit,
-        t,
-        /** Cached calculation results */
-        baseMinusT;
+	/**
+	 * Converts a Punycode string of ASCII-only symbols to a string of Unicode
+	 * symbols.
+	 * @memberOf punycode
+	 * @param {String} input The Punycode string of ASCII-only symbols.
+	 * @returns {String} The resulting string of Unicode symbols.
+	 */
+	function decode(input) {
+		// Don't use UCS-2
+		var output = [],
+		    inputLength = input.length,
+		    out,
+		    i = 0,
+		    n = initialN,
+		    bias = initialBias,
+		    basic,
+		    j,
+		    index,
+		    oldi,
+		    w,
+		    k,
+		    digit,
+		    t,
+		    /** Cached calculation results */
+		    baseMinusT;
 
-    // Handle the basic code points: let `basic` be the number of input code
-    // points before the last delimiter, or `0` if there is none, then copy
-    // the first basic code points to the output.
+		// Handle the basic code points: let `basic` be the number of input code
+		// points before the last delimiter, or `0` if there is none, then copy
+		// the first basic code points to the output.
 
-    basic = input.lastIndexOf(delimiter);
-    if (basic < 0) {
-      basic = 0;
-    }
+		basic = input.lastIndexOf(delimiter);
+		if (basic < 0) {
+			basic = 0;
+		}
 
-    for (j = 0; j < basic; ++j) {
-      // if it's not a basic code point
-      if (input.charCodeAt(j) >= 0x80) {
-        error('not-basic');
-      }
-      output.push(input.charCodeAt(j));
-    }
+		for (j = 0; j < basic; ++j) {
+			// if it's not a basic code point
+			if (input.charCodeAt(j) >= 0x80) {
+				error('not-basic');
+			}
+			output.push(input.charCodeAt(j));
+		}
 
-    // Main decoding loop: start just after the last delimiter if any basic code
-    // points were copied; start at the beginning otherwise.
+		// Main decoding loop: start just after the last delimiter if any basic code
+		// points were copied; start at the beginning otherwise.
 
-    for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
+		for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
 
-      // `index` is the index of the next character to be consumed.
-      // Decode a generalized variable-length integer into `delta`,
-      // which gets added to `i`. The overflow checking is easier
-      // if we increase `i` as we go, then subtract off its starting
-      // value at the end to obtain `delta`.
-      for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
+			// `index` is the index of the next character to be consumed.
+			// Decode a generalized variable-length integer into `delta`,
+			// which gets added to `i`. The overflow checking is easier
+			// if we increase `i` as we go, then subtract off its starting
+			// value at the end to obtain `delta`.
+			for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
 
-        if (index >= inputLength) {
-          error('invalid-input');
-        }
+				if (index >= inputLength) {
+					error('invalid-input');
+				}
 
-        digit = basicToDigit(input.charCodeAt(index++));
+				digit = basicToDigit(input.charCodeAt(index++));
 
-        if (digit >= base || digit > floor((maxInt - i) / w)) {
-          error('overflow');
-        }
+				if (digit >= base || digit > floor((maxInt - i) / w)) {
+					error('overflow');
+				}
 
-        i += digit * w;
-        t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+				i += digit * w;
+				t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
 
-        if (digit < t) {
-          break;
-        }
+				if (digit < t) {
+					break;
+				}
 
-        baseMinusT = base - t;
-        if (w > floor(maxInt / baseMinusT)) {
-          error('overflow');
-        }
+				baseMinusT = base - t;
+				if (w > floor(maxInt / baseMinusT)) {
+					error('overflow');
+				}
 
-        w *= baseMinusT;
+				w *= baseMinusT;
 
-      }
+			}
 
-      out = output.length + 1;
-      bias = adapt(i - oldi, out, oldi == 0);
+			out = output.length + 1;
+			bias = adapt(i - oldi, out, oldi == 0);
 
-      // `i` was supposed to wrap around from `out` to `0`,
-      // incrementing `n` each time, so we'll fix that now:
-      if (floor(i / out) > maxInt - n) {
-        error('overflow');
-      }
+			// `i` was supposed to wrap around from `out` to `0`,
+			// incrementing `n` each time, so we'll fix that now:
+			if (floor(i / out) > maxInt - n) {
+				error('overflow');
+			}
 
-      n += floor(i / out);
-      i %= out;
+			n += floor(i / out);
+			i %= out;
 
-      // Insert `n` at position `i` of the output
-      output.splice(i++, 0, n);
+			// Insert `n` at position `i` of the output
+			output.splice(i++, 0, n);
 
-    }
+		}
 
-    return ucs2encode(output);
-  }
+		return ucs2encode(output);
+	}
 
-  /**
-   * Converts a string of Unicode symbols (e.g. a domain name label) to a
-   * Punycode string of ASCII-only symbols.
-   * @memberOf punycode
-   * @param {String} input The string of Unicode symbols.
-   * @returns {String} The resulting Punycode string of ASCII-only symbols.
-   */
-  function encode(input) {
-    var n,
-        delta,
-        handledCPCount,
-        basicLength,
-        bias,
-        j,
-        m,
-        q,
-        k,
-        t,
-        currentValue,
-        output = [],
-        /** `inputLength` will hold the number of code points in `input`. */
-        inputLength,
-        /** Cached calculation results */
-        handledCPCountPlusOne,
-        baseMinusT,
-        qMinusT;
+	/**
+	 * Converts a string of Unicode symbols (e.g. a domain name label) to a
+	 * Punycode string of ASCII-only symbols.
+	 * @memberOf punycode
+	 * @param {String} input The string of Unicode symbols.
+	 * @returns {String} The resulting Punycode string of ASCII-only symbols.
+	 */
+	function encode(input) {
+		var n,
+		    delta,
+		    handledCPCount,
+		    basicLength,
+		    bias,
+		    j,
+		    m,
+		    q,
+		    k,
+		    t,
+		    currentValue,
+		    output = [],
+		    /** `inputLength` will hold the number of code points in `input`. */
+		    inputLength,
+		    /** Cached calculation results */
+		    handledCPCountPlusOne,
+		    baseMinusT,
+		    qMinusT;
 
-    // Convert the input in UCS-2 to Unicode
-    input = ucs2decode(input);
+		// Convert the input in UCS-2 to Unicode
+		input = ucs2decode(input);
 
-    // Cache the length
-    inputLength = input.length;
+		// Cache the length
+		inputLength = input.length;
 
-    // Initialize the state
-    n = initialN;
-    delta = 0;
-    bias = initialBias;
+		// Initialize the state
+		n = initialN;
+		delta = 0;
+		bias = initialBias;
 
-    // Handle the basic code points
-    for (j = 0; j < inputLength; ++j) {
-      currentValue = input[j];
-      if (currentValue < 0x80) {
-        output.push(stringFromCharCode(currentValue));
-      }
-    }
+		// Handle the basic code points
+		for (j = 0; j < inputLength; ++j) {
+			currentValue = input[j];
+			if (currentValue < 0x80) {
+				output.push(stringFromCharCode(currentValue));
+			}
+		}
 
-    handledCPCount = basicLength = output.length;
+		handledCPCount = basicLength = output.length;
 
-    // `handledCPCount` is the number of code points that have been handled;
-    // `basicLength` is the number of basic code points.
+		// `handledCPCount` is the number of code points that have been handled;
+		// `basicLength` is the number of basic code points.
 
-    // Finish the basic string - if it is not empty - with a delimiter
-    if (basicLength) {
-      output.push(delimiter);
-    }
+		// Finish the basic string - if it is not empty - with a delimiter
+		if (basicLength) {
+			output.push(delimiter);
+		}
 
-    // Main encoding loop:
-    while (handledCPCount < inputLength) {
+		// Main encoding loop:
+		while (handledCPCount < inputLength) {
 
-      // All non-basic code points < n have been handled already. Find the next
-      // larger one:
-      for (m = maxInt, j = 0; j < inputLength; ++j) {
-        currentValue = input[j];
-        if (currentValue >= n && currentValue < m) {
-          m = currentValue;
-        }
-      }
+			// All non-basic code points < n have been handled already. Find the next
+			// larger one:
+			for (m = maxInt, j = 0; j < inputLength; ++j) {
+				currentValue = input[j];
+				if (currentValue >= n && currentValue < m) {
+					m = currentValue;
+				}
+			}
 
-      // Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
-      // but guard against overflow
-      handledCPCountPlusOne = handledCPCount + 1;
-      if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
-        error('overflow');
-      }
+			// Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
+			// but guard against overflow
+			handledCPCountPlusOne = handledCPCount + 1;
+			if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
+				error('overflow');
+			}
 
-      delta += (m - n) * handledCPCountPlusOne;
-      n = m;
+			delta += (m - n) * handledCPCountPlusOne;
+			n = m;
 
-      for (j = 0; j < inputLength; ++j) {
-        currentValue = input[j];
+			for (j = 0; j < inputLength; ++j) {
+				currentValue = input[j];
 
-        if (currentValue < n && ++delta > maxInt) {
-          error('overflow');
-        }
+				if (currentValue < n && ++delta > maxInt) {
+					error('overflow');
+				}
 
-        if (currentValue == n) {
-          // Represent delta as a generalized variable-length integer
-          for (q = delta, k = base; /* no condition */; k += base) {
-            t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
-            if (q < t) {
-              break;
-            }
-            qMinusT = q - t;
-            baseMinusT = base - t;
-            output.push(
-              stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0))
-            );
-            q = floor(qMinusT / baseMinusT);
-          }
+				if (currentValue == n) {
+					// Represent delta as a generalized variable-length integer
+					for (q = delta, k = base; /* no condition */; k += base) {
+						t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+						if (q < t) {
+							break;
+						}
+						qMinusT = q - t;
+						baseMinusT = base - t;
+						output.push(
+							stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0))
+						);
+						q = floor(qMinusT / baseMinusT);
+					}
 
-          output.push(stringFromCharCode(digitToBasic(q, 0)));
-          bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
-          delta = 0;
-          ++handledCPCount;
-        }
-      }
+					output.push(stringFromCharCode(digitToBasic(q, 0)));
+					bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
+					delta = 0;
+					++handledCPCount;
+				}
+			}
 
-      ++delta;
-      ++n;
+			++delta;
+			++n;
 
-    }
-    return output.join('');
-  }
+		}
+		return output.join('');
+	}
 
-  /**
-   * Converts a Punycode string representing a domain name or an email address
-   * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
-   * it doesn't matter if you call it on a string that has already been
-   * converted to Unicode.
-   * @memberOf punycode
-   * @param {String} input The Punycoded domain name or email address to
-   * convert to Unicode.
-   * @returns {String} The Unicode representation of the given Punycode
-   * string.
-   */
-  function toUnicode(input) {
-    return mapDomain(input, function(string) {
-      return regexPunycode.test(string)
-        ? decode(string.slice(4).toLowerCase())
-        : string;
-    });
-  }
+	/**
+	 * Converts a Punycode string representing a domain name or an email address
+	 * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
+	 * it doesn't matter if you call it on a string that has already been
+	 * converted to Unicode.
+	 * @memberOf punycode
+	 * @param {String} input The Punycoded domain name or email address to
+	 * convert to Unicode.
+	 * @returns {String} The Unicode representation of the given Punycode
+	 * string.
+	 */
+	function toUnicode(input) {
+		return mapDomain(input, function(string) {
+			return regexPunycode.test(string)
+				? decode(string.slice(4).toLowerCase())
+				: string;
+		});
+	}
 
-  /**
-   * Converts a Unicode string representing a domain name or an email address to
-   * Punycode. Only the non-ASCII parts of the domain name will be converted,
-   * i.e. it doesn't matter if you call it with a domain that's already in
-   * ASCII.
-   * @memberOf punycode
-   * @param {String} input The domain name or email address to convert, as a
-   * Unicode string.
-   * @returns {String} The Punycode representation of the given domain name or
-   * email address.
-   */
-  function toASCII(input) {
-    return mapDomain(input, function(string) {
-      return regexNonASCII.test(string)
-        ? 'xn--' + encode(string)
-        : string;
-    });
-  }
+	/**
+	 * Converts a Unicode string representing a domain name or an email address to
+	 * Punycode. Only the non-ASCII parts of the domain name will be converted,
+	 * i.e. it doesn't matter if you call it with a domain that's already in
+	 * ASCII.
+	 * @memberOf punycode
+	 * @param {String} input The domain name or email address to convert, as a
+	 * Unicode string.
+	 * @returns {String} The Punycode representation of the given domain name or
+	 * email address.
+	 */
+	function toASCII(input) {
+		return mapDomain(input, function(string) {
+			return regexNonASCII.test(string)
+				? 'xn--' + encode(string)
+				: string;
+		});
+	}
 
-  /*--------------------------------------------------------------------------*/
+	/*--------------------------------------------------------------------------*/
 
-  /** Define the public API */
-  punycode = {
-    /**
-     * A string representing the current Punycode.js version number.
-     * @memberOf punycode
-     * @type String
-     */
-    'version': '1.4.1',
-    /**
-     * An object of methods to convert from JavaScript's internal character
-     * representation (UCS-2) to Unicode code points, and back.
-     * @see <https://mathiasbynens.be/notes/javascript-encoding>
-     * @memberOf punycode
-     * @type Object
-     */
-    'ucs2': {
-      'decode': ucs2decode,
-      'encode': ucs2encode
-    },
-    'decode': decode,
-    'encode': encode,
-    'toASCII': toASCII,
-    'toUnicode': toUnicode
-  };
+	/** Define the public API */
+	punycode = {
+		/**
+		 * A string representing the current Punycode.js version number.
+		 * @memberOf punycode
+		 * @type String
+		 */
+		'version': '1.4.1',
+		/**
+		 * An object of methods to convert from JavaScript's internal character
+		 * representation (UCS-2) to Unicode code points, and back.
+		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+		 * @memberOf punycode
+		 * @type Object
+		 */
+		'ucs2': {
+			'decode': ucs2decode,
+			'encode': ucs2encode
+		},
+		'decode': decode,
+		'encode': encode,
+		'toASCII': toASCII,
+		'toUnicode': toUnicode
+	};
 
-  /** Expose `punycode` */
-  // Some AMD build optimizers, like r.js, check for specific condition patterns
-  // like the following:
-  if (
-    true
-  ) {
-    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
-      return punycode;
-    }.call(exports, __webpack_require__, exports, module),
-        __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else if (freeExports && freeModule) {
-    if (module.exports == freeExports) {
-      // in Node.js, io.js, or RingoJS v0.8.0+
-      freeModule.exports = punycode;
-    } else {
-      // in Narwhal or RingoJS v0.7.0-
-      for (key in punycode) {
-        punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
-      }
-    }
-  } else {
-    // in Rhino or a web browser
-    root.punycode = punycode;
-  }
+	/** Expose `punycode` */
+	// Some AMD build optimizers, like r.js, check for specific condition patterns
+	// like the following:
+	if (
+		true
+	) {
+		!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+			return punycode;
+		}.call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else if (freeExports && freeModule) {
+		if (module.exports == freeExports) {
+			// in Node.js, io.js, or RingoJS v0.8.0+
+			freeModule.exports = punycode;
+		} else {
+			// in Narwhal or RingoJS v0.7.0-
+			for (key in punycode) {
+				punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
+			}
+		}
+	} else {
+		// in Rhino or a web browser
+		root.punycode = punycode;
+	}
 
 }(this));
 
@@ -18425,86 +18425,86 @@ module.exports = __webpack_require__(34)
 /***/ (function(module, exports) {
 
 module.exports = {
-  "_args": [
-    [
-      {
-        "raw": "snekfetch@^2.2.0",
-        "scope": null,
-        "escapedName": "snekfetch",
-        "name": "snekfetch",
-        "rawSpec": "^2.2.0",
-        "spec": ">=2.2.0 <3.0.0",
-        "type": "range"
-      },
-      "/home/travis/build/hydrabolt/discord.js"
-    ]
-  ],
-  "_from": "snekfetch@>=2.2.0 <3.0.0",
-  "_id": "snekfetch@2.2.0",
-  "_inCache": true,
-  "_location": "/snekfetch",
-  "_nodeVersion": "7.7.4",
-  "_npmOperationalInternal": {
-    "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/snekfetch-2.2.0.tgz_1491730119288_0.9762700067367405"
-  },
-  "_npmUser": {
-    "name": "snek",
-    "email": "me@gus.host"
-  },
-  "_npmVersion": "4.4.4",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "snekfetch@^2.2.0",
-    "scope": null,
-    "escapedName": "snekfetch",
-    "name": "snekfetch",
-    "rawSpec": "^2.2.0",
-    "spec": ">=2.2.0 <3.0.0",
-    "type": "range"
-  },
-  "_requiredBy": [
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/snekfetch/-/snekfetch-2.2.0.tgz",
-  "_shasum": "f8a110abbb71ef51b93bbc35462988fc5ed7b128",
-  "_shrinkwrap": null,
-  "_spec": "snekfetch@^2.2.0",
-  "_where": "/home/travis/build/hydrabolt/discord.js",
-  "author": {
-    "name": "Gus Caplan",
-    "email": "me@gus.host"
-  },
-  "bugs": {
-    "url": "https://github.com/GusCaplan/snekfetch/issues"
-  },
-  "dependencies": {},
-  "description": "Just do http requests without all that weird nastiness from other libs",
-  "devDependencies": {},
-  "directories": {},
-  "dist": {
-    "shasum": "f8a110abbb71ef51b93bbc35462988fc5ed7b128",
-    "tarball": "https://registry.npmjs.org/snekfetch/-/snekfetch-2.2.0.tgz"
-  },
-  "gitHead": "f2f5ad729c5d1bc655e845d4804677236b524ba4",
-  "homepage": "https://github.com/GusCaplan/snekfetch#readme",
-  "license": "MIT",
-  "main": "src/index.js",
-  "maintainers": [
-    {
-      "name": "snek",
-      "email": "me@gus.host"
-    }
-  ],
-  "name": "snekfetch",
-  "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GusCaplan/snekfetch.git"
-  },
-  "scripts": {},
-  "version": "2.2.0"
+	"_args": [
+		[
+			{
+				"raw": "snekfetch@^2.2.0",
+				"scope": null,
+				"escapedName": "snekfetch",
+				"name": "snekfetch",
+				"rawSpec": "^2.2.0",
+				"spec": ">=2.2.0 <3.0.0",
+				"type": "range"
+			},
+			"/home/travis/build/hydrabolt/discord.js"
+		]
+	],
+	"_from": "snekfetch@>=2.2.0 <3.0.0",
+	"_id": "snekfetch@2.2.0",
+	"_inCache": true,
+	"_location": "/snekfetch",
+	"_nodeVersion": "7.7.4",
+	"_npmOperationalInternal": {
+		"host": "packages-18-east.internal.npmjs.com",
+		"tmp": "tmp/snekfetch-2.2.0.tgz_1491730119288_0.9762700067367405"
+	},
+	"_npmUser": {
+		"name": "snek",
+		"email": "me@gus.host"
+	},
+	"_npmVersion": "4.4.4",
+	"_phantomChildren": {},
+	"_requested": {
+		"raw": "snekfetch@^2.2.0",
+		"scope": null,
+		"escapedName": "snekfetch",
+		"name": "snekfetch",
+		"rawSpec": "^2.2.0",
+		"spec": ">=2.2.0 <3.0.0",
+		"type": "range"
+	},
+	"_requiredBy": [
+		"/"
+	],
+	"_resolved": "https://registry.npmjs.org/snekfetch/-/snekfetch-2.2.0.tgz",
+	"_shasum": "f8a110abbb71ef51b93bbc35462988fc5ed7b128",
+	"_shrinkwrap": null,
+	"_spec": "snekfetch@^2.2.0",
+	"_where": "/home/travis/build/hydrabolt/discord.js",
+	"author": {
+		"name": "Gus Caplan",
+		"email": "me@gus.host"
+	},
+	"bugs": {
+		"url": "https://github.com/GusCaplan/snekfetch/issues"
+	},
+	"dependencies": {},
+	"description": "Just do http requests without all that weird nastiness from other libs",
+	"devDependencies": {},
+	"directories": {},
+	"dist": {
+		"shasum": "f8a110abbb71ef51b93bbc35462988fc5ed7b128",
+		"tarball": "https://registry.npmjs.org/snekfetch/-/snekfetch-2.2.0.tgz"
+	},
+	"gitHead": "f2f5ad729c5d1bc655e845d4804677236b524ba4",
+	"homepage": "https://github.com/GusCaplan/snekfetch#readme",
+	"license": "MIT",
+	"main": "src/index.js",
+	"maintainers": [
+		{
+			"name": "snek",
+			"email": "me@gus.host"
+		}
+	],
+	"name": "snekfetch",
+	"optionalDependencies": {},
+	"readme": "ERROR: No README data found!",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/GusCaplan/snekfetch.git"
+	},
+	"scripts": {},
+	"version": "2.2.0"
 };
 
 /***/ }),
@@ -18635,7 +18635,7 @@ function mimeOfBuffer(input) {
     };
   }
 
-  // needs to be before `tif` check
+	// needs to be before `tif` check
   if (
     ((buf[0] === 0x49 && buf[1] === 0x49 && buf[2] === 0x2A && buf[3] === 0x0) ||
     (buf[0] === 0x4D && buf[1] === 0x4D && buf[2] === 0x0 && buf[3] === 0x2A)) && buf[8] === 0x43 && buf[9] === 0x52
@@ -18677,7 +18677,7 @@ function mimeOfBuffer(input) {
     };
   }
 
-  // needs to be before `zip` check
+	// needs to be before `zip` check
   if (
     buf[0] === 0x50 && buf[1] === 0x4B && buf[2] === 0x3 && buf[3] === 0x4 && buf[30] === 0x6D && buf[31] === 0x69 &&
     buf[32] === 0x6D && buf[33] === 0x65 && buf[34] === 0x74 && buf[35] === 0x79 && buf[36] === 0x70 &&
@@ -18693,8 +18693,8 @@ function mimeOfBuffer(input) {
     };
   }
 
-  // needs to be before `zip` check
-  // assumes signed .xpi from addons.mozilla.org
+	// needs to be before `zip` check
+	// assumes signed .xpi from addons.mozilla.org
   if (
     buf[0] === 0x50 && buf[1] === 0x4B && buf[2] === 0x3 && buf[3] === 0x4 && buf[30] === 0x4D && buf[31] === 0x45 &&
     buf[32] === 0x54 && buf[33] === 0x41 && buf[34] === 0x2D && buf[35] === 0x49 && buf[36] === 0x4E &&
@@ -18764,21 +18764,21 @@ function mimeOfBuffer(input) {
   }
 
   if (
-    (buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && (buf[3] === 0x18 || buf[3] === 0x20) && buf[4] === 0x66 &&
+		(buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && (buf[3] === 0x18 || buf[3] === 0x20) && buf[4] === 0x66 &&
     buf[5] === 0x74 && buf[6] === 0x79 && buf[7] === 0x70) ||
     (buf[0] === 0x33 && buf[1] === 0x67 && buf[2] === 0x70 && buf[3] === 0x35) ||
-    (buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x1C && buf[4] === 0x66 && buf[5] === 0x74 &&
+		(buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x1C && buf[4] === 0x66 && buf[5] === 0x74 &&
       buf[6] === 0x79 && buf[7] === 0x70 && buf[8] === 0x6D && buf[9] === 0x70 && buf[10] === 0x34 &&
       buf[11] === 0x32 && buf[16] === 0x6D && buf[17] === 0x70 && buf[18] === 0x34 && buf[19] === 0x31 &&
       buf[20] === 0x6D && buf[21] === 0x70 && buf[22] === 0x34 && buf[23] === 0x32 && buf[24] === 0x69 &&
       buf[25] === 0x73 && buf[26] === 0x6F && buf[27] === 0x6D) ||
-    (buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x1C && buf[4] === 0x66 && buf[5] === 0x74 &&
+		(buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x1C && buf[4] === 0x66 && buf[5] === 0x74 &&
       buf[6] === 0x79 && buf[7] === 0x70 && buf[8] === 0x69 && buf[9] === 0x73 && buf[10] === 0x6F &&
       buf[11] === 0x6D) ||
-    (buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x1c && buf[4] === 0x66 && buf[5] === 0x74 &&
+		(buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x1c && buf[4] === 0x66 && buf[5] === 0x74 &&
       buf[6] === 0x79 && buf[7] === 0x70 && buf[8] === 0x6D && buf[9] === 0x70 && buf[10] === 0x34 &&
       buf[11] === 0x32 && buf[12] === 0x0 && buf[13] === 0x0 && buf[14] === 0x0 && buf[15] === 0x0)
-  ) {
+	) {
     return {
       ext: 'mp4',
       mime: 'video/mp4',
@@ -18802,7 +18802,7 @@ function mimeOfBuffer(input) {
     };
   }
 
-  // https://github.com/threatstack/libmagic/blob/master/magic/Magdir/matroska
+	// https://github.com/threatstack/libmagic/blob/master/magic/Magdir/matroska
   if (buf[0] === 0x1A && buf[1] === 0x45 && buf[2] === 0xDF && buf[3] === 0xA3) {
     const sliced = buf.subarray(4, 4 + 4096);
     const idPos = sliced.findIndex((el, i, arr) => arr[i] === 0x42 && arr[i + 1] === 0x82);
@@ -18879,7 +18879,7 @@ function mimeOfBuffer(input) {
     };
   }
 
-  // needs to be before `ogg` check
+	// needs to be before `ogg` check
   if (
     buf[28] === 0x4F && buf[29] === 0x70 && buf[30] === 0x75 && buf[31] === 0x73 && buf[32] === 0x48 &&
     buf[33] === 0x65 && buf[34] === 0x61 && buf[35] === 0x64
@@ -18950,12 +18950,12 @@ function mimeOfBuffer(input) {
   }
 
   if (
-    (buf[0] === 0x77 && buf[1] === 0x4F && buf[2] === 0x46 && buf[3] === 0x46) &&
-    (
-      (buf[4] === 0x00 && buf[5] === 0x01 && buf[6] === 0x00 && buf[7] === 0x00) ||
-      (buf[4] === 0x4F && buf[5] === 0x54 && buf[6] === 0x54 && buf[7] === 0x4F)
-    )
-  ) {
+		(buf[0] === 0x77 && buf[1] === 0x4F && buf[2] === 0x46 && buf[3] === 0x46) &&
+		(
+			(buf[4] === 0x00 && buf[5] === 0x01 && buf[6] === 0x00 && buf[7] === 0x00) ||
+			(buf[4] === 0x4F && buf[5] === 0x54 && buf[6] === 0x54 && buf[7] === 0x4F)
+		)
+	) {
     return {
       ext: 'woff',
       mime: 'application/font-woff',
@@ -18963,12 +18963,12 @@ function mimeOfBuffer(input) {
   }
 
   if (
-    (buf[0] === 0x77 && buf[1] === 0x4F && buf[2] === 0x46 && buf[3] === 0x32) &&
-    (
-      (buf[4] === 0x00 && buf[5] === 0x01 && buf[6] === 0x00 && buf[7] === 0x00) ||
-      (buf[4] === 0x4F && buf[5] === 0x54 && buf[6] === 0x54 && buf[7] === 0x4F)
-    )
-  ) {
+		(buf[0] === 0x77 && buf[1] === 0x4F && buf[2] === 0x46 && buf[3] === 0x32) &&
+		(
+			(buf[4] === 0x00 && buf[5] === 0x01 && buf[6] === 0x00 && buf[7] === 0x00) ||
+			(buf[4] === 0x4F && buf[5] === 0x54 && buf[6] === 0x54 && buf[7] === 0x4F)
+		)
+	) {
     return {
       ext: 'woff2',
       mime: 'application/font-woff',
@@ -18976,13 +18976,13 @@ function mimeOfBuffer(input) {
   }
 
   if (
-    (buf[34] === 0x4C && buf[35] === 0x50) &&
-    (
-      (buf[8] === 0x00 && buf[9] === 0x00 && buf[10] === 0x01) ||
-      (buf[8] === 0x01 && buf[9] === 0x00 && buf[10] === 0x02) ||
-      (buf[8] === 0x02 && buf[9] === 0x00 && buf[10] === 0x02)
-    )
-  ) {
+		(buf[34] === 0x4C && buf[35] === 0x50) &&
+		(
+			(buf[8] === 0x00 && buf[9] === 0x00 && buf[10] === 0x01) ||
+			(buf[8] === 0x01 && buf[9] === 0x00 && buf[10] === 0x02) ||
+			(buf[8] === 0x02 && buf[9] === 0x00 && buf[10] === 0x02)
+		)
+	) {
     return {
       ext: 'eot',
       mime: 'application/octet-stream',
@@ -19053,16 +19053,16 @@ function mimeOfBuffer(input) {
   }
 
   if (
-    (buf[0] === 0x4D && buf[1] === 0x53 && buf[2] === 0x43 && buf[3] === 0x46) ||
-    (buf[0] === 0x49 && buf[1] === 0x53 && buf[2] === 0x63 && buf[3] === 0x28)
-  ) {
+		(buf[0] === 0x4D && buf[1] === 0x53 && buf[2] === 0x43 && buf[3] === 0x46) ||
+		(buf[0] === 0x49 && buf[1] === 0x53 && buf[2] === 0x63 && buf[3] === 0x28)
+	) {
     return {
       ext: 'cab',
       mime: 'application/vnd.ms-cab-compressed',
     };
   }
 
-  // needs to be before `ar` check
+	// needs to be before `ar` check
   if (
     buf[0] === 0x21 && buf[1] === 0x3C && buf[2] === 0x61 && buf[3] === 0x72 && buf[4] === 0x63 && buf[5] === 0x68 &&
     buf[6] === 0x3E && buf[7] === 0x0A && buf[8] === 0x64 && buf[9] === 0x65 && buf[10] === 0x62 && buf[11] === 0x69 &&
@@ -19093,9 +19093,9 @@ function mimeOfBuffer(input) {
   }
 
   if (
-    (buf[0] === 0x1F && buf[1] === 0xA0) ||
-    (buf[0] === 0x1F && buf[1] === 0x9D)
-  ) {
+		(buf[0] === 0x1F && buf[1] === 0xA0) ||
+		(buf[0] === 0x1F && buf[1] === 0x9D)
+	) {
     return {
       ext: 'Z',
       mime: 'application/x-compress',
@@ -19141,1053 +19141,1053 @@ module.exports = mimeOfBuffer;
 /***/ (function(module, exports) {
 
 module.exports = {
-  "123": "application/vnd.lotus-1-2-3",
-  "ez": "application/andrew-inset",
-  "aw": "application/applixware",
-  "atom": "application/atom+xml",
-  "atomcat": "application/atomcat+xml",
-  "atomsvc": "application/atomsvc+xml",
-  "bdoc": "application/x-bdoc",
-  "ccxml": "application/ccxml+xml",
-  "cdmia": "application/cdmi-capability",
-  "cdmic": "application/cdmi-container",
-  "cdmid": "application/cdmi-domain",
-  "cdmio": "application/cdmi-object",
-  "cdmiq": "application/cdmi-queue",
-  "cu": "application/cu-seeme",
-  "mpd": "application/dash+xml",
-  "davmount": "application/davmount+xml",
-  "dbk": "application/docbook+xml",
-  "dssc": "application/dssc+der",
-  "xdssc": "application/dssc+xml",
-  "ecma": "application/ecmascript",
-  "emma": "application/emma+xml",
-  "epub": "application/epub+zip",
-  "exi": "application/exi",
-  "pfr": "application/font-tdpfr",
-  "woff": "application/font-woff",
-  "woff2": "application/font-woff2",
-  "geojson": "application/geo+json",
-  "gml": "application/gml+xml",
-  "gpx": "application/gpx+xml",
-  "gxf": "application/gxf",
-  "stk": "application/hyperstudio",
-  "ink": "application/inkml+xml",
-  "inkml": "application/inkml+xml",
-  "ipfix": "application/ipfix",
-  "jar": "application/java-archive",
-  "war": "application/java-archive",
-  "ear": "application/java-archive",
-  "ser": "application/java-serialized-object",
-  "class": "application/java-vm",
-  "js": "application/javascript",
-  "json": "application/json",
-  "map": "application/json",
-  "json5": "application/json5",
-  "jsonml": "application/jsonml+json",
-  "jsonld": "application/ld+json",
-  "lostxml": "application/lost+xml",
-  "hqx": "application/mac-binhex40",
-  "cpt": "application/mac-compactpro",
-  "mads": "application/mads+xml",
-  "webmanifest": "application/manifest+json",
-  "mrc": "application/marc",
-  "mrcx": "application/marcxml+xml",
-  "ma": "application/mathematica",
-  "nb": "application/mathematica",
-  "mb": "application/mathematica",
-  "mathml": "application/mathml+xml",
-  "mbox": "application/mbox",
-  "mscml": "application/mediaservercontrol+xml",
-  "metalink": "application/metalink+xml",
-  "meta4": "application/metalink4+xml",
-  "mets": "application/mets+xml",
-  "mods": "application/mods+xml",
-  "m21": "application/mp21",
-  "mp21": "application/mp21",
-  "mp4s": "application/mp4",
-  "m4p": "application/mp4",
-  "doc": "application/msword",
-  "dot": "application/msword",
-  "mxf": "application/mxf",
-  "bin": "application/octet-stream",
-  "dms": "application/octet-stream",
-  "lrf": "application/octet-stream",
-  "mar": "application/octet-stream",
-  "so": "application/octet-stream",
-  "dist": "application/octet-stream",
-  "distz": "application/octet-stream",
-  "pkg": "application/octet-stream",
-  "bpk": "application/octet-stream",
-  "dump": "application/octet-stream",
-  "elc": "application/octet-stream",
-  "deploy": "application/octet-stream",
-  "exe": "application/x-msdownload",
-  "dll": "application/x-msdownload",
-  "deb": "application/x-debian-package",
-  "dmg": "application/x-apple-diskimage",
-  "iso": "application/x-iso9660-image",
-  "img": "application/octet-stream",
-  "msi": "application/x-msdownload",
-  "msp": "application/octet-stream",
-  "msm": "application/octet-stream",
-  "buffer": "application/octet-stream",
-  "oda": "application/oda",
-  "opf": "application/oebps-package+xml",
-  "ogx": "application/ogg",
-  "omdoc": "application/omdoc+xml",
-  "onetoc": "application/onenote",
-  "onetoc2": "application/onenote",
-  "onetmp": "application/onenote",
-  "onepkg": "application/onenote",
-  "oxps": "application/oxps",
-  "xer": "application/patch-ops-error+xml",
-  "pdf": "application/pdf",
-  "pgp": "application/pgp-encrypted",
-  "asc": "application/pgp-signature",
-  "sig": "application/pgp-signature",
-  "prf": "application/pics-rules",
-  "p10": "application/pkcs10",
-  "p7m": "application/pkcs7-mime",
-  "p7c": "application/pkcs7-mime",
-  "p7s": "application/pkcs7-signature",
-  "p8": "application/pkcs8",
-  "ac": "application/pkix-attr-cert",
-  "cer": "application/pkix-cert",
-  "crl": "application/pkix-crl",
-  "pkipath": "application/pkix-pkipath",
-  "pki": "application/pkixcmp",
-  "pls": "application/pls+xml",
-  "ai": "application/postscript",
-  "eps": "application/postscript",
-  "ps": "application/postscript",
-  "cww": "application/prs.cww",
-  "pskcxml": "application/pskc+xml",
-  "rdf": "application/rdf+xml",
-  "rif": "application/reginfo+xml",
-  "rnc": "application/relax-ng-compact-syntax",
-  "rl": "application/resource-lists+xml",
-  "rld": "application/resource-lists-diff+xml",
-  "rs": "application/rls-services+xml",
-  "gbr": "application/rpki-ghostbusters",
-  "mft": "application/rpki-manifest",
-  "roa": "application/rpki-roa",
-  "rsd": "application/rsd+xml",
-  "rss": "application/rss+xml",
-  "rtf": "text/rtf",
-  "sbml": "application/sbml+xml",
-  "scq": "application/scvp-cv-request",
-  "scs": "application/scvp-cv-response",
-  "spq": "application/scvp-vp-request",
-  "spp": "application/scvp-vp-response",
-  "sdp": "application/sdp",
-  "setpay": "application/set-payment-initiation",
-  "setreg": "application/set-registration-initiation",
-  "shf": "application/shf+xml",
-  "smi": "application/smil+xml",
-  "smil": "application/smil+xml",
-  "rq": "application/sparql-query",
-  "srx": "application/sparql-results+xml",
-  "gram": "application/srgs",
-  "grxml": "application/srgs+xml",
-  "sru": "application/sru+xml",
-  "ssdl": "application/ssdl+xml",
-  "ssml": "application/ssml+xml",
-  "tei": "application/tei+xml",
-  "teicorpus": "application/tei+xml",
-  "tfi": "application/thraud+xml",
-  "tsd": "application/timestamped-data",
-  "plb": "application/vnd.3gpp.pic-bw-large",
-  "psb": "application/vnd.3gpp.pic-bw-small",
-  "pvb": "application/vnd.3gpp.pic-bw-var",
-  "tcap": "application/vnd.3gpp2.tcap",
-  "pwn": "application/vnd.3m.post-it-notes",
-  "aso": "application/vnd.accpac.simply.aso",
-  "imp": "application/vnd.accpac.simply.imp",
-  "acu": "application/vnd.acucobol",
-  "atc": "application/vnd.acucorp",
-  "acutc": "application/vnd.acucorp",
-  "air": "application/vnd.adobe.air-application-installer-package+zip",
-  "fcdt": "application/vnd.adobe.formscentral.fcdt",
-  "fxp": "application/vnd.adobe.fxp",
-  "fxpl": "application/vnd.adobe.fxp",
-  "xdp": "application/vnd.adobe.xdp+xml",
-  "xfdf": "application/vnd.adobe.xfdf",
-  "ahead": "application/vnd.ahead.space",
-  "azf": "application/vnd.airzip.filesecure.azf",
-  "azs": "application/vnd.airzip.filesecure.azs",
-  "azw": "application/vnd.amazon.ebook",
-  "acc": "application/vnd.americandynamics.acc",
-  "ami": "application/vnd.amiga.ami",
-  "apk": "application/vnd.android.package-archive",
-  "cii": "application/vnd.anser-web-certificate-issue-initiation",
-  "fti": "application/vnd.anser-web-funds-transfer-initiation",
-  "atx": "application/vnd.antix.game-component",
-  "mpkg": "application/vnd.apple.installer+xml",
-  "m3u8": "application/vnd.apple.mpegurl",
-  "pkpass": "application/vnd.apple.pkpass",
-  "swi": "application/vnd.aristanetworks.swi",
-  "iota": "application/vnd.astraea-software.iota",
-  "aep": "application/vnd.audiograph",
-  "mpm": "application/vnd.blueice.multipass",
-  "bmi": "application/vnd.bmi",
-  "rep": "application/vnd.businessobjects",
-  "cdxml": "application/vnd.chemdraw+xml",
-  "mmd": "application/vnd.chipnuts.karaoke-mmd",
-  "cdy": "application/vnd.cinderella",
-  "cla": "application/vnd.claymore",
-  "rp9": "application/vnd.cloanto.rp9",
-  "c4g": "application/vnd.clonk.c4group",
-  "c4d": "application/vnd.clonk.c4group",
-  "c4f": "application/vnd.clonk.c4group",
-  "c4p": "application/vnd.clonk.c4group",
-  "c4u": "application/vnd.clonk.c4group",
-  "c11amc": "application/vnd.cluetrust.cartomobile-config",
-  "c11amz": "application/vnd.cluetrust.cartomobile-config-pkg",
-  "csp": "application/vnd.commonspace",
-  "cdbcmsg": "application/vnd.contact.cmsg",
-  "cmc": "application/vnd.cosmocaller",
-  "clkx": "application/vnd.crick.clicker",
-  "clkk": "application/vnd.crick.clicker.keyboard",
-  "clkp": "application/vnd.crick.clicker.palette",
-  "clkt": "application/vnd.crick.clicker.template",
-  "clkw": "application/vnd.crick.clicker.wordbank",
-  "wbs": "application/vnd.criticaltools.wbs+xml",
-  "pml": "application/vnd.ctc-posml",
-  "ppd": "application/vnd.cups-ppd",
-  "car": "application/vnd.curl.car",
-  "pcurl": "application/vnd.curl.pcurl",
-  "dart": "application/vnd.dart",
-  "rdz": "application/vnd.data-vision.rdz",
-  "uvf": "application/vnd.dece.data",
-  "uvvf": "application/vnd.dece.data",
-  "uvd": "application/vnd.dece.data",
-  "uvvd": "application/vnd.dece.data",
-  "uvt": "application/vnd.dece.ttml+xml",
-  "uvvt": "application/vnd.dece.ttml+xml",
-  "uvx": "application/vnd.dece.unspecified",
-  "uvvx": "application/vnd.dece.unspecified",
-  "uvz": "application/vnd.dece.zip",
-  "uvvz": "application/vnd.dece.zip",
-  "fe_launch": "application/vnd.denovo.fcselayout-link",
-  "dna": "application/vnd.dna",
-  "mlp": "application/vnd.dolby.mlp",
-  "dpg": "application/vnd.dpgraph",
-  "dfac": "application/vnd.dreamfactory",
-  "kpxx": "application/vnd.ds-keypoint",
-  "ait": "application/vnd.dvb.ait",
-  "svc": "application/vnd.dvb.service",
-  "geo": "application/vnd.dynageo",
-  "mag": "application/vnd.ecowin.chart",
-  "nml": "application/vnd.enliven",
-  "esf": "application/vnd.epson.esf",
-  "msf": "application/vnd.epson.msf",
-  "qam": "application/vnd.epson.quickanime",
-  "slt": "application/vnd.epson.salt",
-  "ssf": "application/vnd.epson.ssf",
-  "es3": "application/vnd.eszigno3+xml",
-  "et3": "application/vnd.eszigno3+xml",
-  "ez2": "application/vnd.ezpix-album",
-  "ez3": "application/vnd.ezpix-package",
-  "fdf": "application/vnd.fdf",
-  "mseed": "application/vnd.fdsn.mseed",
-  "seed": "application/vnd.fdsn.seed",
-  "dataless": "application/vnd.fdsn.seed",
-  "gph": "application/vnd.flographit",
-  "ftc": "application/vnd.fluxtime.clip",
-  "fm": "application/vnd.framemaker",
-  "frame": "application/vnd.framemaker",
-  "maker": "application/vnd.framemaker",
-  "book": "application/vnd.framemaker",
-  "fnc": "application/vnd.frogans.fnc",
-  "ltf": "application/vnd.frogans.ltf",
-  "fsc": "application/vnd.fsc.weblaunch",
-  "oas": "application/vnd.fujitsu.oasys",
-  "oa2": "application/vnd.fujitsu.oasys2",
-  "oa3": "application/vnd.fujitsu.oasys3",
-  "fg5": "application/vnd.fujitsu.oasysgp",
-  "bh2": "application/vnd.fujitsu.oasysprs",
-  "ddd": "application/vnd.fujixerox.ddd",
-  "xdw": "application/vnd.fujixerox.docuworks",
-  "xbd": "application/vnd.fujixerox.docuworks.binder",
-  "fzs": "application/vnd.fuzzysheet",
-  "txd": "application/vnd.genomatix.tuxedo",
-  "ggb": "application/vnd.geogebra.file",
-  "ggt": "application/vnd.geogebra.tool",
-  "gex": "application/vnd.geometry-explorer",
-  "gre": "application/vnd.geometry-explorer",
-  "gxt": "application/vnd.geonext",
-  "g2w": "application/vnd.geoplan",
-  "g3w": "application/vnd.geospace",
-  "gmx": "application/vnd.gmx",
-  "gdoc": "application/vnd.google-apps.document",
-  "gslides": "application/vnd.google-apps.presentation",
-  "gsheet": "application/vnd.google-apps.spreadsheet",
-  "kml": "application/vnd.google-earth.kml+xml",
-  "kmz": "application/vnd.google-earth.kmz",
-  "gqf": "application/vnd.grafeq",
-  "gqs": "application/vnd.grafeq",
-  "gac": "application/vnd.groove-account",
-  "ghf": "application/vnd.groove-help",
-  "gim": "application/vnd.groove-identity-message",
-  "grv": "application/vnd.groove-injector",
-  "gtm": "application/vnd.groove-tool-message",
-  "tpl": "application/vnd.groove-tool-template",
-  "vcg": "application/vnd.groove-vcard",
-  "hal": "application/vnd.hal+xml",
-  "zmm": "application/vnd.handheld-entertainment+xml",
-  "hbci": "application/vnd.hbci",
-  "les": "application/vnd.hhe.lesson-player",
-  "hpgl": "application/vnd.hp-hpgl",
-  "hpid": "application/vnd.hp-hpid",
-  "hps": "application/vnd.hp-hps",
-  "jlt": "application/vnd.hp-jlyt",
-  "pcl": "application/vnd.hp-pcl",
-  "pclxl": "application/vnd.hp-pclxl",
-  "sfd-hdstx": "application/vnd.hydrostatix.sof-data",
-  "mpy": "application/vnd.ibm.minipay",
-  "afp": "application/vnd.ibm.modcap",
-  "listafp": "application/vnd.ibm.modcap",
-  "list3820": "application/vnd.ibm.modcap",
-  "irm": "application/vnd.ibm.rights-management",
-  "sc": "application/vnd.ibm.secure-container",
-  "icc": "application/vnd.iccprofile",
-  "icm": "application/vnd.iccprofile",
-  "igl": "application/vnd.igloader",
-  "ivp": "application/vnd.immervision-ivp",
-  "ivu": "application/vnd.immervision-ivu",
-  "igm": "application/vnd.insors.igm",
-  "xpw": "application/vnd.intercon.formnet",
-  "xpx": "application/vnd.intercon.formnet",
-  "i2g": "application/vnd.intergeo",
-  "qbo": "application/vnd.intu.qbo",
-  "qfx": "application/vnd.intu.qfx",
-  "rcprofile": "application/vnd.ipunplugged.rcprofile",
-  "irp": "application/vnd.irepository.package+xml",
-  "xpr": "application/vnd.is-xpr",
-  "fcs": "application/vnd.isac.fcs",
-  "jam": "application/vnd.jam",
-  "rms": "application/vnd.jcp.javame.midlet-rms",
-  "jisp": "application/vnd.jisp",
-  "joda": "application/vnd.joost.joda-archive",
-  "ktz": "application/vnd.kahootz",
-  "ktr": "application/vnd.kahootz",
-  "karbon": "application/vnd.kde.karbon",
-  "chrt": "application/vnd.kde.kchart",
-  "kfo": "application/vnd.kde.kformula",
-  "flw": "application/vnd.kde.kivio",
-  "kon": "application/vnd.kde.kontour",
-  "kpr": "application/vnd.kde.kpresenter",
-  "kpt": "application/vnd.kde.kpresenter",
-  "ksp": "application/vnd.kde.kspread",
-  "kwd": "application/vnd.kde.kword",
-  "kwt": "application/vnd.kde.kword",
-  "htke": "application/vnd.kenameaapp",
-  "kia": "application/vnd.kidspiration",
-  "kne": "application/vnd.kinar",
-  "knp": "application/vnd.kinar",
-  "skp": "application/vnd.koan",
-  "skd": "application/vnd.koan",
-  "skt": "application/vnd.koan",
-  "skm": "application/vnd.koan",
-  "sse": "application/vnd.kodak-descriptor",
-  "lasxml": "application/vnd.las.las+xml",
-  "lbd": "application/vnd.llamagraphics.life-balance.desktop",
-  "lbe": "application/vnd.llamagraphics.life-balance.exchange+xml",
-  "apr": "application/vnd.lotus-approach",
-  "pre": "application/vnd.lotus-freelance",
-  "nsf": "application/vnd.lotus-notes",
-  "org": "application/vnd.lotus-organizer",
-  "scm": "application/vnd.lotus-screencam",
-  "lwp": "application/vnd.lotus-wordpro",
-  "portpkg": "application/vnd.macports.portpkg",
-  "mcd": "application/vnd.mcd",
-  "mc1": "application/vnd.medcalcdata",
-  "cdkey": "application/vnd.mediastation.cdkey",
-  "mwf": "application/vnd.mfer",
-  "mfm": "application/vnd.mfmp",
-  "flo": "application/vnd.micrografx.flo",
-  "igx": "application/vnd.micrografx.igx",
-  "mif": "application/vnd.mif",
-  "daf": "application/vnd.mobius.daf",
-  "dis": "application/vnd.mobius.dis",
-  "mbk": "application/vnd.mobius.mbk",
-  "mqy": "application/vnd.mobius.mqy",
-  "msl": "application/vnd.mobius.msl",
-  "plc": "application/vnd.mobius.plc",
-  "txf": "application/vnd.mobius.txf",
-  "mpn": "application/vnd.mophun.application",
-  "mpc": "application/vnd.mophun.certificate",
-  "xul": "application/vnd.mozilla.xul+xml",
-  "cil": "application/vnd.ms-artgalry",
-  "cab": "application/vnd.ms-cab-compressed",
-  "xls": "application/vnd.ms-excel",
-  "xlm": "application/vnd.ms-excel",
-  "xla": "application/vnd.ms-excel",
-  "xlc": "application/vnd.ms-excel",
-  "xlt": "application/vnd.ms-excel",
-  "xlw": "application/vnd.ms-excel",
-  "xlam": "application/vnd.ms-excel.addin.macroenabled.12",
-  "xlsb": "application/vnd.ms-excel.sheet.binary.macroenabled.12",
-  "xlsm": "application/vnd.ms-excel.sheet.macroenabled.12",
-  "xltm": "application/vnd.ms-excel.template.macroenabled.12",
-  "eot": "application/vnd.ms-fontobject",
-  "chm": "application/vnd.ms-htmlhelp",
-  "ims": "application/vnd.ms-ims",
-  "lrm": "application/vnd.ms-lrm",
-  "thmx": "application/vnd.ms-officetheme",
-  "cat": "application/vnd.ms-pki.seccat",
-  "stl": "application/vnd.ms-pki.stl",
-  "ppt": "application/vnd.ms-powerpoint",
-  "pps": "application/vnd.ms-powerpoint",
-  "pot": "application/vnd.ms-powerpoint",
-  "ppam": "application/vnd.ms-powerpoint.addin.macroenabled.12",
-  "pptm": "application/vnd.ms-powerpoint.presentation.macroenabled.12",
-  "sldm": "application/vnd.ms-powerpoint.slide.macroenabled.12",
-  "ppsm": "application/vnd.ms-powerpoint.slideshow.macroenabled.12",
-  "potm": "application/vnd.ms-powerpoint.template.macroenabled.12",
-  "mpp": "application/vnd.ms-project",
-  "mpt": "application/vnd.ms-project",
-  "docm": "application/vnd.ms-word.document.macroenabled.12",
-  "dotm": "application/vnd.ms-word.template.macroenabled.12",
-  "wps": "application/vnd.ms-works",
-  "wks": "application/vnd.ms-works",
-  "wcm": "application/vnd.ms-works",
-  "wdb": "application/vnd.ms-works",
-  "wpl": "application/vnd.ms-wpl",
-  "xps": "application/vnd.ms-xpsdocument",
-  "mseq": "application/vnd.mseq",
-  "mus": "application/vnd.musician",
-  "msty": "application/vnd.muvee.style",
-  "taglet": "application/vnd.mynfc",
-  "nlu": "application/vnd.neurolanguage.nlu",
-  "ntf": "application/vnd.nitf",
-  "nitf": "application/vnd.nitf",
-  "nnd": "application/vnd.noblenet-directory",
-  "nns": "application/vnd.noblenet-sealer",
-  "nnw": "application/vnd.noblenet-web",
-  "ngdat": "application/vnd.nokia.n-gage.data",
-  "n-gage": "application/vnd.nokia.n-gage.symbian.install",
-  "rpst": "application/vnd.nokia.radio-preset",
-  "rpss": "application/vnd.nokia.radio-presets",
-  "edm": "application/vnd.novadigm.edm",
-  "edx": "application/vnd.novadigm.edx",
-  "ext": "application/vnd.novadigm.ext",
-  "odc": "application/vnd.oasis.opendocument.chart",
-  "otc": "application/vnd.oasis.opendocument.chart-template",
-  "odb": "application/vnd.oasis.opendocument.database",
-  "odf": "application/vnd.oasis.opendocument.formula",
-  "odft": "application/vnd.oasis.opendocument.formula-template",
-  "odg": "application/vnd.oasis.opendocument.graphics",
-  "otg": "application/vnd.oasis.opendocument.graphics-template",
-  "odi": "application/vnd.oasis.opendocument.image",
-  "oti": "application/vnd.oasis.opendocument.image-template",
-  "odp": "application/vnd.oasis.opendocument.presentation",
-  "otp": "application/vnd.oasis.opendocument.presentation-template",
-  "ods": "application/vnd.oasis.opendocument.spreadsheet",
-  "ots": "application/vnd.oasis.opendocument.spreadsheet-template",
-  "odt": "application/vnd.oasis.opendocument.text",
-  "odm": "application/vnd.oasis.opendocument.text-master",
-  "ott": "application/vnd.oasis.opendocument.text-template",
-  "oth": "application/vnd.oasis.opendocument.text-web",
-  "xo": "application/vnd.olpc-sugar",
-  "dd2": "application/vnd.oma.dd2+xml",
-  "oxt": "application/vnd.openofficeorg.extension",
-  "pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-  "sldx": "application/vnd.openxmlformats-officedocument.presentationml.slide",
-  "ppsx": "application/vnd.openxmlformats-officedocument.presentationml.slideshow",
-  "potx": "application/vnd.openxmlformats-officedocument.presentationml.template",
-  "xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  "xltx": "application/vnd.openxmlformats-officedocument.spreadsheetml.template",
-  "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-  "dotx": "application/vnd.openxmlformats-officedocument.wordprocessingml.template",
-  "mgp": "application/vnd.osgeo.mapguide.package",
-  "dp": "application/vnd.osgi.dp",
-  "esa": "application/vnd.osgi.subsystem",
-  "pdb": "application/x-pilot",
-  "pqa": "application/vnd.palm",
-  "oprc": "application/vnd.palm",
-  "paw": "application/vnd.pawaafile",
-  "str": "application/vnd.pg.format",
-  "ei6": "application/vnd.pg.osasli",
-  "efif": "application/vnd.picsel",
-  "wg": "application/vnd.pmi.widget",
-  "plf": "application/vnd.pocketlearn",
-  "pbd": "application/vnd.powerbuilder6",
-  "box": "application/vnd.previewsystems.box",
-  "mgz": "application/vnd.proteus.magazine",
-  "qps": "application/vnd.publishare-delta-tree",
-  "ptid": "application/vnd.pvi.ptid1",
-  "qxd": "application/vnd.quark.quarkxpress",
-  "qxt": "application/vnd.quark.quarkxpress",
-  "qwd": "application/vnd.quark.quarkxpress",
-  "qwt": "application/vnd.quark.quarkxpress",
-  "qxl": "application/vnd.quark.quarkxpress",
-  "qxb": "application/vnd.quark.quarkxpress",
-  "bed": "application/vnd.realvnc.bed",
-  "mxl": "application/vnd.recordare.musicxml",
-  "musicxml": "application/vnd.recordare.musicxml+xml",
-  "cryptonote": "application/vnd.rig.cryptonote",
-  "cod": "application/vnd.rim.cod",
-  "rm": "application/vnd.rn-realmedia",
-  "rmvb": "application/vnd.rn-realmedia-vbr",
-  "link66": "application/vnd.route66.link66+xml",
-  "st": "application/vnd.sailingtracker.track",
-  "see": "application/vnd.seemail",
-  "sema": "application/vnd.sema",
-  "semd": "application/vnd.semd",
-  "semf": "application/vnd.semf",
-  "ifm": "application/vnd.shana.informed.formdata",
-  "itp": "application/vnd.shana.informed.formtemplate",
-  "iif": "application/vnd.shana.informed.interchange",
-  "ipk": "application/vnd.shana.informed.package",
-  "twd": "application/vnd.simtech-mindmapper",
-  "twds": "application/vnd.simtech-mindmapper",
-  "mmf": "application/vnd.smaf",
-  "teacher": "application/vnd.smart.teacher",
-  "sdkm": "application/vnd.solent.sdkm+xml",
-  "sdkd": "application/vnd.solent.sdkm+xml",
-  "dxp": "application/vnd.spotfire.dxp",
-  "sfs": "application/vnd.spotfire.sfs",
-  "sdc": "application/vnd.stardivision.calc",
-  "sda": "application/vnd.stardivision.draw",
-  "sdd": "application/vnd.stardivision.impress",
-  "smf": "application/vnd.stardivision.math",
-  "sdw": "application/vnd.stardivision.writer",
-  "vor": "application/vnd.stardivision.writer",
-  "sgl": "application/vnd.stardivision.writer-global",
-  "smzip": "application/vnd.stepmania.package",
-  "sm": "application/vnd.stepmania.stepchart",
-  "sxc": "application/vnd.sun.xml.calc",
-  "stc": "application/vnd.sun.xml.calc.template",
-  "sxd": "application/vnd.sun.xml.draw",
-  "std": "application/vnd.sun.xml.draw.template",
-  "sxi": "application/vnd.sun.xml.impress",
-  "sti": "application/vnd.sun.xml.impress.template",
-  "sxm": "application/vnd.sun.xml.math",
-  "sxw": "application/vnd.sun.xml.writer",
-  "sxg": "application/vnd.sun.xml.writer.global",
-  "stw": "application/vnd.sun.xml.writer.template",
-  "sus": "application/vnd.sus-calendar",
-  "susp": "application/vnd.sus-calendar",
-  "svd": "application/vnd.svd",
-  "sis": "application/vnd.symbian.install",
-  "sisx": "application/vnd.symbian.install",
-  "xsm": "application/vnd.syncml+xml",
-  "bdm": "application/vnd.syncml.dm+wbxml",
-  "xdm": "application/vnd.syncml.dm+xml",
-  "tao": "application/vnd.tao.intent-module-archive",
-  "pcap": "application/vnd.tcpdump.pcap",
-  "cap": "application/vnd.tcpdump.pcap",
-  "dmp": "application/vnd.tcpdump.pcap",
-  "tmo": "application/vnd.tmobile-livetv",
-  "tpt": "application/vnd.trid.tpt",
-  "mxs": "application/vnd.triscape.mxs",
-  "tra": "application/vnd.trueapp",
-  "ufd": "application/vnd.ufdl",
-  "ufdl": "application/vnd.ufdl",
-  "utz": "application/vnd.uiq.theme",
-  "umj": "application/vnd.umajin",
-  "unityweb": "application/vnd.unity",
-  "uoml": "application/vnd.uoml+xml",
-  "vcx": "application/vnd.vcx",
-  "vsd": "application/vnd.visio",
-  "vst": "application/vnd.visio",
-  "vss": "application/vnd.visio",
-  "vsw": "application/vnd.visio",
-  "vis": "application/vnd.visionary",
-  "vsf": "application/vnd.vsf",
-  "wbxml": "application/vnd.wap.wbxml",
-  "wmlc": "application/vnd.wap.wmlc",
-  "wmlsc": "application/vnd.wap.wmlscriptc",
-  "wtb": "application/vnd.webturbo",
-  "nbp": "application/vnd.wolfram.player",
-  "wpd": "application/vnd.wordperfect",
-  "wqd": "application/vnd.wqd",
-  "stf": "application/vnd.wt.stf",
-  "xar": "application/vnd.xara",
-  "xfdl": "application/vnd.xfdl",
-  "hvd": "application/vnd.yamaha.hv-dic",
-  "hvs": "application/vnd.yamaha.hv-script",
-  "hvp": "application/vnd.yamaha.hv-voice",
-  "osf": "application/vnd.yamaha.openscoreformat",
-  "osfpvg": "application/vnd.yamaha.openscoreformat.osfpvg+xml",
-  "saf": "application/vnd.yamaha.smaf-audio",
-  "spf": "application/vnd.yamaha.smaf-phrase",
-  "cmp": "application/vnd.yellowriver-custom-menu",
-  "zir": "application/vnd.zul",
-  "zirz": "application/vnd.zul",
-  "zaz": "application/vnd.zzazz.deck+xml",
-  "vxml": "application/voicexml+xml",
-  "wgt": "application/widget",
-  "hlp": "application/winhlp",
-  "wsdl": "application/wsdl+xml",
-  "wspolicy": "application/wspolicy+xml",
-  "7z": "application/x-7z-compressed",
-  "abw": "application/x-abiword",
-  "ace": "application/x-ace-compressed",
-  "aab": "application/x-authorware-bin",
-  "x32": "application/x-authorware-bin",
-  "u32": "application/x-authorware-bin",
-  "vox": "application/x-authorware-bin",
-  "aam": "application/x-authorware-map",
-  "aas": "application/x-authorware-seg",
-  "bcpio": "application/x-bcpio",
-  "torrent": "application/x-bittorrent",
-  "blb": "application/x-blorb",
-  "blorb": "application/x-blorb",
-  "bz": "application/x-bzip",
-  "bz2": "application/x-bzip2",
-  "boz": "application/x-bzip2",
-  "cbr": "application/x-cbr",
-  "cba": "application/x-cbr",
-  "cbt": "application/x-cbr",
-  "cbz": "application/x-cbr",
-  "cb7": "application/x-cbr",
-  "vcd": "application/x-cdlink",
-  "cfs": "application/x-cfs-compressed",
-  "chat": "application/x-chat",
-  "pgn": "application/x-chess-pgn",
-  "crx": "application/x-chrome-extension",
-  "cco": "application/x-cocoa",
-  "nsc": "application/x-conference",
-  "cpio": "application/x-cpio",
-  "csh": "application/x-csh",
-  "udeb": "application/x-debian-package",
-  "dgc": "application/x-dgc-compressed",
-  "dir": "application/x-director",
-  "dcr": "application/x-director",
-  "dxr": "application/x-director",
-  "cst": "application/x-director",
-  "cct": "application/x-director",
-  "cxt": "application/x-director",
-  "w3d": "application/x-director",
-  "fgd": "application/x-director",
-  "swa": "application/x-director",
-  "wad": "application/x-doom",
-  "ncx": "application/x-dtbncx+xml",
-  "dtb": "application/x-dtbook+xml",
-  "res": "application/x-dtbresource+xml",
-  "dvi": "application/x-dvi",
-  "evy": "application/x-envoy",
-  "eva": "application/x-eva",
-  "bdf": "application/x-font-bdf",
-  "gsf": "application/x-font-ghostscript",
-  "psf": "application/x-font-linux-psf",
-  "otf": "font/opentype",
-  "pcf": "application/x-font-pcf",
-  "snf": "application/x-font-snf",
-  "ttf": "application/x-font-ttf",
-  "ttc": "application/x-font-ttf",
-  "pfa": "application/x-font-type1",
-  "pfb": "application/x-font-type1",
-  "pfm": "application/x-font-type1",
-  "afm": "application/x-font-type1",
-  "arc": "application/x-freearc",
-  "spl": "application/x-futuresplash",
-  "gca": "application/x-gca-compressed",
-  "ulx": "application/x-glulx",
-  "gnumeric": "application/x-gnumeric",
-  "gramps": "application/x-gramps-xml",
-  "gtar": "application/x-gtar",
-  "hdf": "application/x-hdf",
-  "php": "application/x-httpd-php",
-  "install": "application/x-install-instructions",
-  "jardiff": "application/x-java-archive-diff",
-  "jnlp": "application/x-java-jnlp-file",
-  "latex": "application/x-latex",
-  "luac": "application/x-lua-bytecode",
-  "lzh": "application/x-lzh-compressed",
-  "lha": "application/x-lzh-compressed",
-  "run": "application/x-makeself",
-  "mie": "application/x-mie",
-  "prc": "application/x-pilot",
-  "mobi": "application/x-mobipocket-ebook",
-  "application": "application/x-ms-application",
-  "lnk": "application/x-ms-shortcut",
-  "wmd": "application/x-ms-wmd",
-  "wmz": "application/x-msmetafile",
-  "xbap": "application/x-ms-xbap",
-  "mdb": "application/x-msaccess",
-  "obd": "application/x-msbinder",
-  "crd": "application/x-mscardfile",
-  "clp": "application/x-msclip",
-  "com": "application/x-msdownload",
-  "bat": "application/x-msdownload",
-  "mvb": "application/x-msmediaview",
-  "m13": "application/x-msmediaview",
-  "m14": "application/x-msmediaview",
-  "wmf": "application/x-msmetafile",
-  "emf": "application/x-msmetafile",
-  "emz": "application/x-msmetafile",
-  "mny": "application/x-msmoney",
-  "pub": "application/x-mspublisher",
-  "scd": "application/x-msschedule",
-  "trm": "application/x-msterminal",
-  "wri": "application/x-mswrite",
-  "nc": "application/x-netcdf",
-  "cdf": "application/x-netcdf",
-  "pac": "application/x-ns-proxy-autoconfig",
-  "nzb": "application/x-nzb",
-  "pl": "application/x-perl",
-  "pm": "application/x-perl",
-  "p12": "application/x-pkcs12",
-  "pfx": "application/x-pkcs12",
-  "p7b": "application/x-pkcs7-certificates",
-  "spc": "application/x-pkcs7-certificates",
-  "p7r": "application/x-pkcs7-certreqresp",
-  "rar": "application/x-rar-compressed",
-  "rpm": "application/x-redhat-package-manager",
-  "ris": "application/x-research-info-systems",
-  "sea": "application/x-sea",
-  "sh": "application/x-sh",
-  "shar": "application/x-shar",
-  "swf": "application/x-shockwave-flash",
-  "xap": "application/x-silverlight-app",
-  "sql": "application/x-sql",
-  "sit": "application/x-stuffit",
-  "sitx": "application/x-stuffitx",
-  "srt": "application/x-subrip",
-  "sv4cpio": "application/x-sv4cpio",
-  "sv4crc": "application/x-sv4crc",
-  "t3": "application/x-t3vm-image",
-  "gam": "application/x-tads",
-  "tar": "application/x-tar",
-  "tcl": "application/x-tcl",
-  "tk": "application/x-tcl",
-  "tex": "application/x-tex",
-  "tfm": "application/x-tex-tfm",
-  "texinfo": "application/x-texinfo",
-  "texi": "application/x-texinfo",
-  "obj": "application/x-tgif",
-  "ustar": "application/x-ustar",
-  "src": "application/x-wais-source",
-  "webapp": "application/x-web-app-manifest+json",
-  "der": "application/x-x509-ca-cert",
-  "crt": "application/x-x509-ca-cert",
-  "pem": "application/x-x509-ca-cert",
-  "fig": "application/x-xfig",
-  "xlf": "application/x-xliff+xml",
-  "xpi": "application/x-xpinstall",
-  "xz": "application/x-xz",
-  "z1": "application/x-zmachine",
-  "z2": "application/x-zmachine",
-  "z3": "application/x-zmachine",
-  "z4": "application/x-zmachine",
-  "z5": "application/x-zmachine",
-  "z6": "application/x-zmachine",
-  "z7": "application/x-zmachine",
-  "z8": "application/x-zmachine",
-  "xaml": "application/xaml+xml",
-  "xdf": "application/xcap-diff+xml",
-  "xenc": "application/xenc+xml",
-  "xhtml": "application/xhtml+xml",
-  "xht": "application/xhtml+xml",
-  "xml": "text/xml",
-  "xsl": "application/xml",
-  "xsd": "application/xml",
-  "rng": "application/xml",
-  "dtd": "application/xml-dtd",
-  "xop": "application/xop+xml",
-  "xpl": "application/xproc+xml",
-  "xslt": "application/xslt+xml",
-  "xspf": "application/xspf+xml",
-  "mxml": "application/xv+xml",
-  "xhvml": "application/xv+xml",
-  "xvml": "application/xv+xml",
-  "xvm": "application/xv+xml",
-  "yang": "application/yang",
-  "yin": "application/yin+xml",
-  "zip": "application/zip",
-  "3gpp": "video/3gpp",
-  "adp": "audio/adpcm",
-  "au": "audio/basic",
-  "snd": "audio/basic",
-  "mid": "audio/midi",
-  "midi": "audio/midi",
-  "kar": "audio/midi",
-  "rmi": "audio/midi",
-  "mp3": "audio/mpeg",
-  "m4a": "audio/x-m4a",
-  "mp4a": "audio/mp4",
-  "mpga": "audio/mpeg",
-  "mp2": "audio/mpeg",
-  "mp2a": "audio/mpeg",
-  "m2a": "audio/mpeg",
-  "m3a": "audio/mpeg",
-  "oga": "audio/ogg",
-  "ogg": "audio/ogg",
-  "spx": "audio/ogg",
-  "s3m": "audio/s3m",
-  "sil": "audio/silk",
-  "uva": "audio/vnd.dece.audio",
-  "uvva": "audio/vnd.dece.audio",
-  "eol": "audio/vnd.digital-winds",
-  "dra": "audio/vnd.dra",
-  "dts": "audio/vnd.dts",
-  "dtshd": "audio/vnd.dts.hd",
-  "lvp": "audio/vnd.lucent.voice",
-  "pya": "audio/vnd.ms-playready.media.pya",
-  "ecelp4800": "audio/vnd.nuera.ecelp4800",
-  "ecelp7470": "audio/vnd.nuera.ecelp7470",
-  "ecelp9600": "audio/vnd.nuera.ecelp9600",
-  "rip": "audio/vnd.rip",
-  "wav": "audio/x-wav",
-  "weba": "audio/webm",
-  "aac": "audio/x-aac",
-  "aif": "audio/x-aiff",
-  "aiff": "audio/x-aiff",
-  "aifc": "audio/x-aiff",
-  "caf": "audio/x-caf",
-  "flac": "audio/x-flac",
-  "mka": "audio/x-matroska",
-  "m3u": "audio/x-mpegurl",
-  "wax": "audio/x-ms-wax",
-  "wma": "audio/x-ms-wma",
-  "ram": "audio/x-pn-realaudio",
-  "ra": "audio/x-realaudio",
-  "rmp": "audio/x-pn-realaudio-plugin",
-  "xm": "audio/xm",
-  "cdx": "chemical/x-cdx",
-  "cif": "chemical/x-cif",
-  "cmdf": "chemical/x-cmdf",
-  "cml": "chemical/x-cml",
-  "csml": "chemical/x-csml",
-  "xyz": "chemical/x-xyz",
-  "bmp": "image/x-ms-bmp",
-  "cgm": "image/cgm",
-  "g3": "image/g3fax",
-  "gif": "image/gif",
-  "ief": "image/ief",
-  "jpeg": "image/jpeg",
-  "jpg": "image/jpeg",
-  "jpe": "image/jpeg",
-  "ktx": "image/ktx",
-  "png": "image/png",
-  "btif": "image/prs.btif",
-  "sgi": "image/sgi",
-  "svg": "image/svg+xml",
-  "svgz": "image/svg+xml",
-  "tiff": "image/tiff",
-  "tif": "image/tiff",
-  "psd": "image/vnd.adobe.photoshop",
-  "uvi": "image/vnd.dece.graphic",
-  "uvvi": "image/vnd.dece.graphic",
-  "uvg": "image/vnd.dece.graphic",
-  "uvvg": "image/vnd.dece.graphic",
-  "djvu": "image/vnd.djvu",
-  "djv": "image/vnd.djvu",
-  "sub": "text/vnd.dvb.subtitle",
-  "dwg": "image/vnd.dwg",
-  "dxf": "image/vnd.dxf",
-  "fbs": "image/vnd.fastbidsheet",
-  "fpx": "image/vnd.fpx",
-  "fst": "image/vnd.fst",
-  "mmr": "image/vnd.fujixerox.edmics-mmr",
-  "rlc": "image/vnd.fujixerox.edmics-rlc",
-  "mdi": "image/vnd.ms-modi",
-  "wdp": "image/vnd.ms-photo",
-  "npx": "image/vnd.net-fpx",
-  "wbmp": "image/vnd.wap.wbmp",
-  "xif": "image/vnd.xiff",
-  "webp": "image/webp",
-  "3ds": "image/x-3ds",
-  "ras": "image/x-cmu-raster",
-  "cmx": "image/x-cmx",
-  "fh": "image/x-freehand",
-  "fhc": "image/x-freehand",
-  "fh4": "image/x-freehand",
-  "fh5": "image/x-freehand",
-  "fh7": "image/x-freehand",
-  "ico": "image/x-icon",
-  "jng": "image/x-jng",
-  "sid": "image/x-mrsid-image",
-  "pcx": "image/x-pcx",
-  "pic": "image/x-pict",
-  "pct": "image/x-pict",
-  "pnm": "image/x-portable-anymap",
-  "pbm": "image/x-portable-bitmap",
-  "pgm": "image/x-portable-graymap",
-  "ppm": "image/x-portable-pixmap",
-  "rgb": "image/x-rgb",
-  "tga": "image/x-tga",
-  "xbm": "image/x-xbitmap",
-  "xpm": "image/x-xpixmap",
-  "xwd": "image/x-xwindowdump",
-  "eml": "message/rfc822",
-  "mime": "message/rfc822",
-  "igs": "model/iges",
-  "iges": "model/iges",
-  "msh": "model/mesh",
-  "mesh": "model/mesh",
-  "silo": "model/mesh",
-  "dae": "model/vnd.collada+xml",
-  "dwf": "model/vnd.dwf",
-  "gdl": "model/vnd.gdl",
-  "gtw": "model/vnd.gtw",
-  "mts": "model/vnd.mts",
-  "vtu": "model/vnd.vtu",
-  "wrl": "model/vrml",
-  "vrml": "model/vrml",
-  "x3db": "model/x3d+binary",
-  "x3dbz": "model/x3d+binary",
-  "x3dv": "model/x3d+vrml",
-  "x3dvz": "model/x3d+vrml",
-  "x3d": "model/x3d+xml",
-  "x3dz": "model/x3d+xml",
-  "appcache": "text/cache-manifest",
-  "manifest": "text/cache-manifest",
-  "ics": "text/calendar",
-  "ifb": "text/calendar",
-  "coffee": "text/coffeescript",
-  "litcoffee": "text/coffeescript",
-  "css": "text/css",
-  "csv": "text/csv",
-  "hjson": "text/hjson",
-  "html": "text/html",
-  "htm": "text/html",
-  "shtml": "text/html",
-  "jade": "text/jade",
-  "jsx": "text/jsx",
-  "less": "text/less",
-  "mml": "text/mathml",
-  "n3": "text/n3",
-  "txt": "text/plain",
-  "text": "text/plain",
-  "conf": "text/plain",
-  "def": "text/plain",
-  "list": "text/plain",
-  "log": "text/plain",
-  "in": "text/plain",
-  "ini": "text/plain",
-  "dsc": "text/prs.lines.tag",
-  "rtx": "text/richtext",
-  "sgml": "text/sgml",
-  "sgm": "text/sgml",
-  "slim": "text/slim",
-  "slm": "text/slim",
-  "stylus": "text/stylus",
-  "styl": "text/stylus",
-  "tsv": "text/tab-separated-values",
-  "t": "text/troff",
-  "tr": "text/troff",
-  "roff": "text/troff",
-  "man": "text/troff",
-  "me": "text/troff",
-  "ms": "text/troff",
-  "ttl": "text/turtle",
-  "uri": "text/uri-list",
-  "uris": "text/uri-list",
-  "urls": "text/uri-list",
-  "vcard": "text/vcard",
-  "curl": "text/vnd.curl",
-  "dcurl": "text/vnd.curl.dcurl",
-  "mcurl": "text/vnd.curl.mcurl",
-  "scurl": "text/vnd.curl.scurl",
-  "fly": "text/vnd.fly",
-  "flx": "text/vnd.fmi.flexstor",
-  "gv": "text/vnd.graphviz",
-  "3dml": "text/vnd.in3d.3dml",
-  "spot": "text/vnd.in3d.spot",
-  "jad": "text/vnd.sun.j2me.app-descriptor",
-  "wml": "text/vnd.wap.wml",
-  "wmls": "text/vnd.wap.wmlscript",
-  "vtt": "text/vtt",
-  "s": "text/x-asm",
-  "asm": "text/x-asm",
-  "c": "text/x-c",
-  "cc": "text/x-c",
-  "cxx": "text/x-c",
-  "cpp": "text/x-c",
-  "h": "text/x-c",
-  "hh": "text/x-c",
-  "dic": "text/x-c",
-  "htc": "text/x-component",
-  "f": "text/x-fortran",
-  "for": "text/x-fortran",
-  "f77": "text/x-fortran",
-  "f90": "text/x-fortran",
-  "hbs": "text/x-handlebars-template",
-  "java": "text/x-java-source",
-  "lua": "text/x-lua",
-  "markdown": "text/x-markdown",
-  "md": "text/x-markdown",
-  "mkd": "text/x-markdown",
-  "nfo": "text/x-nfo",
-  "opml": "text/x-opml",
-  "p": "text/x-pascal",
-  "pas": "text/x-pascal",
-  "pde": "text/x-processing",
-  "sass": "text/x-sass",
-  "scss": "text/x-scss",
-  "etx": "text/x-setext",
-  "sfv": "text/x-sfv",
-  "ymp": "text/x-suse-ymp",
-  "uu": "text/x-uuencode",
-  "vcs": "text/x-vcalendar",
-  "vcf": "text/x-vcard",
-  "yaml": "text/yaml",
-  "yml": "text/yaml",
-  "3gp": "video/3gpp",
-  "3g2": "video/3gpp2",
-  "h261": "video/h261",
-  "h263": "video/h263",
-  "h264": "video/h264",
-  "jpgv": "video/jpeg",
-  "jpm": "video/jpm",
-  "jpgm": "video/jpm",
-  "mj2": "video/mj2",
-  "mjp2": "video/mj2",
-  "ts": "video/mp2t",
-  "mp4": "video/mp4",
-  "mp4v": "video/mp4",
-  "mpg4": "video/mp4",
-  "mpeg": "video/mpeg",
-  "mpg": "video/mpeg",
-  "mpe": "video/mpeg",
-  "m1v": "video/mpeg",
-  "m2v": "video/mpeg",
-  "ogv": "video/ogg",
-  "qt": "video/quicktime",
-  "mov": "video/quicktime",
-  "uvh": "video/vnd.dece.hd",
-  "uvvh": "video/vnd.dece.hd",
-  "uvm": "video/vnd.dece.mobile",
-  "uvvm": "video/vnd.dece.mobile",
-  "uvp": "video/vnd.dece.pd",
-  "uvvp": "video/vnd.dece.pd",
-  "uvs": "video/vnd.dece.sd",
-  "uvvs": "video/vnd.dece.sd",
-  "uvv": "video/vnd.dece.video",
-  "uvvv": "video/vnd.dece.video",
-  "dvb": "video/vnd.dvb.file",
-  "fvt": "video/vnd.fvt",
-  "mxu": "video/vnd.mpegurl",
-  "m4u": "video/vnd.mpegurl",
-  "pyv": "video/vnd.ms-playready.media.pyv",
-  "uvu": "video/vnd.uvvu.mp4",
-  "uvvu": "video/vnd.uvvu.mp4",
-  "viv": "video/vnd.vivo",
-  "webm": "video/webm",
-  "f4v": "video/x-f4v",
-  "fli": "video/x-fli",
-  "flv": "video/x-flv",
-  "m4v": "video/x-m4v",
-  "mkv": "video/x-matroska",
-  "mk3d": "video/x-matroska",
-  "mks": "video/x-matroska",
-  "mng": "video/x-mng",
-  "asf": "video/x-ms-asf",
-  "asx": "video/x-ms-asf",
-  "vob": "video/x-ms-vob",
-  "wm": "video/x-ms-wm",
-  "wmv": "video/x-ms-wmv",
-  "wmx": "video/x-ms-wmx",
-  "wvx": "video/x-ms-wvx",
-  "avi": "video/x-msvideo",
-  "movie": "video/x-sgi-movie",
-  "smv": "video/x-smv",
-  "ice": "x-conference/x-cooltalk"
+	"123": "application/vnd.lotus-1-2-3",
+	"ez": "application/andrew-inset",
+	"aw": "application/applixware",
+	"atom": "application/atom+xml",
+	"atomcat": "application/atomcat+xml",
+	"atomsvc": "application/atomsvc+xml",
+	"bdoc": "application/x-bdoc",
+	"ccxml": "application/ccxml+xml",
+	"cdmia": "application/cdmi-capability",
+	"cdmic": "application/cdmi-container",
+	"cdmid": "application/cdmi-domain",
+	"cdmio": "application/cdmi-object",
+	"cdmiq": "application/cdmi-queue",
+	"cu": "application/cu-seeme",
+	"mpd": "application/dash+xml",
+	"davmount": "application/davmount+xml",
+	"dbk": "application/docbook+xml",
+	"dssc": "application/dssc+der",
+	"xdssc": "application/dssc+xml",
+	"ecma": "application/ecmascript",
+	"emma": "application/emma+xml",
+	"epub": "application/epub+zip",
+	"exi": "application/exi",
+	"pfr": "application/font-tdpfr",
+	"woff": "application/font-woff",
+	"woff2": "application/font-woff2",
+	"geojson": "application/geo+json",
+	"gml": "application/gml+xml",
+	"gpx": "application/gpx+xml",
+	"gxf": "application/gxf",
+	"stk": "application/hyperstudio",
+	"ink": "application/inkml+xml",
+	"inkml": "application/inkml+xml",
+	"ipfix": "application/ipfix",
+	"jar": "application/java-archive",
+	"war": "application/java-archive",
+	"ear": "application/java-archive",
+	"ser": "application/java-serialized-object",
+	"class": "application/java-vm",
+	"js": "application/javascript",
+	"json": "application/json",
+	"map": "application/json",
+	"json5": "application/json5",
+	"jsonml": "application/jsonml+json",
+	"jsonld": "application/ld+json",
+	"lostxml": "application/lost+xml",
+	"hqx": "application/mac-binhex40",
+	"cpt": "application/mac-compactpro",
+	"mads": "application/mads+xml",
+	"webmanifest": "application/manifest+json",
+	"mrc": "application/marc",
+	"mrcx": "application/marcxml+xml",
+	"ma": "application/mathematica",
+	"nb": "application/mathematica",
+	"mb": "application/mathematica",
+	"mathml": "application/mathml+xml",
+	"mbox": "application/mbox",
+	"mscml": "application/mediaservercontrol+xml",
+	"metalink": "application/metalink+xml",
+	"meta4": "application/metalink4+xml",
+	"mets": "application/mets+xml",
+	"mods": "application/mods+xml",
+	"m21": "application/mp21",
+	"mp21": "application/mp21",
+	"mp4s": "application/mp4",
+	"m4p": "application/mp4",
+	"doc": "application/msword",
+	"dot": "application/msword",
+	"mxf": "application/mxf",
+	"bin": "application/octet-stream",
+	"dms": "application/octet-stream",
+	"lrf": "application/octet-stream",
+	"mar": "application/octet-stream",
+	"so": "application/octet-stream",
+	"dist": "application/octet-stream",
+	"distz": "application/octet-stream",
+	"pkg": "application/octet-stream",
+	"bpk": "application/octet-stream",
+	"dump": "application/octet-stream",
+	"elc": "application/octet-stream",
+	"deploy": "application/octet-stream",
+	"exe": "application/x-msdownload",
+	"dll": "application/x-msdownload",
+	"deb": "application/x-debian-package",
+	"dmg": "application/x-apple-diskimage",
+	"iso": "application/x-iso9660-image",
+	"img": "application/octet-stream",
+	"msi": "application/x-msdownload",
+	"msp": "application/octet-stream",
+	"msm": "application/octet-stream",
+	"buffer": "application/octet-stream",
+	"oda": "application/oda",
+	"opf": "application/oebps-package+xml",
+	"ogx": "application/ogg",
+	"omdoc": "application/omdoc+xml",
+	"onetoc": "application/onenote",
+	"onetoc2": "application/onenote",
+	"onetmp": "application/onenote",
+	"onepkg": "application/onenote",
+	"oxps": "application/oxps",
+	"xer": "application/patch-ops-error+xml",
+	"pdf": "application/pdf",
+	"pgp": "application/pgp-encrypted",
+	"asc": "application/pgp-signature",
+	"sig": "application/pgp-signature",
+	"prf": "application/pics-rules",
+	"p10": "application/pkcs10",
+	"p7m": "application/pkcs7-mime",
+	"p7c": "application/pkcs7-mime",
+	"p7s": "application/pkcs7-signature",
+	"p8": "application/pkcs8",
+	"ac": "application/pkix-attr-cert",
+	"cer": "application/pkix-cert",
+	"crl": "application/pkix-crl",
+	"pkipath": "application/pkix-pkipath",
+	"pki": "application/pkixcmp",
+	"pls": "application/pls+xml",
+	"ai": "application/postscript",
+	"eps": "application/postscript",
+	"ps": "application/postscript",
+	"cww": "application/prs.cww",
+	"pskcxml": "application/pskc+xml",
+	"rdf": "application/rdf+xml",
+	"rif": "application/reginfo+xml",
+	"rnc": "application/relax-ng-compact-syntax",
+	"rl": "application/resource-lists+xml",
+	"rld": "application/resource-lists-diff+xml",
+	"rs": "application/rls-services+xml",
+	"gbr": "application/rpki-ghostbusters",
+	"mft": "application/rpki-manifest",
+	"roa": "application/rpki-roa",
+	"rsd": "application/rsd+xml",
+	"rss": "application/rss+xml",
+	"rtf": "text/rtf",
+	"sbml": "application/sbml+xml",
+	"scq": "application/scvp-cv-request",
+	"scs": "application/scvp-cv-response",
+	"spq": "application/scvp-vp-request",
+	"spp": "application/scvp-vp-response",
+	"sdp": "application/sdp",
+	"setpay": "application/set-payment-initiation",
+	"setreg": "application/set-registration-initiation",
+	"shf": "application/shf+xml",
+	"smi": "application/smil+xml",
+	"smil": "application/smil+xml",
+	"rq": "application/sparql-query",
+	"srx": "application/sparql-results+xml",
+	"gram": "application/srgs",
+	"grxml": "application/srgs+xml",
+	"sru": "application/sru+xml",
+	"ssdl": "application/ssdl+xml",
+	"ssml": "application/ssml+xml",
+	"tei": "application/tei+xml",
+	"teicorpus": "application/tei+xml",
+	"tfi": "application/thraud+xml",
+	"tsd": "application/timestamped-data",
+	"plb": "application/vnd.3gpp.pic-bw-large",
+	"psb": "application/vnd.3gpp.pic-bw-small",
+	"pvb": "application/vnd.3gpp.pic-bw-var",
+	"tcap": "application/vnd.3gpp2.tcap",
+	"pwn": "application/vnd.3m.post-it-notes",
+	"aso": "application/vnd.accpac.simply.aso",
+	"imp": "application/vnd.accpac.simply.imp",
+	"acu": "application/vnd.acucobol",
+	"atc": "application/vnd.acucorp",
+	"acutc": "application/vnd.acucorp",
+	"air": "application/vnd.adobe.air-application-installer-package+zip",
+	"fcdt": "application/vnd.adobe.formscentral.fcdt",
+	"fxp": "application/vnd.adobe.fxp",
+	"fxpl": "application/vnd.adobe.fxp",
+	"xdp": "application/vnd.adobe.xdp+xml",
+	"xfdf": "application/vnd.adobe.xfdf",
+	"ahead": "application/vnd.ahead.space",
+	"azf": "application/vnd.airzip.filesecure.azf",
+	"azs": "application/vnd.airzip.filesecure.azs",
+	"azw": "application/vnd.amazon.ebook",
+	"acc": "application/vnd.americandynamics.acc",
+	"ami": "application/vnd.amiga.ami",
+	"apk": "application/vnd.android.package-archive",
+	"cii": "application/vnd.anser-web-certificate-issue-initiation",
+	"fti": "application/vnd.anser-web-funds-transfer-initiation",
+	"atx": "application/vnd.antix.game-component",
+	"mpkg": "application/vnd.apple.installer+xml",
+	"m3u8": "application/vnd.apple.mpegurl",
+	"pkpass": "application/vnd.apple.pkpass",
+	"swi": "application/vnd.aristanetworks.swi",
+	"iota": "application/vnd.astraea-software.iota",
+	"aep": "application/vnd.audiograph",
+	"mpm": "application/vnd.blueice.multipass",
+	"bmi": "application/vnd.bmi",
+	"rep": "application/vnd.businessobjects",
+	"cdxml": "application/vnd.chemdraw+xml",
+	"mmd": "application/vnd.chipnuts.karaoke-mmd",
+	"cdy": "application/vnd.cinderella",
+	"cla": "application/vnd.claymore",
+	"rp9": "application/vnd.cloanto.rp9",
+	"c4g": "application/vnd.clonk.c4group",
+	"c4d": "application/vnd.clonk.c4group",
+	"c4f": "application/vnd.clonk.c4group",
+	"c4p": "application/vnd.clonk.c4group",
+	"c4u": "application/vnd.clonk.c4group",
+	"c11amc": "application/vnd.cluetrust.cartomobile-config",
+	"c11amz": "application/vnd.cluetrust.cartomobile-config-pkg",
+	"csp": "application/vnd.commonspace",
+	"cdbcmsg": "application/vnd.contact.cmsg",
+	"cmc": "application/vnd.cosmocaller",
+	"clkx": "application/vnd.crick.clicker",
+	"clkk": "application/vnd.crick.clicker.keyboard",
+	"clkp": "application/vnd.crick.clicker.palette",
+	"clkt": "application/vnd.crick.clicker.template",
+	"clkw": "application/vnd.crick.clicker.wordbank",
+	"wbs": "application/vnd.criticaltools.wbs+xml",
+	"pml": "application/vnd.ctc-posml",
+	"ppd": "application/vnd.cups-ppd",
+	"car": "application/vnd.curl.car",
+	"pcurl": "application/vnd.curl.pcurl",
+	"dart": "application/vnd.dart",
+	"rdz": "application/vnd.data-vision.rdz",
+	"uvf": "application/vnd.dece.data",
+	"uvvf": "application/vnd.dece.data",
+	"uvd": "application/vnd.dece.data",
+	"uvvd": "application/vnd.dece.data",
+	"uvt": "application/vnd.dece.ttml+xml",
+	"uvvt": "application/vnd.dece.ttml+xml",
+	"uvx": "application/vnd.dece.unspecified",
+	"uvvx": "application/vnd.dece.unspecified",
+	"uvz": "application/vnd.dece.zip",
+	"uvvz": "application/vnd.dece.zip",
+	"fe_launch": "application/vnd.denovo.fcselayout-link",
+	"dna": "application/vnd.dna",
+	"mlp": "application/vnd.dolby.mlp",
+	"dpg": "application/vnd.dpgraph",
+	"dfac": "application/vnd.dreamfactory",
+	"kpxx": "application/vnd.ds-keypoint",
+	"ait": "application/vnd.dvb.ait",
+	"svc": "application/vnd.dvb.service",
+	"geo": "application/vnd.dynageo",
+	"mag": "application/vnd.ecowin.chart",
+	"nml": "application/vnd.enliven",
+	"esf": "application/vnd.epson.esf",
+	"msf": "application/vnd.epson.msf",
+	"qam": "application/vnd.epson.quickanime",
+	"slt": "application/vnd.epson.salt",
+	"ssf": "application/vnd.epson.ssf",
+	"es3": "application/vnd.eszigno3+xml",
+	"et3": "application/vnd.eszigno3+xml",
+	"ez2": "application/vnd.ezpix-album",
+	"ez3": "application/vnd.ezpix-package",
+	"fdf": "application/vnd.fdf",
+	"mseed": "application/vnd.fdsn.mseed",
+	"seed": "application/vnd.fdsn.seed",
+	"dataless": "application/vnd.fdsn.seed",
+	"gph": "application/vnd.flographit",
+	"ftc": "application/vnd.fluxtime.clip",
+	"fm": "application/vnd.framemaker",
+	"frame": "application/vnd.framemaker",
+	"maker": "application/vnd.framemaker",
+	"book": "application/vnd.framemaker",
+	"fnc": "application/vnd.frogans.fnc",
+	"ltf": "application/vnd.frogans.ltf",
+	"fsc": "application/vnd.fsc.weblaunch",
+	"oas": "application/vnd.fujitsu.oasys",
+	"oa2": "application/vnd.fujitsu.oasys2",
+	"oa3": "application/vnd.fujitsu.oasys3",
+	"fg5": "application/vnd.fujitsu.oasysgp",
+	"bh2": "application/vnd.fujitsu.oasysprs",
+	"ddd": "application/vnd.fujixerox.ddd",
+	"xdw": "application/vnd.fujixerox.docuworks",
+	"xbd": "application/vnd.fujixerox.docuworks.binder",
+	"fzs": "application/vnd.fuzzysheet",
+	"txd": "application/vnd.genomatix.tuxedo",
+	"ggb": "application/vnd.geogebra.file",
+	"ggt": "application/vnd.geogebra.tool",
+	"gex": "application/vnd.geometry-explorer",
+	"gre": "application/vnd.geometry-explorer",
+	"gxt": "application/vnd.geonext",
+	"g2w": "application/vnd.geoplan",
+	"g3w": "application/vnd.geospace",
+	"gmx": "application/vnd.gmx",
+	"gdoc": "application/vnd.google-apps.document",
+	"gslides": "application/vnd.google-apps.presentation",
+	"gsheet": "application/vnd.google-apps.spreadsheet",
+	"kml": "application/vnd.google-earth.kml+xml",
+	"kmz": "application/vnd.google-earth.kmz",
+	"gqf": "application/vnd.grafeq",
+	"gqs": "application/vnd.grafeq",
+	"gac": "application/vnd.groove-account",
+	"ghf": "application/vnd.groove-help",
+	"gim": "application/vnd.groove-identity-message",
+	"grv": "application/vnd.groove-injector",
+	"gtm": "application/vnd.groove-tool-message",
+	"tpl": "application/vnd.groove-tool-template",
+	"vcg": "application/vnd.groove-vcard",
+	"hal": "application/vnd.hal+xml",
+	"zmm": "application/vnd.handheld-entertainment+xml",
+	"hbci": "application/vnd.hbci",
+	"les": "application/vnd.hhe.lesson-player",
+	"hpgl": "application/vnd.hp-hpgl",
+	"hpid": "application/vnd.hp-hpid",
+	"hps": "application/vnd.hp-hps",
+	"jlt": "application/vnd.hp-jlyt",
+	"pcl": "application/vnd.hp-pcl",
+	"pclxl": "application/vnd.hp-pclxl",
+	"sfd-hdstx": "application/vnd.hydrostatix.sof-data",
+	"mpy": "application/vnd.ibm.minipay",
+	"afp": "application/vnd.ibm.modcap",
+	"listafp": "application/vnd.ibm.modcap",
+	"list3820": "application/vnd.ibm.modcap",
+	"irm": "application/vnd.ibm.rights-management",
+	"sc": "application/vnd.ibm.secure-container",
+	"icc": "application/vnd.iccprofile",
+	"icm": "application/vnd.iccprofile",
+	"igl": "application/vnd.igloader",
+	"ivp": "application/vnd.immervision-ivp",
+	"ivu": "application/vnd.immervision-ivu",
+	"igm": "application/vnd.insors.igm",
+	"xpw": "application/vnd.intercon.formnet",
+	"xpx": "application/vnd.intercon.formnet",
+	"i2g": "application/vnd.intergeo",
+	"qbo": "application/vnd.intu.qbo",
+	"qfx": "application/vnd.intu.qfx",
+	"rcprofile": "application/vnd.ipunplugged.rcprofile",
+	"irp": "application/vnd.irepository.package+xml",
+	"xpr": "application/vnd.is-xpr",
+	"fcs": "application/vnd.isac.fcs",
+	"jam": "application/vnd.jam",
+	"rms": "application/vnd.jcp.javame.midlet-rms",
+	"jisp": "application/vnd.jisp",
+	"joda": "application/vnd.joost.joda-archive",
+	"ktz": "application/vnd.kahootz",
+	"ktr": "application/vnd.kahootz",
+	"karbon": "application/vnd.kde.karbon",
+	"chrt": "application/vnd.kde.kchart",
+	"kfo": "application/vnd.kde.kformula",
+	"flw": "application/vnd.kde.kivio",
+	"kon": "application/vnd.kde.kontour",
+	"kpr": "application/vnd.kde.kpresenter",
+	"kpt": "application/vnd.kde.kpresenter",
+	"ksp": "application/vnd.kde.kspread",
+	"kwd": "application/vnd.kde.kword",
+	"kwt": "application/vnd.kde.kword",
+	"htke": "application/vnd.kenameaapp",
+	"kia": "application/vnd.kidspiration",
+	"kne": "application/vnd.kinar",
+	"knp": "application/vnd.kinar",
+	"skp": "application/vnd.koan",
+	"skd": "application/vnd.koan",
+	"skt": "application/vnd.koan",
+	"skm": "application/vnd.koan",
+	"sse": "application/vnd.kodak-descriptor",
+	"lasxml": "application/vnd.las.las+xml",
+	"lbd": "application/vnd.llamagraphics.life-balance.desktop",
+	"lbe": "application/vnd.llamagraphics.life-balance.exchange+xml",
+	"apr": "application/vnd.lotus-approach",
+	"pre": "application/vnd.lotus-freelance",
+	"nsf": "application/vnd.lotus-notes",
+	"org": "application/vnd.lotus-organizer",
+	"scm": "application/vnd.lotus-screencam",
+	"lwp": "application/vnd.lotus-wordpro",
+	"portpkg": "application/vnd.macports.portpkg",
+	"mcd": "application/vnd.mcd",
+	"mc1": "application/vnd.medcalcdata",
+	"cdkey": "application/vnd.mediastation.cdkey",
+	"mwf": "application/vnd.mfer",
+	"mfm": "application/vnd.mfmp",
+	"flo": "application/vnd.micrografx.flo",
+	"igx": "application/vnd.micrografx.igx",
+	"mif": "application/vnd.mif",
+	"daf": "application/vnd.mobius.daf",
+	"dis": "application/vnd.mobius.dis",
+	"mbk": "application/vnd.mobius.mbk",
+	"mqy": "application/vnd.mobius.mqy",
+	"msl": "application/vnd.mobius.msl",
+	"plc": "application/vnd.mobius.plc",
+	"txf": "application/vnd.mobius.txf",
+	"mpn": "application/vnd.mophun.application",
+	"mpc": "application/vnd.mophun.certificate",
+	"xul": "application/vnd.mozilla.xul+xml",
+	"cil": "application/vnd.ms-artgalry",
+	"cab": "application/vnd.ms-cab-compressed",
+	"xls": "application/vnd.ms-excel",
+	"xlm": "application/vnd.ms-excel",
+	"xla": "application/vnd.ms-excel",
+	"xlc": "application/vnd.ms-excel",
+	"xlt": "application/vnd.ms-excel",
+	"xlw": "application/vnd.ms-excel",
+	"xlam": "application/vnd.ms-excel.addin.macroenabled.12",
+	"xlsb": "application/vnd.ms-excel.sheet.binary.macroenabled.12",
+	"xlsm": "application/vnd.ms-excel.sheet.macroenabled.12",
+	"xltm": "application/vnd.ms-excel.template.macroenabled.12",
+	"eot": "application/vnd.ms-fontobject",
+	"chm": "application/vnd.ms-htmlhelp",
+	"ims": "application/vnd.ms-ims",
+	"lrm": "application/vnd.ms-lrm",
+	"thmx": "application/vnd.ms-officetheme",
+	"cat": "application/vnd.ms-pki.seccat",
+	"stl": "application/vnd.ms-pki.stl",
+	"ppt": "application/vnd.ms-powerpoint",
+	"pps": "application/vnd.ms-powerpoint",
+	"pot": "application/vnd.ms-powerpoint",
+	"ppam": "application/vnd.ms-powerpoint.addin.macroenabled.12",
+	"pptm": "application/vnd.ms-powerpoint.presentation.macroenabled.12",
+	"sldm": "application/vnd.ms-powerpoint.slide.macroenabled.12",
+	"ppsm": "application/vnd.ms-powerpoint.slideshow.macroenabled.12",
+	"potm": "application/vnd.ms-powerpoint.template.macroenabled.12",
+	"mpp": "application/vnd.ms-project",
+	"mpt": "application/vnd.ms-project",
+	"docm": "application/vnd.ms-word.document.macroenabled.12",
+	"dotm": "application/vnd.ms-word.template.macroenabled.12",
+	"wps": "application/vnd.ms-works",
+	"wks": "application/vnd.ms-works",
+	"wcm": "application/vnd.ms-works",
+	"wdb": "application/vnd.ms-works",
+	"wpl": "application/vnd.ms-wpl",
+	"xps": "application/vnd.ms-xpsdocument",
+	"mseq": "application/vnd.mseq",
+	"mus": "application/vnd.musician",
+	"msty": "application/vnd.muvee.style",
+	"taglet": "application/vnd.mynfc",
+	"nlu": "application/vnd.neurolanguage.nlu",
+	"ntf": "application/vnd.nitf",
+	"nitf": "application/vnd.nitf",
+	"nnd": "application/vnd.noblenet-directory",
+	"nns": "application/vnd.noblenet-sealer",
+	"nnw": "application/vnd.noblenet-web",
+	"ngdat": "application/vnd.nokia.n-gage.data",
+	"n-gage": "application/vnd.nokia.n-gage.symbian.install",
+	"rpst": "application/vnd.nokia.radio-preset",
+	"rpss": "application/vnd.nokia.radio-presets",
+	"edm": "application/vnd.novadigm.edm",
+	"edx": "application/vnd.novadigm.edx",
+	"ext": "application/vnd.novadigm.ext",
+	"odc": "application/vnd.oasis.opendocument.chart",
+	"otc": "application/vnd.oasis.opendocument.chart-template",
+	"odb": "application/vnd.oasis.opendocument.database",
+	"odf": "application/vnd.oasis.opendocument.formula",
+	"odft": "application/vnd.oasis.opendocument.formula-template",
+	"odg": "application/vnd.oasis.opendocument.graphics",
+	"otg": "application/vnd.oasis.opendocument.graphics-template",
+	"odi": "application/vnd.oasis.opendocument.image",
+	"oti": "application/vnd.oasis.opendocument.image-template",
+	"odp": "application/vnd.oasis.opendocument.presentation",
+	"otp": "application/vnd.oasis.opendocument.presentation-template",
+	"ods": "application/vnd.oasis.opendocument.spreadsheet",
+	"ots": "application/vnd.oasis.opendocument.spreadsheet-template",
+	"odt": "application/vnd.oasis.opendocument.text",
+	"odm": "application/vnd.oasis.opendocument.text-master",
+	"ott": "application/vnd.oasis.opendocument.text-template",
+	"oth": "application/vnd.oasis.opendocument.text-web",
+	"xo": "application/vnd.olpc-sugar",
+	"dd2": "application/vnd.oma.dd2+xml",
+	"oxt": "application/vnd.openofficeorg.extension",
+	"pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+	"sldx": "application/vnd.openxmlformats-officedocument.presentationml.slide",
+	"ppsx": "application/vnd.openxmlformats-officedocument.presentationml.slideshow",
+	"potx": "application/vnd.openxmlformats-officedocument.presentationml.template",
+	"xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+	"xltx": "application/vnd.openxmlformats-officedocument.spreadsheetml.template",
+	"docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+	"dotx": "application/vnd.openxmlformats-officedocument.wordprocessingml.template",
+	"mgp": "application/vnd.osgeo.mapguide.package",
+	"dp": "application/vnd.osgi.dp",
+	"esa": "application/vnd.osgi.subsystem",
+	"pdb": "application/x-pilot",
+	"pqa": "application/vnd.palm",
+	"oprc": "application/vnd.palm",
+	"paw": "application/vnd.pawaafile",
+	"str": "application/vnd.pg.format",
+	"ei6": "application/vnd.pg.osasli",
+	"efif": "application/vnd.picsel",
+	"wg": "application/vnd.pmi.widget",
+	"plf": "application/vnd.pocketlearn",
+	"pbd": "application/vnd.powerbuilder6",
+	"box": "application/vnd.previewsystems.box",
+	"mgz": "application/vnd.proteus.magazine",
+	"qps": "application/vnd.publishare-delta-tree",
+	"ptid": "application/vnd.pvi.ptid1",
+	"qxd": "application/vnd.quark.quarkxpress",
+	"qxt": "application/vnd.quark.quarkxpress",
+	"qwd": "application/vnd.quark.quarkxpress",
+	"qwt": "application/vnd.quark.quarkxpress",
+	"qxl": "application/vnd.quark.quarkxpress",
+	"qxb": "application/vnd.quark.quarkxpress",
+	"bed": "application/vnd.realvnc.bed",
+	"mxl": "application/vnd.recordare.musicxml",
+	"musicxml": "application/vnd.recordare.musicxml+xml",
+	"cryptonote": "application/vnd.rig.cryptonote",
+	"cod": "application/vnd.rim.cod",
+	"rm": "application/vnd.rn-realmedia",
+	"rmvb": "application/vnd.rn-realmedia-vbr",
+	"link66": "application/vnd.route66.link66+xml",
+	"st": "application/vnd.sailingtracker.track",
+	"see": "application/vnd.seemail",
+	"sema": "application/vnd.sema",
+	"semd": "application/vnd.semd",
+	"semf": "application/vnd.semf",
+	"ifm": "application/vnd.shana.informed.formdata",
+	"itp": "application/vnd.shana.informed.formtemplate",
+	"iif": "application/vnd.shana.informed.interchange",
+	"ipk": "application/vnd.shana.informed.package",
+	"twd": "application/vnd.simtech-mindmapper",
+	"twds": "application/vnd.simtech-mindmapper",
+	"mmf": "application/vnd.smaf",
+	"teacher": "application/vnd.smart.teacher",
+	"sdkm": "application/vnd.solent.sdkm+xml",
+	"sdkd": "application/vnd.solent.sdkm+xml",
+	"dxp": "application/vnd.spotfire.dxp",
+	"sfs": "application/vnd.spotfire.sfs",
+	"sdc": "application/vnd.stardivision.calc",
+	"sda": "application/vnd.stardivision.draw",
+	"sdd": "application/vnd.stardivision.impress",
+	"smf": "application/vnd.stardivision.math",
+	"sdw": "application/vnd.stardivision.writer",
+	"vor": "application/vnd.stardivision.writer",
+	"sgl": "application/vnd.stardivision.writer-global",
+	"smzip": "application/vnd.stepmania.package",
+	"sm": "application/vnd.stepmania.stepchart",
+	"sxc": "application/vnd.sun.xml.calc",
+	"stc": "application/vnd.sun.xml.calc.template",
+	"sxd": "application/vnd.sun.xml.draw",
+	"std": "application/vnd.sun.xml.draw.template",
+	"sxi": "application/vnd.sun.xml.impress",
+	"sti": "application/vnd.sun.xml.impress.template",
+	"sxm": "application/vnd.sun.xml.math",
+	"sxw": "application/vnd.sun.xml.writer",
+	"sxg": "application/vnd.sun.xml.writer.global",
+	"stw": "application/vnd.sun.xml.writer.template",
+	"sus": "application/vnd.sus-calendar",
+	"susp": "application/vnd.sus-calendar",
+	"svd": "application/vnd.svd",
+	"sis": "application/vnd.symbian.install",
+	"sisx": "application/vnd.symbian.install",
+	"xsm": "application/vnd.syncml+xml",
+	"bdm": "application/vnd.syncml.dm+wbxml",
+	"xdm": "application/vnd.syncml.dm+xml",
+	"tao": "application/vnd.tao.intent-module-archive",
+	"pcap": "application/vnd.tcpdump.pcap",
+	"cap": "application/vnd.tcpdump.pcap",
+	"dmp": "application/vnd.tcpdump.pcap",
+	"tmo": "application/vnd.tmobile-livetv",
+	"tpt": "application/vnd.trid.tpt",
+	"mxs": "application/vnd.triscape.mxs",
+	"tra": "application/vnd.trueapp",
+	"ufd": "application/vnd.ufdl",
+	"ufdl": "application/vnd.ufdl",
+	"utz": "application/vnd.uiq.theme",
+	"umj": "application/vnd.umajin",
+	"unityweb": "application/vnd.unity",
+	"uoml": "application/vnd.uoml+xml",
+	"vcx": "application/vnd.vcx",
+	"vsd": "application/vnd.visio",
+	"vst": "application/vnd.visio",
+	"vss": "application/vnd.visio",
+	"vsw": "application/vnd.visio",
+	"vis": "application/vnd.visionary",
+	"vsf": "application/vnd.vsf",
+	"wbxml": "application/vnd.wap.wbxml",
+	"wmlc": "application/vnd.wap.wmlc",
+	"wmlsc": "application/vnd.wap.wmlscriptc",
+	"wtb": "application/vnd.webturbo",
+	"nbp": "application/vnd.wolfram.player",
+	"wpd": "application/vnd.wordperfect",
+	"wqd": "application/vnd.wqd",
+	"stf": "application/vnd.wt.stf",
+	"xar": "application/vnd.xara",
+	"xfdl": "application/vnd.xfdl",
+	"hvd": "application/vnd.yamaha.hv-dic",
+	"hvs": "application/vnd.yamaha.hv-script",
+	"hvp": "application/vnd.yamaha.hv-voice",
+	"osf": "application/vnd.yamaha.openscoreformat",
+	"osfpvg": "application/vnd.yamaha.openscoreformat.osfpvg+xml",
+	"saf": "application/vnd.yamaha.smaf-audio",
+	"spf": "application/vnd.yamaha.smaf-phrase",
+	"cmp": "application/vnd.yellowriver-custom-menu",
+	"zir": "application/vnd.zul",
+	"zirz": "application/vnd.zul",
+	"zaz": "application/vnd.zzazz.deck+xml",
+	"vxml": "application/voicexml+xml",
+	"wgt": "application/widget",
+	"hlp": "application/winhlp",
+	"wsdl": "application/wsdl+xml",
+	"wspolicy": "application/wspolicy+xml",
+	"7z": "application/x-7z-compressed",
+	"abw": "application/x-abiword",
+	"ace": "application/x-ace-compressed",
+	"aab": "application/x-authorware-bin",
+	"x32": "application/x-authorware-bin",
+	"u32": "application/x-authorware-bin",
+	"vox": "application/x-authorware-bin",
+	"aam": "application/x-authorware-map",
+	"aas": "application/x-authorware-seg",
+	"bcpio": "application/x-bcpio",
+	"torrent": "application/x-bittorrent",
+	"blb": "application/x-blorb",
+	"blorb": "application/x-blorb",
+	"bz": "application/x-bzip",
+	"bz2": "application/x-bzip2",
+	"boz": "application/x-bzip2",
+	"cbr": "application/x-cbr",
+	"cba": "application/x-cbr",
+	"cbt": "application/x-cbr",
+	"cbz": "application/x-cbr",
+	"cb7": "application/x-cbr",
+	"vcd": "application/x-cdlink",
+	"cfs": "application/x-cfs-compressed",
+	"chat": "application/x-chat",
+	"pgn": "application/x-chess-pgn",
+	"crx": "application/x-chrome-extension",
+	"cco": "application/x-cocoa",
+	"nsc": "application/x-conference",
+	"cpio": "application/x-cpio",
+	"csh": "application/x-csh",
+	"udeb": "application/x-debian-package",
+	"dgc": "application/x-dgc-compressed",
+	"dir": "application/x-director",
+	"dcr": "application/x-director",
+	"dxr": "application/x-director",
+	"cst": "application/x-director",
+	"cct": "application/x-director",
+	"cxt": "application/x-director",
+	"w3d": "application/x-director",
+	"fgd": "application/x-director",
+	"swa": "application/x-director",
+	"wad": "application/x-doom",
+	"ncx": "application/x-dtbncx+xml",
+	"dtb": "application/x-dtbook+xml",
+	"res": "application/x-dtbresource+xml",
+	"dvi": "application/x-dvi",
+	"evy": "application/x-envoy",
+	"eva": "application/x-eva",
+	"bdf": "application/x-font-bdf",
+	"gsf": "application/x-font-ghostscript",
+	"psf": "application/x-font-linux-psf",
+	"otf": "font/opentype",
+	"pcf": "application/x-font-pcf",
+	"snf": "application/x-font-snf",
+	"ttf": "application/x-font-ttf",
+	"ttc": "application/x-font-ttf",
+	"pfa": "application/x-font-type1",
+	"pfb": "application/x-font-type1",
+	"pfm": "application/x-font-type1",
+	"afm": "application/x-font-type1",
+	"arc": "application/x-freearc",
+	"spl": "application/x-futuresplash",
+	"gca": "application/x-gca-compressed",
+	"ulx": "application/x-glulx",
+	"gnumeric": "application/x-gnumeric",
+	"gramps": "application/x-gramps-xml",
+	"gtar": "application/x-gtar",
+	"hdf": "application/x-hdf",
+	"php": "application/x-httpd-php",
+	"install": "application/x-install-instructions",
+	"jardiff": "application/x-java-archive-diff",
+	"jnlp": "application/x-java-jnlp-file",
+	"latex": "application/x-latex",
+	"luac": "application/x-lua-bytecode",
+	"lzh": "application/x-lzh-compressed",
+	"lha": "application/x-lzh-compressed",
+	"run": "application/x-makeself",
+	"mie": "application/x-mie",
+	"prc": "application/x-pilot",
+	"mobi": "application/x-mobipocket-ebook",
+	"application": "application/x-ms-application",
+	"lnk": "application/x-ms-shortcut",
+	"wmd": "application/x-ms-wmd",
+	"wmz": "application/x-msmetafile",
+	"xbap": "application/x-ms-xbap",
+	"mdb": "application/x-msaccess",
+	"obd": "application/x-msbinder",
+	"crd": "application/x-mscardfile",
+	"clp": "application/x-msclip",
+	"com": "application/x-msdownload",
+	"bat": "application/x-msdownload",
+	"mvb": "application/x-msmediaview",
+	"m13": "application/x-msmediaview",
+	"m14": "application/x-msmediaview",
+	"wmf": "application/x-msmetafile",
+	"emf": "application/x-msmetafile",
+	"emz": "application/x-msmetafile",
+	"mny": "application/x-msmoney",
+	"pub": "application/x-mspublisher",
+	"scd": "application/x-msschedule",
+	"trm": "application/x-msterminal",
+	"wri": "application/x-mswrite",
+	"nc": "application/x-netcdf",
+	"cdf": "application/x-netcdf",
+	"pac": "application/x-ns-proxy-autoconfig",
+	"nzb": "application/x-nzb",
+	"pl": "application/x-perl",
+	"pm": "application/x-perl",
+	"p12": "application/x-pkcs12",
+	"pfx": "application/x-pkcs12",
+	"p7b": "application/x-pkcs7-certificates",
+	"spc": "application/x-pkcs7-certificates",
+	"p7r": "application/x-pkcs7-certreqresp",
+	"rar": "application/x-rar-compressed",
+	"rpm": "application/x-redhat-package-manager",
+	"ris": "application/x-research-info-systems",
+	"sea": "application/x-sea",
+	"sh": "application/x-sh",
+	"shar": "application/x-shar",
+	"swf": "application/x-shockwave-flash",
+	"xap": "application/x-silverlight-app",
+	"sql": "application/x-sql",
+	"sit": "application/x-stuffit",
+	"sitx": "application/x-stuffitx",
+	"srt": "application/x-subrip",
+	"sv4cpio": "application/x-sv4cpio",
+	"sv4crc": "application/x-sv4crc",
+	"t3": "application/x-t3vm-image",
+	"gam": "application/x-tads",
+	"tar": "application/x-tar",
+	"tcl": "application/x-tcl",
+	"tk": "application/x-tcl",
+	"tex": "application/x-tex",
+	"tfm": "application/x-tex-tfm",
+	"texinfo": "application/x-texinfo",
+	"texi": "application/x-texinfo",
+	"obj": "application/x-tgif",
+	"ustar": "application/x-ustar",
+	"src": "application/x-wais-source",
+	"webapp": "application/x-web-app-manifest+json",
+	"der": "application/x-x509-ca-cert",
+	"crt": "application/x-x509-ca-cert",
+	"pem": "application/x-x509-ca-cert",
+	"fig": "application/x-xfig",
+	"xlf": "application/x-xliff+xml",
+	"xpi": "application/x-xpinstall",
+	"xz": "application/x-xz",
+	"z1": "application/x-zmachine",
+	"z2": "application/x-zmachine",
+	"z3": "application/x-zmachine",
+	"z4": "application/x-zmachine",
+	"z5": "application/x-zmachine",
+	"z6": "application/x-zmachine",
+	"z7": "application/x-zmachine",
+	"z8": "application/x-zmachine",
+	"xaml": "application/xaml+xml",
+	"xdf": "application/xcap-diff+xml",
+	"xenc": "application/xenc+xml",
+	"xhtml": "application/xhtml+xml",
+	"xht": "application/xhtml+xml",
+	"xml": "text/xml",
+	"xsl": "application/xml",
+	"xsd": "application/xml",
+	"rng": "application/xml",
+	"dtd": "application/xml-dtd",
+	"xop": "application/xop+xml",
+	"xpl": "application/xproc+xml",
+	"xslt": "application/xslt+xml",
+	"xspf": "application/xspf+xml",
+	"mxml": "application/xv+xml",
+	"xhvml": "application/xv+xml",
+	"xvml": "application/xv+xml",
+	"xvm": "application/xv+xml",
+	"yang": "application/yang",
+	"yin": "application/yin+xml",
+	"zip": "application/zip",
+	"3gpp": "video/3gpp",
+	"adp": "audio/adpcm",
+	"au": "audio/basic",
+	"snd": "audio/basic",
+	"mid": "audio/midi",
+	"midi": "audio/midi",
+	"kar": "audio/midi",
+	"rmi": "audio/midi",
+	"mp3": "audio/mpeg",
+	"m4a": "audio/x-m4a",
+	"mp4a": "audio/mp4",
+	"mpga": "audio/mpeg",
+	"mp2": "audio/mpeg",
+	"mp2a": "audio/mpeg",
+	"m2a": "audio/mpeg",
+	"m3a": "audio/mpeg",
+	"oga": "audio/ogg",
+	"ogg": "audio/ogg",
+	"spx": "audio/ogg",
+	"s3m": "audio/s3m",
+	"sil": "audio/silk",
+	"uva": "audio/vnd.dece.audio",
+	"uvva": "audio/vnd.dece.audio",
+	"eol": "audio/vnd.digital-winds",
+	"dra": "audio/vnd.dra",
+	"dts": "audio/vnd.dts",
+	"dtshd": "audio/vnd.dts.hd",
+	"lvp": "audio/vnd.lucent.voice",
+	"pya": "audio/vnd.ms-playready.media.pya",
+	"ecelp4800": "audio/vnd.nuera.ecelp4800",
+	"ecelp7470": "audio/vnd.nuera.ecelp7470",
+	"ecelp9600": "audio/vnd.nuera.ecelp9600",
+	"rip": "audio/vnd.rip",
+	"wav": "audio/x-wav",
+	"weba": "audio/webm",
+	"aac": "audio/x-aac",
+	"aif": "audio/x-aiff",
+	"aiff": "audio/x-aiff",
+	"aifc": "audio/x-aiff",
+	"caf": "audio/x-caf",
+	"flac": "audio/x-flac",
+	"mka": "audio/x-matroska",
+	"m3u": "audio/x-mpegurl",
+	"wax": "audio/x-ms-wax",
+	"wma": "audio/x-ms-wma",
+	"ram": "audio/x-pn-realaudio",
+	"ra": "audio/x-realaudio",
+	"rmp": "audio/x-pn-realaudio-plugin",
+	"xm": "audio/xm",
+	"cdx": "chemical/x-cdx",
+	"cif": "chemical/x-cif",
+	"cmdf": "chemical/x-cmdf",
+	"cml": "chemical/x-cml",
+	"csml": "chemical/x-csml",
+	"xyz": "chemical/x-xyz",
+	"bmp": "image/x-ms-bmp",
+	"cgm": "image/cgm",
+	"g3": "image/g3fax",
+	"gif": "image/gif",
+	"ief": "image/ief",
+	"jpeg": "image/jpeg",
+	"jpg": "image/jpeg",
+	"jpe": "image/jpeg",
+	"ktx": "image/ktx",
+	"png": "image/png",
+	"btif": "image/prs.btif",
+	"sgi": "image/sgi",
+	"svg": "image/svg+xml",
+	"svgz": "image/svg+xml",
+	"tiff": "image/tiff",
+	"tif": "image/tiff",
+	"psd": "image/vnd.adobe.photoshop",
+	"uvi": "image/vnd.dece.graphic",
+	"uvvi": "image/vnd.dece.graphic",
+	"uvg": "image/vnd.dece.graphic",
+	"uvvg": "image/vnd.dece.graphic",
+	"djvu": "image/vnd.djvu",
+	"djv": "image/vnd.djvu",
+	"sub": "text/vnd.dvb.subtitle",
+	"dwg": "image/vnd.dwg",
+	"dxf": "image/vnd.dxf",
+	"fbs": "image/vnd.fastbidsheet",
+	"fpx": "image/vnd.fpx",
+	"fst": "image/vnd.fst",
+	"mmr": "image/vnd.fujixerox.edmics-mmr",
+	"rlc": "image/vnd.fujixerox.edmics-rlc",
+	"mdi": "image/vnd.ms-modi",
+	"wdp": "image/vnd.ms-photo",
+	"npx": "image/vnd.net-fpx",
+	"wbmp": "image/vnd.wap.wbmp",
+	"xif": "image/vnd.xiff",
+	"webp": "image/webp",
+	"3ds": "image/x-3ds",
+	"ras": "image/x-cmu-raster",
+	"cmx": "image/x-cmx",
+	"fh": "image/x-freehand",
+	"fhc": "image/x-freehand",
+	"fh4": "image/x-freehand",
+	"fh5": "image/x-freehand",
+	"fh7": "image/x-freehand",
+	"ico": "image/x-icon",
+	"jng": "image/x-jng",
+	"sid": "image/x-mrsid-image",
+	"pcx": "image/x-pcx",
+	"pic": "image/x-pict",
+	"pct": "image/x-pict",
+	"pnm": "image/x-portable-anymap",
+	"pbm": "image/x-portable-bitmap",
+	"pgm": "image/x-portable-graymap",
+	"ppm": "image/x-portable-pixmap",
+	"rgb": "image/x-rgb",
+	"tga": "image/x-tga",
+	"xbm": "image/x-xbitmap",
+	"xpm": "image/x-xpixmap",
+	"xwd": "image/x-xwindowdump",
+	"eml": "message/rfc822",
+	"mime": "message/rfc822",
+	"igs": "model/iges",
+	"iges": "model/iges",
+	"msh": "model/mesh",
+	"mesh": "model/mesh",
+	"silo": "model/mesh",
+	"dae": "model/vnd.collada+xml",
+	"dwf": "model/vnd.dwf",
+	"gdl": "model/vnd.gdl",
+	"gtw": "model/vnd.gtw",
+	"mts": "model/vnd.mts",
+	"vtu": "model/vnd.vtu",
+	"wrl": "model/vrml",
+	"vrml": "model/vrml",
+	"x3db": "model/x3d+binary",
+	"x3dbz": "model/x3d+binary",
+	"x3dv": "model/x3d+vrml",
+	"x3dvz": "model/x3d+vrml",
+	"x3d": "model/x3d+xml",
+	"x3dz": "model/x3d+xml",
+	"appcache": "text/cache-manifest",
+	"manifest": "text/cache-manifest",
+	"ics": "text/calendar",
+	"ifb": "text/calendar",
+	"coffee": "text/coffeescript",
+	"litcoffee": "text/coffeescript",
+	"css": "text/css",
+	"csv": "text/csv",
+	"hjson": "text/hjson",
+	"html": "text/html",
+	"htm": "text/html",
+	"shtml": "text/html",
+	"jade": "text/jade",
+	"jsx": "text/jsx",
+	"less": "text/less",
+	"mml": "text/mathml",
+	"n3": "text/n3",
+	"txt": "text/plain",
+	"text": "text/plain",
+	"conf": "text/plain",
+	"def": "text/plain",
+	"list": "text/plain",
+	"log": "text/plain",
+	"in": "text/plain",
+	"ini": "text/plain",
+	"dsc": "text/prs.lines.tag",
+	"rtx": "text/richtext",
+	"sgml": "text/sgml",
+	"sgm": "text/sgml",
+	"slim": "text/slim",
+	"slm": "text/slim",
+	"stylus": "text/stylus",
+	"styl": "text/stylus",
+	"tsv": "text/tab-separated-values",
+	"t": "text/troff",
+	"tr": "text/troff",
+	"roff": "text/troff",
+	"man": "text/troff",
+	"me": "text/troff",
+	"ms": "text/troff",
+	"ttl": "text/turtle",
+	"uri": "text/uri-list",
+	"uris": "text/uri-list",
+	"urls": "text/uri-list",
+	"vcard": "text/vcard",
+	"curl": "text/vnd.curl",
+	"dcurl": "text/vnd.curl.dcurl",
+	"mcurl": "text/vnd.curl.mcurl",
+	"scurl": "text/vnd.curl.scurl",
+	"fly": "text/vnd.fly",
+	"flx": "text/vnd.fmi.flexstor",
+	"gv": "text/vnd.graphviz",
+	"3dml": "text/vnd.in3d.3dml",
+	"spot": "text/vnd.in3d.spot",
+	"jad": "text/vnd.sun.j2me.app-descriptor",
+	"wml": "text/vnd.wap.wml",
+	"wmls": "text/vnd.wap.wmlscript",
+	"vtt": "text/vtt",
+	"s": "text/x-asm",
+	"asm": "text/x-asm",
+	"c": "text/x-c",
+	"cc": "text/x-c",
+	"cxx": "text/x-c",
+	"cpp": "text/x-c",
+	"h": "text/x-c",
+	"hh": "text/x-c",
+	"dic": "text/x-c",
+	"htc": "text/x-component",
+	"f": "text/x-fortran",
+	"for": "text/x-fortran",
+	"f77": "text/x-fortran",
+	"f90": "text/x-fortran",
+	"hbs": "text/x-handlebars-template",
+	"java": "text/x-java-source",
+	"lua": "text/x-lua",
+	"markdown": "text/x-markdown",
+	"md": "text/x-markdown",
+	"mkd": "text/x-markdown",
+	"nfo": "text/x-nfo",
+	"opml": "text/x-opml",
+	"p": "text/x-pascal",
+	"pas": "text/x-pascal",
+	"pde": "text/x-processing",
+	"sass": "text/x-sass",
+	"scss": "text/x-scss",
+	"etx": "text/x-setext",
+	"sfv": "text/x-sfv",
+	"ymp": "text/x-suse-ymp",
+	"uu": "text/x-uuencode",
+	"vcs": "text/x-vcalendar",
+	"vcf": "text/x-vcard",
+	"yaml": "text/yaml",
+	"yml": "text/yaml",
+	"3gp": "video/3gpp",
+	"3g2": "video/3gpp2",
+	"h261": "video/h261",
+	"h263": "video/h263",
+	"h264": "video/h264",
+	"jpgv": "video/jpeg",
+	"jpm": "video/jpm",
+	"jpgm": "video/jpm",
+	"mj2": "video/mj2",
+	"mjp2": "video/mj2",
+	"ts": "video/mp2t",
+	"mp4": "video/mp4",
+	"mp4v": "video/mp4",
+	"mpg4": "video/mp4",
+	"mpeg": "video/mpeg",
+	"mpg": "video/mpeg",
+	"mpe": "video/mpeg",
+	"m1v": "video/mpeg",
+	"m2v": "video/mpeg",
+	"ogv": "video/ogg",
+	"qt": "video/quicktime",
+	"mov": "video/quicktime",
+	"uvh": "video/vnd.dece.hd",
+	"uvvh": "video/vnd.dece.hd",
+	"uvm": "video/vnd.dece.mobile",
+	"uvvm": "video/vnd.dece.mobile",
+	"uvp": "video/vnd.dece.pd",
+	"uvvp": "video/vnd.dece.pd",
+	"uvs": "video/vnd.dece.sd",
+	"uvvs": "video/vnd.dece.sd",
+	"uvv": "video/vnd.dece.video",
+	"uvvv": "video/vnd.dece.video",
+	"dvb": "video/vnd.dvb.file",
+	"fvt": "video/vnd.fvt",
+	"mxu": "video/vnd.mpegurl",
+	"m4u": "video/vnd.mpegurl",
+	"pyv": "video/vnd.ms-playready.media.pyv",
+	"uvu": "video/vnd.uvvu.mp4",
+	"uvvu": "video/vnd.uvvu.mp4",
+	"viv": "video/vnd.vivo",
+	"webm": "video/webm",
+	"f4v": "video/x-f4v",
+	"fli": "video/x-fli",
+	"flv": "video/x-flv",
+	"m4v": "video/x-m4v",
+	"mkv": "video/x-matroska",
+	"mk3d": "video/x-matroska",
+	"mks": "video/x-matroska",
+	"mng": "video/x-mng",
+	"asf": "video/x-ms-asf",
+	"asx": "video/x-ms-asf",
+	"vob": "video/x-ms-vob",
+	"wm": "video/x-ms-wm",
+	"wmv": "video/x-ms-wmv",
+	"wmx": "video/x-ms-wmx",
+	"wvx": "video/x-ms-wvx",
+	"avi": "video/x-msvideo",
+	"movie": "video/x-sgi-movie",
+	"smv": "video/x-smv",
+	"ice": "x-conference/x-cooltalk"
 };
 
 /***/ }),
@@ -20204,191 +20204,191 @@ var IncomingMessage = response.IncomingMessage
 var rStates = response.readyStates
 
 function decideMode (preferBinary, useFetch) {
-  if (capability.fetch && useFetch) {
-    return 'fetch'
-  } else if (capability.mozchunkedarraybuffer) {
-    return 'moz-chunked-arraybuffer'
-  } else if (capability.msstream) {
-    return 'ms-stream'
-  } else if (capability.arraybuffer && preferBinary) {
-    return 'arraybuffer'
-  } else if (capability.vbArray && preferBinary) {
-    return 'text:vbarray'
-  } else {
-    return 'text'
-  }
+	if (capability.fetch && useFetch) {
+		return 'fetch'
+	} else if (capability.mozchunkedarraybuffer) {
+		return 'moz-chunked-arraybuffer'
+	} else if (capability.msstream) {
+		return 'ms-stream'
+	} else if (capability.arraybuffer && preferBinary) {
+		return 'arraybuffer'
+	} else if (capability.vbArray && preferBinary) {
+		return 'text:vbarray'
+	} else {
+		return 'text'
+	}
 }
 
 var ClientRequest = module.exports = function (opts) {
-  var self = this
-  stream.Writable.call(self)
+	var self = this
+	stream.Writable.call(self)
 
-  self._opts = opts
-  self._body = []
-  self._headers = {}
-  if (opts.auth)
-    self.setHeader('Authorization', 'Basic ' + new Buffer(opts.auth).toString('base64'))
-  Object.keys(opts.headers).forEach(function (name) {
-    self.setHeader(name, opts.headers[name])
-  })
+	self._opts = opts
+	self._body = []
+	self._headers = {}
+	if (opts.auth)
+		self.setHeader('Authorization', 'Basic ' + new Buffer(opts.auth).toString('base64'))
+	Object.keys(opts.headers).forEach(function (name) {
+		self.setHeader(name, opts.headers[name])
+	})
 
-  var preferBinary
-  var useFetch = true
-  if (opts.mode === 'disable-fetch' || 'timeout' in opts) {
-    // If the use of XHR should be preferred and includes preserving the 'content-type' header.
-    // Force XHR to be used since the Fetch API does not yet support timeouts.
-    useFetch = false
-    preferBinary = true
-  } else if (opts.mode === 'prefer-streaming') {
-    // If streaming is a high priority but binary compatibility and
-    // the accuracy of the 'content-type' header aren't
-    preferBinary = false
-  } else if (opts.mode === 'allow-wrong-content-type') {
-    // If streaming is more important than preserving the 'content-type' header
-    preferBinary = !capability.overrideMimeType
-  } else if (!opts.mode || opts.mode === 'default' || opts.mode === 'prefer-fast') {
-    // Use binary if text streaming may corrupt data or the content-type header, or for speed
-    preferBinary = true
-  } else {
-    throw new Error('Invalid value for opts.mode')
-  }
-  self._mode = decideMode(preferBinary, useFetch)
+	var preferBinary
+	var useFetch = true
+	if (opts.mode === 'disable-fetch' || 'timeout' in opts) {
+		// If the use of XHR should be preferred and includes preserving the 'content-type' header.
+		// Force XHR to be used since the Fetch API does not yet support timeouts.
+		useFetch = false
+		preferBinary = true
+	} else if (opts.mode === 'prefer-streaming') {
+		// If streaming is a high priority but binary compatibility and
+		// the accuracy of the 'content-type' header aren't
+		preferBinary = false
+	} else if (opts.mode === 'allow-wrong-content-type') {
+		// If streaming is more important than preserving the 'content-type' header
+		preferBinary = !capability.overrideMimeType
+	} else if (!opts.mode || opts.mode === 'default' || opts.mode === 'prefer-fast') {
+		// Use binary if text streaming may corrupt data or the content-type header, or for speed
+		preferBinary = true
+	} else {
+		throw new Error('Invalid value for opts.mode')
+	}
+	self._mode = decideMode(preferBinary, useFetch)
 
-  self.on('finish', function () {
-    self._onFinish()
-  })
+	self.on('finish', function () {
+		self._onFinish()
+	})
 }
 
 inherits(ClientRequest, stream.Writable)
 
 ClientRequest.prototype.setHeader = function (name, value) {
-  var self = this
-  var lowerName = name.toLowerCase()
-  // This check is not necessary, but it prevents warnings from browsers about setting unsafe
-  // headers. To be honest I'm not entirely sure hiding these warnings is a good thing, but
-  // http-browserify did it, so I will too.
-  if (unsafeHeaders.indexOf(lowerName) !== -1)
-    return
+	var self = this
+	var lowerName = name.toLowerCase()
+	// This check is not necessary, but it prevents warnings from browsers about setting unsafe
+	// headers. To be honest I'm not entirely sure hiding these warnings is a good thing, but
+	// http-browserify did it, so I will too.
+	if (unsafeHeaders.indexOf(lowerName) !== -1)
+		return
 
-  self._headers[lowerName] = {
-    name: name,
-    value: value
-  }
+	self._headers[lowerName] = {
+		name: name,
+		value: value
+	}
 }
 
 ClientRequest.prototype.getHeader = function (name) {
-  var self = this
-  return self._headers[name.toLowerCase()].value
+	var self = this
+	return self._headers[name.toLowerCase()].value
 }
 
 ClientRequest.prototype.removeHeader = function (name) {
-  var self = this
-  delete self._headers[name.toLowerCase()]
+	var self = this
+	delete self._headers[name.toLowerCase()]
 }
 
 ClientRequest.prototype._onFinish = function () {
-  var self = this
+	var self = this
 
-  if (self._destroyed)
-    return
-  var opts = self._opts
+	if (self._destroyed)
+		return
+	var opts = self._opts
 
-  var headersObj = self._headers
-  var body = null
-  if (opts.method === 'POST' || opts.method === 'PUT' || opts.method === 'PATCH' || opts.method === 'MERGE') {
-    if (capability.blobConstructor) {
-      body = new global.Blob(self._body.map(function (buffer) {
-        return toArrayBuffer(buffer)
-      }), {
-        type: (headersObj['content-type'] || {}).value || ''
-      })
-    } else {
-      // get utf8 string
-      body = Buffer.concat(self._body).toString()
-    }
-  }
+	var headersObj = self._headers
+	var body = null
+	if (opts.method === 'POST' || opts.method === 'PUT' || opts.method === 'PATCH' || opts.method === 'MERGE') {
+		if (capability.blobConstructor) {
+			body = new global.Blob(self._body.map(function (buffer) {
+				return toArrayBuffer(buffer)
+			}), {
+				type: (headersObj['content-type'] || {}).value || ''
+			})
+		} else {
+			// get utf8 string
+			body = Buffer.concat(self._body).toString()
+		}
+	}
 
-  if (self._mode === 'fetch') {
-    var headers = Object.keys(headersObj).map(function (name) {
-      return [headersObj[name].name, headersObj[name].value]
-    })
+	if (self._mode === 'fetch') {
+		var headers = Object.keys(headersObj).map(function (name) {
+			return [headersObj[name].name, headersObj[name].value]
+		})
 
-    global.fetch(self._opts.url, {
-      method: self._opts.method,
-      headers: headers,
-      body: body || undefined,
-      mode: 'cors',
-      credentials: opts.withCredentials ? 'include' : 'same-origin'
-    }).then(function (response) {
-      self._fetchResponse = response
-      self._connect()
-    }, function (reason) {
-      self.emit('error', reason)
-    })
-  } else {
-    var xhr = self._xhr = new global.XMLHttpRequest()
-    try {
-      xhr.open(self._opts.method, self._opts.url, true)
-    } catch (err) {
-      process.nextTick(function () {
-        self.emit('error', err)
-      })
-      return
-    }
+		global.fetch(self._opts.url, {
+			method: self._opts.method,
+			headers: headers,
+			body: body || undefined,
+			mode: 'cors',
+			credentials: opts.withCredentials ? 'include' : 'same-origin'
+		}).then(function (response) {
+			self._fetchResponse = response
+			self._connect()
+		}, function (reason) {
+			self.emit('error', reason)
+		})
+	} else {
+		var xhr = self._xhr = new global.XMLHttpRequest()
+		try {
+			xhr.open(self._opts.method, self._opts.url, true)
+		} catch (err) {
+			process.nextTick(function () {
+				self.emit('error', err)
+			})
+			return
+		}
 
-    // Can't set responseType on really old browsers
-    if ('responseType' in xhr)
-      xhr.responseType = self._mode.split(':')[0]
+		// Can't set responseType on really old browsers
+		if ('responseType' in xhr)
+			xhr.responseType = self._mode.split(':')[0]
 
-    if ('withCredentials' in xhr)
-      xhr.withCredentials = !!opts.withCredentials
+		if ('withCredentials' in xhr)
+			xhr.withCredentials = !!opts.withCredentials
 
-    if (self._mode === 'text' && 'overrideMimeType' in xhr)
-      xhr.overrideMimeType('text/plain; charset=x-user-defined')
+		if (self._mode === 'text' && 'overrideMimeType' in xhr)
+			xhr.overrideMimeType('text/plain; charset=x-user-defined')
 
-    if ('timeout' in opts) {
-      xhr.timeout = opts.timeout
-      xhr.ontimeout = function () {
-        self.emit('timeout')
-      }
-    }
+		if ('timeout' in opts) {
+			xhr.timeout = opts.timeout
+			xhr.ontimeout = function () {
+				self.emit('timeout')
+			}
+		}
 
-    Object.keys(headersObj).forEach(function (name) {
-      xhr.setRequestHeader(headersObj[name].name, headersObj[name].value)
-    })
+		Object.keys(headersObj).forEach(function (name) {
+			xhr.setRequestHeader(headersObj[name].name, headersObj[name].value)
+		})
 
-    self._response = null
-    xhr.onreadystatechange = function () {
-      switch (xhr.readyState) {
-        case rStates.LOADING:
-        case rStates.DONE:
-          self._onXHRProgress()
-          break
-      }
-    }
-    // Necessary for streaming in Firefox, since xhr.response is ONLY defined
-    // in onprogress, not in onreadystatechange with xhr.readyState = 3
-    if (self._mode === 'moz-chunked-arraybuffer') {
-      xhr.onprogress = function () {
-        self._onXHRProgress()
-      }
-    }
+		self._response = null
+		xhr.onreadystatechange = function () {
+			switch (xhr.readyState) {
+				case rStates.LOADING:
+				case rStates.DONE:
+					self._onXHRProgress()
+					break
+			}
+		}
+		// Necessary for streaming in Firefox, since xhr.response is ONLY defined
+		// in onprogress, not in onreadystatechange with xhr.readyState = 3
+		if (self._mode === 'moz-chunked-arraybuffer') {
+			xhr.onprogress = function () {
+				self._onXHRProgress()
+			}
+		}
 
-    xhr.onerror = function () {
-      if (self._destroyed)
-        return
-      self.emit('error', new Error('XHR error'))
-    }
+		xhr.onerror = function () {
+			if (self._destroyed)
+				return
+			self.emit('error', new Error('XHR error'))
+		}
 
-    try {
-      xhr.send(body)
-    } catch (err) {
-      process.nextTick(function () {
-        self.emit('error', err)
-      })
-      return
-    }
-  }
+		try {
+			xhr.send(body)
+		} catch (err) {
+			process.nextTick(function () {
+				self.emit('error', err)
+			})
+			return
+		}
+	}
 }
 
 /**
@@ -20397,66 +20397,66 @@ ClientRequest.prototype._onFinish = function () {
  * accessing it throws an exception in IE8
  */
 function statusValid (xhr) {
-  try {
-    var status = xhr.status
-    return (status !== null && status !== 0)
-  } catch (e) {
-    return false
-  }
+	try {
+		var status = xhr.status
+		return (status !== null && status !== 0)
+	} catch (e) {
+		return false
+	}
 }
 
 ClientRequest.prototype._onXHRProgress = function () {
-  var self = this
+	var self = this
 
-  if (!statusValid(self._xhr) || self._destroyed)
-    return
+	if (!statusValid(self._xhr) || self._destroyed)
+		return
 
-  if (!self._response)
-    self._connect()
+	if (!self._response)
+		self._connect()
 
-  self._response._onXHRProgress()
+	self._response._onXHRProgress()
 }
 
 ClientRequest.prototype._connect = function () {
-  var self = this
+	var self = this
 
-  if (self._destroyed)
-    return
+	if (self._destroyed)
+		return
 
-  self._response = new IncomingMessage(self._xhr, self._fetchResponse, self._mode)
-  self._response.on('error', function(err) {
-    self.emit('error', err)
-  })
+	self._response = new IncomingMessage(self._xhr, self._fetchResponse, self._mode)
+	self._response.on('error', function(err) {
+		self.emit('error', err)
+	})
 
-  self.emit('response', self._response)
+	self.emit('response', self._response)
 }
 
 ClientRequest.prototype._write = function (chunk, encoding, cb) {
-  var self = this
+	var self = this
 
-  self._body.push(chunk)
-  cb()
+	self._body.push(chunk)
+	cb()
 }
 
 ClientRequest.prototype.abort = ClientRequest.prototype.destroy = function () {
-  var self = this
-  self._destroyed = true
-  if (self._response)
-    self._response._destroyed = true
-  if (self._xhr)
-    self._xhr.abort()
-  // Currently, there isn't a way to truly abort a fetch.
-  // If you like bikeshedding, see https://github.com/whatwg/fetch/issues/27
+	var self = this
+	self._destroyed = true
+	if (self._response)
+		self._response._destroyed = true
+	if (self._xhr)
+		self._xhr.abort()
+	// Currently, there isn't a way to truly abort a fetch.
+	// If you like bikeshedding, see https://github.com/whatwg/fetch/issues/27
 }
 
 ClientRequest.prototype.end = function (data, encoding, cb) {
-  var self = this
-  if (typeof data === 'function') {
-    cb = data
-    data = undefined
-  }
+	var self = this
+	if (typeof data === 'function') {
+		cb = data
+		data = undefined
+	}
 
-  stream.Writable.prototype.end.call(self, data, encoding, cb)
+	stream.Writable.prototype.end.call(self, data, encoding, cb)
 }
 
 ClientRequest.prototype.flushHeaders = function () {}
@@ -20466,27 +20466,27 @@ ClientRequest.prototype.setSocketKeepAlive = function () {}
 
 // Taken from http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader%28%29-method
 var unsafeHeaders = [
-  'accept-charset',
-  'accept-encoding',
-  'access-control-request-headers',
-  'access-control-request-method',
-  'connection',
-  'content-length',
-  'cookie',
-  'cookie2',
-  'date',
-  'dnt',
-  'expect',
-  'host',
-  'keep-alive',
-  'origin',
-  'referer',
-  'te',
-  'trailer',
-  'transfer-encoding',
-  'upgrade',
-  'user-agent',
-  'via'
+	'accept-charset',
+	'accept-encoding',
+	'access-control-request-headers',
+	'access-control-request-method',
+	'connection',
+	'content-length',
+	'cookie',
+	'cookie2',
+	'date',
+	'dnt',
+	'expect',
+	'host',
+	'keep-alive',
+	'origin',
+	'referer',
+	'te',
+	'trailer',
+	'transfer-encoding',
+	'upgrade',
+	'user-agent',
+	'via'
 ]
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5).Buffer, __webpack_require__(9), __webpack_require__(6)))
@@ -20500,101 +20500,101 @@ var inherits = __webpack_require__(11)
 var stream = __webpack_require__(35)
 
 var rStates = exports.readyStates = {
-  UNSENT: 0,
-  OPENED: 1,
-  HEADERS_RECEIVED: 2,
-  LOADING: 3,
-  DONE: 4
+	UNSENT: 0,
+	OPENED: 1,
+	HEADERS_RECEIVED: 2,
+	LOADING: 3,
+	DONE: 4
 }
 
 var IncomingMessage = exports.IncomingMessage = function (xhr, response, mode) {
-  var self = this
-  stream.Readable.call(self)
+	var self = this
+	stream.Readable.call(self)
 
-  self._mode = mode
-  self.headers = {}
-  self.rawHeaders = []
-  self.trailers = {}
-  self.rawTrailers = []
+	self._mode = mode
+	self.headers = {}
+	self.rawHeaders = []
+	self.trailers = {}
+	self.rawTrailers = []
 
-  // Fake the 'close' event, but only once 'end' fires
-  self.on('end', function () {
-    // The nextTick is necessary to prevent the 'request' module from causing an infinite loop
-    process.nextTick(function () {
-      self.emit('close')
-    })
-  })
+	// Fake the 'close' event, but only once 'end' fires
+	self.on('end', function () {
+		// The nextTick is necessary to prevent the 'request' module from causing an infinite loop
+		process.nextTick(function () {
+			self.emit('close')
+		})
+	})
 
-  if (mode === 'fetch') {
-    self._fetchResponse = response
+	if (mode === 'fetch') {
+		self._fetchResponse = response
 
-    self.url = response.url
-    self.statusCode = response.status
-    self.statusMessage = response.statusText
-    
-    response.headers.forEach(function(header, key){
-      self.headers[key.toLowerCase()] = header
-      self.rawHeaders.push(key, header)
-    })
+		self.url = response.url
+		self.statusCode = response.status
+		self.statusMessage = response.statusText
+		
+		response.headers.forEach(function(header, key){
+			self.headers[key.toLowerCase()] = header
+			self.rawHeaders.push(key, header)
+		})
 
 
-    // TODO: this doesn't respect backpressure. Once WritableStream is available, this can be fixed
-    var reader = response.body.getReader()
-    function read () {
-      reader.read().then(function (result) {
-        if (self._destroyed)
-          return
-        if (result.done) {
-          self.push(null)
-          return
-        }
-        self.push(new Buffer(result.value))
-        read()
-      }).catch(function(err) {
-        self.emit('error', err)
-      })
-    }
-    read()
+		// TODO: this doesn't respect backpressure. Once WritableStream is available, this can be fixed
+		var reader = response.body.getReader()
+		function read () {
+			reader.read().then(function (result) {
+				if (self._destroyed)
+					return
+				if (result.done) {
+					self.push(null)
+					return
+				}
+				self.push(new Buffer(result.value))
+				read()
+			}).catch(function(err) {
+				self.emit('error', err)
+			})
+		}
+		read()
 
-  } else {
-    self._xhr = xhr
-    self._pos = 0
+	} else {
+		self._xhr = xhr
+		self._pos = 0
 
-    self.url = xhr.responseURL
-    self.statusCode = xhr.status
-    self.statusMessage = xhr.statusText
-    var headers = xhr.getAllResponseHeaders().split(/\r?\n/)
-    headers.forEach(function (header) {
-      var matches = header.match(/^([^:]+):\s*(.*)/)
-      if (matches) {
-        var key = matches[1].toLowerCase()
-        if (key === 'set-cookie') {
-          if (self.headers[key] === undefined) {
-            self.headers[key] = []
-          }
-          self.headers[key].push(matches[2])
-        } else if (self.headers[key] !== undefined) {
-          self.headers[key] += ', ' + matches[2]
-        } else {
-          self.headers[key] = matches[2]
-        }
-        self.rawHeaders.push(matches[1], matches[2])
-      }
-    })
+		self.url = xhr.responseURL
+		self.statusCode = xhr.status
+		self.statusMessage = xhr.statusText
+		var headers = xhr.getAllResponseHeaders().split(/\r?\n/)
+		headers.forEach(function (header) {
+			var matches = header.match(/^([^:]+):\s*(.*)/)
+			if (matches) {
+				var key = matches[1].toLowerCase()
+				if (key === 'set-cookie') {
+					if (self.headers[key] === undefined) {
+						self.headers[key] = []
+					}
+					self.headers[key].push(matches[2])
+				} else if (self.headers[key] !== undefined) {
+					self.headers[key] += ', ' + matches[2]
+				} else {
+					self.headers[key] = matches[2]
+				}
+				self.rawHeaders.push(matches[1], matches[2])
+			}
+		})
 
-    self._charset = 'x-user-defined'
-    if (!capability.overrideMimeType) {
-      var mimeType = self.rawHeaders['mime-type']
-      if (mimeType) {
-        var charsetMatch = mimeType.match(/;\s*charset=([^;])(;|$)/)
-        if (charsetMatch) {
-          self._charset = charsetMatch[1].toLowerCase()
-        }
-      }
-      if (!self._charset)
-        self._charset = 'utf-8' // best guess
-    }
-  }
+		self._charset = 'x-user-defined'
+		if (!capability.overrideMimeType) {
+			var mimeType = self.rawHeaders['mime-type']
+			if (mimeType) {
+				var charsetMatch = mimeType.match(/;\s*charset=([^;])(;|$)/)
+				if (charsetMatch) {
+					self._charset = charsetMatch[1].toLowerCase()
+				}
+			}
+			if (!self._charset)
+				self._charset = 'utf-8' // best guess
+		}
+	}
 }
 
 inherits(IncomingMessage, stream.Readable)
@@ -20602,80 +20602,80 @@ inherits(IncomingMessage, stream.Readable)
 IncomingMessage.prototype._read = function () {}
 
 IncomingMessage.prototype._onXHRProgress = function () {
-  var self = this
+	var self = this
 
-  var xhr = self._xhr
+	var xhr = self._xhr
 
-  var response = null
-  switch (self._mode) {
-    case 'text:vbarray': // For IE9
-      if (xhr.readyState !== rStates.DONE)
-        break
-      try {
-        // This fails in IE8
-        response = new global.VBArray(xhr.responseBody).toArray()
-      } catch (e) {}
-      if (response !== null) {
-        self.push(new Buffer(response))
-        break
-      }
-      // Falls through in IE8 
-    case 'text':
-      try { // This will fail when readyState = 3 in IE9. Switch mode and wait for readyState = 4
-        response = xhr.responseText
-      } catch (e) {
-        self._mode = 'text:vbarray'
-        break
-      }
-      if (response.length > self._pos) {
-        var newData = response.substr(self._pos)
-        if (self._charset === 'x-user-defined') {
-          var buffer = new Buffer(newData.length)
-          for (var i = 0; i < newData.length; i++)
-            buffer[i] = newData.charCodeAt(i) & 0xff
+	var response = null
+	switch (self._mode) {
+		case 'text:vbarray': // For IE9
+			if (xhr.readyState !== rStates.DONE)
+				break
+			try {
+				// This fails in IE8
+				response = new global.VBArray(xhr.responseBody).toArray()
+			} catch (e) {}
+			if (response !== null) {
+				self.push(new Buffer(response))
+				break
+			}
+			// Falls through in IE8	
+		case 'text':
+			try { // This will fail when readyState = 3 in IE9. Switch mode and wait for readyState = 4
+				response = xhr.responseText
+			} catch (e) {
+				self._mode = 'text:vbarray'
+				break
+			}
+			if (response.length > self._pos) {
+				var newData = response.substr(self._pos)
+				if (self._charset === 'x-user-defined') {
+					var buffer = new Buffer(newData.length)
+					for (var i = 0; i < newData.length; i++)
+						buffer[i] = newData.charCodeAt(i) & 0xff
 
-          self.push(buffer)
-        } else {
-          self.push(newData, self._charset)
-        }
-        self._pos = response.length
-      }
-      break
-    case 'arraybuffer':
-      if (xhr.readyState !== rStates.DONE || !xhr.response)
-        break
-      response = xhr.response
-      self.push(new Buffer(new Uint8Array(response)))
-      break
-    case 'moz-chunked-arraybuffer': // take whole
-      response = xhr.response
-      if (xhr.readyState !== rStates.LOADING || !response)
-        break
-      self.push(new Buffer(new Uint8Array(response)))
-      break
-    case 'ms-stream':
-      response = xhr.response
-      if (xhr.readyState !== rStates.LOADING)
-        break
-      var reader = new global.MSStreamReader()
-      reader.onprogress = function () {
-        if (reader.result.byteLength > self._pos) {
-          self.push(new Buffer(new Uint8Array(reader.result.slice(self._pos))))
-          self._pos = reader.result.byteLength
-        }
-      }
-      reader.onload = function () {
-        self.push(null)
-      }
-      // reader.onerror = ??? // TODO: this
-      reader.readAsArrayBuffer(response)
-      break
-  }
+					self.push(buffer)
+				} else {
+					self.push(newData, self._charset)
+				}
+				self._pos = response.length
+			}
+			break
+		case 'arraybuffer':
+			if (xhr.readyState !== rStates.DONE || !xhr.response)
+				break
+			response = xhr.response
+			self.push(new Buffer(new Uint8Array(response)))
+			break
+		case 'moz-chunked-arraybuffer': // take whole
+			response = xhr.response
+			if (xhr.readyState !== rStates.LOADING || !response)
+				break
+			self.push(new Buffer(new Uint8Array(response)))
+			break
+		case 'ms-stream':
+			response = xhr.response
+			if (xhr.readyState !== rStates.LOADING)
+				break
+			var reader = new global.MSStreamReader()
+			reader.onprogress = function () {
+				if (reader.result.byteLength > self._pos) {
+					self.push(new Buffer(new Uint8Array(reader.result.slice(self._pos))))
+					self._pos = reader.result.byteLength
+				}
+			}
+			reader.onload = function () {
+				self.push(null)
+			}
+			// reader.onerror = ??? // TODO: this
+			reader.readAsArrayBuffer(response)
+			break
+	}
 
-  // The ms-stream case handles end separately in reader.onload()
-  if (self._xhr.readyState === rStates.DONE && self._mode !== 'ms-stream') {
-    self.push(null)
-  }
+	// The ms-stream case handles end separately in reader.onload()
+	if (self._xhr.readyState === rStates.DONE && self._mode !== 'ms-stream') {
+		self.push(null)
+	}
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(5).Buffer, __webpack_require__(9)))
@@ -20746,29 +20746,29 @@ exports.clearImmediate = clearImmediate;
 var Buffer = __webpack_require__(5).Buffer
 
 module.exports = function (buf) {
-  // If the buffer is backed by a Uint8Array, a faster version will work
-  if (buf instanceof Uint8Array) {
-    // If the buffer isn't a subarray, return the underlying ArrayBuffer
-    if (buf.byteOffset === 0 && buf.byteLength === buf.buffer.byteLength) {
-      return buf.buffer
-    } else if (typeof buf.buffer.slice === 'function') {
-      // Otherwise we need to get a proper copy
-      return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength)
-    }
-  }
+	// If the buffer is backed by a Uint8Array, a faster version will work
+	if (buf instanceof Uint8Array) {
+		// If the buffer isn't a subarray, return the underlying ArrayBuffer
+		if (buf.byteOffset === 0 && buf.byteLength === buf.buffer.byteLength) {
+			return buf.buffer
+		} else if (typeof buf.buffer.slice === 'function') {
+			// Otherwise we need to get a proper copy
+			return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength)
+		}
+	}
 
-  if (Buffer.isBuffer(buf)) {
-    // This is the slow version that will work with any Buffer
-    // implementation (even in old browsers)
-    var arrayCopy = new Uint8Array(buf.length)
-    var len = buf.length
-    for (var i = 0; i < len; i++) {
-      arrayCopy[i] = buf[i]
-    }
-    return arrayCopy.buffer
-  } else {
-    throw new Error('Argument must be a Buffer')
-  }
+	if (Buffer.isBuffer(buf)) {
+		// This is the slow version that will work with any Buffer
+		// implementation (even in old browsers)
+		var arrayCopy = new Uint8Array(buf.length)
+		var len = buf.length
+		for (var i = 0; i < len; i++) {
+			arrayCopy[i] = buf[i]
+		}
+		return arrayCopy.buffer
+	} else {
+		throw new Error('Argument must be a Buffer')
+	}
 }
 
 
@@ -20874,26 +20874,26 @@ function config (name) {
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
-  if(!module.webpackPolyfill) {
-    module.deprecate = function() {};
-    module.paths = [];
-    // module.parent = undefined by default
-    if(!module.children) module.children = [];
-    Object.defineProperty(module, "loaded", {
-      enumerable: true,
-      get: function() {
-        return module.l;
-      }
-    });
-    Object.defineProperty(module, "id", {
-      enumerable: true,
-      get: function() {
-        return module.i;
-      }
-    });
-    module.webpackPolyfill = 1;
-  }
-  return module;
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
 };
 
 
@@ -23478,4 +23478,1662 @@ class WebSocketManager extends EventEmitter {
 
   heartbeat(normal) {
     if (normal && !this.lastHeartbeatAck) {
-      this.tryRe
+      this.tryReconnect();
+      return;
+    }
+
+    this.client.emit('debug', 'Sending heartbeat');
+    this.client._pingTimestamp = Date.now();
+    this.client.ws.send({
+      op: Constants.OPCodes.HEARTBEAT,
+      d: this.sequence,
+    }, true);
+
+    this.lastHeartbeatAck = false;
+  }
+
+  /**
+   * Sends a packet to the gateway
+   * @param {Object} data An object that can be JSON stringified
+   * @param {boolean} force Whether or not to send the packet immediately
+   */
+  send(data, force = false) {
+    if (force) {
+      this._send(data);
+      return;
+    }
+    this._queue.push(data);
+    this.doQueue();
+  }
+
+  destroy() {
+    if (this.ws) this.ws.close(1000);
+    this._queue = [];
+    this.status = Constants.Status.IDLE;
+  }
+
+  _send(data) {
+    if (this.ws.readyState === WebSocketConnection.OPEN) {
+      this.emit('send', data);
+      this.ws.send(data);
+    }
+  }
+
+  doQueue() {
+    const item = this._queue[0];
+    if (!(this.ws.readyState === WebSocketConnection.OPEN && item)) return;
+    if (this.remaining === 0) {
+      this.client.setTimeout(this.doQueue.bind(this), Date.now() - this.remainingReset);
+      return;
+    }
+    this._remaining--;
+    this._send(item);
+    this._queue.shift();
+    this.doQueue();
+  }
+
+  /**
+   * Run whenever the gateway connections opens up
+   */
+  eventOpen() {
+    this.client.emit('debug', 'Connection to gateway opened');
+    this.lastHeartbeatAck = true;
+    if (this.sessionID) this._sendResume();
+    else this._sendNewIdentify();
+  }
+
+  /**
+   * Sends a gateway resume packet, in cases of unexpected disconnections.
+   */
+  _sendResume() {
+    if (!this.sessionID) {
+      this._sendNewIdentify();
+      return;
+    }
+    this.client.emit('debug', 'Identifying as resumed session');
+    this.resumeStart = this.sequence;
+    const payload = {
+      token: this.client.token,
+      session_id: this.sessionID,
+      seq: this.sequence,
+    };
+
+    this.send({
+      op: Constants.OPCodes.RESUME,
+      d: payload,
+    });
+  }
+
+  /**
+   * Sends a new identification packet, in cases of new connections or failed reconnections.
+   */
+  _sendNewIdentify() {
+    this.reconnecting = false;
+    const payload = this.client.options.ws;
+    payload.token = this.client.token;
+    if (this.client.options.shardCount > 0) {
+      payload.shard = [Number(this.client.options.shardId), Number(this.client.options.shardCount)];
+    }
+    this.client.emit('debug', 'Identifying as new session');
+    this.send({
+      op: Constants.OPCodes.IDENTIFY,
+      d: payload,
+    });
+    this.sequence = -1;
+  }
+
+  /**
+   * @external CloseEvent
+   * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent}
+   */
+
+  /**
+   * Run whenever the connection to the gateway is closed, it will try to reconnect the client.
+   * @param {CloseEvent} event The WebSocket close event
+   */
+  eventClose(event) {
+    this.emit('close', event);
+    this.client.clearInterval(this.client.manager.heartbeatInterval);
+    this.status = Constants.Status.DISCONNECTED;
+    this._queue = [];
+    /**
+     * Emitted whenever the client websocket is disconnected
+     * @event Client#disconnect
+     * @param {CloseEvent} event The WebSocket close event
+     */
+    if (!this.reconnecting) this.client.emit(Constants.Events.DISCONNECT, event);
+    if ([4004, 4010, 4011].includes(event.code)) return;
+    if (!this.reconnecting && event.code !== 1000) this.tryReconnect();
+  }
+
+  /**
+   * Run whenever a message is received from the WebSocket. Returns `true` if the message
+   * was handled properly.
+   * @param {Object} data The received websocket data
+   * @returns {boolean}
+   */
+  eventPacket(data) {
+    if (data === null) {
+      this.eventError(new Error(Constants.Errors.BAD_WS_MESSAGE));
+      return false;
+    }
+
+    this.client.emit('raw', data);
+
+    if (data.op === Constants.OPCodes.HELLO) this.client.manager.setupKeepAlive(data.d.heartbeat_interval);
+    return this.packetManager.handle(data);
+  }
+
+  /**
+   * Run whenever an error occurs with the WebSocket connection. Tries to reconnect
+   * @param {Error} err The encountered error
+   */
+  eventError(err) {
+    /**
+     * Emitted whenever the Client encounters a serious connection error
+     * @event Client#error
+     * @param {Error} error The encountered error
+     */
+    if (this.client.listenerCount('error') > 0) this.client.emit('error', err);
+    this.tryReconnect();
+  }
+
+  _emitReady(normal = true) {
+    /**
+     * Emitted when the Client becomes ready to start working
+     * @event Client#ready
+     */
+    this.status = Constants.Status.READY;
+    this.client.emit(Constants.Events.READY);
+    this.packetManager.handleQueue();
+    this.normalReady = normal;
+  }
+
+  /**
+   * Runs on new packets before `READY` to see if the Client is ready yet, if it is prepares
+   * the `READY` event.
+   */
+  checkIfReady() {
+    if (this.status !== Constants.Status.READY && this.status !== Constants.Status.NEARLY) {
+      let unavailableCount = 0;
+      for (const guildID of this.client.guilds.keys()) {
+        unavailableCount += this.client.guilds.get(guildID).available ? 0 : 1;
+      }
+      if (unavailableCount === 0) {
+        this.status = Constants.Status.NEARLY;
+        if (this.client.options.fetchAllMembers) {
+          const promises = this.client.guilds.map(g => g.fetchMembers());
+          Promise.all(promises).then(() => this._emitReady(), e => {
+            this.client.emit(Constants.Events.WARN, 'Error in pre-ready guild member fetching');
+            this.client.emit(Constants.Events.ERROR, e);
+            this._emitReady();
+          });
+          return;
+        }
+        this._emitReady();
+      }
+    }
+  }
+
+  /**
+   * Tries to reconnect the client, changing the status to Constants.Status.RECONNECTING.
+   */
+  tryReconnect() {
+    if (
+      this.status === Constants.Status.RECONNECTING ||
+      this.status === Constants.Status.CONNECTING ||
+      !this.client.token
+    ) return;
+    this.status = Constants.Status.RECONNECTING;
+    this.ws.close();
+    this.packetManager.handleQueue();
+    /**
+     * Emitted when the Client tries to reconnect after being disconnected
+     * @event Client#reconnecting
+     */
+    this.client.emit(Constants.Events.RECONNECTING);
+    this.connect(this.client.ws.gateway);
+  }
+}
+
+module.exports = WebSocketManager;
+
+
+/***/ }),
+/* 135 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const Constants = __webpack_require__(0);
+
+const BeforeReadyWhitelist = [
+  Constants.WSEvents.READY,
+  Constants.WSEvents.GUILD_CREATE,
+  Constants.WSEvents.GUILD_DELETE,
+  Constants.WSEvents.GUILD_MEMBERS_CHUNK,
+  Constants.WSEvents.GUILD_MEMBER_ADD,
+  Constants.WSEvents.GUILD_MEMBER_REMOVE,
+];
+
+class WebSocketPacketManager {
+  constructor(websocketManager) {
+    this.ws = websocketManager;
+    this.handlers = {};
+    this.queue = [];
+
+    this.register(Constants.WSEvents.READY, __webpack_require__(162));
+    this.register(Constants.WSEvents.RESUMED, __webpack_require__(165));
+    this.register(Constants.WSEvents.GUILD_CREATE, __webpack_require__(142));
+    this.register(Constants.WSEvents.GUILD_DELETE, __webpack_require__(143));
+    this.register(Constants.WSEvents.GUILD_UPDATE, __webpack_require__(153));
+    this.register(Constants.WSEvents.GUILD_BAN_ADD, __webpack_require__(140));
+    this.register(Constants.WSEvents.GUILD_BAN_REMOVE, __webpack_require__(141));
+    this.register(Constants.WSEvents.GUILD_MEMBER_ADD, __webpack_require__(145));
+    this.register(Constants.WSEvents.GUILD_MEMBER_REMOVE, __webpack_require__(146));
+    this.register(Constants.WSEvents.GUILD_MEMBER_UPDATE, __webpack_require__(147));
+    this.register(Constants.WSEvents.GUILD_ROLE_CREATE, __webpack_require__(149));
+    this.register(Constants.WSEvents.GUILD_ROLE_DELETE, __webpack_require__(150));
+    this.register(Constants.WSEvents.GUILD_ROLE_UPDATE, __webpack_require__(151));
+    this.register(Constants.WSEvents.GUILD_EMOJIS_UPDATE, __webpack_require__(144));
+    this.register(Constants.WSEvents.GUILD_MEMBERS_CHUNK, __webpack_require__(148));
+    this.register(Constants.WSEvents.CHANNEL_CREATE, __webpack_require__(136));
+    this.register(Constants.WSEvents.CHANNEL_DELETE, __webpack_require__(137));
+    this.register(Constants.WSEvents.CHANNEL_UPDATE, __webpack_require__(139));
+    this.register(Constants.WSEvents.CHANNEL_PINS_UPDATE, __webpack_require__(138));
+    this.register(Constants.WSEvents.PRESENCE_UPDATE, __webpack_require__(161));
+    this.register(Constants.WSEvents.USER_UPDATE, __webpack_require__(169));
+    this.register(Constants.WSEvents.USER_NOTE_UPDATE, __webpack_require__(167));
+    this.register(Constants.WSEvents.USER_SETTINGS_UPDATE, __webpack_require__(168));
+    this.register(Constants.WSEvents.VOICE_STATE_UPDATE, __webpack_require__(171));
+    this.register(Constants.WSEvents.TYPING_START, __webpack_require__(166));
+    this.register(Constants.WSEvents.MESSAGE_CREATE, __webpack_require__(154));
+    this.register(Constants.WSEvents.MESSAGE_DELETE, __webpack_require__(155));
+    this.register(Constants.WSEvents.MESSAGE_UPDATE, __webpack_require__(160));
+    this.register(Constants.WSEvents.MESSAGE_DELETE_BULK, __webpack_require__(156));
+    this.register(Constants.WSEvents.VOICE_SERVER_UPDATE, __webpack_require__(170));
+    this.register(Constants.WSEvents.GUILD_SYNC, __webpack_require__(152));
+    this.register(Constants.WSEvents.RELATIONSHIP_ADD, __webpack_require__(163));
+    this.register(Constants.WSEvents.RELATIONSHIP_REMOVE, __webpack_require__(164));
+    this.register(Constants.WSEvents.MESSAGE_REACTION_ADD, __webpack_require__(157));
+    this.register(Constants.WSEvents.MESSAGE_REACTION_REMOVE, __webpack_require__(158));
+    this.register(Constants.WSEvents.MESSAGE_REACTION_REMOVE_ALL, __webpack_require__(159));
+  }
+
+  get client() {
+    return this.ws.client;
+  }
+
+  register(event, Handler) {
+    this.handlers[event] = new Handler(this);
+  }
+
+  handleQueue() {
+    this.queue.forEach((element, index) => {
+      this.handle(this.queue[index]);
+      this.queue.splice(index, 1);
+    });
+  }
+
+  setSequence(s) {
+    if (s && s > this.ws.sequence) this.ws.sequence = s;
+  }
+
+  handle(packet) {
+    if (packet.op === Constants.OPCodes.RECONNECT) {
+      this.setSequence(packet.s);
+      this.ws.tryReconnect();
+      return false;
+    }
+
+    if (packet.op === Constants.OPCodes.INVALID_SESSION) {
+      this.client.emit('debug', `SESSION INVALID! Waiting to reconnect: ${packet.d}`);
+      if (packet.d) {
+        setTimeout(() => {
+          this.ws._sendResume();
+        }, 2500);
+      } else {
+        this.ws.sessionID = null;
+        this.ws._sendNewIdentify();
+      }
+      return false;
+    }
+
+    if (packet.op === Constants.OPCodes.HEARTBEAT_ACK) {
+      this.ws.client._pong(this.ws.client._pingTimestamp);
+      this.ws.lastHeartbeatAck = true;
+      this.ws.client.emit('debug', 'Heartbeat acknowledged');
+    } else if (packet.op === Constants.OPCodes.HEARTBEAT) {
+      this.client.ws.send({
+        op: Constants.OPCodes.HEARTBEAT,
+        d: this.client.ws.sequence,
+      });
+      this.ws.client.emit('debug', 'Received gateway heartbeat');
+    }
+
+    if (this.ws.status === Constants.Status.RECONNECTING) {
+      this.ws.reconnecting = false;
+      this.ws.checkIfReady();
+    }
+
+    this.setSequence(packet.s);
+
+    if (this.ws.disabledEvents[packet.t] !== undefined) return false;
+
+    if (this.ws.status !== Constants.Status.READY) {
+      if (BeforeReadyWhitelist.indexOf(packet.t) === -1) {
+        this.queue.push(packet);
+        return false;
+      }
+    }
+
+    if (this.handlers[packet.t]) return this.handlers[packet.t].handle(packet);
+    return false;
+  }
+}
+
+module.exports = WebSocketPacketManager;
+
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class ChannelCreateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.ChannelCreate.handle(data);
+  }
+}
+
+/**
+ * Emitted whenever a channel is created.
+ * @event Client#channelCreate
+ * @param {Channel} channel The channel that was created
+ */
+
+module.exports = ChannelCreateHandler;
+
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+const Constants = __webpack_require__(0);
+
+class ChannelDeleteHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    const response = client.actions.ChannelDelete.handle(data);
+    if (response.channel) client.emit(Constants.Events.CHANNEL_DELETE, response.channel);
+  }
+}
+
+/**
+ * Emitted whenever a channel is deleted.
+ * @event Client#channelDelete
+ * @param {Channel} channel The channel that was deleted
+ */
+
+module.exports = ChannelDeleteHandler;
+
+
+/***/ }),
+/* 138 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+const Constants = __webpack_require__(0);
+
+/*
+{ t: 'CHANNEL_PINS_UPDATE',
+  s: 666,
+  op: 0,
+  d:
+   { last_pin_timestamp: '2016-08-28T17:37:13.171774+00:00',
+     channel_id: '314866471639044027' } }
+*/
+
+class ChannelPinsUpdate extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    const channel = client.channels.get(data.channel_id);
+    const time = new Date(data.last_pin_timestamp);
+    if (channel && time) client.emit(Constants.Events.CHANNEL_PINS_UPDATE, channel, time);
+  }
+}
+
+/**
+ * Emitted whenever the pins of a channel are updated. Due to the nature of the WebSocket event, not much information
+ * can be provided easily here - you need to manually check the pins yourself.
+ * @event Client#channelPinsUpdate
+ * @param {Channel} channel The channel that the pins update occured in
+ * @param {Date} time The time of the pins update
+ */
+
+module.exports = ChannelPinsUpdate;
+
+
+/***/ }),
+/* 139 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class ChannelUpdateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.ChannelUpdate.handle(data);
+  }
+}
+
+module.exports = ChannelUpdateHandler;
+
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// ##untested handler##
+
+const AbstractHandler = __webpack_require__(1);
+const Constants = __webpack_require__(0);
+
+class GuildBanAddHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    const guild = client.guilds.get(data.guild_id);
+    const user = client.users.get(data.user.id);
+    if (guild && user) client.emit(Constants.Events.GUILD_BAN_ADD, guild, user);
+  }
+}
+
+/**
+ * Emitted whenever a member is banned from a guild.
+ * @event Client#guildBanAdd
+ * @param {Guild} guild The guild that the ban occurred in
+ * @param {User} user The user that was banned
+ */
+
+module.exports = GuildBanAddHandler;
+
+
+/***/ }),
+/* 141 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// ##untested handler##
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildBanRemoveHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.GuildBanRemove.handle(data);
+  }
+}
+
+/**
+ * Emitted whenever a member is unbanned from a guild.
+ * @event Client#guildBanRemove
+ * @param {Guild} guild The guild that the unban occurred in
+ * @param {User} user The user that was unbanned
+ */
+
+module.exports = GuildBanRemoveHandler;
+
+
+/***/ }),
+/* 142 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildCreateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+
+    const guild = client.guilds.get(data.id);
+    if (guild) {
+      if (!guild.available && !data.unavailable) {
+        // A newly available guild
+        guild.setup(data);
+        this.packetManager.ws.checkIfReady();
+      }
+    } else {
+      // A new guild
+      client.dataManager.newGuild(data);
+    }
+  }
+}
+
+module.exports = GuildCreateHandler;
+
+
+/***/ }),
+/* 143 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+const Constants = __webpack_require__(0);
+
+class GuildDeleteHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    const response = client.actions.GuildDelete.handle(data);
+    if (response.guild) client.emit(Constants.Events.GUILD_DELETE, response.guild);
+  }
+}
+
+/**
+ * Emitted whenever a guild is deleted/left.
+ * @event Client#guildDelete
+ * @param {Guild} guild The guild that was deleted
+ */
+
+module.exports = GuildDeleteHandler;
+
+
+/***/ }),
+/* 144 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildEmojisUpdate extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.GuildEmojisUpdate.handle(data);
+  }
+}
+
+module.exports = GuildEmojisUpdate;
+
+
+/***/ }),
+/* 145 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// ##untested handler##
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildMemberAddHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    const guild = client.guilds.get(data.guild_id);
+    if (guild) {
+      guild.memberCount++;
+      guild._addMember(data);
+    }
+  }
+}
+
+module.exports = GuildMemberAddHandler;
+
+
+/***/ }),
+/* 146 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// ##untested handler##
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildMemberRemoveHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.GuildMemberRemove.handle(data);
+  }
+}
+
+module.exports = GuildMemberRemoveHandler;
+
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// ##untested handler##
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildMemberUpdateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+
+    const guild = client.guilds.get(data.guild_id);
+    if (guild) {
+      const member = guild.members.get(data.user.id);
+      if (member) guild._updateMember(member, data);
+    }
+  }
+}
+
+module.exports = GuildMemberUpdateHandler;
+
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+const Constants = __webpack_require__(0);
+// Uncomment in v12
+// const Collection = require('../../../../util/Collection');
+
+class GuildMembersChunkHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    const guild = client.guilds.get(data.guild_id);
+    if (!guild) return;
+
+    // Uncomment in v12
+    // const members = new Collection();
+    //
+    // for (const member of data.members) members.set(member.id, guild._addMember(member, false));
+
+    const members = data.members.map(member => guild._addMember(member, false));
+
+    client.emit(Constants.Events.GUILD_MEMBERS_CHUNK, members, guild);
+
+    client.ws.lastHeartbeatAck = true;
+  }
+}
+
+/**
+ * Emitted whenever a chunk of guild members is received (all members come from the same guild)
+ * @event Client#guildMembersChunk
+ * @param {Collection<Snowflake, GuildMember>} members The members in the chunk
+ * @param {Guild} guild The guild related to the member chunk
+ */
+
+module.exports = GuildMembersChunkHandler;
+
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildRoleCreateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.GuildRoleCreate.handle(data);
+  }
+}
+
+module.exports = GuildRoleCreateHandler;
+
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildRoleDeleteHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.GuildRoleDelete.handle(data);
+  }
+}
+
+module.exports = GuildRoleDeleteHandler;
+
+
+/***/ }),
+/* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildRoleUpdateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.GuildRoleUpdate.handle(data);
+  }
+}
+
+module.exports = GuildRoleUpdateHandler;
+
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildSyncHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.GuildSync.handle(data);
+  }
+}
+
+module.exports = GuildSyncHandler;
+
+
+/***/ }),
+/* 153 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class GuildUpdateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.GuildUpdate.handle(data);
+  }
+}
+
+module.exports = GuildUpdateHandler;
+
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+const Constants = __webpack_require__(0);
+
+class MessageCreateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    const response = client.actions.MessageCreate.handle(data);
+    if (response.message) client.emit(Constants.Events.MESSAGE_CREATE, response.message);
+  }
+}
+
+/**
+ * Emitted whenever a message is created
+ * @event Client#message
+ * @param {Message} message The created message
+ */
+
+module.exports = MessageCreateHandler;
+
+
+/***/ }),
+/* 155 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+const Constants = __webpack_require__(0);
+
+class MessageDeleteHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    const response = client.actions.MessageDelete.handle(data);
+    if (response.message) client.emit(Constants.Events.MESSAGE_DELETE, response.message);
+  }
+}
+
+/**
+ * Emitted whenever a message is deleted
+ * @event Client#messageDelete
+ * @param {Message} message The deleted message
+ */
+
+module.exports = MessageDeleteHandler;
+
+
+/***/ }),
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class MessageDeleteBulkHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.MessageDeleteBulk.handle(data);
+  }
+}
+
+/**
+ * Emitted whenever messages are deleted in bulk
+ * @event Client#messageDeleteBulk
+ * @param {Collection<Snowflake, Message>} messages The deleted messages, mapped by their ID
+ */
+
+module.exports = MessageDeleteBulkHandler;
+
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class MessageReactionAddHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.MessageReactionAdd.handle(data);
+  }
+}
+
+module.exports = MessageReactionAddHandler;
+
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class MessageReactionRemove extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.MessageReactionRemove.handle(data);
+  }
+}
+
+module.exports = MessageReactionRemove;
+
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class MessageReactionRemoveAll extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.MessageReactionRemoveAll.handle(data);
+  }
+}
+
+module.exports = MessageReactionRemoveAll;
+
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class MessageUpdateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.MessageUpdate.handle(data);
+  }
+}
+
+module.exports = MessageUpdateHandler;
+
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+const Constants = __webpack_require__(0);
+const Util = __webpack_require__(4);
+
+class PresenceUpdateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    let user = client.users.get(data.user.id);
+    const guild = client.guilds.get(data.guild_id);
+
+    // Step 1
+    if (!user) {
+      if (data.user.username) {
+        user = client.dataManager.newUser(data.user);
+      } else {
+        return;
+      }
+    }
+
+    const oldUser = Util.cloneObject(user);
+    user.patch(data.user);
+    if (!user.equals(oldUser)) {
+      client.emit(Constants.Events.USER_UPDATE, oldUser, user);
+    }
+
+    if (guild) {
+      let member = guild.members.get(user.id);
+      if (!member && data.status !== 'offline') {
+        member = guild._addMember({
+          user,
+          roles: data.roles,
+          deaf: false,
+          mute: false,
+        }, false);
+        client.emit(Constants.Events.GUILD_MEMBER_AVAILABLE, member);
+      }
+      if (member) {
+        if (client.listenerCount(Constants.Events.PRESENCE_UPDATE) === 0) {
+          guild._setPresence(user.id, data);
+          return;
+        }
+        const oldMember = Util.cloneObject(member);
+        if (member.presence) {
+          oldMember.frozenPresence = Util.cloneObject(member.presence);
+        }
+        guild._setPresence(user.id, data);
+        client.emit(Constants.Events.PRESENCE_UPDATE, oldMember, member);
+      } else {
+        guild._setPresence(user.id, data);
+      }
+    }
+  }
+}
+
+/**
+ * Emitted whenever a guild member's presence changes, or they change one of their details.
+ * @event Client#presenceUpdate
+ * @param {GuildMember} oldMember The member before the presence update
+ * @param {GuildMember} newMember The member after the presence update
+ */
+
+/**
+ * Emitted whenever a user's details (e.g. username) are changed.
+ * @event Client#userUpdate
+ * @param {User} oldUser The user before the update
+ * @param {User} newUser The user after the update
+ */
+
+/**
+ * Emitted whenever a member becomes available in a large guild
+ * @event Client#guildMemberAvailable
+ * @param {GuildMember} member The member that became available
+ */
+
+module.exports = PresenceUpdateHandler;
+
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+const ClientUser = __webpack_require__(40);
+
+class ReadyHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+
+    client.ws.heartbeat();
+
+    data.user.user_settings = data.user_settings;
+
+    const clientUser = new ClientUser(client, data.user);
+    client.user = clientUser;
+    client.readyAt = new Date();
+    client.users.set(clientUser.id, clientUser);
+
+    for (const guild of data.guilds) client.dataManager.newGuild(guild);
+    for (const privateDM of data.private_channels) client.dataManager.newChannel(privateDM);
+
+    for (const relation of data.relationships) {
+      const user = client.dataManager.newUser(relation.user);
+      if (relation.type === 1) {
+        client.user.friends.set(user.id, user);
+      } else if (relation.type === 2) {
+        client.user.blocked.set(user.id, user);
+      }
+    }
+
+    data.presences = data.presences || [];
+    for (const presence of data.presences) {
+      client.dataManager.newUser(presence.user);
+      client._setPresence(presence.user.id, presence);
+    }
+
+    if (data.notes) {
+      for (const user in data.notes) {
+        let note = data.notes[user];
+        if (!note.length) note = null;
+
+        client.user.notes.set(user, note);
+      }
+    }
+
+    if (!client.user.bot && client.options.sync) client.setInterval(client.syncGuilds.bind(client), 30000);
+    client.once('ready', client.syncGuilds.bind(client));
+
+    if (!client.users.has('1')) {
+      client.dataManager.newUser({
+        id: '1',
+        username: 'Clyde',
+        discriminator: '0000',
+        avatar: 'https://discordapp.com/assets/f78426a064bc9dd24847519259bc42af.png',
+        bot: true,
+        status: 'online',
+        game: null,
+        verified: true,
+      });
+    }
+
+    client.setTimeout(() => {
+      if (!client.ws.normalReady) client.ws._emitReady(false);
+    }, 1200 * data.guilds.length);
+
+    const ws = this.packetManager.ws;
+
+    ws.sessionID = data.session_id;
+    ws._trace = data._trace;
+    client.emit('debug', `READY ${ws._trace.join(' -> ')} ${ws.sessionID}`);
+    ws.checkIfReady();
+  }
+}
+
+module.exports = ReadyHandler;
+
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class RelationshipAddHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    if (data.type === 1) {
+      client.fetchUser(data.id).then(user => {
+        client.user.friends.set(user.id, user);
+      });
+    } else if (data.type === 2) {
+      client.fetchUser(data.id).then(user => {
+        client.user.blocked.set(user.id, user);
+      });
+    }
+  }
+}
+
+module.exports = RelationshipAddHandler;
+
+
+/***/ }),
+/* 164 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class RelationshipRemoveHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    if (data.type === 2) {
+      if (client.user.blocked.has(data.id)) {
+        client.user.blocked.delete(data.id);
+      }
+    } else if (data.type === 1) {
+      if (client.user.friends.has(data.id)) {
+        client.user.friends.delete(data.id);
+      }
+    }
+  }
+}
+
+module.exports = RelationshipRemoveHandler;
+
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class ResumedHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const ws = client.ws;
+
+    ws._trace = packet.d._trace;
+
+    const replayed = ws.sequence - ws.resumeStart;
+    ws.resumeStart = -1;
+
+    client.emit('debug', `RESUMED ${ws._trace.join(' -> ')} | replayed ${replayed} events. `);
+    client.emit('resume', replayed);
+
+    ws.heartbeat();
+  }
+}
+
+/**
+ * Emitted whenever a websocket resumes
+ * @event Client#resume
+ * @param {Number} replayed Number of events that were replayed
+ */
+
+module.exports = ResumedHandler;
+
+
+/***/ }),
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+const Constants = __webpack_require__(0);
+
+class TypingStartHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    const channel = client.channels.get(data.channel_id);
+    const user = client.users.get(data.user_id);
+    const timestamp = new Date(data.timestamp * 1000);
+
+    if (channel && user) {
+      if (channel.type === 'voice') {
+        client.emit(Constants.Events.WARN, `Discord sent a typing packet to voice channel ${channel.id}`);
+        return;
+      }
+      if (channel._typing.has(user.id)) {
+        const typing = channel._typing.get(user.id);
+        typing.lastTimestamp = timestamp;
+        typing.resetTimeout(tooLate(channel, user));
+      } else {
+        channel._typing.set(user.id, new TypingData(client, timestamp, timestamp, tooLate(channel, user)));
+        client.emit(Constants.Events.TYPING_START, channel, user);
+      }
+    }
+  }
+}
+
+class TypingData {
+  constructor(client, since, lastTimestamp, _timeout) {
+    this.client = client;
+    this.since = since;
+    this.lastTimestamp = lastTimestamp;
+    this._timeout = _timeout;
+  }
+
+  resetTimeout(_timeout) {
+    this.client.clearTimeout(this._timeout);
+    this._timeout = _timeout;
+  }
+
+  get elapsedTime() {
+    return Date.now() - this.since;
+  }
+}
+
+function tooLate(channel, user) {
+  return channel.client.setTimeout(() => {
+    channel.client.emit(Constants.Events.TYPING_STOP, channel, user, channel._typing.get(user.id));
+    channel._typing.delete(user.id);
+  }, 6000);
+}
+
+/**
+ * Emitted whenever a user starts typing in a channel
+ * @event Client#typingStart
+ * @param {Channel} channel The channel the user started typing in
+ * @param {User} user The user that started typing
+ */
+
+/**
+ * Emitted whenever a user stops typing in a channel
+ * @event Client#typingStop
+ * @param {Channel} channel The channel the user stopped typing in
+ * @param {User} user The user that stopped typing
+ */
+
+module.exports = TypingStartHandler;
+
+
+/***/ }),
+/* 167 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class UserNoteUpdateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+
+    client.actions.UserNoteUpdate.handle(data);
+  }
+}
+
+module.exports = UserNoteUpdateHandler;
+
+
+/***/ }),
+/* 168 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+const Constants = __webpack_require__(0);
+
+class UserSettingsUpdateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    client.user.settings.patch(packet.d);
+    client.emit(Constants.Events.USER_SETTINGS_UPDATE, client.user.settings);
+  }
+}
+
+/**
+ * Emitted when the client user's settings update
+ * @event Client#clientUserSettingsUpdate
+ * @param {ClientUserSettings} clientUserSettings The new client user settings
+ */
+
+module.exports = UserSettingsUpdateHandler;
+
+
+/***/ }),
+/* 169 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+class UserUpdateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.actions.UserUpdate.handle(data);
+  }
+}
+
+module.exports = UserUpdateHandler;
+
+
+/***/ }),
+/* 170 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+/*
+{
+    "token": "my_token",
+    "guild_id": "41771983423143937",
+    "endpoint": "smart.loyal.discord.gg"
+}
+*/
+
+class VoiceServerUpdate extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+    client.emit('self.voiceServer', data);
+  }
+}
+
+module.exports = VoiceServerUpdate;
+
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const AbstractHandler = __webpack_require__(1);
+
+const Constants = __webpack_require__(0);
+const Util = __webpack_require__(4);
+
+class VoiceStateUpdateHandler extends AbstractHandler {
+  handle(packet) {
+    const client = this.packetManager.client;
+    const data = packet.d;
+
+    const guild = client.guilds.get(data.guild_id);
+    if (guild) {
+      const member = guild.members.get(data.user_id);
+      if (member) {
+        const oldVoiceChannelMember = Util.cloneObject(member);
+        if (member.voiceChannel && member.voiceChannel.id !== data.channel_id) {
+          member.voiceChannel.members.delete(oldVoiceChannelMember.id);
+        }
+
+        // If the member left the voice channel, unset their speaking property
+        if (!data.channel_id) member.speaking = null;
+
+        if (member.user.id === client.user.id && data.channel_id) {
+          client.emit('self.voiceStateUpdate', data);
+        }
+
+        const newChannel = client.channels.get(data.channel_id);
+        if (newChannel) newChannel.members.set(member.user.id, member);
+
+        member.serverMute = data.mute;
+        member.serverDeaf = data.deaf;
+        member.selfMute = data.self_mute;
+        member.selfDeaf = data.self_deaf;
+        member.voiceSessionID = data.session_id;
+        member.voiceChannelID = data.channel_id;
+        client.emit(Constants.Events.VOICE_STATE_UPDATE, oldVoiceChannelMember, member);
+      }
+    }
+  }
+}
+
+/**
+ * Emitted whenever a user changes voice state - e.g. joins/leaves a channel, mutes/unmutes.
+ * @event Client#voiceStateUpdate
+ * @param {GuildMember} oldMember The member before the voice state update
+ * @param {GuildMember} newMember The member after the voice state update
+ */
+
+module.exports = VoiceStateUpdateHandler;
+
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports) {
+
+/**
+ * Represents a user connection (or "platform identity")
+ */
+class UserConnection {
+  constructor(user, data) {
+    /**
+     * The user that owns the Connection
+     * @type {User}
+     */
+    this.user = user;
+
+    this.setup(data);
+  }
+
+  setup(data) {
+    /**
+     * The type of the Connection
+     * @type {string}
+     */
+    this.type = data.type;
+
+    /**
+     * The username of the connection account
+     * @type {string}
+     */
+    this.name = data.name;
+
+    /**
+     * The id of the connection account
+     * @type {string}
+     */
+    this.id = data.id;
+
+    /**
+     * Whether the connection is revoked
+     * @type {boolean}
+     */
+    this.revoked = data.revoked;
+
+    /**
+     * Partial server integrations (not yet implemented)
+     * @type {Object[]}
+     */
+    this.integrations = data.integrations;
+  }
+}
+
+module.exports = UserConnection;
+
+
+/***/ }),
+/* 173 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const Collection = __webpack_require__(3);
+const UserConnection = __webpack_require__(172);
+
+/**
+ * Represents a user's profile on Discord.
+ */
+class UserProfile {
+  constructor(user, data) {
+    /**
+     * The owner of the profile
+     * @type {User}
+     */
+    this.user = user;
+
+    /**
+     * The Client that created the instance of the the UserProfile.
+     * @name UserProfile#client
+     * @type {Client}
+     * @readonly
+     */
+    Object.defineProperty(this, 'client', { value: user.client });
+
+    /**
+     * Guilds that the client user and the user share
+     * @type {Collection<Snowflake, Guild>}
+     */
+    this.mutualGuilds = new Collection();
+
+    /**
+     * The user's connections
+     * @type {Collection<String, UserConnection>}
+     */
+    this.connections = new Collection();
+
+    this.setup(data);
+  }
+
+  setup(data) {
+    /**
+     * If the user has Discord Premium
+     * @type {boolean}
+     */
+    this.premium = data.premium;
+
+    /**
+     * The date since which the user has had Discord Premium
+     * @type {?Date}
+     */
+    this.premiumSince = data.premium_since ? new Date(data.premium_since) : null;
+
+    for (const guild of data.mutual_guilds) {
+      if (this.client.guilds.has(guild.id)) {
+        this.mutualGuilds.set(guild.id, this.client.guilds.get(guild.id));
+      }
+    }
+    for (const connection of data.connected_accounts) {
+      this.connections.set(connection.id, new UserConnection(this.user, connection));
+    }
+  }
+}
+
+module.exports = UserProfile;
+
+
+/***/ }),
+/* 174 */
+/***/ (function(module, exports) {
+
+/**
+ * Represents a Discord voice region for guilds
+ */
+class VoiceRegion {
+  constructor(data) {
+    /**
+     * ID of the region
+     * @type {string}
+     */
+    this.id = data.id;
+
+    /**
+     * Name of the region
+     * @type {string}
+     */
+    this.name = data.name;
+
+    /**
+     * Whether the region is VIP-only
+     * @type {boolean}
+     */
+    this.vip = data.vip;
+
+    /**
+     * Whether the region is deprecated
+     * @type {boolean}
+     */
+    this.deprecated = data.deprecated;
+
+    /**
+     * Whether the region is optimal
+     * @type {boolean}
+     */
+    this.optimal = data.optimal;
+
+    /**
+     * Whether the region is custom
+     * @type {boolean}
+     */
+    this.custom = data.custom;
+
+    /**
+     * A sample hostname for what a connection might look like
+     * @type {string}
+     */
+    this.sampleHostname = data.sample_hostname;
+  }
+}
+
+module.exports = VoiceRegion;
+
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 181 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const Util = __webpack_require__(4);
+
+module.exports = {
+  // "Root" classes (starting points)
+  Client: __webpack_require__(66),
+  Shard: __webpack_require__(69),
+  ShardClientUtil: __webpack_require__(70),
+  ShardingManager: __webpack_require__(71),
+  WebhookClient: __webpack_require__(67),
+
+  // Utilities
+  Collection: __webpack_require__(3),
+  Constants: __webpack_require__(0),
+  EvaluatedPermissions: __webpack_require__(8),
+  Permissions: __webpack_require__(8),
+  Snowflake: __webpack_require__(7),
+  SnowflakeUtil: __webpack_require__(7),
+  Util: Util,
+  util: Util,
+  version: __webpack_require__(39).version,
+
+  // Shortcuts to Util methods
+  escapeMarkdown: Util.escapeMarkdown,
+  fetchRecommendedShards: Util.fetchRecommendedShards,
+  splitMessage: Util.splitMessage,
+
+  // Structures
+  Channel: __webpack_require__(14),
+  ClientUser: __webpack_require__(40),
+  ClientUserSettings: __webpack_require__(41),
+  DMChannel: __webpack_require__(42),
+  Emoji: __webpack_require__(18),
+  Game: __webpack_require__(12).Game,
+  GroupDMChannel: __webpack_require__(27),
+  Guild: __webpack_require__(24),
+  GuildChannel: __webpack_require__(25),
+  GuildMember: __webpack_require__(19),
+  Invite: __webpack_require__(43),
+  Message: __webpack_require__(20),
+  MessageAttachment: __webpack_require__(44),
+  MessageCollector: __webpack_require__(45),
+  MessageEmbed: __webpack_require__(46),
+  MessageMentions: __webpack_require__(47),
+  MessageReaction: __webpack_require__(48),
+  OAuth2Application: __webpack_require__(49),
+  PartialGuild: __webpack_require__(50),
+  PartialGuildChannel: __webpack_require__(51),
+  PermissionOverwrites: __webpack_require__(52),
+  Presence: __webpack_require__(12).Presence,
+  ReactionEmoji: __webpack_require__(28),
+  RichEmbed: __webpack_require__(68),
+  Role: __webpack_require__(15),
+  TextChannel: __webpack_require__(53),
+  User: __webpack_require__(16),
+  VoiceChannel: __webpack_require__(54),
+  Webhook: __webpack_require__(29),
+};
+
+if (__webpack_require__(17).platform() === 'browser') window.Discord = module.exports; // eslint-disable-line no-undef
+
+
+/***/ })
+/******/ ]);
