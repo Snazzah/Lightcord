@@ -14,6 +14,7 @@ This product is still in alpha stage, don't expect it to be 100% perfect yet.
 - [Moment](http://momentjs.com) <small>used for timestamp conversion</small>
 - [Twemoji](https://github.com/twitter/twemoji) <small>used for emoji conversion</small>
 - [Fuse.js](http://fusejs.io) <small>used for searching (QuickSwitcher)</small>
+- [hightlight.js](http://hightlightjs.com) <small>used for highlighting codeblocks</small>
 
 ### Note to Discord Developers
 If you don't feel comfromtable with the stylesheet being used, feel free to contact me, I'll take it down upon request.
