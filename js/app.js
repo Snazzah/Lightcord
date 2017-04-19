@@ -514,7 +514,7 @@ let App = {
 				member.guild.roles.array().filter(role=>role.name==="@everyone"||role.hoist).map(role=>roles.push(role));
 				roles.sort((a,b)=>a.position-b.position).reverse().map(role=>{
 					if(!role.members.has(newmember.id)) return;
-					$('.role-wrap[data-id*="'+role.id+'"]').delete();
+					$('.role-wrap[data-id*="'+role.id+'"]').remove();
 					role.members.array().sort((a,b)=>a.displayName>b.displayName).map(member=>{
 						let user = member.user;
 						if (user.presence.status !== 'offline' && !$(`.members [data-id*="${user.id}"]`)[0] && channel.members.has(user.id)) {
