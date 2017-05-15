@@ -34,7 +34,8 @@ const assets = [
 
 assets.map(v=>displayHandler.preloadAsset(v))
 
-$(function() {
+window.onload = ()=>{
+	$("#djs-version")[0].innerText = Discord.version;
 	displayHandler.hideLoadingScreen();
 	$(".landing input").keypress(function (e) {
 		var code = (e.keyCode ? e.keyCode : e.which)
@@ -42,7 +43,7 @@ $(function() {
 			App.start($(".landing input")[0].value);
 		}
 	});
-})
+}
 
 if(localStorage.token && localStorage.token !== '' && localStorage.token !== undefined){
 	$(".landing .continue-session").fadeIn(500).click(()=>App.start(localStorage.token));

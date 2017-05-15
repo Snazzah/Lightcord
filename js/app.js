@@ -112,7 +112,6 @@ let App = {
 				}
 				App.connected = true;
 
-				console.log('%c[Lightcord] %cStoring token', 'color:#59A1EA; font-weight: bold;', 'color:#000;');
 				localStorage.token = bot.token;
 				if (!localStorage.trustedDomains) localStorage.trustedDomains = [];
 				if (!localStorage.theme) localStorage.theme = 'dark'
@@ -239,10 +238,10 @@ let App = {
 			$('.guild [data-guild*="' + guild.id + '"]').delete();
 		});
 		bot.on('presenceUpdate', (oldmember, newmember) => {
-			App.payloadManager.updateUser(newmember);
+			App.payloadManager.updateUser(newmember, "presence");
 		});
 		bot.on('userUpdate', (oldmember, newmember) => {
-			App.payloadManager.updateUser(newmember);
+			App.payloadManager.updateUser(newmember, "user");
 		});
 		window.onclose = ()=>{
 			console.debug('%c[Discord] %cDisconnecting...', 'color:#7289DA; font-weight: bold;', 'color:#000;');
@@ -402,8 +401,9 @@ let App = {
 				m = m.replace(m, channel)
 				return m
 			}).replace(/(?:\\)?(?:&lt;){1,2}:[0-9a-z--_]+:(\d+)&gt;(?:\d+)?(?:&gt;)?/ig, function (m, r) {
+				console.log(m,r);
 				if (m.includes('\\')) return m.replace(m, m.substr(1))
-				return m.replace(m, '<img class="emoji" src="https://cdn.discordapp.com/emojis/' + r + '.png"/>')
+				return m.replace(m, '<img class="emoji" tooltip-bottom=":ok!:" src="https://cdn.discordapp.com/emojis/' + r + '.png"/>')
 			}).replace(/[\s\S]+/ig, function (m, r) {
 				return twemoji.parse(m, {
 					folder: 'svg',
@@ -494,7 +494,7 @@ let App = {
 				if(activeChannel === cid) App.switchTo.DMs();
 			});
 		},
-		updateUser: function(newmember){
+		updateUser: function(newmember, type){
 			let member = null;
 			if(bot.guilds.get(activeGuild)){
 				member = bot.guilds.get(activeGuild).members.get(newmember.id);
@@ -508,31 +508,30 @@ let App = {
 					}
 				}
 			}
-			if($(`.members [data-id*="${newmember.id}"]`)[0]){
-				$(`.members [data-id*="${newmember.id}"]`).remove();
-				let roles = [];
-				member.guild.roles.array().filter(role=>role.name==="@everyone"||role.hoist).map(role=>roles.push(role));
-				roles.sort((a,b)=>a.position-b.position).reverse().map(role=>{
-					if(!role.members.has(newmember.id)) return;
-					$('.role-wrap[data-id*="'+role.id+'"]').remove();
-					role.members.array().sort((a,b)=>a.displayName>b.displayName).map(member=>{
-						let user = member.user;
-						if (user.presence.status !== 'offline' && !$(`.members [data-id*="${user.id}"]`)[0] && channel.members.has(user.id)) {
-							var status = 'online'
-							var game = ''
-							status = user.presence.status
-							if (user.presence.game !== null) game = '<div class="channel-activity">' + `<span>${user.presence.game && user.presence.game.streaming ? 'Streaming' : 'Playing'}<strong>` + (user.presence.game.name && user.presence.game ? user.presence.game.name.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') : "") + '</strong></span></div>'
-							if (status === null || status === undefined) status = 'offline'
-							var avatar = 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.png'
-							if (user.avatar === null) avatar = 'https://discordapp.com/assets/' + avatarHashes[user.id % avatarHashes.length] + '.png'
-							$('.role-wrap[data-id*="'+role.id+'"]').append('<div class="member"><a data-id="' + user.id + '" onclick="App.switchTo.dmChannel(\'' + user.id + '\')" draggable="false"><div style="background-image: url(\'' + avatar + '\')" class="avatar-small-dm"><div class="status ' + (user.presence.game && user.presence.game.streaming ? "streaming" : user.presence.status) + '"></div></div><div class="member-user ' + (game !== '' ? '' : 'no-status') +'" ' + (member && member.colorRole ? 'style="opacity:1;color:' + member.colorRole.hexColor + ';"' : '') + '>' + member.displayName.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (member.bot ? '<p class="bot-tag">BOT</p>' : '') + game + '</div></a></div>')
-						}
-					});
-				});
+			if($(`.members [data-id*="${newmember.id}"]`)[0] && type === "presence"){
+				var status = 'online';
+				var user = newmember;
+				var game = '';
+				if (bot.users.has(newmember.id)) {
+					status = newmember.presence.status;
+					if (newmember.presence.game !== null) game = '<div class="channel-activity">' + `<span>${newmember.presence.game && newmember.presence.game.name && newmember.presence.game.streaming ? 'Streaming' : 'Playing'}<strong>` + newmember.presence.game.name.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</strong></span></div>'
+				}
+				if (status === null || status === undefined) status = 'offline';
+				var avatar = 'https://cdn.discordapp.com/avatars/' + newmember.id + '/' + newmember.avatar + '.png'
+				if (newmember.avatar === null) avatar = 'https://discordapp.com/assets/' + avatarHashes[user.id % avatarHashes.length] + '.png'
+				$(`.members [data-id*="${newmember.id}"] .status`)[0].className = 'status ' + (newmember.presence.game && newmember.presence.game.streaming ? "streaming" : newmember.presence.status);
+				$(`.members [data-id*="${newmember.id}"] .member-user`).html(newmember.username.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (newmember.recipient.bot ? '<p class="bot-tag">BOT</p>' : '') + game);
+				$(`.members [data-id*="${newmember.id}"] .member-user`)[0].className = 'member-user' + (game !== '' ? '' : ' no-status');
+				$(`.members [data-id*="${newmember.id}"]`)[0].className = 'member' + (status === 'offline' ? ' offline-member' : '');
+				if(!member.guild.large && status === 'offline' && !$('.offline-members-wrap [data-id*="${newmember.id}"]')[0]){
+					$('.offline-members-wrap').append('<div class="member"><a data-id="' + user.id + '" onclick="App.switchTo.dmChannel(\'' + user.id + '\')" draggable="false"><div style="background-image: url(\'' + avatar + '\')" class="avatar-small-dm"></div><div class="member-user no-status" ' + (member && member.colorRole ? 'style="opacity:1;color:' + member.colorRole.hexColor + ';"' : '') + '>' + member.displayName.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (member.bot ? '<p class="bot-tag">BOT</p>' : '') + '</div></a></div>');
+				}else{
+					$('.offline-members-wrap [data-id*="${newmember.id}"]').remove();
+				}
 			}
 			if(newmember.id === bot.user.id){
 				$('.account-details .username').html(newmember.username.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (newmember.bot ? '<span class="bot-tag">BOT</span>' : ''));
-				$(`.account .avatar-small .status`)[0].className = "status " + (newmember.presence.game && newmember.presence.game.streaming ? "streaming" : newmember.presence.status)
+				$(`.account .avatar-small .status`)[0].className = "status " + (newmember.presence.game && newmember.presence.game.streaming ? "streaming" : newmember.presence.status);
 			}
 		},
 		loadMoreMessages: function(channelid){
@@ -675,10 +674,10 @@ let App = {
 				let roles = [];
 				channel.guild.roles.array().filter(role=>role.name==="@everyone"||role.hoist).map(role=>roles.push(role));
 				roles.sort((a,b)=>a.position-b.position).reverse().map(role=>{
-					$('.members').append(`<div class="role-wrap" data-id="${role.id}"><h4>${role.name.toUpperCase()} - ${role.members.filter(m=>m.user.presence.status!=='offline').size}</h4></div>`)
-					role.members.array().sort((a,b)=>a.displayName>b.displayName).map(member=>{
+					$('.members').append(`<div class="role-wrap" data-id="${role.id}"><h4>${role.name!=="@everyone" ? role.name.toUpperCase() : "ONLINE"} - ${role.members.filter(m=>m.user.presence.status!=='offline').size}</h4></div>`)
+					role.members.array().sort((a,b)=>a.displayName>b.displayName).filter(u=>channel.members.has(u.id)).map(member=>{
 						let user = member.user;
-						if (user.presence.status !== 'offline' && !$(`.members [data-id*="${user.id}"]`)[0] && channel.members.has(user.id)) {
+						if (!$(`.members [data-id*="${user.id}"]`)[0] && channel.members.has(user.id)) {
 							var status = 'online'
 							var game = ''
 							status = user.presence.status
@@ -686,9 +685,18 @@ let App = {
 							if (status === null || status === undefined) status = 'offline'
 							var avatar = 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.png'
 							if (user.avatar === null) avatar = 'https://discordapp.com/assets/' + avatarHashes[user.id % avatarHashes.length] + '.png'
-							$('.role-wrap[data-id*="'+role.id+'"]').append('<div class="member"><a data-id="' + user.id + '" onclick="App.switchTo.dmChannel(\'' + user.id + '\')" draggable="false"><div style="background-image: url(\'' + avatar + '\')" class="avatar-small-dm"><div class="status ' + (user.presence.game && user.presence.game.streaming ? "streaming" : user.presence.status) + '"></div></div><div class="member-user ' + (game !== '' ? '' : 'no-status') +'" ' + (member && member.colorRole ? 'style="opacity:1;color:' + member.colorRole.hexColor + ';"' : '') + '>' + member.displayName.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (member.bot ? '<p class="bot-tag">BOT</p>' : '') + game + '</div></a></div>')
+							$('.role-wrap[data-id*="'+role.id+'"]').append('<div class="member' + (status === 'offline' ? ' offline-member' : '') + '"><a data-id="' + user.id + '" onclick="App.switchTo.dmChannel(\'' + user.id + '\')" draggable="false"><div style="background-image: url(\'' + avatar + '\')" class="avatar-small-dm"><div class="status ' + (user.presence.game && user.presence.game.streaming ? "streaming" : user.presence.status) + '"></div></div><div class="member-user'  + (game !== '' ? '' : ' no-status') +'" ' + (member && member.colorRole ? 'style="opacity:1;color:' + member.colorRole.hexColor + ';"' : '') + '>' + member.displayName.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (member.bot ? '<p class="bot-tag">BOT</p>' : '') + game + '</div></a></div>')
 						}
 					});
+				});
+				$('.members').append(`<div class="role-wrap offline-members-wrap"><h4>OFFLINE - ${channel.members.filter(m=>m.user.presence.status==='offline').size}</h4></div>`)
+				if(!channel.guild.large) channel.members.array().sort((a,b)=>a.displayName>b.displayName).filter(u=>channel.members.has(u.id)).map(member=>{
+					let user = member.user;
+					var avatar = 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.png'
+					if (user.avatar === null) avatar = 'https://discordapp.com/assets/' + avatarHashes[user.id % avatarHashes.length] + '.png'
+					if(user.presence.status === 'offline'){
+						$('.offline-members-wrap').append('<div class="member"><a data-id="' + user.id + '" onclick="App.switchTo.dmChannel(\'' + user.id + '\')" draggable="false"><div style="background-image: url(\'' + avatar + '\')" class="avatar-small-dm"></div><div class="member-user no-status" ' + (member && member.colorRole ? 'style="opacity:1;color:' + member.colorRole.hexColor + ';"' : '') + '>' + member.displayName.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (member.bot ? '<p class="bot-tag">BOT</p>' : '') + '</div></a></div>')
+					}
 				});
 				$('.members-wrap').removeClass('dm');
 			});
@@ -716,7 +724,7 @@ let App = {
 						status = d[i].recipient.presence.status
 						if (d[i].recipient.presence.game !== null) game = '<div class="channel-activity">' + `<span>${d[i].recipient.presence.game && d[i].recipient.presence.game.name && d[i].recipient.presence.game.streaming ? 'Streaming' : 'Playing'}<strong>` + d[i].recipient.presence.game.name.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</strong></span></div>'
 					}
-					if (status === null || status === undefined) status = 'offline'
+					if (status === null || status === undefined) status = 'offline';
 					var avatar = 'https://cdn.discordapp.com/avatars/' + d[i].recipient.id + '/' + d[i].recipient.avatar + '.png'
 					if (d[i].recipient.avatar === null) avatar = 'https://discordapp.com/assets/' + avatarHashes[d[i].recipient.id % avatarHashes.length] + '.png'
 					$('.channels').append('<div class="channel dm"><a data-dmuid="' + d[i].recipient.id + '" onclick="App.switchTo.channel(\'' + d[i].id + '\', \'' + d[i].recipient.username + '\')" draggable="false"><div style="background-image: url(\'' + avatar + '\')" class="avatar-small-dm"><div class="status ' + (d[i].recipient.presence.game && d[i].recipient.presence.game.streaming ? "streaming" : d[i].recipient.presence.status) + '"></div></div><div class="dm-user ' + (game !== '' ? '' : 'no-status') +'">' + d[i].recipient.username.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (d[i].recipient.bot ? '<p class="bot-tag">BOT</p>' : '') + game + '</div></a><button class="close" onclick="App.payloadManager.deleteDmChannel(\'' + d[i].id + '\', \'' + d[i].recipient.id + '\')"></button></div>')
@@ -913,7 +921,7 @@ let App = {
 						found.guilds.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.guild('${res.id}')"><div class="icon" ${res.icon ? `style="background-image: url(&quot;https://cdn.discordapp.com/icons/${res.id}/${res.icon}.png&quot;);"` : ''}></div><span>${res.name.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span></div>`);
 					}else if(res.bot !== undefined){
 						let avatar_url = res.avatar ? (res.avatar.startsWith("a_") ? `https://cdn.discordapp.com/avatars/${res.id}/${res.avatar}.gif` : `https://cdn.discordapp.com/avatars/${res.id}/${res.avatar}.png`) : `https://discordapp.com/assets/${avatarHashes[res.discriminator % avatarHashes.length]}.png`;
-						found.users.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.chatMode();App.switchTo.dmChannel('${res.id}')"><div class="icon" style="background-image: url(&quot;${avatar_url}&quot;); border-radius: 50%;"></div><span>${res.username.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span><span class="discriminator">#${res.discriminator}</span></div>`);
+						found.users.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.chatMode();App.switchTo.dmChannel('${res.id}')"><div class="icon" style="background-image: url(&quot;${avatar_url}&quot;); border-radius: 50%;"></div><span>${res.username.replace(/</g, "&lt;").replace(/>/g, "&gt;")}${res.bot ? '<span class="bot-tag">BOT</span>' : ''}</span><span class="discriminator">#${res.discriminator}</span></div>`);
 					}else{
 						if(res.type === "dm" || res.type === "voice") return;
 						found.channels.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.chatMode();App.switchTo.guild('${res.guild.id}');App.switchTo.channel('${res.id}', '${res.name}')"><div class="icon hashtag"></div><span>${res.name}</span><span class="discriminator">${res.guild.name}</span></div>`);
