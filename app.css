@@ -377,7 +377,7 @@ width: 50px;
  padding-bottom: 20px;
 }
 .friends.bot:after {
- content: "Bots don't have friends. :(";
+ content: "Bots don't have friends. :( You can do Ctrl+Comma for the Quickswitcher";
   color: rgba(255,255,255,.7);
   font-family: WhitneyMedium,sans-serif;
   font-size: 25px;
