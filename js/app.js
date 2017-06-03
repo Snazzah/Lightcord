@@ -489,7 +489,7 @@ let App = {
 				next(files[0]);
 			})
 		},
-		guild: function(id){
+		guild: function(id, cid){
 			App.switchTo.chatMode();
 			var guild = bot.guilds.get(id);
 			$('.messages-container').empty();
@@ -512,9 +512,10 @@ let App = {
 			})
 			guildChannels = guildChannels.sort(function (a, b) {return a.position - b.position})
 			for (var i in guildChannels) {
-				if (guildChannels[i].id === guild.id) App.switchTo.channel(guild.id, guildChannels[i].name)
 				if (guildChannels[i].type === 'text') $('.channels').append('<div class="channel" data-channel="' + guildChannels[i].id + '"><a draggable="false" onclick="App.switchTo.channel(\'' + guildChannels[i].id + '\', \'' + guildChannels[i].name + '\')" class="channel">' + guildChannels[i].name + '</a></div></div>')
 			}
+			if (cid) App.switchTo.channel(cid, guild.channels.get(cid).name);
+			if (!cid) App.switchTo.channel(guild.id, guild.defaultChannel.name)
 		},
 		channel: function(id, name){
 			bot.channels.get(id).fetchMessages().then((msgs) => {
@@ -730,7 +731,7 @@ let App = {
 						found.users.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.chatMode();App.switchTo.dmChannel('${res.id}')"><div class="icon" style="background-image: url(&quot;${avatar_url}&quot;); border-radius: 50%;"></div><span>${res.username.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span><span class="discriminator">#${res.discriminator}</span></div>`);
 					}else{
 						if(res.type === "dm") return;
-						found.channels.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.chatMode();App.switchTo.guild('${res.guild.id}');App.switchTo.channel('${res.id}', '${res.name}')"><div class="icon hashtag"></div><span>${res.name}</span><span class="discriminator">${res.guild.name}</span></div>`);
+						found.channels.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.chatMode();App.switchTo.guild('${res.guild.id}', '${res.id}')"><div class="icon hashtag"></div><span>${res.name}</span><span class="discriminator">${res.guild.name}</span></div>`);
 					}
 				}catch(e){
 					console.log('%c[Lightcord] %cCouldn\'t parse object in Quickswitcher!', 'color:#59A1EA; font-weight: bold;', 'color:#000;', e, res);
