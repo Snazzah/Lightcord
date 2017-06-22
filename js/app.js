@@ -406,13 +406,8 @@ let App = {
 					});
 				});
 			}
-			$('.messages-container').scrollTop($('.messages-container').scrollTop() + $('.chat').children()[1].lastChild.clientHeight)
-			tippy('.emoji', {
-				theme: 'discord',
-				position: 'top',
-				size: 'small',
-				arrow: true
-			});
+			$('.messages-container').scrollTop($('.messages-container').scrollTop() + $('.chat').children()[1].lastChild.clientHeight);
+			setTimeout(()=>tippy('.emoji', {theme: 'discord', position: 'top', size: 'small', arrow: true }), 500);
 		},
 		messageEmbed: function(msg) {
 			var edit = ''
