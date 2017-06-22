@@ -4,13 +4,63 @@ var bot = new Discord.Client({
 	bot: true,
 	userAgent: {
 		url: 'https://github.com/SnazzyPine25/Lightcord',
-		version: '1.0.3'
+		version: '1.1.0'
 	},
 });
 DiscordClientConverter(bot);
-var converter = new showdown.Converter();
-converter.setOption('headerLevelStart', '10');
-converter.setOption('strikethrough', true);
+var MDRends = {
+	message: new marked.Renderer(),
+	embed: new marked.Renderer(),
+	embedTitle: new marked.Renderer()
+}
+marked.setOptions({
+	renderer: MDRends.message,
+	highlight: (c,l)=>hljs.highlight(l, c.trim()).value,
+	tables: false
+})
+marked.setOptions({
+	renderer: MDRends.embed,
+	highlight: (c,l)=>hljs.highlight(l, c.trim()).value,
+	tables: false
+})
+marked.setOptions({
+	renderer: MDRends.embedTitle,
+	tables: false
+})
+MDRends.message.link = (h,i,t)=>`[${t}](${h})`;
+MDRends.message.image = (h,i,t)=>`![${t}](${h})`;
+MDRends.message.hr = ()=>`---`;
+MDRends.message.heading = (t,l)=>`${"#".repeat(l)} ${t}<br>`;
+
+MDRends.embed.link = (href, title, text)=>{
+	try {
+		var prot = decodeURIComponent(unescape(href))
+		.replace(/[^\w:]/g, '')
+		.toLowerCase();
+	} catch (e) {
+		return '';
+	}
+	if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0) {
+		return '';
+	}
+	var out = '<a onclick="App.deploy.maskedLink(\''+href+'\')"';
+	if (title) {
+		out += ' title="' + title + '"';
+	}
+	out += '>' + text + '</a>';
+	return out;
+};
+MDRends.embed.image = (h,i,t)=>`![${t}](${this.link(h,null,h)})`;
+MDRends.embed.hr = ()=>`---`;
+MDRends.embed.heading = (t,l)=>`${"#".repeat(l)} ${t}<br>`;
+
+MDRends.embedTitle.link = (h,i,t)=>`[${t}](${h})`;
+MDRends.embedTitle.image = (h,i,t)=>`![${t}](${h})`;
+MDRends.embedTitle.hr = ()=>`---`;
+MDRends.embedTitle.paragraph = (t)=>`${t}`;
+MDRends.embedTitle.heading = (t,l)=>`${"#".repeat(l)} ${t}`;
+MDRends.embedTitle.code = (c,l)=>`\`\`\`${l}${c}\`\`\``;
+// marked('# heading+', { renderer: MDRends.message })
 var avatarHashes = [
 	"6debd47ed13483642cf09e832ed0bc1b",
 	"322c936a8c8be1b803cd94861bdfa868",
@@ -60,7 +110,7 @@ window.onmouseover = function(me){
   if($(source).attr("tooltip-bottom")){
     tt.innerText = currentTooltip.t = $(source).attr("tooltip-bottom");
     tt.className = "from-bottom";
-    tt.style = `top: ${source.getBoundingClientRect().top-32}px; left: ${source.getBoundingClientRect().left-17.5}px;`
+    tt.style = `top: ${source.getBoundingClientRect().top-32}px; left: ${source.x}px;`
     currentTooltip.e = tt;
     document.body.appendChild(tt);
   }
@@ -82,6 +132,24 @@ let App = {
 	shifting: false,
 	disableUploading: false,
 	connected: false,
+	hexToRgb: function(hex) {
+		if(hex.length > 7){hex = hex.slice(0,7-hex.length)}
+		var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+		hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+			return r + r + g + g + b + b;
+		});
+
+		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+		return result ? {
+			r: parseInt(result[1], 16),
+			g: parseInt(result[2], 16),
+			b: parseInt(result[3], 16)
+		} : null;
+	},
+	reloadCSS: function(){
+		document.querySelector('link[href*="app.css"]').outerHTML = '<link href="appp.css" type="text/css" rel="stylesheet">'
+		document.querySelector('link[href*="appp.css"]').outerHTML = '<link href="app.css" type="text/css" rel="stylesheet">'
+	},
 	start: function(token){
 		displayHandler.showLoadingScreen();
 		if($(".landing .error")[0].outerHTML.includes("none") && token.trim() === ''){
@@ -113,8 +181,9 @@ let App = {
 				App.connected = true;
 
 				localStorage.token = bot.token;
-				if (!localStorage.trustedDomains) localStorage.trustedDomains = [];
-				if (!localStorage.theme) localStorage.theme = 'dark'
+				if (!localStorage.trustedDomains || localStorage.trustedDomains.includes("|")) localStorage.trustedDomains = "[]";
+				if (!localStorage.theme) localStorage.theme = 'dark';
+				if (!localStorage.justStarted) localStorage.justStarted = 'true';
 				console.log('%c[Lightcord] %cUpdating document', 'color:#59A1EA; font-weight: bold;', 'color:#000;');
 				$('body').attr('class', 'theme-' + localStorage.theme)
 				$('.landing').remove();
@@ -122,12 +191,18 @@ let App = {
 				$('.app').remove();
 
 				console.log('%c[Lightcord] %cAdding account details', 'color:#59A1EA; font-weight: bold;', 'color:#000;');
-				document.body.innerHTML += "<div class='flex-vertical flex-spacer'><section class='flex-horizontal flex-spacer'><div class='guilds'><div class='guild'><a draggable='false' style='background-color: rgb(46, 49, 54);' onclick='App.switchTo.DMs()' class='avatar' tooltip-left='Direct Messages'>DM</a></div><div class='guild-seperator'></div></div><div class='flex-vertical channels-wrap'><div class='flex-vertical flex-spacer'><div class='guild-header'><header><span>Loading...</span></header></div><div class='channels'></div><div class='account'></div></div></div><div class='chat flex-vertical flex-spacer'><div class='title-wrap'><div class='title'><span class='channel'>Loading...</span></div><span class='topic'>Loading...</span></div><div class='messages-container'></div><form id='message'><div class='textarea'><div class='textarea-inner'><div class='channel-textarea-upload'><div class='file-input' style='position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0; cursor: pointer;'></div></div><textarea id='textarea' rows='1' placeholder='Chat using Lightcord...' style='height: auto; overflow: hidden;'></textarea></div></div></form></div><div class='flex-vertical members-wrap'><div class='flex-vertical flex-spacer'><div class='title-space'></div><div class='members'></div></div></div></section></div><input id='file-input' name='file' multiple type='file' style='position:absolute;width:0px;height:0px;visibility:hidden;'/>";
+				document.body.innerHTML += `<div class='flex-vertical flex-spacer'><section class='flex-horizontal flex-spacer'><div class='guilds'><div class='guild'><a draggable='false' style='background-color: rgb(46, 49, 54);' onclick='App.switchTo.DMs()' class='avatar' tooltip-left='Direct Messages'>DM</a></div><div class='guild-seperator'></div></div><div class='flex-vertical channels-wrap'><div class='flex-vertical flex-spacer'><div class='guild-header'><header><span>Loading...</span></header></div><div class='channels'></div><div class="account-change-status" style="display: none;"><div class="popout-menu-item " onclick="App.changeStatus.online()"><div class="status-icon-text"><div class="status online" style="margin-right: 14px;"></div><div class="status-text">Online</div></div></div><div class="popout-menu-item " onclick="App.changeStatus.idle()"><div class="status-icon-text"><div class="status idle" style="margin-right: 14px;"></div><div class="status-text">Idle</div></div></div><div class="popout-menu-item " onclick="App.changeStatus.dnd()"><div class="status-icon-text"><div class="status dnd" style="margin-right: 14px;"></div><div class="status-text">Do Not Disturb</div></div></div><div class="popout-menu-item "><input id="status-game" placeholder="Game status..."></div><div class="popout-menu-item "><input id="status-url" placeholder="Streaming URL..."></div></div><div class='account'></div></div></div><div class='chat flex-vertical flex-spacer'><div class='title-wrap'><div class='title'><span class='channel'>Loading...</span></div><span class='topic'>Loading...</span></div><div class='messages-container'></div><form id='message'><div class='textarea'><div class='textarea-inner'><div class='channel-textarea-upload'><div class='file-input' style='position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0; cursor: pointer;'></div></div><textarea id='textarea' rows='1' placeholder='Chat using Lightcord...' style='height: auto; overflow: hidden;'></textarea></div></div></form></div><div class='flex-vertical members-wrap'><div class='flex-vertical flex-spacer'><div class='title-space'></div><div class='members'></div></div></div></section></div><input id='file-input' name='file' multiple type='file' style='position:absolute;width:0px;height:0px;visibility:hidden;'/>`;
 				var avatar = 'https://cdn.discordapp.com/avatars/' + bot.user.id + '/' + bot.user.avatar + '.png'
 				if (bot.user.avatar === null) avatar = 'https://discordapp.com/assets/' + avatarHashes[bot.user.discriminator % avatarHashes.length] + '.png'
 				var bottag = '';
 				if (bot.user.bot) bottag = '<span class="bot-tag">BOT</span>';
-				$('.account').append('<div class="avatar-small" style="background: url(\'' + avatar + '\');background-size: 30px 30px;"><div class="status ' + (bot.user.presence.game && bot.user.presence.game.streaming ? "streaming" : bot.user.presence.status) + '"></div></div><div class="account-details"><div class="username">' + bot.user.username + bottag + '</div><div class="discriminator">#' + bot.user.discriminator + '</div></div><div class="leave">-></div>')
+				$('.account').append('<div class="avatar-small" style="background: url(\'' + avatar + '\');background-size: 30px 30px;"><div class="status ' + (bot.user.presence.game && bot.user.presence.game.streaming ? "streaming" : bot.user.presence.status) + '"></div></div><div class="account-details"><div class="username">' + bot.user.username + bottag + '</div><div class="discriminator">#' + bot.user.discriminator + '</div></div><div class="settings" title="User Settings"></div>')
+				tippy('.account .settings', {
+					theme: 'discord',
+					position: 'top',
+					size: 'small',
+					arrow: true
+				});
 
 				console.log('%c[Lightcord] %cLoading DMs', 'color:#59A1EA; font-weight: bold;', 'color:#000;');
 				App.switchTo.DMs();/*
@@ -144,7 +219,7 @@ let App = {
 				document.onkeydown = function (e) {
 					var code = (e.keyCode ? e.keyCode : e.which)
 					if (code === 188 && e.ctrlKey) {
-						console.log('%c[Lightcord] %cQuickswitcher key combo triggered', 'color:#59A1EA; font-weight: bold;', 'color:#000;');
+						console.debug('%c[Lightcord] %cQuickswitcher key combo triggered', 'color:#59A1EA; font-weight: bold;', 'color:#000;');
 						quickSwitcherOn = true;
 						App.deploy.clearModal();
 						App.deploy.quickSwitcher();
@@ -166,6 +241,31 @@ let App = {
 				document.ondragleave = function (e) {
 					$('.upload-modal').attr('style', 'display: none;');
 				};*/
+				$(".account-change-status input").keypress(function (e) {
+					var code = (e.keyCode ? e.keyCode : e.which);
+					if (code === 13 && !e.shiftKey) {
+						console.debug('%c[Lightcord] %cGame status is being changed with enter key', 'color:#59A1EA; font-weight: bold;', 'color:#000;');
+						App.changeStatus.game();
+					}
+				});
+
+				$('.account .avatar-small').click(function() {
+					if($('.account-change-status')[0].style.display === "none"){
+						$('.account-change-status').show();
+					}else{
+						$('.account-change-status').hide();
+					}
+				});
+
+				if(bot.user.presence.game){
+					$('#status-game').val(bot.user.presence.game.name);
+					$('#status-url').val(bot.user.presence.game.url);
+				};
+
+				if(localStorage.justStarted === "true"){
+					localStorage.justStarted = "false";
+					$('<div class="lightcord-tip"><h4>Searching for stuff</h4><p>To go to guilds and private messages, press <key>Ctrl</key> <key>,</key> to open the Quickswitcher.</p><button class="close" onclick="$(this.parentNode).remove()"></button></div>').insertAfter('.guild-header')
+				}
 
 				displayHandler.hideLoadingScreen();
 
@@ -243,7 +343,7 @@ let App = {
 		bot.on('userUpdate', (oldmember, newmember) => {
 			App.payloadManager.updateUser(newmember, "user");
 		});
-		window.onclose = ()=>{
+		window.onclose = window.onunload = ()=>{
 			console.debug('%c[Discord] %cDisconnecting...', 'color:#7289DA; font-weight: bold;', 'color:#000;');
 			bot.destroy();
 		}
@@ -279,13 +379,15 @@ let App = {
 				msg.content = '<p><span class="username" ' + color + '>' + name + '</span> pinned a message to this channel. <strong>See all the pins.</strong> <span data-timestamp="' + msg.createdTimestamp + '" class="timestamp">' + moment(msg.createdTimestamp).calendar() + '</span><p>'
 				var parsedMsg = $('<div class="msg-group" style="padding: 15px 0;">').append('<div class="message"><div class="comment" data-uid="' + msg.author.id + '" style="margin-left: 20px;"><div class="message-text"><span data-id="' + msg.id + '" class="markup">' + msg.content + '</span></div></div></div></div>')
 				return $('.messages-container').append(parsedMsg)
-			} else var parsedMsg = $('<div class="msg-group">').append('<div class="message"><div class="avatar-large" tooltip-bottom="View Profile" style="background-image: url(\'' + avatar + '\');"></div><div class="comment" data-uid="' + msg.author.id + '"><h2><span class="username-wrap">' + username + '</strong></span><span data-timestamp="' + msg.createdTimestamp + '" class="timestamp">' + moment(msg.createdTimestamp).calendar() + '</span></h2><div class="message-text"><span data-id="' + msg.id + '" class="markup">' + converter.makeHtml(App.payloadManager.messageEmbed(msg)) + '</span></div></div></div></div>')
+			} else var parsedMsg = $('<div class="msg-group">').append('<div class="message"><div class="avatar-large" style="background-image: url(\'' + avatar + '\');"></div><div class="comment" data-uid="' + msg.author.id + '"><h2><span class="username-wrap">' + username + '</strong></span><span data-timestamp="' + msg.createdTimestamp + '" class="timestamp">' + moment(msg.createdTimestamp).calendar() + '</span></h2><div class="message-text"><span data-id="' + msg.id + '" class="markup">' + App.payloadManager.messageEmbed(msg) + '</span></div></div></div></div>')
+			//} else var parsedMsg = $('<div class="msg-group">').append('<div class="message"><div class="avatar-large" style="background-image: url(\'' + avatar + '\');"></div><div class="comment" data-uid="' + msg.author.id + '"><h2><span class="username-wrap">' + username + '</strong></span><span data-timestamp="' + msg.createdTimestamp + '" class="timestamp">' + moment(msg.createdTimestamp).calendar() + '</span></h2><div class="message-text"><span data-id="' + msg.id + '" class="markup">' + converter.makeHtml(App.payloadManager.messageEmbed(msg)) + '</span></div></div></div></div>')
 			var d = $(document.querySelector('[data-uid="' + msg.author.id + '"]')).parents()
 			if (d[2] !== undefined) {
 				var day = moment(msg.createdTimestamp).format('hh-DDMMYY').split('-')
 				var lastTimestamp = moment(parseInt(d[2].lastChild.firstChild.lastChild.firstChild.lastChild.dataset.timestamp)).format('hh-DDMMYY').split('-')
 				if (d[2].lastChild.firstChild.lastChild.dataset.uid === msg.author.id && day[0] === lastTimestamp[0] && day[1] === lastTimestamp[1]) {
-					$(d[2].lastChild.firstChild.lastChild.lastChild).append('<span data-id="' + msg.id + '" class="markup">' + converter.makeHtml(App.payloadManager.messageEmbed(msg)) + '</span>')
+					$(d[2].lastChild.firstChild.lastChild.lastChild).append('<span data-id="' + msg.id + '" class="markup">' + App.payloadManager.messageEmbed(msg) + '</span>')
+					// $(d[2].lastChild.firstChild.lastChild.lastChild).append('<span data-id="' + msg.id + '" class="markup">' + converter.makeHtml(App.payloadManager.messageEmbed(msg)) + '</span>')
 					return $('.messages-container').scrollTop($('.messages-container').scrollTop() + $('.chat').children()[1].lastChild.lastChild.lastChild.clientHeight + 10)
 				} else return $('.messages-container').append(parsedMsg)
 			}
@@ -297,7 +399,13 @@ let App = {
 					});
 				});
 			}
-			return $('.messages-container').scrollTop($('.messages-container').scrollTop() + $('.chat').children()[1].lastChild.clientHeight)
+			$('.messages-container').scrollTop($('.messages-container').scrollTop() + $('.chat').children()[1].lastChild.clientHeight)
+			tippy('.emoji', {
+				theme: 'discord',
+				position: 'top',
+				size: 'small',
+				arrow: true
+			});
 		},
 		messageEmbed: function(msg) {
 			var edit = ''
@@ -334,13 +442,13 @@ let App = {
 							if (embed.author.name) embData.push('<a class="embed-author"  onclick="App.deploy.maskedLink(\''+(embed.author.url ? embed.author.url : '')+'\')">' + embed.author.name + '</a>')
 								embData.push('</div>')
 						}
-						if (embed.title) embData.push('<div><a class="embed-title" onclick="App.deploy.maskedLink(\''+(embed.url ? embed.url : '')+'\')">' + App.payloadManager.parseTwemoji(embed.title) + '</a></div>')
-						if (embed.description) embData.push('<div class="embed-description markup">'+ App.payloadManager.parseTwemoji(converter.makeHtml(embed.description.replace(/>/ig, '&gt;').replace(/</ig, '&lt;').replace(/-/ig, '&#45;').replace(/\+/ig, '&#45;'))) + '</div>')
+						if (embed.title) embData.push('<div><a class="embed-title" onclick="App.deploy.maskedLink(\''+(embed.url ? embed.url : '')+'\')">' + App.payloadManager.parseTwemoji(marked(embed.title, { renderer: MDRends.embedTitle })) + '</a></div>')
+						if (embed.description) embData.push('<div class="embed-description markup">'+ App.payloadManager.parseDiscord(marked(embed.description, { renderer: MDRends.embed }), msg) + '</div>')
 						if (embed.fields) embData.push('<div class="embed-fields">')
 						for (var i in embed.fields) {
 							var inline = ''
 							if (embed.fields[i].inline) inline = '-inline'
-							embData.push('<div class="embed-field embed-field' + inline + '"><div class="embed-field-name">' + App.payloadManager.parseTwemoji(embed.fields[i].name) + '</div><div class="embed-field-value markup">' + embed.fields[i].value.replace(/\-/ig, '&#45;').replace(/\+/ig, '&#45;').replace(/</, '&lt;').replace(/>/, '&gt;').replace(/\n+/ig, '<br>').replace(/https?:\/\/[\S]*/ig, function (m, r) {return m.replace(m, '<a href="' + m + '">' + m + '</a>')}).replace(/[\s\S]+/, function (m) {return twemoji.parse(m)}) + '</div></div>')
+							embData.push('<div class="embed-field embed-field' + inline + '"><div class="embed-field-name">' + App.payloadManager.parseTwemoji(marked(embed.fields[i].name, { renderer: MDRends.embedTitle })) + '</div><div class="embed-field-value markup">' + App.payloadManager.parseDiscord(marked(embed.fields[i].value, { renderer: MDRends.embed }), msg) + '</div></div>')
 						}
 						if (embed.fields) embData.push('</div>')
 						if (embed.footer) {
@@ -377,12 +485,12 @@ let App = {
 			var codeblock = new RegExp(/`[\s\S]*`/g).exec(msg.content)
 			var i = 0
 			var j = 0
-			return App.payloadManager.parseEmoji(msg.content).replace(/#/g, '&#35;').replace(/-/g, '&#45;').replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\[/ig, '&#91;').replace(/\(/ig, '&#40;').replace(/\./ig, '&#46;').replace(/\+/ig, '&#43;').replace(regex, function (m, r) {
+			return App.payloadManager.parseOnlyEmoji(marked(msg.content.replace(/#/g, '&#35;').replace(/-/g, '&#45;').replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\[/ig, '&#91;').replace(/\(/ig, '&#40;').replace(/\./ig, '&#46;').replace(/\+/ig, '&#43;').replace(regex, function (m, r) {
 				m = m.replace(/&gt;/ig, '>').replace(/&lt;/ig, '<').replace(/&lt;/ig, '<')
 				if (msg.type !== 6 && msg.mentions[i] === undefined && r !== 0 && m.startsWith('<@')) {
 					i++
 					if (msg.mentions[i] === undefined) {
-						if (bot.users.has(m.substr(2, m.length - 3))) m = m.replace(m, '<span class="mention">@' + (msg.guild.members.get(m.substr(2, m.length - 3)) ? msg.guild.members.get(m.substr(2, m.length - 3)).displayName : bot.users.get(m.substr(2, m.length - 3)).username) + '</span>')
+						if (bot.users.has(m.substr(2, m.length - 3))) m = m.replace(m, '<span class="mention">@' + (msg.guild && msg.guild.members.get(m.substr(2, m.length - 3)) ? msg.guild.members.get(m.substr(2, m.length - 3)).displayName : bot.users.get(m.substr(2, m.length - 3)).username) + '</span>')
 						else m = m.replace(m, '<span class="mention">' + m + '</span>')
 					}
 					if (msg.mentions[i] !== undefined) {
@@ -393,9 +501,9 @@ let App = {
 				if (msg.type === 6 && msg.mentions[i] !== undefined) m = m.replace(m, '<span class="username">' + msg.guild.members.get(msg.mentions[i].id).displayName + '</span>')
 				if (msg.type !== 6 && msg.mentions[i] !== undefined) m = m.replace(m, '<span class="mention">@' + msg.guild.members.get(msg.mentions[i].id).displayName + '</span>')
 				return m
-			}).replace(/@everyone/ig, '<span class="mention">@everyone</span>').replace(/@here/ig, '<span class="mention">@here</span>').replace(/https?:\/\/[\S]*/ig, function (m, r) {
-				return m.replace(m, '<a href="' + m + '">' + m + '</a>')
-			}).replace(/&lt;&#35;(\d+)&gt;/g, function (m, r) {
+			}).replace(/@everyone/ig, '<span class="mention">@everyone</span>')
+			.replace(/@here/ig, '<span class="mention">@here</span>')
+			.replace(/&lt;&#35;(\d+)&gt;/g, function (m, r) {
 				var channel = '&#35;deleted-channel'
 				if (bot.channels.get(r) !== undefined) channel = '<span class="mention">&#35;' + bot.channels.get(r).name + '</span>'
 				m = m.replace(m, channel)
@@ -403,15 +511,16 @@ let App = {
 			}).replace(/(?:\\)?(?:&lt;){1,2}:[0-9a-z--_]+:(\d+)&gt;(?:\d+)?(?:&gt;)?/ig, function (m, r) {
 				console.log(m,r);
 				if (m.includes('\\')) return m.replace(m, m.substr(1))
-				return m.replace(m, '<img class="emoji" tooltip-bottom=":ok!:" src="https://cdn.discordapp.com/emojis/' + r + '.png"/>')
-			}).replace(/[\s\S]+/ig, function (m, r) {
-				return twemoji.parse(m, {
-					folder: 'svg',
-					ext: '.svg'
-				})
+				return m.replace(m, `<img class="emoji" title="&colon;${m.replace(/&lt;:(.+):\d+&gt;/g, "$1")}&colon;" src="https://cdn.discordapp.com/emojis/${r}.png"/>`)
+			}).replace(/&lt;@&amp;([0-9]+)&gt;/g, function (m, r) {
+				var role = '@deleted-role'
+				var rsel = msg.mentions.roles.get(r);
+				if (rsel !== undefined) role = `<component class="mention"${rsel.color !== 0 ? `style="color: ${rsel.hexColor}; background-color: rgba(${App.hexToRgb(rsel.color).r}, ${App.hexToRgb(rsel.color).g}, ${App.hexToRgb(rsel.color).b}, 0.0980392); border: none;"` : ""}>@${rsel.name}</component>`
+				m = m.replace(m, role)
+				return m
 			}).replace(/`[\s\S]*`/g, codeblock).replace(/```[\s\S]*```/g, function (m) {
 				return ghCodeblock[0].replace(/```([\S]+)/g, '```$1\n').replace(/([\s\S]+)```/g, '$1\n```')
-			}) + edit + attachEnd;
+			}), { renderer: MDRends.message })) + edit + attachEnd;
 		},
 		messageDelete: function(msg){
 			if(msg.channel.id !== activeChannel) return;
@@ -426,7 +535,7 @@ let App = {
 			if(msg.channel.id !== activeChannel) return;
 			var d = $(document.querySelector('[data-id="' + msg.id + '"]'))
 			if (d[0]) {
-				d[0].innerHTML = converter.makeHtml(App.payloadManager.messageEmbed(msg))
+				d[0].innerHTML = App.payloadManager.messageEmbed(msg)
 			}
 		},
 		parseEmoji: function(content){
@@ -441,10 +550,65 @@ let App = {
 			}
 			return content;
 		},
+		parseOnlyEmoji: function(content){
+			if(content.match(/:(\w+):/g)){
+				content.match(/:(\w+):/g).map(pe => {
+					emojiData.map(e => {
+						if(e.aliases.includes(pe.replace(/:/g, ""))){
+							let per = twemoji.parse(e.emoji, {
+								folder: 'svg',
+								ext: '.svg'
+							}).replace('"false"', `"false" title="&colon;${pe.replace(/:/g, "")}&colon;"`);
+							content = content.replace(pe, per);
+						}
+					})
+				})
+			}
+			return content;
+		},
 		parseTwemoji: function(content){
 			return twemoji.parse(App.payloadManager.parseEmoji(content), {
 				folder: 'svg',
 				ext: '.svg'
+			})
+		},
+		parseDiscord: function(content, msg){
+			var regex = new RegExp(/&lt;@!?(\d+)&gt;/ig)
+			var ghCodeblock = new RegExp(/```[\s\S]*```/g).exec(msg.content)
+			var codeblock = new RegExp(/`[\s\S]*`/g).exec(msg.content)
+			return App.payloadManager.parseOnlyEmoji(content).replace(regex, function (m, r) {
+				m = m.replace(/&gt;/ig, '>').replace(/&lt;/ig, '<').replace(/&lt;/ig, '<')
+				if (msg.type !== 6 && msg.mentions[i] === undefined && r !== 0 && m.startsWith('<@')) {
+					i++
+					if (msg.mentions[i] === undefined) {
+						if (bot.users.has(m.substr(2, m.length - 3))) m = m.replace(m, '<span class="mention">@' + (msg.guild && msg.guild.members.get(m.substr(2, m.length - 3)) ? msg.guild.members.get(m.substr(2, m.length - 3)).displayName : bot.users.get(m.substr(2, m.length - 3)).username) + '</span>')
+						else m = m.replace(m, '<span class="mention">' + m + '</span>')
+					}
+					if (msg.mentions[i] !== undefined) {
+						if (msg.type === 6) m = m.replace(m, msg.guild.members.get(msg.mentions[i].id).displayName)
+						if (msg.type !== 6) m = m.replace(m, '<span class="mention">@' + msg.guild.members.get(msg.mentions[i].id).displayName + '</span>')
+					}
+				}
+				if (msg.type === 6 && msg.mentions[i] !== undefined) m = m.replace(m, '<span class="username">' + msg.guild.members.get(msg.mentions[i].id).displayName + '</span>')
+				if (msg.type !== 6 && msg.mentions[i] !== undefined) m = m.replace(m, '<span class="mention">@' + msg.guild.members.get(msg.mentions[i].id).displayName + '</span>')
+				return m
+			}).replace(/@everyone/ig, '<span class="mention">@everyone</span>')
+			.replace(/@here/ig, '<span class="mention">@here</span>')
+			.replace(/&lt;&#35;(\d+)&gt;/g, function (m, r) {
+				var channel = '&#35;deleted-channel'
+				if (bot.channels.get(r) !== undefined) channel = '<span class="mention">&#35;' + bot.channels.get(r).name + '</span>'
+				m = m.replace(m, channel)
+				return m
+			}).replace(/(?:\\)?(?:&lt;){1,2}:[0-9a-z--_]+:(\d+)&gt;(?:\d+)?(?:&gt;)?/ig, function (m, r) {
+				console.log(m,r);
+				if (m.includes('\\')) return m.replace(m, m.substr(1))
+				return m.replace(m, `<img class="emoji" title="&colon;${m.replace(/&lt;:(.+):\d+&gt;/g, "$1")}&colon;" src="https://cdn.discordapp.com/emojis/${r}.png"/>`)
+			}).replace(/&lt;@&amp;([0-9]+)&gt;/g, function (m, r) {
+				var role = '@deleted-role'
+				var rsel = msg.mentions.roles.get(r);
+				if (rsel !== undefined) role = `<component class="mention"${rsel.color !== 0 ? `style="color: ${rsel.hexColor}; background-color: rgba(${App.hexToRgb(rsel.color).r}, ${App.hexToRgb(rsel.color).g}, ${App.hexToRgb(rsel.color).b}, 0.0980392); border: none;"` : ""}>@${rsel.name}</component>`
+				m = m.replace(m, role)
+				return m
 			})
 		},
 		handleCommand: function(input, channel) {
@@ -476,6 +640,9 @@ let App = {
 			if (command === '/unflip') {
 				bot.channels.get(channel).sendMessage(suffix + ' ┬─┬﻿ ノ( ゜-゜ノ)')
 			}
+			if (command === '/shrug') {
+				bot.channels.get(channel).sendMessage(suffix + '¯\\_(ツ)_/¯')
+			}
 			if (command === '/theme') {
 				var themes = ['dark', 'light']
 				var val = themes.indexOf(localStorage.theme)
@@ -503,7 +670,7 @@ let App = {
 			for (var a in users) {
 				if (users[a].childNodes !== undefined) {
 					if (users[a].childNodes[0].dataset.dmuid === newmember.id) {
-						if (newmember.presence.game && !$(users[a].childNodes[0].childNodes[1].childNodes[1]).html().includes(`<strong>`)) $(users[a].childNodes[0].childNodes[1].childNodes[1]).append('<span>' + `${newmember.presence.game && newmember.presence.game.streaming ? 'Streaming' : 'Playing'}` + '<strong>' + newmember.presence.game.name.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</strong></span>')
+						if (newmember.presence.game && !$(users[a].childNodes[0].childNodes[newmember.bot ? 2 : 1].childNodes[1]).html().includes(`<strong>`)) $(users[a].childNodes[0].childNodes[1].childNodes[1]).append('<span>' + `${newmember.presence.game && newmember.presence.game.streaming ? 'Streaming' : 'Playing'}` + '<strong>' + newmember.presence.game.name.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</strong></span>')
 						users[a].childNodes[0].childNodes[0].childNodes[0].className = 'status ' + (newmember.presence.game && newmember.presence.game.streaming ? "streaming" : newmember.presence.status)
 					}
 				}
@@ -530,6 +697,10 @@ let App = {
 				}
 			}
 			if(newmember.id === bot.user.id){
+				if(newmember.presence.game){
+					$('#status-game').val(newmember.presence.game.name);
+					$('#status-url').val(newmember.presence.game.url);
+				};
 				$('.account-details .username').html(newmember.username.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (newmember.bot ? '<span class="bot-tag">BOT</span>' : ''));
 				$(`.account .avatar-small .status`)[0].className = "status " + (newmember.presence.game && newmember.presence.game.streaming ? "streaming" : newmember.presence.status);
 			}
@@ -573,11 +744,11 @@ let App = {
 					$(".messages-container")[0].scrollTop = $(".messages-container")[0].scrollHeight;
 					$('#textarea').val('');
 				}
-			})
+			});
 			$('.file-input').click(function() {
 				if(App.disableUploading) return;
 				$('#file-input').click();
-			})
+			});
 			document.getElementById('file-input').addEventListener("change", function() {
 				if(App.disableUploading) return;
 				let filelist = document.getElementById('file-input').files;
@@ -733,10 +904,11 @@ let App = {
 		},
 		dmChannel: function(id){
 			if(id === bot.user.id){
-				App.deploy.errorPrompt("You can't directly message yourself!")
+				App.deploy.errorPrompt("You can't directly message yourself!");
 				return;
 			}
-			App.switchTo.DMs()
+			App.switchTo.DMs();
+			App.switchTo.chatMode();
 			let user = bot.users.get(id);
 			var dms = bot.channels.filter(c=>c.type==="dm");
 			if (!dms.has(id)) {
@@ -781,7 +953,7 @@ let App = {
 			displayHandler.showModal();
 		},
 		maskedLink: function(url){
-			if(localStorage.trustedDomains.split("|").includes(url.replace(/(.+):\/\//, "").split("/")[0])){
+			if(JSON.parse(localStorage.trustedDomains).includes(url.replace(/(.+):\/\//, "").split("/")[0])){
 				window.open(url, '_blank', '');
 				return;
 			}
@@ -791,10 +963,8 @@ let App = {
 		}
 	},
 	maskedLinkOkayed: function(url, trust){
-		if(trust && !localStorage.trustedDomains.split("|").includes(url.replace(/(.+):\/\//, "").split("/")[0])){
-			td = localStorage.trustedDomains.split("|")
-			td.push(url.replace(/(.+):\/\//, "").split("/")[0]);
-			localStorage.trustedDomains = td.join("|");
+		if(trust && !JSON.parse(localStorage.trustedDomains).includes(url.replace(/(.+):\/\//, "").split("/")[0])){
+			localStorage.trustedDomains = JSON.parse(localStorage.trustedDomains).push(url.replace(/(.+):\/\//, "").split("/")[0]);;
 		}
 		window.open(url, '_blank', '');
 		App.deploy.clearModal();
@@ -921,7 +1091,7 @@ let App = {
 						found.guilds.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.guild('${res.id}')"><div class="icon" ${res.icon ? `style="background-image: url(&quot;https://cdn.discordapp.com/icons/${res.id}/${res.icon}.png&quot;);"` : ''}></div><span>${res.name.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span></div>`);
 					}else if(res.bot !== undefined){
 						let avatar_url = res.avatar ? (res.avatar.startsWith("a_") ? `https://cdn.discordapp.com/avatars/${res.id}/${res.avatar}.gif` : `https://cdn.discordapp.com/avatars/${res.id}/${res.avatar}.png`) : `https://discordapp.com/assets/${avatarHashes[res.discriminator % avatarHashes.length]}.png`;
-						found.users.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.chatMode();App.switchTo.dmChannel('${res.id}')"><div class="icon" style="background-image: url(&quot;${avatar_url}&quot;); border-radius: 50%;"></div><span>${res.username.replace(/</g, "&lt;").replace(/>/g, "&gt;")}${res.bot ? '<span class="bot-tag">BOT</span>' : ''}</span><span class="discriminator">#${res.discriminator}</span></div>`);
+						found.users.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.dmChannel('${res.id}')"><div class="icon" style="background-image: url(&quot;${avatar_url}&quot;); border-radius: 50%;"></div><span>${res.username.replace(/</g, "&lt;").replace(/>/g, "&gt;")}${res.bot ? '<span class="bot-tag">BOT</span>' : ''}</span><span class="discriminator">#${res.discriminator}</span></div>`);
 					}else{
 						if(res.type === "dm" || res.type === "voice") return;
 						found.channels.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.chatMode();App.switchTo.guild('${res.guild.id}');App.switchTo.channel('${res.id}', '${res.name}')"><div class="icon hashtag"></div><span>${res.name}</span><span class="discriminator">${res.guild.name}</span></div>`);
@@ -946,11 +1116,39 @@ let App = {
 				found.users.map(v=>$(".quickswitcher-scroller").append(v));
 			}
 		}
+	},
+	changeStatus: {
+		checkURL: function(){
+			if(!($('#status-url').val() === "" || $('#status-url').val().startsWith("https://twitch.tv/"))) App.deploy.errorPrompt("Invalid Twitch URL!");
+			return $('#status-url').val() === "" || $('#status-url').val().startsWith("https://twitch.tv/");
+		},
+		online: function(){
+			if(!App.changeStatus.checkURL()) return;
+			bot.user.setStatus('online').catch(e=>App.deploy.errorPrompt(e.toString()));
+			App.changeStatus.game();
+		},
+		idle: function(){
+			if(!App.changeStatus.checkURL()) return;
+			bot.user.setStatus('idle').catch(e=>App.deploy.errorPrompt(e.toString()));
+			App.changeStatus.game();
+		},
+		dnd: function(){
+			if(!App.changeStatus.checkURL()) return;
+			bot.user.setStatus('dnd').catch(e=>App.deploy.errorPrompt(e.toString()));
+			App.changeStatus.game();
+		},
+		game: function(){
+			if(!App.changeStatus.checkURL()) return;
+			bot.user.setGame($('#status-game').val(), Util.empToNil($('#status-url').val())).catch(e=>App.deploy.errorPrompt(e.toString()));
+		}
 	}
 }
 
 let Util = {
 	random: function(array){
 		return array[Math.floor(Math.random() * ((array.length-1) - 0 + 1)) + 0];
+	},
+	empToNil: function(val){
+		return val === "" ? null : val;
 	}
 }

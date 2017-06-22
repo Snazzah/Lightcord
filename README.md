@@ -10,11 +10,12 @@ This product is still in alpha stage, don't expect it to be 100% perfect yet.
 - [Discord.JS Webpack](http://github.com/hydrabolt/discord.js/tree/webpack) <small>used for the Discord API</small>
 - [JQuery](http://jquery.com) <small>used for easy DOM management</small>
 - [FileDrop](http://filedropjs.org) <small>used for the Drag & Drop feature</small>
-- [Showdown](https://github.com/showdownjs/showdown) <small>used for markdown conversion</small>
+- [Marked](https://github.com/chjj/marked) <small>used for markdown conversion</small>
 - [Moment](http://momentjs.com) <small>used for timestamp conversion</small>
 - [Twemoji](https://github.com/twitter/twemoji) <small>used for emoji conversion</small>
 - [Fuse.js](http://fusejs.io) <small>used for searching (QuickSwitcher)</small>
 - [hightlight.js](http://hightlightjs.com) <small>used for highlighting codeblocks</small>
+- [Tippy.js](https://github.com/atomiks/tippyjs) <small>used for tooltips</small>
 
 ### Note to Discord Developers
 If you don't feel comfromtable with the stylesheet being used, feel free to contact me, I'll take it down upon request.

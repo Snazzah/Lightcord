@@ -11,12 +11,14 @@
 		<link href="app.css" type="text/css" rel="stylesheet">
 		<link rel="icon" href="img/lightcord.png" type="image/png">
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.4.3/showdown.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.js"></script>
 		<script src="https://twemoji.maxcdn.com/2/twemoji.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/2.6.1/fuse.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/solarized-dark.min.css">
+		<link rel="stylesheet" href="https://cdn.rawgit.com/atomiks/tippyjs/c9134153/dist/tippy.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
+		<script src="https://cdn.rawgit.com/atomiks/tippyjs/c9134153/dist/tippy.min.js"></script>
 		<script src="js/discord.master.js"></script>
 		<script src="js/botconverter.js"></script>
 		<script src="js/filedrop.min.js"></script>
@@ -29,9 +31,9 @@
 				<img src="img/lightcord.png"><br>
 				<h1>Lightcord</h1><sup>ALPHA</sup>
 			</div>
-			<sup><i>v<b>1.0.3</b> | using discord.js webpack version <b id="djs-version">...</b></sup></i><br>
+			<sup><i>v<b>1.1.0</b> | using discord.js webpack version <b id="djs-version">...</b></sup></i><br>
 			<div class="error" style="display: none;">Invalid Token!</div>
-			<input placeholder="Bot Token" type="password">
+			<input placeholder="Bot Token" type="password"><button class="enter-token" onclick="App.start($('.landing input')[0].value);"></button>
 			<div class="continue-session" style="display: none;">Continue Session</div><br>
 			<b>Based on <a href="https://github.com/TeamCernodile/Botcord">Botcord</a> by <a href="https://github.com/TeamCernodile">Team Cernodile</a></b><br>
 			<p><i style="color: #f00">NOTICE:</i> I (Snazzah/SnazzyPine25) am not responsible for token stealing or any compromises to your token. If you do not trust Lightcord to handle your token, you can check the source code or host it yourself.</p>
