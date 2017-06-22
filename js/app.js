@@ -181,7 +181,14 @@ let App = {
 				App.connected = true;
 
 				localStorage.token = bot.token;
-				if (!localStorage.trustedDomains || localStorage.trustedDomains.includes("|")) localStorage.trustedDomains = "[]";
+				try{
+					if(!localStorage.trustedDomains || typeof JSON.parse(localStorage.trustedDomains) !== "object"){
+						localStorage.trustedDomains = "[]";
+					}
+				}catch(e){
+					console.log('%c[Lightcord] %cFailed to parse trustedDomains', 'color:#59A1EA; font-weight: bold;', 'color:#000;', e);
+					localStorage.trustedDomains = "[]";
+				}
 				if (!localStorage.theme) localStorage.theme = 'dark';
 				if (!localStorage.justStarted) localStorage.justStarted = 'true';
 				console.log('%c[Lightcord] %cUpdating document', 'color:#59A1EA; font-weight: bold;', 'color:#000;');
@@ -964,7 +971,9 @@ let App = {
 	},
 	maskedLinkOkayed: function(url, trust){
 		if(trust && !JSON.parse(localStorage.trustedDomains).includes(url.replace(/(.+):\/\//, "").split("/")[0])){
-			localStorage.trustedDomains = JSON.parse(localStorage.trustedDomains).push(url.replace(/(.+):\/\//, "").split("/")[0]);;
+			td = JSON.parse(localStorage.trustedDomains);
+			td.push(url.replace(/(.+):\/\//, "").split("/")[0]);
+			localStorage.trustedDomains = JSON.stringify(td);
 		}
 		window.open(url, '_blank', '');
 		App.deploy.clearModal();
