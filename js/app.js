@@ -15,19 +15,33 @@ var MDRends = {
 }
 marked.setOptions({
 	renderer: MDRends.message,
-	highlight: (c,l)=>hljs.highlight(l, c.trim()).value,
+	highlight: (c,l)=>{
+		if(!l) return c.trim();
+		try{
+			return hljs.highlight(l, c.trim()).value
+		}catch(e){
+			return c.trim();
+		}
+	},
 	tables: false
 })
 marked.setOptions({
 	renderer: MDRends.embed,
-	highlight: (c,l)=>hljs.highlight(l, c.trim()).value,
+	highlight: (c,l)=>{
+		if(!l) return c.trim();
+		try{
+			return hljs.highlight(l, c.trim()).value
+		}catch(e){
+			return c.trim();
+		}
+	},
 	tables: false
 })
 marked.setOptions({
 	renderer: MDRends.embedTitle,
 	tables: false
 })
-MDRends.message.link = (h,i,t)=>`[${t}](${h})`;
+//MDRends.message.link = (h,i,t)=>`[${t}](${h})`;
 MDRends.message.image = (h,i,t)=>`![${t}](${h})`;
 MDRends.message.hr = ()=>`---`;
 MDRends.message.heading = (t,l)=>`${"#".repeat(l)} ${t}<br>`;
@@ -132,20 +146,6 @@ let App = {
 	shifting: false,
 	disableUploading: false,
 	connected: false,
-	hexToRgb: function(hex) {
-		if(hex.length > 7){hex = hex.slice(0,7-hex.length)}
-		var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-		hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-			return r + r + g + g + b + b;
-		});
-
-		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-		return result ? {
-			r: parseInt(result[1], 16),
-			g: parseInt(result[2], 16),
-			b: parseInt(result[3], 16)
-		} : null;
-	},
 	reloadCSS: function(){
 		document.querySelector('link[href*="app.css"]').outerHTML = '<link href="appp.css" type="text/css" rel="stylesheet">'
 		document.querySelector('link[href*="appp.css"]').outerHTML = '<link href="app.css" type="text/css" rel="stylesheet">'
@@ -328,6 +328,9 @@ let App = {
 		bot.on('message', (message) => {
 			App.payloadManager.messageCreate(message);
 		});
+		bot.on('messageUpdate', (message) => {
+			App.payloadManager.messageUpdate(message);
+		});
 		bot.on('messageDelete', (message) => {
 			App.payloadManager.messageDelete(message);
 		});
@@ -358,7 +361,7 @@ let App = {
 	payloadManager: {
 		messageCreate: function(msg){
 			if(msg.channel.id !== activeChannel) return;
-			var avatar = 'https://cdn.discordapp.com/avatars/' + msg.author.id + '/' + msg.author.avatar + '.png'
+			var avatar = msg.author.avatar && msg.author.avatar.startsWith('a_') ? msg.author.avatarURL({format:'gif', size:128}) : msg.author.displayAvatarURL({format:'png', size:128})
 			var bot = ''
 			if (msg.author.avatar === null) avatar = 'https://discordapp.com/assets/' + avatarHashes[msg.author.discriminator % avatarHashes.length] + '.png'
 			if (msg.author.bot) bot = '<span class="bot-tag">Bot</span>'
@@ -419,6 +422,25 @@ let App = {
 				return { width:srcWidth*ratio, height:srcHeight*ratio };
 			}
 			if (msg.editedTimestamp !== null) edit = '<span class="edited">(edited)</span>'
+			if (msg.attachments.array()[0] !== undefined) {
+				msg.attachments.array().map(attachment=>{
+					if (attachment.width) {
+						var dimensions = calculateAspectRatioFit(attachment.width, attachment.height, 400, 600)
+						var width = dimensions.width
+						if (attachment.width < 400) width = Math.round(attachment.width / 1.035)
+						attachEnd += '<img src="' + attachment.proxyURL + '" href="' + attachment.url + '" alt="' + attachment.filename + '" width="' + width + '" height="auto"/>'
+					} else {
+						function humanFileSize (size) {
+						if (size === 0) return '0 bytes'
+							var i = Math.floor( Math.log(size) / Math.log(1024) );
+							return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ' ' + ['bytes', 'kB', 'MB', 'GB', 'TB'][i];
+						}
+						attachEnd += '<div class="attachment"><div class="icon icon-file ' + 
+						(attachment.filename.startsWith('.txt') || attachment.filename.startsWith('.doc') || attachment.filename.startsWith('.rtf') ? 'document' : '')
+						 +'"></div><a href="' + attachment.url + '" target="_blank" rel="noreferrer">' + attachment.filename + '</a><div class="metadata">' + humanFileSize(attachment.filesize) + '</div></div>'
+					}
+				});
+			}
 			if (msg.embeds[0] !== undefined) {
 				msg.embeds.map(embed=>{
 					if (embed.thumbnail) {
@@ -427,8 +449,9 @@ let App = {
 						else embed.thumbnail.width = dimensions.width
 					}
 					var provider = ''
+					console.log(embed);
 					if (embed.provider) provider = '<div class="embed-provider">' + embed.provider.name + '</div>'
-					if (embed.type === 'image') attachEnd = attachEnd + (msg.embeds.indexOf(embed)!==0 ? '<br>' : '') + '<div class="embed"><img src="' + embed.thumbnail.proxyURL + '" href="' + embed.thumbnail.url + '"></div>'
+					if (embed.type === 'image') attachEnd = attachEnd + (msg.embeds.indexOf(embed)!==0 ? '<br>' : '') + '<img src="' + embed.thumbnail.proxyURL + '" href="' + embed.thumbnail.url + '">'
 					if (embed.type === 'video') attachEnd = attachEnd + (msg.embeds.indexOf(embed)!==0 ? '<br>' : '') + '<div class="embed"><img src="' + embed.thumbnail.proxyURL + '" href="' + embed.thumbnail.url + '" width="' + embed.thumbnail.width +  '" height="' + embed.thumbnail.height +  '"></div>'
 					/*if (embed.type === 'link') {
 						if (embed.description)attachEnd = attachEnd + (msg.embeds.indexOf(embed)!==0 ? '<br>' : '') + '<div class="embed"><div class="embed-description">' + embed.description + '</div></div>'
@@ -459,26 +482,7 @@ let App = {
 							if (embed.footer.text) embData.push('<span class="embed-footer">' + embed.footer.text.replace(/\n+/ig, '<br>') + '</span>')
 							embData.push('</div>')
 						}
-						attachEnd = attachEnd + (msg.embeds.indexOf(embed)!==0 ? '<br>' : '') + '<div class="embed" ' + (embed.color ? 'style="border-left-color: #' + embed.color.toString(16) + '"' : '') + '>' + embData.join('') + '</div>'
-					}
-				});
-			}
-			if (msg.attachments.array()[0] !== undefined) {
-				msg.attachments.array().map(attachment=>{
-					if (attachment.width) {
-						var dimensions = calculateAspectRatioFit(attachment.width, attachment.height, 400, 600)
-						var width = dimensions.width
-						if (attachment.width < 400) width = Math.round(attachment.width / 1.035)
-						attachEnd += '<img src="' + attachment.proxyURL + '" href="' + attachment.url + '" alt="' + attachment.filename + '" width="' + width + '" height="auto"/>'
-					} else {
-						function humanFileSize (size) {
-						if (size === 0) return '0 bytes'
-							var i = Math.floor( Math.log(size) / Math.log(1024) );
-							return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ' ' + ['bytes', 'kB', 'MB', 'GB', 'TB'][i];
-						}
-						attachEnd += '<div class="attachment"><div class="icon icon-file ' + 
-						(attachment.filename.startsWith('.txt') || attachment.filename.startsWith('.doc') || attachment.filename.startsWith('.rtf') ? 'document' : '')
-						 +'"></div><a href="' + attachment.url + '" target="_blank" rel="noreferrer">' + attachment.filename + '</a><div class="metadata">' + humanFileSize(attachment.filesize) + '</div></div>'
+						attachEnd = attachEnd + (msg.embeds.indexOf(embed)!==0 ? '<br>' : '') + '<div class="embed" ' + (embed.color ? 'style="border-left-color: #' + embed.color.toString(16) + ' !important"' : '') + '>' + embData.join('') + '</div>'
 					}
 				});
 			}
@@ -516,13 +520,14 @@ let App = {
 				return m.replace(m, `<img class="emoji" title="&colon;${m.replace(/&lt;:(.+):\d+&gt;/g, "$1")}&colon;" src="https://cdn.discordapp.com/emojis/${r}.png"/>`)
 			}).replace(/&lt;@&amp;([0-9]+)&gt;/g, function (m, r) {
 				var role = '@deleted-role'
-				var rsel = msg.mentions.roles.get(r);
-				if (rsel !== undefined) role = `<component class="mention"${rsel.color !== 0 ? `style="color: ${rsel.hexColor}; background-color: rgba(${App.hexToRgb(rsel.color).r}, ${App.hexToRgb(rsel.color).g}, ${App.hexToRgb(rsel.color).b}, 0.0980392); border: none;"` : ""}>@${rsel.name}</component>`
+				var rsel = msg.guild ? msg.guild.roles.get(r) : msg.mentions.roles.get(r);
+				console.log(m,r,msg)
+				if (rsel !== undefined) role = `<component class="mention"${rsel.color !== 0 ? `style="color: ${rsel.hexColor}; background-color: rgba(${Util.hexToRgb(rsel.hexColor).r}, ${Util.hexToRgb(rsel.hexColor).g}, ${Util.hexToRgb(rsel.hexColor).b}, 0.0980392); border: none;"` : ""}>@${rsel.name}</component>`
 				m = m.replace(m, role)
 				return m
 			}).replace(/`[\s\S]*`/g, codeblock).replace(/```[\s\S]*```/g, function (m) {
 				return ghCodeblock[0].replace(/```([\S]+)/g, '```$1\n').replace(/([\s\S]+)```/g, '$1\n```')
-			}), { renderer: MDRends.message })) + edit + attachEnd;
+			}), { renderer: MDRends.message })).replace(/¯\_\(ツ\)_\/¯/g, "¯\\_(ツ)_/¯") + edit + attachEnd;
 		},
 		messageDelete: function(msg){
 			if(msg.channel.id !== activeChannel) return;
@@ -607,16 +612,19 @@ let App = {
 				return m.replace(m, `<img class="emoji" title="&colon;${m.replace(/&lt;:(.+):\d+&gt;/g, "$1")}&colon;" src="https://cdn.discordapp.com/emojis/${r}.png"/>`)
 			}).replace(/&lt;@&amp;([0-9]+)&gt;/g, function (m, r) {
 				var role = '@deleted-role'
-				var rsel = msg.mentions.roles.get(r);
-				if (rsel !== undefined) role = `<component class="mention"${rsel.color !== 0 ? `style="color: ${rsel.hexColor}; background-color: rgba(${App.hexToRgb(rsel.color).r}, ${App.hexToRgb(rsel.color).g}, ${App.hexToRgb(rsel.color).b}, 0.0980392); border: none;"` : ""}>@${rsel.name}</component>`
+				var rsel = msg.guild ? msg.guild.roles.get(r) : msg.mentions.roles.get(r);
+				if (rsel !== undefined) role = `<component class="mention"${rsel.color !== 0 ? `style="color: ${rsel.hexColor}; background-color: rgba(${Util.hexToRgb(rsel.hexColor).r}, ${Util.hexToRgb(rsel.hexColor).g}, ${Util.hexToRgb(rsel.hexColor).b}, 0.0980392); border: none;"` : ""}>@${rsel.name}</component>`
 				m = m.replace(m, role)
 				return m
 			})
 		},
 		handleCommand: function(input, channel) {
-			if (!input.startsWith('/') && input !== '') return bot.channels.get(channel).sendMessage(input)
+			$('#textarea').val('');
+			console.log(input, channel);
+			if (!input.startsWith('/') && input !== '') return bot.channels.get(channel).send(input);
 			var command = input.trim().split(' ')[0]
 			var suffix = input.trim().substr(command.length + 1)
+			console.log(command, suffix);
 			if (command === '/ping') {
 				var time = Date.now()
 				$('.messages-container').append($('<div class="msg-group" style="margin:0;background: rgba(0, 255, 45, 0.11)">').append('<div class="message" style="padding-left:20px;"><div class="avatar-large" style="background-image: url(\'https://discordapp.com/assets/f78426a064bc9dd24847519259bc42af.png\');"></div><div class="comment" data-uid="0"><h2><span class="username-wrap"><strong class="username">System</strong></span><span data-timestamp="' + Date.now() + '" class="timestamp">' + moment(Date.now()).calendar() + '</span></h2><div class="message-text"><span data-id="' + time + '" class="markup"><p>Ping!</p></span></div></div></div></div>'))
@@ -637,13 +645,13 @@ let App = {
 				}
 			}
 			if (command === '/tableflip') {
-				bot.channels.get(channel).sendMessage(suffix + ' (╯°□°）╯︵ ┻━┻')
+				bot.channels.get(channel).send(suffix + ' (╯°□°）╯︵ ┻━┻')
 			}
 			if (command === '/unflip') {
-				bot.channels.get(channel).sendMessage(suffix + ' ┬─┬﻿ ノ( ゜-゜ノ)')
+				bot.channels.get(channel).send(suffix + ' ┬─┬﻿ ノ( ゜-゜ノ)')
 			}
 			if (command === '/shrug') {
-				bot.channels.get(channel).sendMessage(suffix + '¯\\_(ツ)_/¯')
+				bot.channels.get(channel).send(suffix + '¯\\_(ツ)_/¯')
 			}
 			if (command === '/theme') {
 				var themes = ['dark', 'light']
@@ -651,7 +659,7 @@ let App = {
 				if (themes.indexOf(localStorage.theme) > -1) {
 					if (val !== themes.length - 1) localStorage.theme = themes[val + 1]
 					else localStorage.theme = themes[0]
-					$('body').attr('class', 'theme-' + localStorage.theme)
+					$('body').attr('class', `theme-${localStorage.theme} with-filedrop`)
 					$('.messages-container').append($('<div class="msg-group" style="margin:0;background: rgba(0, 255, 45, 0.11)">').append('<div class="message" style="padding-left:20px;"><div class="avatar-large" style="background-image: url(\'https://discordapp.com/assets/f78426a064bc9dd24847519259bc42af.png\');"></div><div class="comment" data-uid="0"><h2><span class="username-wrap"><strong class="username">System</strong></span><span data-timestamp="' + Date.now() + '" class="timestamp">' + moment(Date.now()).calendar() + '</span></h2><div class="message-text"><span data-id="' + time + '" class="markup"><p>Changed theme to <strong>' + localStorage.theme + '</strong></p></span></div></div></div></div>'))
 				}
 			}
@@ -672,8 +680,16 @@ let App = {
 			for (var a in users) {
 				if (users[a].childNodes !== undefined) {
 					if (users[a].childNodes[0].dataset.dmuid === newmember.id) {
-						if (newmember.presence.game && !$(users[a].childNodes[0].childNodes[newmember.bot ? 2 : 1].childNodes[1]).html().includes(`<strong>`)) $(users[a].childNodes[0].childNodes[1].childNodes[1]).append('<span>' + `${newmember.presence.game && newmember.presence.game.streaming ? 'Streaming' : 'Playing'}` + '<strong>' + newmember.presence.game.name.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</strong></span>')
-						users[a].childNodes[0].childNodes[0].childNodes[0].className = 'status ' + (newmember.presence.game && newmember.presence.game.streaming ? "streaming" : newmember.presence.status)
+						if(newmember.presence.game && users[a].childNodes[0].childNodes[1].className.includes('no-status')){
+							users[a].childNodes[0].childNodes[1].className = "dm-user";
+							$(`<div class="channel-activity"><span>${newmember.presence.game && newmember.presence.game.streaming ? 'Streaming' : 'Playing'}<strong>${newmember.presence.game.name.replace(/</ig, '&lt;').replace(/>/ig, '&gt;')}</strong></span></div>`).insertAfter(users[a].childNodes[0].childNodes[1].lastChild);
+						}else if(newmember.presence.game && !users[a].childNodes[0].childNodes[1].className.includes('no-status')){
+							users[a].childNodes[0].childNodes[1].childNodes[newmember.bot ? 2 : 1].outerHTML = `<div class="channel-activity"><span>${newmember.presence.game && newmember.presence.game.streaming ? 'Streaming' : 'Playing'}<strong>${newmember.presence.game.name.replace(/</ig, '&lt;').replace(/>/ig, '&gt;')}</strong></span></div>`;
+						}else if(!newmember.presence.game && !users[a].childNodes[0].childNodes[1].className.includes('no-status')){
+							users[a].childNodes[0].childNodes[1].className = "dm-user no-status";
+							$(users[a].childNodes[0].childNodes[1].childNodes[newmember.bot ? 2 : 1]).remove();
+						}
+						users[a].childNodes[0].childNodes[0].childNodes[0].className = 'status ' + (newmember.presence.game && newmember.presence.game.streaming ? "streaming" : newmember.presence.status);
 					}
 				}
 			}
@@ -744,7 +760,6 @@ let App = {
 				if (code === 13 && !e.shiftKey) {
 					App.payloadManager.handleCommand($('#textarea').val(), activeChannel);
 					$(".messages-container")[0].scrollTop = $(".messages-container")[0].scrollHeight;
-					$('#textarea').val('');
 				}
 			});
 			$('.file-input').click(function() {
@@ -775,9 +790,10 @@ let App = {
 				next(files[0]);
 			})
 		},
-		guild: function(id){
+		guild: function(id, cid){
 			App.switchTo.chatMode();
 			var guild = bot.guilds.get(id);
+			if(!cid) cid = id;
 			$('.messages-container').empty();
 			$('.title-wrap').empty();
 			$('.channels').empty();
@@ -788,17 +804,17 @@ let App = {
 			guild.channels.forEach((channel) => {
 				if (channel.id === guild.id) {
 					guildChannels.push(channel);
-				} else if (guild.members.get(bot.user.id).hasPermission['ADMINISTRATOR']) {
+				} else if (guild.members.get(bot.user.id).hasPermission('ADMINISTRATOR')) {
 					guildChannels.push(channel);
 				} else {
-					if (channel.permissionsFor(bot.user.id).hasPermission('READ_MESSAGES')) {
+					if (channel.permissionsFor(bot.user.id).has('READ_MESSAGES')) {
 						guildChannels.push(channel);
 					}
 				}
 			})
 			guildChannels = guildChannels.sort(function (a, b) {return a.position - b.position})
 			for (var i in guildChannels) {
-				if (guildChannels[i].id === guild.id) App.switchTo.channel(guild.id, guildChannels[i].name)
+				if (guildChannels[i].id === cid) App.switchTo.channel(cid, guildChannels[i].name)
 				if (guildChannels[i].type === 'text') $('.channels').append('<div class="channel" data-channel="' + guildChannels[i].id + '"><a draggable="false" onclick="App.switchTo.channel(\'' + guildChannels[i].id + '\', \'' + guildChannels[i].name + '\')" class="channel">' + guildChannels[i].name + '</a></div></div>')
 			}
 		},
@@ -828,21 +844,21 @@ let App = {
 				$(".channel-textarea-upload").show();
 				App.disableUploading = false;
 				if(channel.type !== "dm"){
-					if(!channel.permissionsFor(bot.user).hasPermission("SEND_MESSAGES")){
+					if(!channel.permissionsFor(bot.user).has("SEND_MESSAGES")){
 						$("#textarea").attr('disabled','false');
 						document.getElementById('textarea').placeholder = 'You do not have permission to send messages in this channel.'
 						$(".textarea-inner").addClass('disabled');
 						$(".channel-textarea-upload").hide();
 						App.disableUploading = true;
 					}
-					if(!channel.permissionsFor(bot.user).hasPermission("ATTACH_FILES")){
+					if(!channel.permissionsFor(bot.user).has("ATTACH_FILES")){
 						$(".channel-textarea-upload").hide();
 						App.disableUploading = true;
 					}
 				}
 
 				$('.members-wrap').addClass('dm');
-				if(channel.type === "dm") return;
+				if(channel.type === "dm") return;/*
 				$('.members').empty();
 				let roles = [];
 				channel.guild.roles.array().filter(role=>role.name==="@everyone"||role.hoist).map(role=>roles.push(role));
@@ -856,8 +872,7 @@ let App = {
 							status = user.presence.status
 							if (user.presence.game !== null) game = '<div class="channel-activity">' + `<span>${user.presence.game && user.presence.game.streaming ? 'Streaming' : 'Playing'}<strong>` + (user.presence.game.name && user.presence.game ? user.presence.game.name.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') : "") + '</strong></span></div>'
 							if (status === null || status === undefined) status = 'offline'
-							var avatar = 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.png'
-							if (user.avatar === null) avatar = 'https://discordapp.com/assets/' + avatarHashes[user.id % avatarHashes.length] + '.png'
+					var avatar = user.displayAvatarURL({format:'png', size:128});
 							$('.role-wrap[data-id*="'+role.id+'"]').append('<div class="member' + (status === 'offline' ? ' offline-member' : '') + '"><a data-id="' + user.id + '" onclick="App.switchTo.dmChannel(\'' + user.id + '\')" draggable="false"><div style="background-image: url(\'' + avatar + '\')" class="avatar-small-dm"><div class="status ' + (user.presence.game && user.presence.game.streaming ? "streaming" : user.presence.status) + '"></div></div><div class="member-user'  + (game !== '' ? '' : ' no-status') +'" ' + (member && member.colorRole ? 'style="opacity:1;color:' + member.colorRole.hexColor + ';"' : '') + '>' + member.displayName.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (member.bot ? '<p class="bot-tag">BOT</p>' : '') + game + '</div></a></div>')
 						}
 					});
@@ -865,12 +880,11 @@ let App = {
 				$('.members').append(`<div class="role-wrap offline-members-wrap"><h4>OFFLINE - ${channel.members.filter(m=>m.user.presence.status==='offline').size}</h4></div>`)
 				if(!channel.guild.large) channel.members.array().sort((a,b)=>a.displayName>b.displayName).filter(u=>channel.members.has(u.id)).map(member=>{
 					let user = member.user;
-					var avatar = 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.png'
-					if (user.avatar === null) avatar = 'https://discordapp.com/assets/' + avatarHashes[user.id % avatarHashes.length] + '.png'
+					var avatar = user.displayAvatarURL({format:'png', size:128});
 					if(user.presence.status === 'offline'){
 						$('.offline-members-wrap').append('<div class="member"><a data-id="' + user.id + '" onclick="App.switchTo.dmChannel(\'' + user.id + '\')" draggable="false"><div style="background-image: url(\'' + avatar + '\')" class="avatar-small-dm"></div><div class="member-user no-status" ' + (member && member.colorRole ? 'style="opacity:1;color:' + member.colorRole.hexColor + ';"' : '') + '>' + member.displayName.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (member.bot ? '<p class="bot-tag">BOT</p>' : '') + '</div></a></div>')
 					}
-				});
+				});*/
 				$('.members-wrap').removeClass('dm');
 			});
 		},
@@ -898,9 +912,8 @@ let App = {
 						if (d[i].recipient.presence.game !== null) game = '<div class="channel-activity">' + `<span>${d[i].recipient.presence.game && d[i].recipient.presence.game.name && d[i].recipient.presence.game.streaming ? 'Streaming' : 'Playing'}<strong>` + d[i].recipient.presence.game.name.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</strong></span></div>'
 					}
 					if (status === null || status === undefined) status = 'offline';
-					var avatar = 'https://cdn.discordapp.com/avatars/' + d[i].recipient.id + '/' + d[i].recipient.avatar + '.png'
-					if (d[i].recipient.avatar === null) avatar = 'https://discordapp.com/assets/' + avatarHashes[d[i].recipient.id % avatarHashes.length] + '.png'
-					$('.channels').append('<div class="channel dm"><a data-dmuid="' + d[i].recipient.id + '" onclick="App.switchTo.channel(\'' + d[i].id + '\', \'' + d[i].recipient.username + '\')" draggable="false"><div style="background-image: url(\'' + avatar + '\')" class="avatar-small-dm"><div class="status ' + (d[i].recipient.presence.game && d[i].recipient.presence.game.streaming ? "streaming" : d[i].recipient.presence.status) + '"></div></div><div class="dm-user ' + (game !== '' ? '' : 'no-status') +'">' + d[i].recipient.username.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (d[i].recipient.bot ? '<p class="bot-tag">BOT</p>' : '') + game + '</div></a><button class="close" onclick="App.payloadManager.deleteDmChannel(\'' + d[i].id + '\', \'' + d[i].recipient.id + '\')"></button></div>')
+					var avatar = d[i].recipient.displayAvatarURL({format:'png', size:128});
+					$('.channels').append('<div class="channel dm"><a data-dmuid="' + d[i].recipient.id + '" onclick="App.switchTo.channel(\'' + d[i].id + '\', \'' + d[i].recipient.username + '\')" draggable="false"><div style="background-image: url(\'' + avatar + '\')" class="avatar-small-dm"><div class="status ' + (d[i].recipient.presence.game && d[i].recipient.presence.game.streaming ? "streaming" : d[i].recipient.presence.status) + '"></div></div><div class="dm-user ' + (d[i].recipient.presence.game ? '' : 'no-status') +'">' + d[i].recipient.username.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + (d[i].recipient.bot ? '<p class="bot-tag">BOT</p>' : '') + game + '</div></a><button class="close" onclick="App.payloadManager.deleteDmChannel(\'' + d[i].id + '\', \'' + d[i].recipient.id + '\')"></button></div>')
 				}
 			}
 		},
@@ -1092,13 +1105,13 @@ let App = {
 				try{
 					if(res.region){
 						//$(".quickswitcher-scroller").append(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.guild('${res.id}')"><div class="icon" style="background-image: url(&quot;https://cdn.discordapp.com/icons/${res.id}/${res.icon}.png&quot;);"></div><span>${res.name.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span></div>`);
-						found.guilds.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.guild('${res.id}')"><div class="icon" ${res.icon ? `style="background-image: url(&quot;https://cdn.discordapp.com/icons/${res.id}/${res.icon}.png&quot;);"` : ''}></div><span>${res.name.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span></div>`);
+						found.guilds.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.guild('${res.id}')"><div class="icon" style="background-image: url(&quot;${res.icon ? res.iconURL('png', 128) : `http://via.placeholder.com/20/202226/fff?text=${encodeURI(res.nameAcronym)}`}&quot;);"></div><span>${res.name.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span></div>`);
 					}else if(res.bot !== undefined){
-						let avatar_url = res.avatar ? (res.avatar.startsWith("a_") ? `https://cdn.discordapp.com/avatars/${res.id}/${res.avatar}.gif` : `https://cdn.discordapp.com/avatars/${res.id}/${res.avatar}.png`) : `https://discordapp.com/assets/${avatarHashes[res.discriminator % avatarHashes.length]}.png`;
+						let avatar_url = res.displayAvatarURL({format:'png', size:128});
 						found.users.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.dmChannel('${res.id}')"><div class="icon" style="background-image: url(&quot;${avatar_url}&quot;); border-radius: 50%;"></div><span>${res.username.replace(/</g, "&lt;").replace(/>/g, "&gt;")}${res.bot ? '<span class="bot-tag">BOT</span>' : ''}</span><span class="discriminator">#${res.discriminator}</span></div>`);
 					}else{
-						if(res.type === "dm" || res.type === "voice") return;
-						found.channels.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.chatMode();App.switchTo.guild('${res.guild.id}');App.switchTo.channel('${res.id}', '${res.name}')"><div class="icon hashtag"></div><span>${res.name}</span><span class="discriminator">${res.guild.name}</span></div>`);
+						if(res.type === "text" || res.type === "voice") return;
+						found.channels.push(`<div class="result" data-id="${res.id}" onclick="App.deploy.clearModal();App.switchTo.chatMode();App.switchTo.guild('${res.guild.id}', '${res.id}')"><div class="icon hashtag"></div><span>${res.name}</span><span class="discriminator">${res.guild.name}</span></div>`);
 					}
 				}catch(e){
 					console.log('%c[Lightcord] %cCouldn\'t parse object in Quickswitcher!', 'color:#59A1EA; font-weight: bold;', 'color:#000;', e, res);
@@ -1154,5 +1167,25 @@ let Util = {
 	},
 	empToNil: function(val){
 		return val === "" ? null : val;
+	},
+	hexToRgb: function(hex) {
+		if(hex.length > 7){hex = hex.slice(0,7-hex.length)}
+		var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+		hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+			return r + r + g + g + b + b;
+		});
+
+		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+		return result ? {
+			r: parseInt(result[1], 16),
+			g: parseInt(result[2], 16),
+			b: parseInt(result[3], 16)
+		} : null;
+	},
+	deciToHex: function(i){
+		return ("000000" + ((i|0)+4294967296).toString(16)).substr(-6);
+	},
+	deciToRgb: function(i){
+		return Util.hexToRgb(Util.deciToHex(i));
 	}
 }
