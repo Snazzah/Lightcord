@@ -1047,7 +1047,7 @@ let App = {
 				return bytes.buffer;
 			}
 			let abuf = b642buffer(App.filePrompt.currentFile.url.split(",")[1]);
-			bot.channels.get(activeChannel).sendFile(abuf, App.filePrompt.currentFile.name, $(".upload-input")[0].value).then(()=>$(".messages-container")[0].scrollTop = $(".messages-container")[0].scrollHeight);
+			bot.channels.get(activeChannel).sendFile($(".upload-input")[0].value, {file:{attachment:abuf, name:App.filePrompt.currentFile.name}}).then(()=>$(".messages-container")[0].scrollTop = $(".messages-container")[0].scrollHeight);
 			App.filePrompt.cancel();
 		},
 		instaUpload: function(file, next){
@@ -1061,7 +1061,7 @@ let App = {
 				return bytes.buffer;
 			}
 			let abuf = b642buffer(file.url.split(",")[1]);
-			bot.channels.get(activeChannel).sendFile(abuf, file.name, "").then(()=>{
+			bot.channels.get(activeChannel).send("", {file:{attachment:abuf, name:file.name}}).then(()=>{
 				$(".messages-container")[0].scrollTop = $(".messages-container")[0].scrollHeight
 				next();
 			});
