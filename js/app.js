@@ -131,7 +131,7 @@ window.onmouseover = function(me){
 }
 window.onmouseout = function(me){
   let source = me.target;
-  if($(source).attr("tooltip-left") && $(source).attr("tooltip-left") === currentTooltip.t 
+  if($(source).attr("tooltip-left") && $(source).attr("tooltip-left") === currentTooltip.t
   	|| $(source).attr("tooltip-bottom") && $(source).attr("tooltip-bottom") === currentTooltip.t){
     currentTooltip.e.parentNode.removeChild(currentTooltip.e);
     currentTooltip = {
@@ -435,7 +435,7 @@ let App = {
 							var i = Math.floor( Math.log(size) / Math.log(1024) );
 							return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ' ' + ['bytes', 'kB', 'MB', 'GB', 'TB'][i];
 						}
-						attachEnd += '<div class="attachment"><div class="icon icon-file ' + 
+						attachEnd += '<div class="attachment"><div class="icon icon-file ' +
 						(attachment.filename.startsWith('.txt') || attachment.filename.startsWith('.doc') || attachment.filename.startsWith('.rtf') ? 'document' : '')
 						 +'"></div><a href="' + attachment.url + '" target="_blank" rel="noreferrer">' + attachment.filename + '</a><div class="metadata">' + humanFileSize(attachment.filesize) + '</div></div>'
 					}
@@ -495,6 +495,7 @@ let App = {
 				m = m.replace(/&gt;/ig, '>').replace(/&lt;/ig, '<').replace(/&lt;/ig, '<')
 				if (msg.type !== 6 && msg.mentions[i] === undefined && r !== 0 && m.startsWith('<@')) {
 					i++
+					m = m.replace("!", "")
 					if (msg.mentions[i] === undefined) {
 						if (bot.users.has(m.substr(2, m.length - 3))) m = m.replace(m, '<span class="mention">@' + (msg.guild && msg.guild.members.get(m.substr(2, m.length - 3)) ? msg.guild.members.get(m.substr(2, m.length - 3)).displayName : bot.users.get(m.substr(2, m.length - 3)).username) + '</span>')
 						else m = m.replace(m, '<span class="mention">' + m + '</span>')
