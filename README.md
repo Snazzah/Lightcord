@@ -1,21 +1,39 @@
-# Lightcord
-###### Based on [Botcord](https://github.com/TeamCernodile/Botcord) by [Team Cernodile](https://github.com/TeamCernodile)
+# Lightcord V2
+###### Based on Botcord by [Cernodile](https://github.com/Cernodile)
 Lightcord is a visual representation of OAuth applications in Discord, helps you see how healthy your bot is doing.
-(NOTE! User tokens MAY have some significant issues, I've only focused on bot accounts for now)
 
-NOTE: The server is NOT required, but you may host it, so you can have a live demo of it for everyone else.
-This product is still in alpha stage, don't expect it to be 100% perfect yet.
+## Help Wanted!
+Feel free to PR to **this** branch (`v2`) as I try to map out what needs to be done. You can contact me in my [discord server](https://snaz.in/discord)
 
 ## Resources Used
-- [Discord.JS Webpack](http://github.com/hydrabolt/discord.js/tree/webpack) <small>used for the Discord API</small>
-- [JQuery](http://jquery.com) <small>used for easy DOM management</small>
-- [FileDrop](http://filedropjs.org) <small>used for the Drag & Drop feature</small>
-- [Marked](https://github.com/chjj/marked) <small>used for markdown conversion</small>
-- [Moment](http://momentjs.com) <small>used for timestamp conversion</small>
-- [Twemoji](https://github.com/twitter/twemoji) <small>used for emoji conversion</small>
-- [Fuse.js](http://fusejs.io) <small>used for searching (QuickSwitcher)</small>
-- [hightlight.js](http://hightlightjs.com) <small>used for highlighting codeblocks</small>
-- [Tippy.js](https://github.com/atomiks/tippyjs) <small>used for tooltips</small>
+- [eris](http://github.com/abalabahaha/eris) <small>used for the Discord API</small>
+- [Nuxt](http://nuxtjs.org) <small>used for rendering pages</small>
+- [FileDrop](http://filedropjs.org) <small>used for the Drag & Drop feature (planned)</small>
+- [Simple Markdown](https://github.com/Khan/simple-markdown) <small>used for markdown conversion (planned)</small>
+- [Moment](http://momentjs.com) <small>used for timestamp conversion (planned)</small>
+- [Twemoji](https://github.com/twitter/twemoji) <small>used for emoji conversion (planned)</small>
+- [Fuse.js](http://fusejs.io) <small>used for searching (QuickSwitcher) (planned)</small>
+- [hightlight.js](http://hightlightjs.com) <small>used for highlighting codeblocks (planned)</small>
+- [Tippy.js](https://github.com/atomiks/tippyjs) <small>used for tooltips (planned)</small>
 
-### Note to Discord Developers
-If you don't feel comfromtable with the stylesheet being used, feel free to contact me, I'll take it down upon request.
+### Note
+Make sure `opusscript` is not installed when building or else the build will not work.
+
+## Build Setup
+
+```bash
+# install dependencies
+$ yarn install
+
+# serve with hot reload at localhost:3000
+$ yarn dev
+
+# build for production and launch server
+$ yarn build
+$ yarn start
+
+# generate static project
+$ yarn generate
+```
+
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
