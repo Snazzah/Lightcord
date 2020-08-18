@@ -6,6 +6,7 @@ const LOG_PREFIX = ['%c[Discord]', 'color:#7289DA; font-weight: bold;'];
 interface DiscordPlugin {
   client?: Eris.Client,
   init(opts: LoadArgumentsOpts): void
+  destroy(): void
 }
 
 interface LoadArgumentsOpts {
@@ -33,7 +34,6 @@ declare module '@nuxt/types' {
 
 const discordPlugin: Plugin = (context, inject) => {
   const Discord: DiscordPlugin = {
-    client: undefined,
     init (opts: LoadArgumentsOpts) {
       const options = {
         autoreconnect: false, // This sets to true after connecting
@@ -85,9 +85,19 @@ const discordPlugin: Plugin = (context, inject) => {
       this.client.on('shardResume', id => console.warn(...LOG_PREFIX, `Shard ${id} resumed.`));
       this.client.on('shardDisconnect', (error, id) => console.warn(...LOG_PREFIX, `Shard ${id} disconnected`, error));
     },
+    destroy () {
+      if (this.client) {
+        this.client.eventNames()
+          .map(eventName => (this.client as Eris.Client).removeAllListeners(eventName));
+        this.client.disconnect({ reconnect: false });
+        delete this.client;
+      }
+    },
   };
   inject('discord', Discord);
   context.$discord = Discord;
+  if (process.browser)
+    (window as { Discord?: DiscordPlugin }).Discord = Discord;
 };
 
 export default discordPlugin;

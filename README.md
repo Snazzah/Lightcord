@@ -17,7 +17,7 @@ Feel free to PR to **this** branch (`v2`) as I try to map out what needs to be d
 - [Tippy.js](https://github.com/atomiks/tippyjs) <small>used for tooltips (planned)</small>
 
 ### Note
-Make sure `opusscript` is not installed when building or else the build will not work.
+Make sure `opusscript` (`yarn add eris --no-optional`) is not installed when building or else the build will not work.
 
 ## Build Setup
 
