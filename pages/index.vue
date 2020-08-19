@@ -43,7 +43,7 @@
           />
         </svg>
       </div>
-      <div v-if="lastSession" class="session-continue">
+      <div v-if="lastSession" class="session-continue" @click="continueSession">
         <span><i>Continue as</i> <b>{{ lastSession.username }}</b>#{{ lastSession.discriminator }}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +59,7 @@
           />
         </svg>
       </div>
+      <span v-if="lastSession" class="session-remove" @click="removeSession">Remove last session</span>
     </div>
     <div class="markdown">
       Lightcord is a webapp for Discord bots, allowing you to interact with Discord servers as the bot.
@@ -75,6 +76,7 @@ interface DiscordHTTPError extends Error {
 
 const ERROR_MESSAGES = {
   UNAUTHORIZED: 'Invalid token!',
+  USER_ACCOUNT: 'Do not use user tokens in Lightcord!',
 };
 
 export default Vue.extend({
@@ -91,15 +93,6 @@ export default Vue.extend({
     lastSession () {
       if (process.server) return;
       const sessionString = window.localStorage.getItem('LC-LastSession');
-      /*
-       {
-        id: '000000',
-        username: 'user',
-        discriminator: '0000',
-        token: '',
-        path: '/',
-       }
-       */
       return sessionString ? JSON.parse(sessionString) : null;
     },
   },
@@ -120,10 +113,18 @@ export default Vue.extend({
         try {
           this.$discord.client
             .once('ready', () => {
-              console.info('ready');
-              if (this.$discord.client)
-                this.$discord.client.options.autoreconnect = true;
-              this.setLoginState(false, true);
+              if (this.$discord.client) {
+                if (!this.$discord.client.bot) {
+                  this.$discord.destroy();
+                  this.setLoginState(false, true, new Error(ERROR_MESSAGES.USER_ACCOUNT));
+                } else {
+                  console.info('ready');
+                  this.$discord.client.options.autoreconnect = true;
+                  this.setLastSession();
+                  this.$router.push('app');
+                  this.setLoginState(false, true);
+                }
+              }
             })
             .once('error', errorBind);
           await this.$discord.client.connect();
@@ -153,8 +154,31 @@ export default Vue.extend({
       if (error.name === 'DiscordHTTPError') {
         const httpError = error as DiscordHTTPError;
         if (httpError.code === 401)
-          return 'Invalid token!';
-      } else return error.toString();
+          return ERROR_MESSAGES.UNAUTHORIZED;
+      } else if (error.message === ERROR_MESSAGES.USER_ACCOUNT)
+        return error.message;
+      else return error.toString();
+    },
+    setLastSession () {
+      if (this.$discord.client) {
+        window.localStorage.setItem('LC-LastSession', JSON.stringify({
+          token: this.$discord.client.token,
+          id: this.$discord.client.user.id,
+          username: this.$discord.client.user.username,
+          discriminator: this.$discord.client.user.discriminator,
+          path: '/',
+        }));
+      }
+    },
+    continueSession () {
+      (this.$refs.input as HTMLInputElement).value = this.lastSession.token;
+      this.login();
+    },
+    removeSession () {
+      if (confirm('Are you sure you want to remove the last session?')) {
+        window.localStorage.removeItem('LC-LastSession');
+        window.location.reload(false);
+      }
     },
   },
 });
@@ -169,6 +193,7 @@ export default Vue.extend({
   background: #373737;
   padding: 20px;
   border-radius: 15px;
+  overflow: hidden;
   img {
     height: 200px;
     margin-right: 20px;
@@ -308,6 +333,14 @@ export default Vue.extend({
       fill: #000;
       order: 1;
       outline: none;
+    }
+  }
+  .session-remove {
+    color: $start-header;
+    cursor: pointer;
+    display: block;
+    &:hover {
+      text-decoration: underline;
     }
   }
 }
