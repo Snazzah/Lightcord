@@ -88,6 +88,7 @@ export default {
   plugins: [
     '~/plugins/discord.client.ts',
     { src: '~/plugins/vue-tippy.ts', mode: 'client' },
+    { src: '~/plugins/virtual-scroller.ts', mode: 'client' },
   ],
   /*
   ** Auto import components
