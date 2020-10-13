@@ -94,7 +94,10 @@ export default {
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
   */
-  components: true,
+  components: [
+    '~/components/',
+    { path: '~/components/svg/', prefix: 'svg-' },
+  ],
   /*
   ** Nuxt.js dev-modules
   */

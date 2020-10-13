@@ -9584,6 +9584,11 @@ vue-virtual-scroll-list@^2.3.1:
   resolved "https://registry.yarnpkg.com/vue-virtual-scroll-list/-/vue-virtual-scroll-list-2.3.1.tgz#c2f3de022054626c13feb64f0d80154db9dbb22f"
   integrity sha512-2p0bvcmUIMet5tln+cOKt/XjNvgP+ebq9bBD+gquK2rivsSSAFHeqQidzMO3wPFfxWeTB1JpoSzkyL9nzZ9yfA==
 
+vue2-animate@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/vue2-animate/-/vue2-animate-2.1.4.tgz#7a241b8a0f839d97b9df63d4551fbe666354175e"
+  integrity sha512-tIFHLxLYXwti0E3rJ7OeIUxTl+uVC8t9SYlD4aQ+gfgcheSu9yDbXklBNRIFxBmfNWDVpKQLMvGLxRrrCn3alw==
+
 vue@^2.6.11:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"

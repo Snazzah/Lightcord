@@ -23,7 +23,8 @@
     "opusscript": "https://github.com/abalabahaha/opusscript",
     "sass-loader": "^10.0.3",
     "vue-tippy": "^4.6.0",
-    "vue-virtual-scroll-list": "^2.3.1"
+    "vue-virtual-scroll-list": "^2.3.1",
+    "vue2-animate": "^2.1.4"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.0",
