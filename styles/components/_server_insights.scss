@@ -1,0 +1,64 @@
+.server-insights-indent {
+  @include display-flex;
+  @include flexDirection-row;
+  @include justifyContent-flexStart;
+  @include flexWrap-wrap;
+  margin: 0 0 0 -20px;
+
+  .si-header, .key-metric, .table {
+    padding: 20px 0 0 20px;
+  }
+}
+
+.si-header {
+  @include boxSizing-borderBox;
+  @include display-flex;
+  @include flex-1-1-auto;
+  @include alignItems-center;
+  @include justifyContent-flexStart;
+  padding: 20px 0 0;
+  margin-bottom: 16px;
+  color: var(--header-primary);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.key-metric {
+  flex-grow: 0;
+  flex-shrink: 0;
+  @include boxSizing-borderBox;
+  padding-top: 0;
+  margin-bottom: 16px;
+  width: 50%;
+  @include flex-0-0-auto;
+  padding: 20px 0 0 20px;
+  .panel {
+    border-radius: 5px;
+    padding: 16px;
+    height: 100%;
+    @include boxSizing-borderBox;
+    background-color: var(--background-secondary);
+    .header {
+      color: var(--header-secondary);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 16px;
+      text-transform: uppercase;
+      @include display-flex;
+      @include alignItems-center;
+    }
+    .value {
+      margin: 8px 0;
+      line-height: 34px;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--header-primary);
+    }
+  }
+}
+
+@media screen and (max-width: 1920px) and (min-width: 1281px) {
+  .key-metric {
+    width: 25%;
+  }
+}

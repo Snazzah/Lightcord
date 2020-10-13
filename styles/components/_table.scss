@@ -1,0 +1,83 @@
+.table {
+  min-width: 100%;
+  @include width-fitContent;
+  margin: 0;
+  .header {
+    color: var(--header-secondary);
+    background-color: var(--background-secondary-alt);
+    padding: 16px;
+    @include alignItems-center;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    @include prefix('user-select', none);
+    .table-cell {
+      padding: 0;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 18px;
+      @include display-flex;
+      @include flex-0-1-auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-transform: uppercase;
+      flex-grow: 1;
+      flex-shrink: 0;
+    }
+  }
+  .table-row-wrap {
+    @include display-flex;
+    @include flexWrap-noWrap;
+    @include justifyContent-flexStart;
+    @include alignItems-stretch;
+    @include flexDirection-row;
+  }
+  .table-row {
+    color: var(--interactive-normal);
+    background-color: var(--background-secondary);
+    position: relative;
+    padding: 16px;
+    @include flex-1-1-auto;
+    -webkit-transition: color .125s;
+    transition: color .125s;
+    &:hover {
+      background-image: none;
+      color: var(--interactive-hover);
+      &:before {
+        background-color: rgba(114,118,125,.25);
+      }
+    }
+    &:before, &:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      @include boxSizing-borderBox;
+      content: "";
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    &:after {
+      -webkit-transition: border .125s;
+      transition: border .125s;
+      width: calc(100% - 32px);
+      -webkit-transform: translateX(-16px);
+      transform: translateX(-16px);
+    }
+    &:before {
+      -webkit-transition: background-color .125s;
+      transition: background-color .125s;
+      width: 100%;
+    }
+    & + .table-row:after {
+      border-top: 1px solid rgba(114,118,125,.25);
+    }
+  }
+  .table-cell {
+    @include boxSizing-borderBox;
+    @include flex-0-0-auto;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+  }
+}

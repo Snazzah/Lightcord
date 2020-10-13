@@ -1,0 +1,49 @@
+.tippy-tooltip {
+  padding: 8px 12px;
+  text-align: initial;
+  .tippy-content {
+    @include prefix('user-select', none);
+    .guild-name {
+      @include display-flex;
+      @include justifyContent-flexStart;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-width: 0;
+      max-width: 196px;
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 600;
+      word-wrap: break-word;
+    }
+    .mute-text {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+}
+
+@mixin tooltip-theme($name, $backgroundColor, $textColor) {
+  .tippy-tooltip.#{$name}-theme {
+    background-color: $backgroundColor;
+    color: $textColor;
+    pointer-events: none;
+    &[x-placement^='top'] .tippy-arrow {
+      border-top-color: $backgroundColor;
+    }
+    &[x-placement^='bottom'] .tippy-arrow {
+      border-bottom-color: $backgroundColor;
+    }
+    &[x-placement^='left'] .tippy-arrow {
+      border-left-color: $backgroundColor;
+    }
+    &[x-placement^='right'] .tippy-arrow {
+      border-right-color: $backgroundColor;
+    }
+  }
+}
+
+@include tooltip-theme('discord-black', #000, #fff);
+@include tooltip-theme('discord-blurple', #7289da, #fff);

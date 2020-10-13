@@ -21,7 +21,8 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    title: meta.title,
+    titleTemplate: chunk =>
+      chunk ? `${chunk} - Lightcord` : 'Lightcord',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

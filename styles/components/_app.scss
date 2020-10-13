@@ -1,0 +1,240 @@
+.app {
+  text-rendering: optimizeLegibility;
+  .main-layer {
+    @include display-flex;
+    @include flexDirection-row;
+    .guilds-sidebar {
+      background-color: var(--background-tertiary);
+      @include display-flex;
+      @include flexDirection-column;
+      width: 72px;
+      -webkit-flex-shrink: 0;
+      flex-shrink: 0;
+      .scroller {
+        padding: 0;
+        &::-webkit-scrollbar {
+          width: 0;
+        }
+      }
+      .list-item {
+        position: relative;
+        margin: 0 0 8px;
+        @include display-flex;
+        @include justifyContent-center;
+        width: 72px;
+        @include prefix('user-select', none);
+        &:hover, &.selected {
+          cursor: pointer;
+          .pill .pill-item {
+            opacity: 1;
+            height: 20px;
+          }
+          .li-wrapper {
+            border-radius: 25%;
+            .child-wrapper {
+              color: #fff;
+              background-color: #7289DA;
+            }
+          }
+        }
+        .guild-sep {
+          height: 2px;
+          width: 32px;
+          border-radius: 1px;
+          background-color: var(--background-modifier-accent);
+        }
+        &.selected .pill .pill-item {
+          height: 30px;
+        }
+        .pill {
+          position: absolute;
+          top: 0;
+          left: 0;
+          overflow: hidden;
+          width: 8px;
+          height: 48px;
+          @include display-flex;
+          @include justifyContent-flexStart;
+          @include alignItems-center;
+          contain: layout size;
+          .pill-item {
+            position: absolute;
+            display: block;
+            width: 8px;
+            border-radius: 0 4px 4px 0;
+            margin-left: -4px;
+            background-color: var(--header-primary);
+            opacity: 0;
+            height: 0;
+            transform: none;
+            @include transition('height .15s ease-out, opacity .15s ease-out');
+          }
+        }
+        .li-wrapper {
+          @include display-flex;
+          width: 48px;
+          height: 48px;
+          @include alignItems-center;
+          @include justifyContent-center;
+          border-radius: 50%;
+          @include transition('border-radius .15s ease-out');
+          overflow: hidden;
+          img {
+            display: block;
+            width: 48px;
+            height: 48px;
+            @include prefix('object-fit', cover);
+            pointer-events: none;
+          }
+          .child-wrapper {
+            @include transition('background-color .15s ease-out, color .15s ease-out');
+            background-color: var(--background-primary);
+            color: var(--text-normal);
+            @include display-flex;
+            width: 48px;
+            height: 48px;
+            @include alignItems-center;
+            @include justifyContent-center;
+          }
+        }
+        &.home-item {
+          margin-top: 12px;
+        }
+      }
+    }
+    .layer-content {
+      @include display-flex;
+      @include flexDirection-column;
+      width: 100%;
+      overflow: hidden;
+      flex: 1;
+      color: var(--text-normal);
+      &.chat {
+        background: var(--background-primary);
+      }
+    }
+    .user-area {
+      @include display-flex;
+      @include flex-0-0-auto;
+      background-color: var(--background-secondary-alt);
+      height: 52px;
+      font-size: 14px;
+      font-weight: 500;
+      @include alignItems-center;
+      padding: 0 8px;
+      margin-bottom: 1px;
+      .avatar {
+        height: 52px;
+        font-size: 14px;
+        font-weight: 500;
+        @include display-flex;
+        @include alignItems-center;
+        margin-bottom: 1px;
+        outline: 0;
+        position: relative;
+        margin-right: 8px;
+        .avatar-wrapper {
+          -ms-flex-negative: 0;
+          flex-shrink: 0;
+          position: relative;
+          border-radius: 50%;
+          width: 32px;
+          height: 32px;
+        }
+      }
+      .name-tag {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        margin-right: 4px;
+        min-width: 0;
+        .username {
+          @include display-flex;
+          @include alignItems-center;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          color: var(--header-primary);
+          line-height: 18px;
+          font-weight: 600;
+        }
+        .subtext {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          display: block;
+          -webkit-transition: all .22s ease;
+          transition: all .22s ease;
+          -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+          pointer-events: none;
+          width: 100%;
+          color: var(--header-secondary);
+          line-height: 13px;
+        }
+      }
+      .buttons {
+        @include display-flex;
+        @include flexDirection-row;
+        @include flexWrap-noWrap;
+        @include alignItems-stretch;
+        flex: 0 1 auto;
+      }
+    }
+  }
+
+  .scroller {
+    position: relative;
+    overflow: hidden scroll;
+    flex: 1;
+    padding: 12px 0 0;
+  }
+}
+
+.messages-container, .app-scroller, .scroller {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    @include prefix('background-clip', padding-box);
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background-color: var(--scrollbar-thin-thumb);
+    min-height: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    visibility: hidden;
+    border-color: var(--scrollbar-thin-track);
+    background-color: var(--scrollbar-thin-track);
+    border: 2px solid var(--scrollbar-thin-track);
+  }
+  &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track {
+    visibility: hidden;
+  }
+  &:hover::-webkit-scrollbar-thumb, &:hover::-webkit-scrollbar-track {
+    visibility: visible;
+  }
+}
+
+svg.mask {
+  pointer-events: none;
+  position: relative;
+  display: block;
+  height: 100%;
+  width: auto;
+  position: absolute;
+  foreignObject .avatar-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    width: auto;
+  }
+}

@@ -1,15 +1,72 @@
 <template>
-  <div class="main-layer">
-    <div class="guilds-sidebar">
-      <div class="scroller">
+  <div class="content-column">
+    <h2>Lightcord v2.0.0</h2>
+    <p>Running Eris {{ erisVersion }}</p>
+    <div class="server-insights-indent">
+      <div class="key-metric">
+        <div class="panel">
+          <header class="header">
+            Guilds
+          </header>
+          <div class="value">
+            {{ guildCount.toLocaleString() }}
+          </div>
+        </div>
+      </div>
+      <div class="key-metric">
+        <div class="panel">
+          <header class="header">
+            Shards
+          </header>
+          <div class="value">
+            {{ shards.length.toLocaleString() }}
+          </div>
+        </div>
+      </div>
+      <div class="key-metric">
+        <div class="panel">
+          <header class="header">
+            Latency
+          </header>
+          <div class="value">
+            {{ shards
+              .map(shard => shard.ping)
+              .reduce((prev, val) => prev + val, 0) }}
+          </div>
+        </div>
       </div>
     </div>
-    <div class="channel-sidebar">
-      <div class="scroller">
-      </div>
+    <div class="si-header">
+      Shard Information
     </div>
-    <div class="layer-content">
-      <div class="scroller">
+    <div class="table">
+      <div class="header table-row-wrap">
+        <div class="table-cell" style="width: 100px">
+          Shard ID
+        </div>
+        <div class="table-cell" style="width: 100px">
+          Status
+        </div>
+        <div class="table-cell" style="width: 100px">
+          Guilds
+        </div>
+        <div class="table-cell" style="width: 100px">
+          Ping
+        </div>
+      </div>
+      <div v-for="shard in shards" :key="shard.id" class="table-row table-row-wrap">
+        <div class="table-cell" style="width: 100px">
+          {{ shard.id }}
+        </div>
+        <div class="table-cell" style="width: 100px">
+          {{ shard.status }}
+        </div>
+        <div class="table-cell" style="width: 100px">
+          {{ shard.guildCount }}
+        </div>
+        <div class="table-cell" style="width: 100px">
+          {{ shard.ping }}
+        </div>
       </div>
     </div>
   </div>
@@ -17,57 +74,45 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { VERSION } from 'eris';
 
 export default Vue.extend({
   layout: 'app',
+  data () {
+    return {
+      uptime: 0,
+      erisVersion: VERSION,
+    };
+  },
   computed: {
-    dtoken () {
+    shards () {
+      // Force re-computation every second
+      ((_) => {})(this.uptime);
+
       if (this.$discord.client)
-        return this.$discord.client.token;
-      else
-        return '[none]';
+        return Array.from(this.$discord.client.shards.values())
+          .map(shard => ({
+            id: shard.id,
+            status: shard.status,
+            ping: shard.latency,
+            guildCount: this.$discord.client
+              ? Object.values(this.$discord.client.guildShardMap).filter(n => n === shard.id).length
+              : 0,
+          }));
+      else return [];
     },
+    guildCount () {
+      // Force re-computation every second
+      ((_) => {})(this.uptime);
+
+      return this.$discord.client ? this.$discord.client.guilds.size : -1;
+    },
+  },
+  created () {
+    setInterval(() => { this.uptime = this.$discord.client ? this.$discord.client.uptime : 0; }, 1000);
+  },
+  head: {
+    title: 'Client Info',
   },
 });
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>

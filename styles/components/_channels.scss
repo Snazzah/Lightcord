@@ -1,0 +1,199 @@
+.app .channel-sidebar {
+  background: var(--background-secondary);
+  @include display-flex;
+  @include flexDirection-column;
+  width: 240px;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  & > .scroller::-webkit-scrollbar {
+    width: 0;
+  }
+  [role="listitem"] {
+    position: relative;
+    max-width: 224px;
+    margin-left: 8px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    padding: 1px 0;
+    border-radius: 4px;
+    -webkit-transition: none;
+    transition: none;
+    @include prefix('user-select', none);
+    .channel {
+      @include display-flex;
+      @include alignItems-center;
+      border-radius: 4px;
+      height: 42px;
+      padding: 0 8px;
+      color: var(--channels-default);
+      &:hover {
+        color: var(--interactive-hover);
+        background-color: var(--background-modifier-hover);
+        cursor: pointer;
+      }
+      &.channel-tab .avatar svg {
+        width: 80% !important;
+        height: 80% !important;
+      }
+      &.selected, &.nuxt-link-exact-active {
+        color: var(--interactive-active);
+        background-color: var(--background-modifier-selected);
+      }
+      .avatar {
+        @include display-flex;
+        @include alignItems-center;
+        @include justifyContent-center;
+        @include flex-0-0-auto;
+        width: 32px;
+        height: 32px;
+        margin-right: 12px;
+      }
+      .content {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        min-width: 0;
+        @include flex-1-1-auto;
+        .name {
+          font-size: 16px;
+          line-height: 20px;
+          font-weight: 500;
+          @include flex-0-1-auto;
+          @include display-flex;
+          @include justifyContent-flexStart;
+          @include alignItems-center;
+        }
+        .subtext {
+          margin-top: -2px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+    }
+    .guild-channel {
+      position: relative;
+      @include boxSizing-borderBox;
+      height: 32px;
+      padding: 0 8px;
+      margin-left: 8px;
+      border-radius: 4px;
+      @include display-flex;
+      @include flexDirection-row;
+      @include alignItems-center;
+      &:hover {
+        background-color: var(--background-modifier-hover);
+        .content {
+          .name {
+            color: var(--interactive-hover);
+          }
+          .children .item {
+            display: block;
+          }
+        }
+      }
+      &.category-channel {
+        padding-top: 9px;
+        height: 24px;
+        padding-right: 8px;
+        padding-left: 8px;
+        color: var(--channels-default);
+        &.collapsed svg {
+          -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+        }
+        .content {
+          height: 16px;
+          overflow: hidden;
+          svg {
+            position: absolute;
+            left: -8px;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+          }
+          .name {
+            @include boxSizing-borderBox;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-transform: uppercase;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 600;
+            @include flex-1-1-auto;
+            color: var(--channels-default);
+          }
+        }
+        .children .item {
+          display: block;
+        }
+        &:hover {
+          background-color: transparent;
+          svg, .name {
+            color: var(--interactive-hover);
+          }
+        }
+      }
+      &.selected {
+        background-color: var(--background-modifier-selected);
+        .content {
+          .name {
+            color: var(--interactive-active);
+          }
+          .children .item {
+            display: block;
+          }
+        }
+      }
+      .content {
+        @include flex-1-1-auto;
+        @include boxSizing-borderBox;
+        @include display-flex;
+        @include flexDirection-row;
+        @include alignItems-center;
+        min-width: 0;
+        height: 32px;
+        padding: 1px 0;
+        cursor: pointer;
+        &:before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+        svg {
+          color: var(--text-muted);
+          display: block;
+          width: 20px;
+          height: 20px;
+          -webkit-box-flex: 0;
+          -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+          margin-right: 6px;
+        }
+        .name {
+          color: var(--channels-default);
+          font-size: 16px;
+          line-height: 20px;
+          font-weight: 500;
+          white-space: nowrap;
+          @include flex-1-1-auto;
+        }
+      }
+      .children {
+        @include display-flex;
+        @include alignItems-center;
+        @include justifyContent-center;
+        @include flex-0-0-auto;
+        .item {
+          display: none;
+        }
+      }
+    }
+  }
+}
