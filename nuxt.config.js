@@ -98,6 +98,8 @@ export default {
   components: [
     '~/components/',
     { path: '~/components/svg/', prefix: 'svg-' },
+    { path: '~/components/svg/userarea/', prefix: 'svg-userarea-' },
+    { path: '~/components/options/', prefix: 'opt-' },
   ],
   /*
   ** Nuxt.js dev-modules

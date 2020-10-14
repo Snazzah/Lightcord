@@ -1,3 +1,21 @@
+// Developer Portal
+
+.dp-content-heading {
+  color: var(--header-primary);
+  @include display-flex;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.dp-content-subheading {
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--header-secondary);
+}
+
+// Server Insights
 .server-insights-indent {
   @include display-flex;
   @include flexDirection-row;

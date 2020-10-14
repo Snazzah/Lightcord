@@ -33,6 +33,18 @@
         />
       </div>
       <div class="channel-sidebar">
+        <div v-if="selectedGuild" class="guild-header" role="button" tabindex="0">
+          <header>
+            <h1>{{ selectedGuildProto.name }}</h1>
+            <svg width="18" height="18">
+              <g fill="none" fill-rule="evenodd">
+                <path d="M0 0h18v18H0" />
+                <path stroke="currentColor" d="M4.5 4.5l9 9" stroke-linecap="round" />
+                <path stroke="currentColor" d="M13.5 4.5l-9 9" stroke-linecap="round" />
+              </g>
+            </svg>
+          </header>
+        </div>
         <v-scroller
           class="scroller"
           :data-key="'id'"
@@ -45,57 +57,37 @@
               <svg width="40" height="32" viewBox="0 0 40 32" class="mask" aria-hidden="true">
                 <mask id="avatar-mask-userarea" width="32" height="32">
                   <circle cx="16" cy="16" r="16" fill="white" />
-                  <rect color="black" x="19" y="19" width="16" height="16" rx="8" ry="8" />
+                  <rect
+                    color="black"
+                    x="19"
+                    y="19"
+                    width="16"
+                    height="16"
+                    rx="8"
+                    ry="8"
+                  />
                 </mask>
                 <foreignObject x="0" y="0" width="32" height="32" mask="url(#avatar-mask-userarea)">
                   <img :src="clientProps.avatar" class="avatar-image" aria-hidden="true">
                 </foreignObject>
                 <!-- Online Status -->
-                <svg v-if="clientProps.status === 'online'" x="14.5" y="17" width="25" height="15" viewBox="0 0 25 15">
-                  <mask id="status-mask-userarea">
-                    <rect x="7.5" y="5" width="10" height="10" rx="5" ry="5" fill="white" />
-                    <rect x="12.5" y="10" width="0" height="0" rx="0" ry="0" fill="black" />
-                    <polygon points="-2.16506,-2.5 2.16506,0 -2.16506,2.5" fill="black" transform="scale(0) translate(13.125 10)" style="transform-origin: 13.125px 10px;" />
-                    <circle fill="black" cx="12.5" cy="10" r="0" />
-                  </mask>
-                  <rect fill="#43b581" width="25" height="15" mask="url(#status-mask-userarea)" />
-                </svg>
+                <svg-userarea-offline v-if="clientProps.status === 'online'" />
                 <!-- Idle Status -->
-                <svg v-if="clientProps.status === 'idle'" x="14.5" y="17" width="25" height="15" viewBox="0 0 25 15">
-                  <mask id="status-mask-userarea">
-                    <rect x="7.5" y="5" width="10" height="10" rx="5" ry="5" fill="white" />
-                    <rect x="6.25" y="3.75" width="7.5" height="7.5" rx="3.75" ry="3.75" fill="black" />
-                    <polygon points="-2.16506,-2.5 2.16506,0 -2.16506,2.5" fill="black" transform="scale(0) translate(13.125 10)" style="transform-origin: 13.125px 10px;" />
-                    <circle fill="black" cx="12.5" cy="10" r="0" />
-                  </mask>
-                  <rect fill="#faa61a" width="25" height="15" mask="url(#status-mask-userarea)" />
-                </svg>
+                <svg-userarea-idle v-if="clientProps.status === 'idle'" />
                 <!-- DnD Status -->
-                <svg v-if="clientProps.status === 'dnd'" x="14.5" y="17" width="25" height="15" viewBox="0 0 25 15">
-                  <mask id="status-mask-userarea">
-                    <rect x="7.5" y="5" width="10" height="10" rx="5" ry="5" fill="white" />
-                    <rect x="8.75" y="8.75" width="7.5" height="2.5" rx="1.25" ry="1.25" fill="black" />
-                    <polygon points="-2.16506,-2.5 2.16506,0 -2.16506,2.5" fill="black" transform="scale(0) translate(13.125 10)" style="transform-origin: 13.125px 10px;" />
-                    <circle fill="black" cx="12.5" cy="10" r="0" />
-                  </mask>
-                  <rect fill="#f04747" width="25" height="15" mask="url(#status-mask-userarea)" />
-                </svg>
+                <svg-userarea-dnd v-if="clientProps.status === 'dnd'" />
                 <!-- Offline Status -->
-                <svg v-if="clientProps.status === 'offline'" x="14.5" y="17" width="25" height="15" viewBox="0 0 25 15">
-                  <mask id="status-mask-userarea">
-                    <rect x="7.5" y="5" width="10" height="10" rx="5" ry="5" fill="white" />
-                    <rect x="10" y="7.5" width="5" height="5" rx="2.5" ry="2.5" fill="black" />
-                    <polygon points="-2.16506,-2.5 2.16506,0 -2.16506,2.5" fill="black" transform="scale(0) translate(13.125 10)" style="transform-origin: 13.125px 10px;" />
-                    <circle fill="black" cx="12.5" cy="10" r="0" />
-                  </mask>
-                  <rect fill="#747f8d" width="25" height="15" mask="url(#status-mask-userarea)" />
-                </svg>
+                <svg-userarea-offline v-if="clientProps.status === 'offline'" />
               </svg>
             </div>
           </div>
           <div class="name-tag">
-            <div class="username">{{ clientProps.username }}</div>
-            <div class="subtext">#{{ clientProps.discriminator }}</div>
+            <div class="username">
+              {{ clientProps.username }}
+            </div>
+            <div class="subtext">
+              #{{ clientProps.discriminator }}
+            </div>
           </div>
           <div class="button" />
         </div>
@@ -131,10 +123,16 @@ export default Vue.extend({
       channelScrollItem: ChannelScrollItem,
       selectedGuild: null,
       collapsedCategoryChannels: [],
+      theme: 'dark',
       uptime: 0,
     };
   },
   computed: {
+    selectedGuildProto () {
+      ((_) => {})(this.uptime);
+
+      return this.selectedGuild ? this.$discord.client.guilds.get(this.selectedGuild) : null;
+    },
     guilds () {
       ((_) => {})(this.uptime);
 
@@ -146,9 +144,8 @@ export default Vue.extend({
     channels () {
       ((_) => {})(this.uptime);
 
-      const guild = this.selectedGuild ? this.$discord.client.guilds.get(this.selectedGuild) : null;
-      const channels = guild ? Array.from(guild.channels.values()) : null;
-      return !guild ? [
+      const channels = this.selectedGuildProto ? Array.from(this.selectedGuildProto.channels.values()) : null;
+      return !this.selectedGuildProto ? [
         {
           id: '1',
           type: 'channel-tab',
@@ -210,11 +207,24 @@ export default Vue.extend({
   mounted () {
     if (window.document.firstElementChild && !window.document.firstElementChild.classList.contains('theme-dark'))
       window.document.firstElementChild.classList.add('theme-dark');
+
+    if (!localStorage.getItem('LC-Theme')) {
+      localStorage.setItem('LC-Theme', 'dark');
+    } else {
+      this.theme = localStorage.getItem('LC-Theme');
+    }
+    this.updateTheme();
   },
   created () {
     setInterval(() => { this.uptime = this.$discord.client ? this.$discord.client.uptime : 0; }, 1000);
   },
   methods: {
+    updateTheme () {
+      localStorage.setItem('LC-Theme', this.theme);
+      const htmlElement = window.document.firstElementChild;
+      Array.from(htmlElement.classList.values()).map(className => htmlElement.classList.remove(className));
+      htmlElement.classList.add(`theme-${this.theme}`);
+    },
     switchToGuild (id) {
       if (!this.$discord.client.guilds.has(id)) return;
       this.selectedGuild = id;

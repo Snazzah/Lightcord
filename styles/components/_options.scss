@@ -1,0 +1,98 @@
+.option-header {
+  color: var(--channels-default);
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.radio-group {
+  color: var(--header-primary);
+  .item {
+    &.checked {
+      border-color: #7289da;
+      background-color: #7289da;
+
+      .checkbox-wrapper .checkbox {
+        border-color: #7289da !important;
+        background-color: #fff;
+        svg {
+          color: #7289da;
+        }
+      }
+    }
+    & * {
+      @include boxSizing-borderBox;
+    }
+    @include display-flex;
+    @include flexDirection-row;
+    padding: 10px;
+    background: var(--deprecated-card-editable-bg);
+    border-color: var(--background-tertiary);
+    cursor: pointer;
+    border-radius: 3px;
+    position: relative;
+    border-width: 1px;
+    border-style: solid;
+    margin-bottom: 8px;
+    &:last-child {
+      margin: 0;
+    }
+    .checkbox-wrapper {
+      @include display-flex;
+      position: relative;
+      @include userSelect-none;
+      @include flex-1-1-auto;
+      font-size: 16px;
+      max-width: 100%;
+      @include alignItems-top;
+      input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        margin: 0;
+        padding: 0;
+        @include appearance-none;
+        width: 24px;
+        height: 24px;
+        z-index: 1;
+        cursor: pointer;
+      }
+      .checkbox {
+        .theme-light & { border-color: #b9bbbe; }
+        .theme-dark & { border-color: #72767d; }
+        @include display-flex;
+        @include flex-0-0-auto;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 3px;
+        @include justifyContent-center;
+        @include alignItems-center;
+        width: 24px;
+        height: 24px;
+        svg {
+          color: transparent;
+        }
+      }
+      .label {
+        padding-left: 8px;
+        cursor: pointer;
+        @include flex-1-1-auto;
+        min-width: 0;
+        line-height: 24px;
+        .info {
+          margin-right: 8px;
+          width: 100%;
+          .title {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
