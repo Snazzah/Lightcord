@@ -96,6 +96,17 @@ export default Vue.extend({
       return sessionString ? JSON.parse(sessionString) : null;
     },
   },
+  mounted () {
+    if (this.$discord.client)
+      this.$discord.destroy();
+    if (this.$route.query.token) {
+      (this.$refs.input as HTMLInputElement).value = this.$route.query.token as string;
+      this.$router.replace('/');
+      this.login();
+    } else if (this.$route.query.continue_session === 'true') {
+      this.continueSession();
+    }
+  },
   methods: {
     async login () {
       this.$discord.init({
@@ -187,160 +198,161 @@ export default Vue.extend({
 <style lang="scss">
 @import "~/styles/start.scss";
 
-.hero {
-  display: flex;
-  justify-content: center;
-  background: #373737;
-  padding: 20px;
-  border-radius: 15px;
-  overflow: hidden;
-  img {
-    height: 200px;
-    margin-right: 20px;
-  }
-  .hero-text {
+.start-page {
+  .hero {
     display: flex;
-    align-self: center;
-    flex-direction: column;
-    .hero-title {
+    justify-content: center;
+    background: #373737;
+    padding: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    img {
+      height: 200px;
+      margin-right: 20px;
+    }
+    .hero-text {
       display: flex;
       align-self: center;
-      flex-direction: row;
-      h1 {
-        margin: 0;
-        font-size: 72px;
-        line-break: anywhere;
-        font-style: italic;
-        font-weight: bold;
-      }
-      small {
+      flex-direction: column;
+      .hero-title {
+        display: flex;
         align-self: center;
-        margin: 20px;
-        font-style: italic;
-        font-weight: bold;
+        flex-direction: row;
+        h1 {
+          margin: 0;
+          font-size: 72px;
+          line-break: anywhere;
+          font-style: italic;
+          font-weight: bold;
+        }
+        small {
+          align-self: center;
+          margin: 20px;
+          font-style: italic;
+          font-weight: bold;
+          font-size: 24px;
+          line-height: 42px;
+          color: rgba(255, 255, 255, 0.19);
+        }
+      }
+      h3 {
+        margin: 0;
+        color: $start-text;
+        max-width: 400px;
+        font-weight: normal;
         font-size: 24px;
-        line-height: 42px;
-        color: rgba(255, 255, 255, 0.19);
+        margin-bottom: 10px;
       }
     }
-    h3 {
-      margin: 0;
-      color: $start-text;
-      max-width: 400px;
-      font-weight: normal;
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-  }
-  .buttons {
-    padding: 10px 0;
-    a {
-      padding: 10px;
-      background: #282828;
-      border-radius: 10px;
-      color: #C9C9C9;
-      font-weight: 300;
-      font-size: 24px;
-      text-decoration: none;
-      & + a {
-        margin-left: 5px;
+    .buttons {
+      padding: 10px 0;
+      a {
+        padding: 10px;
+        background: #282828;
+        border-radius: 10px;
+        color: #C9C9C9;
+        font-weight: 300;
+        font-size: 24px;
+        text-decoration: none;
+        & + a {
+          margin-left: 5px;
+        }
       }
     }
   }
-}
-
-.login {
-  margin: 20px 0;
-  transition: opacity .1s ease;
-  &.loading {
-    opacity: .5;
+  .login {
+    margin: 20px 0;
     transition: opacity .1s ease;
-    pointer-events: none;
-  }
-  & > * + * {
-    margin-top: 10px;
-  }
-  .error-login {
-    background-color: #e74c3c;
-    color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-  }
-  .input-wrapper {
-    background: #3B3D3F;
-    border: 1px solid #8B8B8B;
-    box-sizing: border-box;
-    border-radius: 5px;
-    display: flex;
-    overflow: hidden;
-    flex-direction: row;
-    height: 60px;
-    input {
-      height: 50px;
-      padding: 5px 10px;
-      background: transparent;
-      border: none;
-      font-size: 36px;
-      color: #C9C9C9;
-      font-weight: 300;
-      outline: none;
-      flex-grow: 5;
-      &::placeholder {
-        color: #545454;
+    &.loading {
+      opacity: .5;
+      transition: opacity .1s ease;
+      pointer-events: none;
+    }
+    & > * + * {
+      margin-top: 10px;
+    }
+    .error-login {
+      background-color: #e74c3c;
+      color: #fff;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .input-wrapper {
+      background: #3B3D3F;
+      border: 1px solid #8B8B8B;
+      box-sizing: border-box;
+      border-radius: 5px;
+      display: flex;
+      overflow: hidden;
+      flex-direction: row;
+      height: 60px;
+      input {
+        height: 50px;
+        padding: 5px 10px;
+        background: transparent;
+        border: none;
+        font-size: 36px;
+        color: #C9C9C9;
+        font-weight: 300;
+        outline: none;
+        flex-grow: 5;
+        &::placeholder {
+          color: #545454;
+        }
+      }
+      svg {
+        height: 60px;
+        cursor: pointer;
+        transition: fill .1s ease;
+        fill: #ABABAB;
+        order: 1;
+        outline: none;
+        &:hover {
+          transition: fill .1s ease;
+          fill: #fff;
+        }
       }
     }
-    svg {
+    .session-continue {
+      background: $start-accent;
+      box-sizing: border-box;
+      border-radius: 5px;
+      display: flex;
+      overflow: hidden;
+      flex-direction: row;
       height: 60px;
       cursor: pointer;
-      transition: fill .1s ease;
-      fill: #ABABAB;
-      order: 1;
-      outline: none;
-      &:hover {
-        transition: fill .1s ease;
-        fill: #fff;
-      }
-    }
-  }
-  .session-continue {
-    background: $start-accent;
-    box-sizing: border-box;
-    border-radius: 5px;
-    display: flex;
-    overflow: hidden;
-    flex-direction: row;
-    height: 60px;
-    cursor: pointer;
-    transition: background .1s ease;
-    &:hover {
       transition: background .1s ease;
-      background: #a9eeff;
-    }
-    span {
-      height: 50px;
-      padding: 5px 10px;
-      font-size: 36px;
-      color: #000;
-      flex-grow: 5;
-      i {
-        font-style: normal;
-        font-weight: 300;
+      &:hover {
+        transition: background .1s ease;
+        background: #a9eeff;
+      }
+      span {
+        height: 50px;
+        padding: 5px 10px;
+        font-size: 36px;
+        color: #000;
+        flex-grow: 5;
+        i {
+          font-style: normal;
+          font-weight: 300;
+        }
+      }
+      svg {
+        height: 60px;
+        transition: fill .1s ease;
+        fill: #000;
+        order: 1;
+        outline: none;
       }
     }
-    svg {
-      height: 60px;
-      transition: fill .1s ease;
-      fill: #000;
-      order: 1;
-      outline: none;
-    }
-  }
-  .session-remove {
-    color: $start-header;
-    cursor: pointer;
-    display: block;
-    &:hover {
-      text-decoration: underline;
+    .session-remove {
+      color: $start-header;
+      cursor: pointer;
+      display: block;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
@@ -350,43 +362,5 @@ export default Vue.extend({
   .tippy-arrow {
     border-left-color: #060606;
   }
-}
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
