@@ -3,7 +3,31 @@
 Lightcord is a visual representation of OAuth applications in Discord, helps you see how healthy your bot is doing.
 
 ## Help Wanted!
-Feel free to PR to **this** branch (`v2`) as I try to map out what needs to be done. You can contact me in my [discord server](https://snaz.in/discord)
+Feel free to PR to **this** branch (`v2`) as I try to map out what needs to be done. You can contact me in my [discord server](https://snaz.in/discord).
+
+- [x] Login
+- App client
+  - [x] Base
+  - [ ] Settings
+    - [x] Index stats page
+    - [x] Change theme
+    - [ ] Change status
+    - [ ] Event log page
+  - Guilds
+    - [x] Scroller rendering
+    - [ ] Header shows boost status
+    - [ ] Header banner
+    - [ ] Header dropdown
+    - [ ] Settings modal
+  - Channels
+    - [x] Scroller rendering
+    - [ ] No text channels fallback
+    - [x] Collapsable Category Channels
+    - Text channels
+      - [ ] Base text channel
+      - [ ] Message rendering
+      - [ ] Embed rendering
+      - [ ] Show typing
 
 ## Resources Used
 - [eris](http://github.com/abalabahaha/eris) <small>used for the Discord API</small>

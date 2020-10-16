@@ -71,7 +71,7 @@ export default Vue.extend({
       return this.app.collapsedCategoryChannels.includes(this.source.channel.id);
     },
     isLocked () {
-      ((_) => {})(this.app.uptime);
+      ((_) => {})(this.app.guildEventTicker);
 
       const guildID = this.source.channel.guild.id;
       const defaultPerm = this.source.channel.guild.roles.get(guildID).permissions.has('readMessages');

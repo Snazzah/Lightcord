@@ -78,6 +78,7 @@ import { VERSION } from 'eris';
 
 export default Vue.extend({
   layout: 'app',
+  name: 'AppClientInfo',
   data () {
     return {
       uptime: 0,

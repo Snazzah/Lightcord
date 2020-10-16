@@ -14,11 +14,16 @@
       border-color: #7289da;
       background-color: #7289da;
 
-      .checkbox-wrapper .checkbox {
-        border-color: #7289da !important;
-        background-color: #fff;
-        svg {
-          color: #7289da;
+      .checkbox-wrapper {
+        .checkbox {
+          border-color: #7289da !important;
+          background-color: #fff;
+          svg {
+            color: #7289da;
+          }
+        }
+        .label {
+          color: #fff;
         }
       }
     }
@@ -94,5 +99,90 @@
         }
       }
     }
+  }
+}
+
+.toggle-box {
+  @include display-flex;
+  @include flexDirection-column;
+  margin-bottom: 20px;
+  &.checked {
+    .label-row .control .container {
+      background: #43b581;
+      svg {
+        left: 12px;
+      }
+    }
+  }
+  &.disabled {
+    cursor: not-allowed;
+    .label-row {
+      pointer-events: none;
+    }
+    .control .container {
+      opacity: 0.3;
+    }
+  }
+  .label-row {
+    @include display-flex;
+    @include flexDirection-row;
+    width: 100%;
+    @include alignItems-flexStart;
+    label {
+      @include flex-1;
+      display: block;
+      overflow: hidden;
+      margin-top: 0;
+      margin-bottom: 0;
+      color: var(--header-primary);
+      line-height: 24px;
+      font-size: 16px;
+      font-weight: 500;
+      word-wrap: break-word;
+      cursor: pointer;
+    }
+    .control {
+      @include flex-0-0-auto;
+      .container {
+        position: relative;
+        width: 40px;
+        height: 24px;
+        border-radius: 14px;
+        cursor: pointer;
+        background: #72767d;
+        @include transition('background .15s ease-out');
+        svg {
+          display: block;
+          position: absolute;
+          width: 28px;
+          height: 18px;
+          margin: 3px;
+          left: -3px;
+          @include transition('left .15s ease-out');
+        }
+      }
+      input {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 14px;
+        cursor: pointer;
+      }
+    }
+  }
+  .note {
+    margin-top: 4px;
+    color: var(--header-secondary);
+    cursor: default;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    border-top: thin solid var(--background-modifier-accent);
+    margin-top: 20px;
   }
 }

@@ -16,14 +16,21 @@
         title: 'Light'
       }]"
     />
+    <opt-toggle
+      v-model="darkSidebar"
+      class="marginTop-20"
+      :class="theme === 'dark' ? 'disabled' : ''"
+      title="Dark Sidebar"
+    />
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue';
 
 export default Vue.extend({
   layout: 'app',
+  name: 'AppSettings',
   computed: {
     theme: {
       get () {
@@ -31,7 +38,16 @@ export default Vue.extend({
       },
       set (value) {
         this.$parent.$parent.theme = value;
-        localStorage.setItem('LC-Theme', value);
+        this.$parent.$parent.updateTheme();
+        return value;
+      },
+    },
+    darkSidebar: {
+      get () {
+        return this.$parent.$parent.darkSidebar;
+      },
+      set (value) {
+        this.$parent.$parent.darkSidebar = value;
         this.$parent.$parent.updateTheme();
         return value;
       },

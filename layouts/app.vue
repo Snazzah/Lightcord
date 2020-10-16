@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="main-layer">
-      <div class="guilds-sidebar">
+      <div class="guilds-sidebar" :class="darkSidebar ? 'theme-dark' : ''">
         <div
           class="list-item home-item"
           name="gsi-home"
@@ -32,7 +32,7 @@
           :data-component="guildScrollItem"
         />
       </div>
-      <div class="channel-sidebar">
+      <div class="channel-sidebar" :class="darkSidebar ? 'theme-dark' : ''">
         <div v-if="selectedGuild" class="guild-header" role="button" tabindex="0">
           <header>
             <h1>{{ selectedGuildProto.name }}</h1>
@@ -112,8 +112,15 @@ function channelSort (a, b) {
   return 0;
 }
 
+function channelViewable (channel, client) {
+  if (client.user.id === channel.guild.ownerID) return true;
+  const perms = channel.permissionsOf(client.user.id);
+  return perms.has('readMessages');
+}
+
 export default Vue.extend({
   layout: 'app',
+  name: 'App',
   middleware ({ $discord, redirect }) {
     if (!$discord.client) redirect('/');
   },
@@ -124,43 +131,49 @@ export default Vue.extend({
       selectedGuild: null,
       collapsedCategoryChannels: [],
       theme: 'dark',
+      darkSidebar: false,
+
+      // Tickers
       uptime: 0,
+      guildEventTicker: 0,
     };
   },
   computed: {
     selectedGuildProto () {
       ((_) => {})(this.uptime);
 
-      return this.selectedGuild ? this.$discord.client.guilds.get(this.selectedGuild) : null;
+      return this.selectedGuild && this.$discord.client ? this.$discord.client.guilds.get(this.selectedGuild) || null : null;
     },
     guilds () {
-      ((_) => {})(this.uptime);
+      ((_) => {})(this.guildEventTicker);
+      if (!this.$discord.client) return [];
 
-      if (this.$discord.client)
-        return Array.from(this.$discord.client.guilds.values())
-          .map(guild => ({ id: guild.id, name: guild.name, iconURL: guild.dynamicIconURL('png', 64) }));
-      else return [];
+      return Array.from(this.$discord.client.guilds.values())
+        .map(guild => ({ id: guild.id, name: guild.name, iconURL: guild.dynamicIconURL('png', 64) }));
     },
     channels () {
-      ((_) => {})(this.uptime);
+      ((_) => {})(this.guildEventTicker);
 
-      const channels = this.selectedGuildProto ? Array.from(this.selectedGuildProto.channels.values()) : null;
-      return !this.selectedGuildProto ? [
-        {
-          id: '1',
-          type: 'channel-tab',
-          name: 'Client Info',
-          svg: 'discord',
-          path: '/app',
-        },
-        {
-          id: '2',
-          type: 'channel-tab',
-          name: 'Settings',
-          svg: 'settings',
-          path: '/app/settings',
-        },
-      ] : [
+      const channels = this.selectedGuildProto ? Array.from(this.selectedGuildProto.channels.values())
+        .filter(chn => channelViewable(chn, this.$discord.client)) : [];
+      if (!this.selectedGuildProto)
+        return [
+          {
+            id: '1',
+            type: 'channel-tab',
+            name: 'Client Info',
+            svg: 'discord',
+            path: '/app',
+          },
+          {
+            id: '2',
+            type: 'channel-tab',
+            name: 'Settings',
+            svg: 'settings',
+            path: '/app/settings',
+          },
+        ];
+      else return [
         ...channels
           .filter(c => !c.parentID && c.type !== 4)
           .sort(channelSort)
@@ -181,6 +194,7 @@ export default Vue.extend({
             ...(this.collapsedCategoryChannels.includes(category.id) ? []
               : Array.from(category.channels.values())
                 .sort(channelSort)
+                .filter(chn => channelViewable(chn, this.$discord.client))
                 .map(c => ({
                   id: c.id,
                   type: 'channel',
@@ -208,19 +222,44 @@ export default Vue.extend({
     if (window.document.firstElementChild && !window.document.firstElementChild.classList.contains('theme-dark'))
       window.document.firstElementChild.classList.add('theme-dark');
 
-    if (!localStorage.getItem('LC-Theme')) {
-      localStorage.setItem('LC-Theme', 'dark');
+    if (!localStorage.getItem('LC-Settings')) {
+      localStorage.setItem('LC-Settings', JSON.stringify({ theme: 'dark', darkSidebar: false }));
     } else {
-      this.theme = localStorage.getItem('LC-Theme');
+      const settings = JSON.parse(localStorage.getItem('LC-Settings'));
+      this.theme = settings.theme || 'dark';
+      this.darkSidebar = settings.darkSidebar || false;
     }
+
     this.updateTheme();
   },
   created () {
-    setInterval(() => { this.uptime = this.$discord.client ? this.$discord.client.uptime : 0; }, 1000);
+    if (!this.$discord.client) return;
+    const self = this;
+    function updateTicker (prop) {
+      return () => { self[prop] = self.$discord.client ? self.$discord.client.uptime : 0; };
+    }
+
+    this.$discord.client.on('error', (err, id) => {
+      console.warn('An error occurred in Shard %s, going back to homepage', id, err);
+      this.$discord.destroy();
+      this.$router.push('/');
+    });
+
+    setInterval(updateTicker('uptime'), 1000);
+
+    this.$discord.client.on('guildCreate', updateTicker('guildEventTicker'));
+    this.$discord.client.on('guildDelete', updateTicker('guildEventTicker'));
+    this.$discord.client.on('guildUpdate', updateTicker('guildEventTicker'));
+    this.$discord.client.on('guildRoleCreate', updateTicker('guildEventTicker'));
+    this.$discord.client.on('guildRoleDelete', updateTicker('guildEventTicker'));
+    this.$discord.client.on('guildRoleUpdate', updateTicker('guildEventTicker'));
+    this.$discord.client.on('channelCreate', updateTicker('guildEventTicker'));
+    this.$discord.client.on('channelDelete', updateTicker('guildEventTicker'));
+    this.$discord.client.on('channelUpdate', updateTicker('guildEventTicker'));
   },
   methods: {
     updateTheme () {
-      localStorage.setItem('LC-Theme', this.theme);
+      localStorage.setItem('LC-Settings', JSON.stringify({ theme: this.theme, darkSidebar: this.darkSidebar }));
       const htmlElement = window.document.firstElementChild;
       Array.from(htmlElement.classList.values()).map(className => htmlElement.classList.remove(className));
       htmlElement.classList.add(`theme-${this.theme}`);
@@ -228,10 +267,15 @@ export default Vue.extend({
     switchToGuild (id) {
       if (!this.$discord.client.guilds.has(id)) return;
       this.selectedGuild = id;
+      const firstChannel = Array.from(this.$discord.client.guilds.get(id).channels.values())
+        .filter(channel => channel.type === 0)
+        .filter(chn => channelViewable(chn, this.$discord.client))[0];
+      this.$router.push(firstChannel ? `/channels/${id}/${firstChannel.id}` : `/channels/${id}`);
     },
     switchToHome () {
       if (!this.selectedGuild) return;
       this.selectedGuild = null;
+      this.$router.push('/app');
     },
   },
 });
