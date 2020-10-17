@@ -113,7 +113,7 @@ export default Vue.extend({
     setInterval(() => { this.uptime = this.$discord.client ? this.$discord.client.uptime : 0; }, 1000);
   },
   head: {
-    title: 'Client Info',
+    title: 'Client Information',
   },
 });
 </script>

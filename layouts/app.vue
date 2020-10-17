@@ -184,8 +184,8 @@ export default Vue.extend({
           {
             id: '1',
             type: 'channel-tab',
-            name: 'Client Info',
-            svg: 'discord',
+            name: 'Client Information',
+            svg: 'home',
             path: '/app',
           },
           {

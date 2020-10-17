@@ -49,11 +49,12 @@
 
 <script>
 import Vue from 'vue';
+import SvgHome from '~/components/svg/Home.vue';
 import SvgDiscord from '~/components/svg/Discord.vue';
 import SvgSettings from '~/components/svg/Settings.vue';
 
 export default Vue.extend({
-  components: { SvgDiscord, SvgSettings },
+  components: { SvgHome, SvgDiscord, SvgSettings },
   props: {
     source: {
       type: Object,
