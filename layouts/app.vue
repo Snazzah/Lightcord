@@ -22,6 +22,22 @@
             </div>
           </tippy>
         </div>
+        <div
+          v-if="unavailableCount"
+          name="gsi-unavailable"
+          class="list-item"
+        >
+          <tippy style="display: none" to="gsi-unavailable" arrow placement="right" boundary="viewport">
+            <div class="guild-name">
+              {{ unavailableCount }} guilds are unavailable.
+            </div>
+          </tippy>
+          <div class="li-wrapper">
+            <div class="child-wrapper">
+              !
+            </div>
+          </div>
+        </div>
         <div class="list-item">
           <div class="guild-sep" />
         </div>
@@ -149,7 +165,14 @@ export default Vue.extend({
       if (!this.$discord.client) return [];
 
       return Array.from(this.$discord.client.guilds.values())
-        .map(guild => ({ id: guild.id, name: guild.name, iconURL: guild.dynamicIconURL('png', 64) }));
+        .filter(guild => !guild.unavailable)
+        .map(guild => ({ type: 'guild', id: guild.id, name: guild.name, iconURL: guild.dynamicIconURL('png', 64) }));
+    },
+    unavailableCount () {
+      ((_) => {})(this.guildEventTicker);
+
+      if (!this.$discord.client) return 0;
+      return this.$discord.client.unavailableGuilds.size;
     },
     channels () {
       ((_) => {})(this.guildEventTicker);

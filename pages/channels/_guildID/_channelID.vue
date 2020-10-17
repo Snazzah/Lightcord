@@ -43,12 +43,6 @@
 <script>
 import Vue from 'vue';
 
-function channelViewable (channel, client) {
-  if (client.user.id === channel.guild.ownerID) return true;
-  const perms = channel.permissionsOf(client.user.id);
-  return perms.has('readMessages');
-}
-
 export default Vue.extend({
   layout: 'app',
   name: 'ChannelPage',
@@ -56,10 +50,6 @@ export default Vue.extend({
     return {
       app: this.$parent.$parent,
     };
-  },
-  mounted () {
-    if (!this.guild()) this.$router.replace('/app');
-    if (!this.channel()) this.$router.replace(`/channels/${this.$route.params.guildID}`);
   },
   computed: {
     canViewChannel () {
@@ -71,6 +61,10 @@ export default Vue.extend({
       const perms = channel.permissionsOf(client.user.id);
       return perms.has('readMessages');
     },
+  },
+  mounted () {
+    if (!this.guild() || this.guild().unavailable) this.$router.replace('/app');
+    if (!this.channel()) this.$router.replace(`/channels/${this.$route.params.guildID}`);
   },
   methods: {
     guild () {

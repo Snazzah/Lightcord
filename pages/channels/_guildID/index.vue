@@ -32,7 +32,7 @@ export default Vue.extend({
     };
   },
   mounted () {
-    if (!this.guild()) this.$router.push('/app');
+    if (!this.guild() || this.guild().unavailable) this.$router.push('/app');
     const viewableChannels = Array.from(this.guild().channels.values())
       .filter(channel => channel.type === 0)
       .filter(channel => channelViewable(channel, this.$discord.client));
