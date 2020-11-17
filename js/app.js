@@ -818,6 +818,7 @@ let App = {
 				if (guildChannels[i].id === cid) App.switchTo.channel(cid, guildChannels[i].name)
 				if (guildChannels[i].type === 'text') $('.channels').append('<div class="channel" data-channel="' + guildChannels[i].id + '"><a draggable="false" onclick="App.switchTo.channel(\'' + guildChannels[i].id + '\', \'' + guildChannels[i].name + '\')" class="channel">' + guildChannels[i].name + '</a></div></div>')
 			}
+			App.switchTo.channel(guildChannels[0].id, guildChannels[0].name);
 		},
 		channel: function(id, name){
 			bot.channels.get(id).fetchMessages().then((msgs) => {
