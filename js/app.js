@@ -93,7 +93,9 @@ var fuseOptions = {
 };
 var activeChannel = 'dm';
 var activeGuild = 'dm';
+var currentMessage = '';
 var quickSwitcherOn = true;
+var lastChannelPerms = true;
 // Emojis
 try {
 	var emojiRequest = new XMLHttpRequest();
@@ -851,9 +853,18 @@ let App = {
 					if(!channel.permissionsFor(bot.user).has("SEND_MESSAGES")){
 						$("#textarea").attr('disabled','false');
 						document.getElementById('textarea').placeholder = 'You do not have permission to send messages in this channel.'
+						if (lastChannelPerms === true) {
+							currentMessage = document.getElementById('textarea').value;
+							document.getElementById('textarea').value = ''
+						}
 						$(".textarea-inner").addClass('disabled');
 						$(".channel-textarea-upload").hide();
 						App.disableUploading = true;
+						lastChannelPerms = false;
+					}
+					else {
+						document.getElementById('textarea').value = currentMessage;
+						lastChannelPerms = true;
 					}
 					if(!channel.permissionsFor(bot.user).has("ATTACH_FILES")){
 						$(".channel-textarea-upload").hide();
