@@ -832,9 +832,11 @@ let App = {
 				$('title').text(`${bot.channels.get(id).type === "dm" ? "@" : "#"}${name} - Lightcord`)
 				$('.title-wrap').append(`<div class="title"><span class="channel${bot.channels.get(id).type === "dm" ? " dm" : ""}">${name}</span></div>`)
 				$('.messages-container').empty();
-				$('.messages-container').append(`<div class="has-more" onclick="App.payloadManager.loadMoreMessages('${id}')">LOAD MORE MESSAGES</div>`);
 				var msg2 = msgs.array();
 				msg2.reverse();
+				if (msg2.length >= 50) {
+					$('.messages-container').append(`<div class="has-more" onclick="App.payloadManager.loadMoreMessages('${id}')">LOAD MORE MESSAGES</div>`);
+				}
 				for (var msg in msg2) {
 					App.payloadManager.messageCreate(msg2[msg]);
 				}
