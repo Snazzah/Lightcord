@@ -93,7 +93,9 @@ var fuseOptions = {
 };
 var activeChannel = 'dm';
 var activeGuild = 'dm';
+var currentMessage = '';
 var quickSwitcherOn = true;
+var lastChannelPerms = true;
 // Emojis
 try {
 	var emojiRequest = new XMLHttpRequest();
@@ -818,6 +820,7 @@ let App = {
 				if (guildChannels[i].id === cid) App.switchTo.channel(cid, guildChannels[i].name)
 				if (guildChannels[i].type === 'text') $('.channels').append('<div class="channel" data-channel="' + guildChannels[i].id + '"><a draggable="false" onclick="App.switchTo.channel(\'' + guildChannels[i].id + '\', \'' + guildChannels[i].name + '\')" class="channel">' + guildChannels[i].name + '</a></div></div>')
 			}
+			App.switchTo.channel(guildChannels[0].id, guildChannels[0].name);
 		},
 		channel: function(id, name){
 			bot.channels.get(id).fetchMessages().then((msgs) => {
@@ -831,9 +834,11 @@ let App = {
 				$('title').text(`${bot.channels.get(id).type === "dm" ? "@" : "#"}${name} - Lightcord`)
 				$('.title-wrap').append(`<div class="title"><span class="channel${bot.channels.get(id).type === "dm" ? " dm" : ""}">${name}</span></div>`)
 				$('.messages-container').empty();
-				$('.messages-container').append(`<div class="has-more" onclick="App.payloadManager.loadMoreMessages('${id}')">LOAD MORE MESSAGES</div>`);
 				var msg2 = msgs.array();
 				msg2.reverse();
+				if (msg2.length >= 50) {
+					$('.messages-container').append(`<div class="has-more" onclick="App.payloadManager.loadMoreMessages('${id}')">LOAD MORE MESSAGES</div>`);
+				}
 				for (var msg in msg2) {
 					App.payloadManager.messageCreate(msg2[msg]);
 				}
@@ -848,9 +853,18 @@ let App = {
 					if(!channel.permissionsFor(bot.user).has("SEND_MESSAGES")){
 						$("#textarea").attr('disabled','false');
 						document.getElementById('textarea').placeholder = 'You do not have permission to send messages in this channel.'
+						if (lastChannelPerms === true) {
+							currentMessage = document.getElementById('textarea').value;
+							document.getElementById('textarea').value = ''
+						}
 						$(".textarea-inner").addClass('disabled');
 						$(".channel-textarea-upload").hide();
 						App.disableUploading = true;
+						lastChannelPerms = false;
+					}
+					else {
+						document.getElementById('textarea').value = currentMessage;
+						lastChannelPerms = true;
 					}
 					if(!channel.permissionsFor(bot.user).has("ATTACH_FILES")){
 						$(".channel-textarea-upload").hide();
@@ -1048,7 +1062,7 @@ let App = {
 				return bytes.buffer;
 			}
 			let abuf = b642buffer(App.filePrompt.currentFile.url.split(",")[1]);
-			bot.channels.get(activeChannel).sendFile($(".upload-input")[0].value, {file:{attachment:abuf, name:App.filePrompt.currentFile.name}}).then(()=>$(".messages-container")[0].scrollTop = $(".messages-container")[0].scrollHeight);
+			bot.channels.get(activeChannel).send($(".upload-input")[0].value, {file:{attachment:abuf, name:App.filePrompt.currentFile.name}}).then(()=>$(".messages-container")[0].scrollTop = $(".messages-container")[0].scrollHeight);
 			App.filePrompt.cancel();
 		},
 		instaUpload: function(file, next){
@@ -1078,7 +1092,7 @@ let App = {
 				return bytes.buffer;
 			}
 			let abuf = b642buffer(App.filePrompt.currentFile.url.split(",")[1]);
-			bot.channels.get(activeChannel).sendFile(abuf);
+			bot.channels.get(activeChannel).send("", {file:{attachment:abuf}});
 		}
 	},
 	quickSwitcher: {
