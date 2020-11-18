@@ -275,6 +275,7 @@ export default Vue.extend({
       this.$router.push('/');
     });
 
+    // deepscan-disable-next-line VUE_MISSING_CLEANUP_IN_LIFECYCLE
     setInterval(updateTicker('uptime'), 1000);
 
     this.$discord.client.on('guildCreate', updateTicker('guildEventTicker'));

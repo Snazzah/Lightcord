@@ -1,7 +1,11 @@
 <template>
   <div class="content-column">
-    <h2 class="header">Client Information</h2>
-    <p class="dp-content-subheading">Lightcord v2.0.0, Running Eris {{ erisVersion }}</p>
+    <h2 class="header">
+      Client Information
+    </h2>
+    <p class="dp-content-subheading">
+      Lightcord v2.0.0, Running Eris {{ erisVersion }}
+    </p>
     <div class="server-insights-indent">
       <div class="key-metric">
         <div class="panel">
@@ -83,6 +87,7 @@ export default Vue.extend({
     return {
       uptime: 0,
       erisVersion: VERSION,
+      uptimeInterval: (null as unknown as NodeJS.Timeout),
     };
   },
   computed: {
@@ -109,8 +114,11 @@ export default Vue.extend({
       return this.$discord.client ? this.$discord.client.guilds.size : -1;
     },
   },
+  beforeDestroy () {
+    clearInterval(this.uptimeInterval);
+  },
   created () {
-    setInterval(() => { this.uptime = this.$discord.client ? this.$discord.client.uptime : 0; }, 1000);
+    this.uptimeInterval = setInterval(() => { this.uptime = this.$discord.client ? this.$discord.client.uptime : 0; }, 1000);
   },
   head: {
     title: 'Client Information',
