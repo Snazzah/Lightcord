@@ -1,3 +1,4 @@
 {
-  "vetur.validation.interpolation": false
+  "vetur.validation.interpolation": false,
+  "deepscan.enable": true
 }

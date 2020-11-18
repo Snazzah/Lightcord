@@ -11,12 +11,13 @@
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lint": "yarn lint:js"
+    "lint": "yarn lint:js",
+    "init:codespace": "npm i -g typescript && yarn add eris && yarn"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^1.0.0",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
-    "eris": "https://github.com/abalabahaha/eris#dev",
+    "eris": "^0.14.0",
     "eventemitter3": "^4.0.4",
     "node-sass": "^4.14.1",
     "nuxt": "^2.14.3",

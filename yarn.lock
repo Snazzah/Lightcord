@@ -3792,9 +3792,10 @@ entities@^2.0.0:
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.0.3.tgz#5c487e5742ab93c15abb5da22759b8590ec03b7f"
   integrity sha512-MyoZ0jgnLvB2X3Lg5HqpFmn1kybDiIfEQmKzTb5apr51Rb+T3KdmMiqa70T+bhGnyv7bQ6WMj2QMHpGMmlrUYQ==
 
-"eris@https://github.com/abalabahaha/eris#dev":
-  version "0.13.3"
-  resolved "https://github.com/abalabahaha/eris#29b529324e6cd9c56eb67057555b7866b0c7b396"
+eris@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/eris/-/eris-0.14.0.tgz#0d13391c0fc1a7b678b2f8d1fc3ec6aef05700d3"
+  integrity sha512-/W6X0SFR2swtA9oc4ga5Wh1TQcZtPgbUaDDdwYc67fvFUAtwC+V1xzWUZq2yDeJnTfB8Uot9SJWA8Lthe2sDtQ==
   dependencies:
     ws "^7.2.1"
   optionalDependencies:
