@@ -1,0 +1,37 @@
+{
+	"name": "Node.js",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick a Node version: 10, 12, 14
+		"args": { "VARIANT": "14" }
+	},
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+    "vetur.validation.interpolation": false,
+    "deepscan.enable": true
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"dbaeumer.vscode-eslint",
+		"deepscan.vscode-deepscan",
+		"editorconfig.editorconfig",
+		"esbenp.prettier-vscode",
+		"alan.stylus",
+		"jock.svg",
+		"ms-vscode.vscode-typescript-tslint-plugin",
+		"octref.vetur",
+		"maptz.regionfolder"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [3000],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "yarn add eris && yarn",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "node"
+}

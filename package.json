@@ -11,8 +11,7 @@
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lint": "yarn lint:js",
-    "init:codespace": "npm i -g typescript && yarn add eris && yarn"
+    "lint": "yarn lint:js"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^1.0.0",
@@ -35,6 +34,7 @@
     "@nuxtjs/eslint-module": "^2.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.5.0",
-    "eslint-plugin-nuxt": "^1.0.0"
+    "eslint-plugin-nuxt": "^1.0.0",
+    "prettier": "^2.1.2"
   }
 }
