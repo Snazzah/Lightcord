@@ -52,9 +52,10 @@ import Vue from 'vue';
 import SvgHome from '~/components/svg/Home.vue';
 import SvgDiscord from '~/components/svg/Discord.vue';
 import SvgSettings from '~/components/svg/Settings.vue';
+import SvgOAuth2 from '~/components/svg/OAuth2.vue';
 
 export default Vue.extend({
-  components: { SvgHome, SvgDiscord, SvgSettings },
+  components: { SvgHome, SvgDiscord, SvgSettings, SvgOAuth2 },
   props: {
     source: {
       type: Object,

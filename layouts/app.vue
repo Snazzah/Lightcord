@@ -191,6 +191,13 @@ export default Vue.extend({
           {
             id: '2',
             type: 'channel-tab',
+            name: 'OAuth2 Information',
+            svg: 'o-auth2',
+            path: '/app/oauth2',
+          },
+          {
+            id: '3',
+            type: 'channel-tab',
             name: 'Settings',
             svg: 'settings',
             path: '/app/settings',
