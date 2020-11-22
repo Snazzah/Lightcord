@@ -15,9 +15,12 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^1.0.0",
+    "@nuxtjs/markdownit": "^1.2.10",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "eris": "^0.14.0",
     "eventemitter3": "^4.0.4",
+    "markdown-it-attrs": "^3.0.3",
+    "markdown-it-div": "^1.1.0",
     "node-sass": "^4.14.1",
     "nuxt": "^2.14.3",
     "opusscript": "https://github.com/abalabahaha/opusscript",
@@ -36,6 +39,7 @@
     "eslint": "^7.5.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "prettier": "^2.1.2",
+    "ts-loader": "^8.0.11",
     "typescript": "^4.0.5"
   }
 }

@@ -61,14 +61,14 @@
       </div>
       <span v-if="lastSession" class="session-remove" @click="removeSession">Remove last session</span>
     </div>
-    <div class="markdown">
-      Lightcord is a webapp for Discord bots, allowing you to interact with Discord servers as the bot.
-    </div>
+    <!-- eslint-disable-next-line vue/no-v-html -->
+    <Intro class="markdown" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import Intro from '~/components/Intro.vue';
 
 interface DiscordHTTPError extends Error {
   code: number
@@ -81,6 +81,7 @@ const ERROR_MESSAGES = {
 
 export default Vue.extend({
   name: 'LightcordHomepage',
+  components: { Intro },
   data () {
     return {
       loading: false,
@@ -239,6 +240,7 @@ $start-accent: #7AE4FF;
       Arial,
       sans-serif;
   }
+
   .hero {
     display: flex;
     justify-content: center;
@@ -300,6 +302,7 @@ $start-accent: #7AE4FF;
       }
     }
   }
+
   .login {
     margin: 20px 0;
     transition: opacity .1s ease;
@@ -391,6 +394,33 @@ $start-accent: #7AE4FF;
       cursor: pointer;
       display: block;
       &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .markdown {
+    font-size: 20px;
+    .danger {
+      margin: 0.5em 0;
+      padding: 0.5em;
+      border-radius: 5px;
+      border: 1px solid #c00;
+      background-color: #c00;
+      background-color: #c00c;
+      color: #fff;
+      a {
+        text-decoration: underline;
+      }
+    }
+    .warning {
+      margin: 0.5em 0;
+      padding: 0.5em;
+      border-radius: 5px;
+      border: 1px solid #e7c000;
+      background-color: #e7c1002c;
+      color: #fff;
+      a {
         text-decoration: underline;
       }
     }
