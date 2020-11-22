@@ -10,11 +10,12 @@ on:
       - ".eslintrc.*"
       - "nuxt.config.js"
       - "tsconfig.json"
-      - ".github/workflows/eslint.yml"
+      - ".prettierrc.json"
+      - ".github/workflows/lint.yml"
 
 jobs:
-  update:
-    name: ESLint
+  lint:
+    name: ESLint & Prettier
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -26,6 +27,8 @@ jobs:
       - name: Install Yarn
         run: npm install -g yarn
       - name: Install dependencies
-        run: yarn install
+        run: |
+          yarn install eris --no-optional
+          yarn
       - name: Run ESLint
         run: yarn run lint

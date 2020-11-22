@@ -6,31 +6,25 @@ module.exports = {
   },
   extends: [
     '@nuxtjs/eslint-config-typescript',
+    'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
   ],
-  plugins: [
-  ],
-  // add your custom rules here
+  plugins: [],
   rules: {
-    semi: [
-      'warn',
-      'always',
-    ],
+    'prettier/prettier': 'warn',
     curly: 'off',
-    'comma-dangle': ['error', {
-      arrays: 'always-multiline',
-      objects: 'always-multiline',
-      imports: 'never',
-      exports: 'never',
-      functions: 'never',
-    }],
-    'keyword-spacing': [
-      'warn',
+    'comma-dangle': [
+      'error',
       {
-        before: true,
-        after: true,
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'never',
+        exports: 'never',
+        functions: 'never',
       },
     ],
+    'keyword-spacing': ['warn', { before: true, after: true }],
     'no-console': 'off',
+    'prefer-const': ['warn', { destructuring: 'all' }],
   },
 };
