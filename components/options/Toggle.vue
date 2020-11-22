@@ -5,16 +5,9 @@
       <div class="control">
         <div class="container" tabindex="-1">
           <svg viewBox="0 0 28 20" preserveAspectRatio="xMinYMid meet">
-            <rect
-              fill="white"
-              x="4"
-              y="0"
-              height="20"
-              width="20"
-              rx="10"
-            />
+            <rect fill="white" x="4" y="0" height="20" width="20" rx="10" />
           </svg>
-          <input type="checkbox">
+          <input type="checkbox" />
         </div>
       </div>
     </div>
@@ -48,7 +41,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    setValue (newValue: string) {
+    setValue(newValue: string) {
       this.$emit('input', newValue);
     },
   },

@@ -3,9 +3,7 @@
     <div class="wrapper">
       <svg-no-text-channels />
       <div class="text-wrapper">
-        <h4 class="title">
-          Invalid Channel Type
-        </h4>
+        <h4 class="title">Invalid Channel Type</h4>
         <div class="text">
           Cannot view a channel with the type {{ channel().type }}
         </div>
@@ -16,12 +14,8 @@
     <div class="wrapper">
       <svg-no-text-channels />
       <div class="text-wrapper">
-        <h4 class="title">
-          hello
-        </h4>
-        <div class="text">
-          You can see this channel, but not right now
-        </div>
+        <h4 class="title">hello</h4>
+        <div class="text">You can see this channel, but not right now</div>
       </div>
     </div>
   </div>
@@ -29,12 +23,8 @@
     <div class="wrapper">
       <svg-no-text-channels />
       <div class="text-wrapper">
-        <h4 class="title">
-          Permission denied
-        </h4>
-        <div class="text">
-          You can't view the messages of this channel.
-        </div>
+        <h4 class="title">Permission denied</h4>
+        <div class="text">You can't view the messages of this channel.</div>
       </div>
     </div>
   </div>
@@ -46,13 +36,13 @@ import Vue from 'vue';
 export default Vue.extend({
   layout: 'app',
   name: 'ChannelPage',
-  data () {
+  data() {
     return {
       app: this.$parent.$parent,
     };
   },
   computed: {
-    canViewChannel () {
+    canViewChannel() {
       ((_) => {})(this.app.guildEventTicker);
 
       const channel = this.channel();
@@ -62,22 +52,29 @@ export default Vue.extend({
       return perms.has('readMessages');
     },
   },
-  mounted () {
+  mounted() {
     if (!this.guild() || this.guild().unavailable) this.$router.replace('/app');
-    if (!this.channel()) this.$router.replace(`/channels/${this.$route.params.guildID}`);
+    if (!this.channel())
+      this.$router.replace(`/channels/${this.$route.params.guildID}`);
   },
   methods: {
-    guild () {
-      return this.$discord.client ? this.$discord.client.guilds.get(this.$route.params.guildID) : null;
+    guild() {
+      return this.$discord.client
+        ? this.$discord.client.guilds.get(this.$route.params.guildID)
+        : null;
     },
-    channel () {
-      return this.guild() ? this.guild().channels.get(this.$route.params.channelID) : null;
+    channel() {
+      return this.guild()
+        ? this.guild().channels.get(this.$route.params.channelID)
+        : null;
     },
   },
-  head () {
-    return this.channel() ? {
-      title: '#' + this.channel().name,
-    } : {};
+  head() {
+    return this.channel()
+      ? {
+          title: '#' + this.channel().name,
+        }
+      : {};
   },
 });
 </script>

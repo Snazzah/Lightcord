@@ -1,11 +1,7 @@
 <template>
   <div class="content-column">
-    <h2 class="header">
-      OAuth2 Information
-    </h2>
-    <h2 class="header">
-      Team
-    </h2>
+    <h2 class="header">OAuth2 Information</h2>
+    <h2 class="header">Team</h2>
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   <div class="start-page">
     <div class="hero">
       <transition appear name="fade">
-        <img src="~/assets/lightcord.png" draggable="false">
+        <img src="~/assets/lightcord.png" draggable="false" />
       </transition>
       <transition appear name="fadeRight">
         <div class="hero-text">
@@ -12,10 +12,9 @@
           </div>
           <h3>placeholder</h3>
           <div class="buttons">
-            <a
-              href="https://github.com/Snazzah/Lightcord"
-              target="_blank"
-            >GitHub</a>
+            <a href="https://github.com/Snazzah/Lightcord" target="_blank">
+              GitHub
+            </a>
           </div>
         </div>
       </transition>
@@ -25,14 +24,23 @@
         {{ error }}
       </div>
       <div class="input-wrapper">
-        <input ref="input" placeholder="Bot Token..." type="password" @keyup.enter="login">
+        <input
+          ref="input"
+          placeholder="Bot Token..."
+          type="password"
+          @keyup.enter="login"
+        />
         <svg
           v-tippy="{ arrow: true, placement: 'left', theme: 'lightcord' }"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
           aria-hidden="true"
           focusable="false"
-          style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+          style="
+            -ms-transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          "
           preserveAspectRatio="xMidYMid meet"
           viewBox="0 0 1024 1024"
           content="Login (enter)"
@@ -44,13 +52,20 @@
         </svg>
       </div>
       <div v-if="lastSession" class="session-continue" @click="continueSession">
-        <span><i>Continue as</i> <b>{{ lastSession.username }}</b>#{{ lastSession.discriminator }}</span>
+        <span>
+          <!-- eslint-disable-next-line prettier/prettier -->
+          <i>Continue as</i> <b>{{ lastSession.username }}</b>#{{ lastSession.discriminator }}
+        </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
           aria-hidden="true"
           focusable="false"
-          style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+          style="
+            -ms-transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          "
           preserveAspectRatio="xMidYMid meet"
           viewBox="0 0 1024 1024"
         >
@@ -59,7 +74,9 @@
           />
         </svg>
       </div>
-      <span v-if="lastSession" class="session-remove" @click="removeSession">Remove last session</span>
+      <span v-if="lastSession" class="session-remove" @click="removeSession">
+        Remove last session
+      </span>
     </div>
     <!-- eslint-disable-next-line vue/no-v-html -->
     <Intro class="markdown" />
@@ -71,7 +88,7 @@ import Vue from 'vue';
 import Intro from '~/components/Intro.vue';
 
 interface DiscordHTTPError extends Error {
-  code: number
+  code: number;
 }
 
 const ERROR_MESSAGES = {
@@ -82,27 +99,27 @@ const ERROR_MESSAGES = {
 export default Vue.extend({
   name: 'LightcordHomepage',
   components: { Intro },
-  data () {
+  data() {
     return {
       loading: false,
       error: undefined,
     } as {
-      loading: boolean,
-      error?: string
+      loading: boolean;
+      error?: string;
     };
   },
   computed: {
-    lastSession () {
+    lastSession() {
       if (process.server) return;
       const sessionString = window.localStorage.getItem('LC-LastSession');
       return sessionString ? JSON.parse(sessionString) : null;
     },
   },
-  mounted () {
-    if (this.$discord.client)
-      this.$discord.destroy();
+  mounted() {
+    if (this.$discord.client) this.$discord.destroy();
     if (this.$route.query.token) {
-      (this.$refs.input as HTMLInputElement).value = this.$route.query.token as string;
+      (this.$refs.input as HTMLInputElement).value = this.$route.query
+        .token as string;
       this.$router.replace('/');
       this.login();
     } else if (this.$route.query.continue_session === 'true') {
@@ -110,7 +127,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    async login () {
+    async login() {
       this.$discord.init({
         token: (this.$refs.input as HTMLInputElement).value,
         membersIntent: false,
@@ -129,7 +146,11 @@ export default Vue.extend({
               if (this.$discord.client) {
                 if (!this.$discord.client.bot) {
                   this.$discord.destroy();
-                  this.setLoginState(false, true, new Error(ERROR_MESSAGES.USER_ACCOUNT));
+                  this.setLoginState(
+                    false,
+                    true,
+                    new Error(ERROR_MESSAGES.USER_ACCOUNT)
+                  );
                 } else {
                   console.info('ready');
                   this.$discord.client.options.autoreconnect = true;
@@ -148,46 +169,52 @@ export default Vue.extend({
         }
       }
     },
-    setLoginState (loading: boolean, clearInput: boolean = false, error?: Error) {
+    setLoginState(
+      loading: boolean,
+      clearInput: boolean = false,
+      error?: Error
+    ) {
       this.loading = loading;
       this.error = error ? this.translateError(error) : '';
-      if (loading)
-        (this.$refs.input as HTMLInputElement).blur();
-      else
-        (this.$refs.input as HTMLInputElement).focus();
-      if (this.error === ERROR_MESSAGES.UNAUTHORIZED &&
+      if (loading) (this.$refs.input as HTMLInputElement).blur();
+      else (this.$refs.input as HTMLInputElement).focus();
+      if (
+        this.error === ERROR_MESSAGES.UNAUTHORIZED &&
         this.lastSession &&
-        this.lastSession.token === (this.$refs.input as HTMLInputElement).value &&
-        process.browser)
+        this.lastSession.token ===
+          (this.$refs.input as HTMLInputElement).value &&
+        process.browser
+      )
         window.localStorage.removeItem('LC-LastSession');
-      if (clearInput)
-        (this.$refs.input as HTMLInputElement).value = '';
+      if (clearInput) (this.$refs.input as HTMLInputElement).value = '';
     },
-    translateError (error: Error) {
+    translateError(error: Error) {
       if (error.name === 'DiscordHTTPError') {
         const httpError = error as DiscordHTTPError;
-        if (httpError.code === 401)
-          return ERROR_MESSAGES.UNAUTHORIZED;
+        if (httpError.code === 401) return ERROR_MESSAGES.UNAUTHORIZED;
       } else if (error.message === ERROR_MESSAGES.USER_ACCOUNT)
         return error.message;
       else return error.toString();
     },
-    setLastSession () {
+    setLastSession() {
       if (this.$discord.client) {
-        window.localStorage.setItem('LC-LastSession', JSON.stringify({
-          token: this.$discord.client.token,
-          id: this.$discord.client.user.id,
-          username: this.$discord.client.user.username,
-          discriminator: this.$discord.client.user.discriminator,
-          path: '/',
-        }));
+        window.localStorage.setItem(
+          'LC-LastSession',
+          JSON.stringify({
+            token: this.$discord.client.token,
+            id: this.$discord.client.user.id,
+            username: this.$discord.client.user.username,
+            discriminator: this.$discord.client.user.discriminator,
+            path: '/',
+          })
+        );
       }
     },
-    continueSession () {
+    continueSession() {
       (this.$refs.input as HTMLInputElement).value = this.lastSession.token;
       this.login();
     },
-    removeSession () {
+    removeSession() {
       if (confirm('Are you sure you want to remove the last session?')) {
         window.localStorage.removeItem('LC-LastSession');
         window.location.reload(false);
@@ -198,13 +225,13 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import "vue2-animate/src/sass/vue2-animate.scss";
+@import 'vue2-animate/src/sass/vue2-animate.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 $start-background: #282828;
-$start-header: #EAEAEA;
-$start-text: #A6A6A6;
-$start-accent: #7AE4FF;
+$start-header: #eaeaea;
+$start-text: #a6a6a6;
+$start-accent: #7ae4ff;
 
 .start-page {
   font-size: 16px;
@@ -220,7 +247,9 @@ $start-accent: #7AE4FF;
   width: 100%;
   min-height: 100%;
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     color: $start-header;
     font-feature-settings: 'ordn' on, 'liga' off;
   }
@@ -230,15 +259,8 @@ $start-accent: #7AE4FF;
   }
 
   input {
-    font-family:
-      Roboto,
-      'Source Sans Pro',
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      'Helvetica Neue',
-      Arial,
-      sans-serif;
+    font-family: Roboto, 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+      'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   }
 
   .hero {
@@ -292,7 +314,7 @@ $start-accent: #7AE4FF;
         padding: 10px;
         background: #282828;
         border-radius: 10px;
-        color: #C9C9C9;
+        color: #c9c9c9;
         font-weight: 300;
         font-size: 24px;
         text-decoration: none;
@@ -305,10 +327,10 @@ $start-accent: #7AE4FF;
 
   .login {
     margin: 20px 0;
-    transition: opacity .1s ease;
+    transition: opacity 0.1s ease;
     &.loading {
-      opacity: .5;
-      transition: opacity .1s ease;
+      opacity: 0.5;
+      transition: opacity 0.1s ease;
       pointer-events: none;
     }
     & > * + * {
@@ -321,8 +343,8 @@ $start-accent: #7AE4FF;
       border-radius: 10px;
     }
     .input-wrapper {
-      background: #3B3D3F;
-      border: 1px solid #8B8B8B;
+      background: #3b3d3f;
+      border: 1px solid #8b8b8b;
       box-sizing: border-box;
       border-radius: 5px;
       display: flex;
@@ -335,7 +357,7 @@ $start-accent: #7AE4FF;
         background: transparent;
         border: none;
         font-size: 36px;
-        color: #C9C9C9;
+        color: #c9c9c9;
         font-weight: 300;
         outline: none;
         flex-grow: 5;
@@ -346,12 +368,12 @@ $start-accent: #7AE4FF;
       svg {
         height: 60px;
         cursor: pointer;
-        transition: fill .1s ease;
-        fill: #ABABAB;
+        transition: fill 0.1s ease;
+        fill: #ababab;
         order: 1;
         outline: none;
         &:hover {
-          transition: fill .1s ease;
+          transition: fill 0.1s ease;
           fill: #fff;
         }
       }
@@ -365,9 +387,9 @@ $start-accent: #7AE4FF;
       flex-direction: row;
       height: 60px;
       cursor: pointer;
-      transition: background .1s ease;
+      transition: background 0.1s ease;
       &:hover {
-        transition: background .1s ease;
+        transition: background 0.1s ease;
         background: #a9eeff;
       }
       span {
@@ -383,7 +405,7 @@ $start-accent: #7AE4FF;
       }
       svg {
         height: 60px;
-        transition: fill .1s ease;
+        transition: fill 0.1s ease;
         fill: #000;
         order: 1;
         outline: none;

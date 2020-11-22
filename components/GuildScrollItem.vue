@@ -5,24 +5,35 @@
     :class="isCurrent ? 'selected' : ''"
     @click="switchTo"
   >
-    <tippy style="display: none" :to="'gsi-' + source.id" arrow placement="right" boundary="viewport">
+    <tippy
+      style="display: none"
+      :to="'gsi-' + source.id"
+      arrow
+      placement="right"
+      boundary="viewport"
+    >
       <div class="guild-name">
         {{ source.name }}
       </div>
       <div class="mute-text">
-        Shard {{ $discord.client.guildShardMap[source.id] === undefined ? 'N/A' : $discord.client.guildShardMap[source.id] }}
+        Shard
+        {{
+          $discord.client.guildShardMap[source.id] === undefined
+            ? 'N/A'
+            : $discord.client.guildShardMap[source.id]
+        }}
       </div>
     </tippy>
     <div class="pill">
       <span class="pill-item" />
     </div>
     <div class="li-wrapper">
-      <img v-if="source.iconURL" :src="source.iconURL">
+      <img v-if="source.iconURL" :src="source.iconURL" />
       <div v-else class="child-wrapper">
         {{
           source.name
             .replace(/'s /g, ' ')
-            .replace(/\w+/g, e => e[0])
+            .replace(/\w+/g, (e) => e[0])
             .replace(/\s/g, '')
         }}
       </div>
@@ -40,18 +51,18 @@ export default Vue.extend({
       required: true,
     },
   },
-  data () {
+  data() {
     return {
       app: this.$parent.$parent.$parent,
     };
   },
   computed: {
-    isCurrent () {
+    isCurrent() {
       return this.app.selectedGuild === this.source.id;
     },
   },
   methods: {
-    switchTo () {
+    switchTo() {
       if (this.isCurrent) return;
       this.app.switchToGuild(this.source.id);
     },

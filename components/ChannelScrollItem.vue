@@ -27,22 +27,23 @@
         {{ source.channel.name }}
       </h2>
     </div>
-    <div class="children"></div>
+    <div class="children" />
   </a>
   <!-- Other channels -->
-  <a
-    v-else-if="source.type === 'channel'"
-    class="guild-channel"
-  >
+  <a v-else-if="source.type === 'channel'" class="guild-channel">
     <div class="content">
-      <svg-text-channel v-if="source.channel.type === 0" :nsfw="source.channel.nsfw" :locked="isLocked" />
+      <svg-text-channel
+        v-if="source.channel.type === 0"
+        :nsfw="source.channel.nsfw"
+        :locked="isLocked"
+      />
       <svg-voice-channel v-if="source.channel.type === 2" :locked="isLocked" />
       <svg-news-channel v-if="source.channel.type === 5" :locked="isLocked" />
       <svg-store-channel v-if="source.channel.type === 6" :locked="isLocked" />
       <div class="name">
         {{ source.channel.name }}
       </div>
-      <div class="children"></div>
+      <div class="children" />
     </div>
   </a>
 </template>
@@ -62,31 +63,40 @@ export default Vue.extend({
       required: true,
     },
   },
-  data () {
+  data() {
     return {
       app: this.$parent.$parent.$parent,
     };
   },
   computed: {
-    collapsed () {
+    collapsed() {
       if (!this.source.channel) return false;
-      return this.app.collapsedCategoryChannels.includes(this.source.channel.id);
+      return this.app.collapsedCategoryChannels.includes(
+        this.source.channel.id
+      );
     },
-    isLocked () {
+    isLocked() {
       ((_) => {})(this.app.guildEventTicker);
 
       const guildID = this.source.channel.guild.id;
-      const defaultPerm = this.source.channel.guild.roles.get(guildID).permissions.has('readMessages');
-      const permOverwrite = this.source.channel.permissionOverwrites.get(guildID);
-      return permOverwrite && !(permOverwrite.allow === 0 && permOverwrite.deny === 0)
-        ? (permOverwrite.deny & 1 << 10) === 1 << 10
+      const defaultPerm = this.source.channel.guild.roles
+        .get(guildID)
+        .permissions.has('readMessages');
+      const permOverwrite = this.source.channel.permissionOverwrites.get(
+        guildID
+      );
+      return permOverwrite &&
+        !(permOverwrite.allow === 0 && permOverwrite.deny === 0)
+        ? (permOverwrite.deny & (1 << 10)) === 1 << 10
         : !defaultPerm;
     },
   },
   methods: {
-    toggleCategory () {
+    toggleCategory() {
       if (!this.source.channel) return;
-      const index = this.app.collapsedCategoryChannels.indexOf(this.source.channel.id);
+      const index = this.app.collapsedCategoryChannels.indexOf(
+        this.source.channel.id
+      );
       if (!this.app.collapsedCategoryChannels.includes(this.source.channel.id))
         this.app.collapsedCategoryChannels.push(this.source.channel.id);
       else this.app.collapsedCategoryChannels.splice(index, 1);

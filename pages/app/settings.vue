@@ -1,20 +1,19 @@
 <template>
   <div class="content-column">
-    <h2 class="header">
-      Client Settings
-    </h2>
-    <h5 class="option-header">
-      Theme
-    </h5>
+    <h2 class="header">Client Settings</h2>
+    <h5 class="option-header">Theme</h5>
     <opt-radio-group
       v-model="theme"
-      :items="[{
-        key: 'dark',
-        title: 'Dark'
-      }, {
-        key: 'light',
-        title: 'Light'
-      }]"
+      :items="[
+        {
+          key: 'dark',
+          title: 'Dark',
+        },
+        {
+          key: 'light',
+          title: 'Light',
+        },
+      ]"
     />
     <opt-toggle
       v-model="darkSidebar"
@@ -33,20 +32,20 @@ export default Vue.extend({
   name: 'AppSettings',
   computed: {
     theme: {
-      get () {
+      get() {
         return this.$parent.$parent.theme;
       },
-      set (value) {
+      set(value) {
         this.$parent.$parent.theme = value;
         this.$parent.$parent.updateTheme();
         return value;
       },
     },
     darkSidebar: {
-      get () {
+      get() {
         return this.$parent.$parent.darkSidebar;
       },
-      set (value) {
+      set(value) {
         this.$parent.$parent.darkSidebar = value;
         this.$parent.$parent.updateTheme();
         return value;

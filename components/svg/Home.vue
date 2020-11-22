@@ -1,11 +1,6 @@
 <template>
   <!-- Discord using SVG masks for no reason it seems -->
-  <svg
-    viewBox="0 0 24 24"
-    width="24"
-    height="24"
-    color="currentColor"
-  >
+  <svg viewBox="0 0 24 24" width="24" height="24" color="currentColor">
     <defs>
       <path id="home-a" d="M8 17v-6h4v6h5V9h3L10 0 0 9h3v8z" />
     </defs>
