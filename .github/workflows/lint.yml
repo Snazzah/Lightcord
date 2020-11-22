@@ -1,4 +1,4 @@
-name: ESLint
+name: Lint
 on:
   push:
     paths:
@@ -28,7 +28,7 @@ jobs:
         run: npm install -g yarn
       - name: Install dependencies
         run: |
-          yarn install eris --no-optional
+          yarn add eris --no-optional
           yarn
       - name: Run ESLint
         run: yarn run lint
