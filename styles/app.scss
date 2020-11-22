@@ -11,6 +11,24 @@
 @import 'components/tooltip';
 @import 'components/developer_portal';
 
+@font-face {
+  font-family: Whitney;
+  font-weight: 400;
+  src: url('../assets/fonts/Whitney-400.woff') format('woff');
+}
+
+@font-face {
+  font-family: Whitney;
+  font-weight: 600;
+  src: url('../assets/fonts/Whitney-600.woff') format('woff');
+}
+
+@font-face {
+  font-family: Whitney;
+  font-weight: 700;
+  src: url('../assets/fonts/Whitney-700.woff') format('woff');
+}
+
 html, body, .app {
   font-family:
     Whitney,
