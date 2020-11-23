@@ -89,10 +89,6 @@ export default {
   },
 
   /*
-   ** Router options
-   */
-  router: { base: '/Lightcord/' },
-  /*
    ** Global CSS
    */
   css: [],
