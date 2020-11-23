@@ -98,6 +98,22 @@ html, body {
 	transition: all 0.2s ease;
 }
 
+.enter-token {
+    color: #fff;
+    display: block;
+    text-align: center;
+    background-color: #2ecc71;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,.25);
+    padding: 5px;
+    user-select: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 26px;
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    transition: all 0.2s ease;
+}
+
 .continue-session {
 	color: #fff;
 	display: block;
