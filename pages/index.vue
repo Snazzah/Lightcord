@@ -233,6 +233,12 @@ $start-header: #eaeaea;
 $start-text: #a6a6a6;
 $start-accent: #7ae4ff;
 
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 400;
+  src: url('../assets/fonts/SourceCodePro-400.woff') format('woff');
+}
+
 .start-page {
   font-size: 16px;
   -ms-text-size-adjust: 100%;
@@ -423,13 +429,21 @@ $start-accent: #7ae4ff;
 
   .markdown {
     font-size: 20px;
+    code {
+      font-family: SourceCodePro, Whitney, Helvetica Neue, Helvetica, Arial,
+        sans-serif;
+      padding: 0.2em;
+      margin: -0.2em 0;
+      border-radius: 3px;
+      font-size: 85%;
+      background-color: #0002;
+    }
     .danger {
       margin: 0.5em 0;
       padding: 0.5em;
       border-radius: 5px;
       border: 1px solid #c00;
-      background-color: #c00;
-      background-color: #c00c;
+      background-color: #cc00002c;
       color: #fff;
       a {
         text-decoration: underline;
