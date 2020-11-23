@@ -10,7 +10,7 @@
             <h1>Lightcord</h1>
             <small>v2.0.0</small>
           </div>
-          <h3>placeholder</h3>
+          <h3>Discord for bots</h3>
           <div class="buttons">
             <a href="https://github.com/Snazzah/Lightcord" target="_blank">
               GitHub
@@ -19,7 +19,41 @@
         </div>
       </transition>
     </div>
-    <div class="login" :class="loading ? 'loading' : ''">
+    <div class="install-extension">
+      <h3>Lightcord requires an extension to use!</h3>
+      <span>Download the extension and reload this page:</span>
+      <div class="ext-button-row">
+        <a
+          href="https://chrome.google.com/webstore/detail/lightcord/cakpfmgjggododapaoacpmmfihpmhcae"
+          target="_blank"
+        >
+          <svg-start-chrome style="color: #7bce59" />
+        </a>
+        <a
+          href="https://addons.opera.com/en/extensions/details/lightcord/"
+          target="_blank"
+        >
+          <svg-start-opera style="color: #eb4646" />
+        </a>
+        <a
+          href="https://addons.mozilla.org/en-US/firefox/addon/lightcord/"
+          target="_blank"
+        >
+          <svg-start-firefox style="color: #d78d56" />
+        </a>
+        <a v-tippy class="disabled" content="Coming Soon" target="_blank">
+          <svg-start-edge style="color: #4db3fc" />
+        </a>
+      </div>
+      <a
+        class="small"
+        href="https://github.com/Snazzah/LightcordExtension#why-do-i-need-this"
+        target="_blank"
+      >
+        Why do I need this?
+      </a>
+    </div>
+    <div class="login requires-extension" :class="loading ? 'loading' : ''">
       <div v-if="error" class="error-login">
         {{ error }}
       </div>
@@ -78,7 +112,6 @@
         Remove last session
       </span>
     </div>
-    <!-- eslint-disable-next-line vue/no-v-html -->
     <Intro class="markdown" />
   </div>
 </template>
@@ -427,6 +460,61 @@ $start-accent: #7ae4ff;
     }
   }
 
+  .install-extension {
+    margin: 20px 0;
+    border-radius: 5px;
+    background: #3b3d3f;
+    border: 1px solid #8b8b8b;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+      color: #fff;
+      font-size: 24px;
+    }
+
+    .ext-button-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      a {
+        padding: 5px;
+        display: inline-block;
+        transition: 0.2s transform ease;
+
+        svg {
+          width: 48px;
+          height: 48px;
+        }
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        &.disabled {
+          opacity: 0.5;
+          filter: grayscale(0.5);
+          transition: 0.2s opacity ease, 0.2s filter ease;
+
+          &:hover {
+            opacity: 0.6;
+            filter: grayscale(0);
+            transform: scale(1);
+          }
+        }
+      }
+    }
+
+    a.small {
+      font-size: 14px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
   .markdown {
     font-size: 20px;
     code {
@@ -460,6 +548,10 @@ $start-accent: #7ae4ff;
         text-decoration: underline;
       }
     }
+  }
+
+  .requires-extension {
+    display: none;
   }
 }
 

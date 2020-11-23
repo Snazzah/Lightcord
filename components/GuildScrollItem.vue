@@ -8,7 +8,6 @@
     <tippy
       style="display: none"
       :to="'gsi-' + source.id"
-      arrow
       placement="right"
       boundary="viewport"
     >

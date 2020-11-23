@@ -97,9 +97,10 @@ export default {
    ** https://nuxtjs.org/guide/plugins
    */
   plugins: [
+    '~/plugins/polyfill.ts',
     '~/plugins/discord.client.ts',
-    { src: '~/plugins/vue-tippy.ts', mode: 'client' },
-    { src: '~/plugins/virtual-scroller.ts', mode: 'client' },
+    '~/plugins/vue-tippy.ts',
+    '~/plugins/virtual-scroller.ts',
   ],
   /*
    ** Auto import components
@@ -109,6 +110,7 @@ export default {
     '~/components/',
     { path: '~/components/svg/', prefix: 'svg-' },
     { path: '~/components/svg/userarea/', prefix: 'svg-userarea-' },
+    { path: '~/components/svg/start/', prefix: 'svg-start-' },
     { path: '~/components/options/', prefix: 'opt-' },
   ],
   /*
