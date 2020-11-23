@@ -11,7 +11,8 @@
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lint:fix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
+    "lint:fix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^1.0.0",
@@ -41,6 +42,7 @@
     "eslint": "^7.5.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "prettier": "^2.1.2",
+    "push-dir": "^0.4.1",
     "ts-loader": "^8.0.11",
     "typescript": "^4.0.5"
   }
