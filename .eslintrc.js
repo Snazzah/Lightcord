@@ -14,7 +14,7 @@ module.exports = {
     'prettier/prettier': 'warn',
     curly: 'off',
     'comma-dangle': [
-      'error',
+      'warn',
       {
         arrays: 'always-multiline',
         objects: 'always-multiline',
