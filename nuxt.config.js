@@ -2,7 +2,7 @@ const meta = {
   title: 'Lightcord',
   description: 'A webapp for discord bots',
   accent: '#7AE4FF',
-  url: 'https://snazzah.github.io/Lightcord/',
+  url: 'https://lightcord.js.org/',
 };
 
 export default {
@@ -36,7 +36,7 @@ export default {
       { name: 'twitter:url', content: meta.url },
       { name: 'twitter:title', content: meta.title },
       { name: 'twitter:description', content: meta.description },
-      { name: 'twitter:image', content: '/Lightcord/lightcord.png' },
+      { name: 'twitter:image', content: '/lightcord.png' },
 
       // OpenGraph
       { name: 'og:type', content: 'website' },
@@ -44,35 +44,35 @@ export default {
       { name: 'og:title', content: meta.title },
       { name: 'og:description', content: meta.description },
       { name: 'og:locale', content: 'en_US' },
-      { name: 'og:image', content: '/Lightcord/lightcord.png' },
+      { name: 'og:image', content: '/lightcord.png' },
     ],
     link: [
       // Manifest
-      { rel: 'icon', type: 'image/x-icon', href: '/Lightcord/favicon.ico' },
-      { rel: 'manifest', href: '/Lightcord/manifest.json' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'manifest', href: '/manifest.json' },
 
       // Icons
       {
         rel: 'mask-icon',
-        href: '/Lightcord/safari-pinned-tab.svg',
+        href: '/safari-pinned-tab.svg',
         color: meta.accent,
       },
       {
         rel: 'apple-touch-icon',
         sizes: '180x180',
-        href: '/Lightcord/apple-touch-icon.png',
+        href: '/apple-touch-icon.png',
       },
-      { rel: 'icon', sizes: '16x16', href: '/Lightcord/favicon-16x16.png' },
-      { rel: 'icon', sizes: '32x32', href: '/Lightcord/favicon-32x32.png' },
+      { rel: 'icon', sizes: '16x16', href: '/favicon-16x16.png' },
+      { rel: 'icon', sizes: '32x32', href: '/favicon-32x32.png' },
       {
         rel: 'icon',
         sizes: '192x192',
-        href: '/Lightcord/android-chrome-192x192.png',
+        href: '/android-chrome-192x192.png',
       },
       {
         rel: 'icon',
         sizes: '512x512',
-        href: '/Lightcord/android-chrome-512x512.png',
+        href: '/android-chrome-512x512.png',
       },
     ],
   },
