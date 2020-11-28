@@ -177,6 +177,7 @@ export default Vue.extend({
       channelScrollItem: ChannelScrollItem,
       selectedGuild: null,
       collapsedCategoryChannels: [],
+      lastVisitedChannels: {},
       theme: 'dark',
       darkSidebar: false,
 
@@ -369,14 +370,30 @@ export default Vue.extend({
     switchToGuild(id) {
       if (!this.$discord.client.guilds.has(id)) return;
       this.selectedGuild = id;
+      if (this.lastVisitedChannels[id])
+        return this.$router.push(
+          `/channels/${id}/${this.lastVisitedChannels[id]}`
+        );
       const firstChannel = Array.from(
         this.$discord.client.guilds.get(id).channels.values()
       )
-        .filter((channel) => channel.type === 0)
+        .sort(channelSort)
+        .filter((channel) => channel.type === 0 || channel.type === 5)
         .filter((chn) => channelViewable(chn, this.$discord.client))[0];
+      if (firstChannel) this.lastVisitedChannels[id] = firstChannel.id;
       this.$router.push(
         firstChannel ? `/channels/${id}/${firstChannel.id}` : `/channels/${id}`
       );
+    },
+    switchToChannel(id) {
+      if (
+        !this.selectedGuild ||
+        !this.$discord.client.guilds.has(this.selectedGuild) ||
+        !this.selectedGuildProto.channels.has(id)
+      )
+        return;
+      this.lastVisitedChannels[this.selectedGuild] = id;
+      this.$router.push(`/channels/${this.selectedGuild}/${id}`);
     },
     switchToHome() {
       if (!this.selectedGuild) return;

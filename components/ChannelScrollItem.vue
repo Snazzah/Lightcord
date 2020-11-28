@@ -30,7 +30,11 @@
     <div class="children" />
   </a>
   <!-- Other channels -->
-  <a v-else-if="source.type === 'channel'" class="guild-channel">
+  <a
+    v-else-if="source.type === 'channel'"
+    class="guild-channel"
+    @click="app.switchToChannel(source.channel.id)"
+  >
     <div class="content">
       <svg-text-channel
         v-if="source.channel.type === 0"

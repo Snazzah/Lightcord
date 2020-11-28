@@ -1,5 +1,5 @@
 <template>
-  <div v-if="channel().type !== 0" class="no-channel">
+  <div v-if="channel().type !== 0 && channel().type !== 5" class="no-channel">
     <div class="wrapper">
       <svg-no-text-channels />
       <div class="text-wrapper">
