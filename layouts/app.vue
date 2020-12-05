@@ -178,6 +178,9 @@ export default Vue.extend({
       selectedGuild: null,
       collapsedCategoryChannels: [],
       lastVisitedChannels: {},
+      channelMessages: {},
+
+      // Settings
       theme: 'dark',
       darkSidebar: false,
 

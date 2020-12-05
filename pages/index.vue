@@ -24,15 +24,12 @@
       <span>Download the extension and reload this page:</span>
       <div class="ext-button-row">
         <a
-          href="https://chrome.google.com/webstore/detail/lightcord/cakpfmgjggododapaoacpmmfihpmhcae"
+          href="https://chrome.google.com/webstore/detail/lightcord/cakpfmgjggododapaoacpmmfihpmhcae/"
           target="_blank"
         >
           <svg-start-chrome style="color: #7bce59" />
         </a>
-        <a
-          href="https://addons.opera.com/en/extensions/details/lightcord/"
-          target="_blank"
-        >
+        <a v-tippy class="disabled" content="Coming Soon" target="_blank">
           <svg-start-opera style="color: #eb4646" />
         </a>
         <a
@@ -45,13 +42,6 @@
           <svg-start-edge style="color: #4db3fc" />
         </a>
       </div>
-      <a
-        class="small"
-        href="https://github.com/Snazzah/LightcordExtension#why-do-i-need-this"
-        target="_blank"
-      >
-        Why do I need this?
-      </a>
     </div>
     <div class="login requires-extension" :class="loading ? 'loading' : ''">
       <div v-if="error" class="error-login">
@@ -259,6 +249,7 @@ export default Vue.extend({
 
 <style lang="scss">
 @import 'vue2-animate/src/sass/vue2-animate.scss';
+@import '~/styles/assets/common';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 $start-background: #282828;
@@ -507,10 +498,13 @@ $start-accent: #7ae4ff;
       }
     }
 
-    a.small {
-      font-size: 14px;
-      &:hover {
-        text-decoration: underline;
+    a {
+      color: #74b9ff;
+      &.small {
+        font-size: 14px;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }

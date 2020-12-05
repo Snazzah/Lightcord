@@ -24,6 +24,7 @@
     "eventemitter3": "^4.0.4",
     "markdown-it-attrs": "^3.0.3",
     "markdown-it-div": "^1.1.0",
+    "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "nuxt": "^2.14.3",
     "opusscript": "https://github.com/abalabahaha/opusscript",

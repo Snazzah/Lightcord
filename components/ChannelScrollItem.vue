@@ -33,6 +33,7 @@
   <a
     v-else-if="source.type === 'channel'"
     class="guild-channel"
+    :class="$route.params.channelID === source.channel.id ? 'selected' : ''"
     @click="app.switchToChannel(source.channel.id)"
   >
     <div class="content">

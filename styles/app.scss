@@ -3,9 +3,11 @@
 @import 'assets/theme_colors';
 
 @import 'components/global';
+@import 'components/objects';
 @import 'components/app';
 @import 'components/channels';
 @import 'components/layers';
+@import 'components/messages';
 @import 'components/table';
 @import 'components/options';
 @import 'components/tooltip';
@@ -15,6 +17,12 @@
   font-family: Whitney;
   font-weight: 400;
   src: url('../assets/fonts/Whitney-400.woff') format('woff');
+}
+
+@font-face {
+  font-family: Whitney;
+  font-weight: 500;
+  src: url('../assets/fonts/Whitney-500.woff') format('woff');
 }
 
 @font-face {
@@ -45,6 +53,7 @@ html, body, .app {
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   box-sizing: border-box;
   color: var(--text-color);
   background-color: #2a2d32;

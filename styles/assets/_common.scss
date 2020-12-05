@@ -4,6 +4,12 @@
   display: flex;
 }
 
+@mixin display-inlineFlex {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
 @mixin flexDirection-row {
   -webkit-box-orient: horizontal;
   -moz-box-orient: horizontal;
@@ -69,6 +75,12 @@
   justify-content: flex-end;
 }
 
+@mixin justifyContent-stretch {
+  -webkit-box-pack: stretch;
+  -ms-flex-pack: stretch;
+  justify-content: stretch;
+}
+
 @mixin alignItems-center {
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -119,6 +131,18 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+@mixin userSelect-text {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+@mixin transformStyle-preserve3d {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 @mixin appearance-none {

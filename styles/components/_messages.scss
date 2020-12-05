@@ -1,0 +1,100 @@
+.message-wrapper {
+  .message {
+    position: relative;
+    word-wrap: break-word;
+    @include userSelect-text;
+    @include flex-0-0-auto;
+    padding-right: 16px;
+    min-height: 1.375rem;
+    padding-top: .125rem;
+    padding-bottom: .125rem;
+    padding-right: 48px!important;
+
+    &.group-start {
+      margin-top: 1.0625rem;
+    }
+
+    &.cozy {
+      padding-left: 72px;
+
+      &.group-start {
+        min-height: 2.75rem;
+      }
+
+      .message-contents {
+        position: static;
+        margin-left: 0;
+        padding-left: 0;
+        text-indent: 0;
+      }
+
+      .header {
+        display: block;
+        position: relative;
+        line-height: 1.375rem;
+        min-height: 1.375rem;
+        color: var(--text-muted);
+        white-space: break-spaces;
+        word-wrap: pre-wrap;
+
+        .header-text {
+          margin-right: .25rem;
+        }
+
+        .timestamp {
+          font-size: 0.75rem;
+          line-height: 1.375rem;
+          color: var(--text-muted);
+          vertical-align: baseline;
+          margin-left: .25rem;
+        }
+      }
+
+      .bot-tag {
+        margin-left: .25rem;
+      }
+    }
+
+    .avatar {
+      position: absolute;
+      left: 16px;
+      margin-top: calc(4px - .125rem);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .username {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.375rem;
+      color: var(--header-primary);
+      display: inline;
+      vertical-align: baseline;
+      position: relative;
+
+      &.clickable:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    .timestamp {
+      display: inline-block;
+      height: 1.25rem;
+      cursor: default;
+      font-weight: 500;
+    }
+  }
+}
