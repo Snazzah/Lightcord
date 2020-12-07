@@ -161,6 +161,12 @@ function channelSort(a, b) {
 
 function channelViewable(channel, client) {
   if (client.user.id === channel.guild.ownerID) return true;
+  if (channel.type === 4) {
+    const viewableChannels = channel.channels.filter((chn) =>
+      channelViewable(chn, client)
+    );
+    if (viewableChannels.length) return true;
+  }
   const perms = channel.permissionsOf(client.user.id);
   return perms.has('readMessages');
 }
