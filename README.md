@@ -32,13 +32,13 @@ Feel free to PR to **this** branch (`v2`) as I try to map out what needs to be d
 ## Resources Used
 - [eris](http://github.com/abalabahaha/eris) <small>used for the Discord API</small>
 - [Nuxt](http://nuxtjs.org) <small>used for rendering pages</small>
+- [Simple Markdown](https://github.com/Khan/simple-markdown) <small>used for markdown conversion</small>
+- [Moment](http://momentjs.com) <small>used for timestamp conversion</small>
+- [Tippy.js](https://github.com/atomiks/tippyjs) and [VueTippy](https://github.com/KABBOUCHI/vue-tippy) <small>used for tooltips</small>
+- [hightlight.js](http://hightlightjs.com) <small>used for highlighting codeblocks</small>
 - [FileDrop](http://filedropjs.org) <small>used for the Drag & Drop feature (planned)</small>
-- [Simple Markdown](https://github.com/Khan/simple-markdown) <small>used for markdown conversion (planned)</small>
-- [Moment](http://momentjs.com) <small>used for timestamp conversion (planned)</small>
 - [Twemoji](https://github.com/twitter/twemoji) <small>used for emoji conversion (planned)</small>
 - [Fuse.js](http://fusejs.io) <small>used for searching (QuickSwitcher) (planned)</small>
-- [hightlight.js](http://hightlightjs.com) <small>used for highlighting codeblocks (planned)</small>
-- [Tippy.js](https://github.com/atomiks/tippyjs) <small>used for tooltips (planned)</small>
 
 ### Note
 Make sure `opusscript` (`yarn add eris --no-optional`) is not installed when building or else the build will not work.

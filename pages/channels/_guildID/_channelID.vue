@@ -95,7 +95,9 @@
 
 <script>
 import Vue from 'vue';
+import lodash from 'lodash';
 import Message from '~/components/Message.vue';
+import { UNCACHEABLE_IDS } from '~/assets/constants';
 
 export default Vue.extend({
   layout: 'app',
@@ -164,12 +166,40 @@ export default Vue.extend({
       return this.$router.replace(`/channels/${this.$route.params.guildID}`);
 
     if (!this.app.channelMessages[this.$route.params.channelID]) {
-      const messages = await this.channel().getMessages();
+      let messages = await this.channel().getMessages();
       console.log('recieved messages', messages);
+
+      const uncachedMembers = lodash
+        .uniq(messages.map((m) => m.author.id))
+        .filter(
+          (id) => !this.guild().members.has(id) && !UNCACHEABLE_IDS.includes(id)
+        );
+
+      if (uncachedMembers.length) {
+        console.log('Found uncached members', uncachedMembers);
+
+        const members = await this.guild().fetchMembers({
+          userIDs: uncachedMembers,
+        });
+
+        for (const member of members) {
+          this.guild().members.add(member, this);
+        }
+
+        messages = messages.map((message) => {
+          const member = members.find(
+            (member) => message.author.id === member.id
+          );
+          if (message.member == null && member) message.member = member;
+          return message;
+        });
+      }
+
       this.app.channelMessages[
         this.$route.params.channelID
       ] = messages.reverse();
       if (messages.length !== 50) this.canLoadMore = false;
+
       this.loadingMessages = false;
       this.ticker = Date.now();
     }
