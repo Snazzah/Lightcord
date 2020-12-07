@@ -1,37 +1,58 @@
 import SimpleMarkdown from 'simple-markdown';
 import hljs from 'highlight.js';
+import Vue from 'vue';
+import { MDAnchor } from './markdownRenders';
 
 interface CodeBlockNode {
   lang?: string;
   content?: string;
 }
-interface HtmlRules {
-  readonly Array?: SimpleMarkdown.HtmlArrayRule;
+
+type VueOutput = SimpleMarkdown.Output<Vue.VNodeChildren | string>;
+type VueNodeOutput = SimpleMarkdown.NodeOutput<Vue.VNodeChildren | string>;
+interface VueOutputRule {
+  readonly vue: VueNodeOutput | null;
+}
+interface VueArrayRule extends SimpleMarkdown.ArrayRule {
+  readonly react?: SimpleMarkdown.ArrayNodeOutput<SimpleMarkdown.ReactElements>;
+  readonly html?: SimpleMarkdown.ArrayNodeOutput<string>;
+  readonly vue: SimpleMarkdown.ArrayNodeOutput<Vue.VNodeChildren | string>;
+  readonly [other: string]: SimpleMarkdown.ArrayNodeOutput<any> | undefined;
+}
+interface NonNullVueOutputRule extends VueOutputRule {
+  readonly vue: VueNodeOutput;
+}
+type VueInOutRule = SimpleMarkdown.SingleNodeParserRule & NonNullVueOutputRule;
+type VueInRule = SimpleMarkdown.SingleNodeParserRule & VueOutputRule;
+interface DefaultVueArrayRule extends SimpleMarkdown.ArrayRule {
+  readonly react: SimpleMarkdown.ArrayNodeOutput<SimpleMarkdown.ReactElements>;
+  readonly html: SimpleMarkdown.ArrayNodeOutput<string>;
+  readonly vue: SimpleMarkdown.ArrayNodeOutput<Vue.VNodeChildren | string>;
+}
+
+interface VueRules {
+  readonly Array?: VueArrayRule;
   [type: string]:
-    | (SimpleMarkdown.ParserRule & SimpleMarkdown.HtmlOutputRule)
-    | SimpleMarkdown.HtmlArrayRule
+    | (SimpleMarkdown.ParserRule & VueOutputRule)
+    | VueArrayRule
     | undefined;
 }
-type DefaultInOutRule = SimpleMarkdown.SingleNodeParserRule &
-  SimpleMarkdown.NonNullHtmlOutputRule;
-type DefaultInRule = SimpleMarkdown.SingleNodeParserRule &
-  SimpleMarkdown.HtmlOutputRule;
-interface DefaultRules extends HtmlRules {
-  Array: SimpleMarkdown.DefaultArrayRule;
-  codeBlock: DefaultInOutRule;
-  blockQuote: DefaultInOutRule;
-  // newline: TextInOutRule;
-  paragraph: DefaultInOutRule;
-  escape: DefaultInRule;
-  autolink: DefaultInRule;
-  link: DefaultInOutRule;
-  url: DefaultInRule;
-  em: DefaultInOutRule;
-  strong: DefaultInOutRule;
-  u: DefaultInOutRule;
-  del: DefaultInOutRule;
-  inlineCode: DefaultInOutRule;
-  text: DefaultInOutRule;
+
+interface DefaultRules extends VueRules {
+  Array: DefaultVueArrayRule;
+  codeBlock: VueInOutRule;
+  blockQuote: VueInOutRule;
+  paragraph: VueInOutRule;
+  escape: VueInRule;
+  autolink: VueInRule;
+  link: VueInOutRule;
+  url: VueInRule;
+  em: VueInOutRule;
+  strong: VueInOutRule;
+  u: VueInOutRule;
+  del: VueInOutRule;
+  inlineCode: VueInOutRule;
+  text: VueInOutRule;
 }
 
 const blockRegex = function (regex: RegExp) {
@@ -47,7 +68,30 @@ const blockRegex = function (regex: RegExp) {
 };
 
 const defaultRules: DefaultRules = {
-  Array: SimpleMarkdown.defaultRules.Array,
+  Array: {
+    ...SimpleMarkdown.defaultRules.Array,
+    vue(arr, output, state) {
+      const result = [];
+
+      console.log('array FOUND', arr);
+
+      // map output over the ast, except group any text
+      // nodes together into a single string output.
+      for (let i = 0; i < arr.length; i++) {
+        let node = arr[i];
+        if (node.type === 'text') {
+          node = { type: 'text', content: node.content };
+          for (; i + 1 < arr.length && arr[i + 1].type === 'text'; i++) {
+            node.content += arr[i + 1].content;
+          }
+        }
+
+        result.push(output(node, state));
+      }
+
+      return result;
+    },
+  },
   codeBlock: {
     order: SimpleMarkdown.defaultRules.codeBlock.order,
     match: blockRegex(/^\n?```([^\s`]*)(?:\n([\s\S]*?)|)\n?```/),
@@ -62,79 +106,230 @@ const defaultRules: DefaultRules = {
       }
       return result;
     },
-    html: (node) =>
-      `<pre><code class="scrollbarGhostHairline-1mSOM1 scrollbar-3dvm_9 hljs ${
-        node.lang || ''
-      }">${
+    vue(node, _, { e }) {
+      return e('pre', [
         node.lang
-          ? hljs.highlight(node.lang, node.content as string).value
-          : node.content
-      }</code></pre>`,
+          ? e(
+              'code',
+              {
+                attrs: {
+                  class:
+                    'scrollbarGhostHairline-1mSOM1 scrollbar-3dvm_9 hljs ' +
+                    node.lang,
+                },
+                domProps: {
+                  innerHTML: hljs.highlight(node.lang, node.content as string)
+                    .value,
+                },
+              },
+              node.content
+            )
+          : e(
+              'code',
+              {
+                attrs: {
+                  class: 'scrollbarGhostHairline-1mSOM1 scrollbar-3dvm_9 hljs',
+                },
+              },
+              node.content
+            ),
+      ]);
+    },
   },
   blockQuote: {
     order: SimpleMarkdown.defaultRules.blockQuote.order,
     match: SimpleMarkdown.blockRegex(/^\n(>[^\n]+([^\n]+)*)+/),
     parse: SimpleMarkdown.defaultRules.blockQuote.parse,
-    html: (node, output, state) =>
-      `<div class="blockquoteContainer-U5TVEi"><div class="blockquoteDivider-2hH8H6"></div><blockquote>${output(
-        node.content,
-        state
-      ).trim()}</blockquote></div>`,
+    vue(node, output, state) {
+      // @TODO change regex and actually use blockquotes
+      return state.e('span', output(node.content, state));
+    },
   },
   paragraph: {
     order: SimpleMarkdown.defaultRules.paragraph.order,
     match: SimpleMarkdown.blockRegex(/^((?:[^\n]|\n(?! *\n))+)\n/),
     parse: SimpleMarkdown.defaultRules.paragraph.parse,
-    // html: SimpleMarkdown.defaultRules.paragraph.html,
-    html: (node, output, state) => output(node.content, state) + '\n',
+    // @ts-ignore
+    vue: (node, output, state) => [...output(node.content, state), '\n'],
   },
-  escape: SimpleMarkdown.defaultRules.escape,
-  // newline: SimpleMarkdown.defaultRules.newline,
-  autolink: SimpleMarkdown.defaultRules.autolink,
+  escape: {
+    ...SimpleMarkdown.defaultRules.escape,
+    vue: null,
+  },
+  autolink: {
+    ...SimpleMarkdown.defaultRules.autolink,
+    vue: null,
+  },
   url: {
     order: SimpleMarkdown.defaultRules.url.order,
     match: SimpleMarkdown.defaultRules.url.match,
     parse: SimpleMarkdown.defaultRules.url.parse,
-    html: null,
+    vue: null,
   },
-  link: SimpleMarkdown.defaultRules.link,
-  em: SimpleMarkdown.defaultRules.em,
-  strong: SimpleMarkdown.defaultRules.strong,
-  u: SimpleMarkdown.defaultRules.u,
-  del: SimpleMarkdown.defaultRules.del,
-  inlineCode: {
-    ...SimpleMarkdown.defaultRules.inlineCode,
-    match: SimpleMarkdown.inlineRegex(/^(`)([\s\S]*?[^`])\1(?!`)/),
-    html(node) {
-      return SimpleMarkdown.htmlTag(
-        'code',
-        SimpleMarkdown.sanitizeText(node.content),
-        { class: 'inline' }
+  link: {
+    ...SimpleMarkdown.defaultRules.link,
+    vue(node, output, { e }) {
+      return e(
+        MDAnchor,
+        {
+          props: {
+            href: node.target,
+            title: node.title,
+          },
+        },
+        output(node.content, { e })
       );
     },
   },
-  text: SimpleMarkdown.defaultRules.text,
+  em: {
+    ...SimpleMarkdown.defaultRules.em,
+    vue(node, output, state) {
+      return state.e('i', output(node.content, state));
+    },
+  },
+  strong: {
+    ...SimpleMarkdown.defaultRules.strong,
+    vue(node, output, state) {
+      return state.e('b', output(node.content, state));
+    },
+  },
+  u: {
+    ...SimpleMarkdown.defaultRules.u,
+    vue(node, output, state) {
+      return state.e('u', output(node.content, state));
+    },
+  },
+  del: {
+    ...SimpleMarkdown.defaultRules.del,
+    vue(node, output, state) {
+      return state.e('del', output(node.content, state));
+    },
+  },
+  inlineCode: {
+    ...SimpleMarkdown.defaultRules.inlineCode,
+    match: SimpleMarkdown.inlineRegex(/^(`)([\s\S]*?[^`])\1(?!`)/),
+    vue(node, _, { e }) {
+      return e(
+        'code',
+        {
+          attrs: {
+            class: 'inline',
+          },
+        },
+        node.content
+      );
+    },
+  },
+  text: {
+    ...SimpleMarkdown.defaultRules.text,
+    vue(node) {
+      return node.content;
+    },
+  },
 };
 
-const createParser = (rules: HtmlRules) => {
+export const MDRender = Vue.component('md-render', {
+  props: {
+    tag: {
+      type: String,
+      default: 'span',
+    },
+    content: {
+      type: Function,
+      required: true,
+    },
+  },
+
+  render(e) {
+    const { tag, content } = (this as unknown) as {
+      tag: string;
+      content: (createElement: Vue.CreateElement) => Vue.VNodeChildren;
+    };
+
+    const children = content(e);
+
+    console.log(children, this.$slots);
+
+    // @ts-ignore
+    if (this.$slots.default) children.push(this.$slots.default);
+
+    return e(
+      tag,
+      {
+        attrs: {
+          class: 'md-render',
+        },
+      },
+      children
+    );
+  },
+});
+
+const vueFor = function (rules: VueRules) {
+  // @ts-ignore
+  const outputFunc = SimpleMarkdown.ruleOutput(rules, 'vue');
+  const nestedOutput = (
+    ast: SimpleMarkdown.SingleASTNode | SimpleMarkdown.SingleASTNode[],
+    state?: any
+  ): Vue.VNodeChildren => {
+    state = state || {};
+    if (Array.isArray(ast)) {
+      return ast.map((node) => {
+        return nestedOutput(node, state);
+      });
+    } else {
+      return outputFunc(ast, nestedOutput, state);
+    }
+  };
+  return nestedOutput;
+};
+
+const cleanUpNodes = (nodes: SimpleMarkdown.SingleASTNode[]) => {
+  const result = [];
+
+  // map output over the ast, except group any text
+  // nodes together into a single string output.
+  for (let i = 0; i < nodes.length; i++) {
+    let node = nodes[i];
+    if (node.type === 'text') {
+      node = { type: 'text', content: node.content };
+      for (; i + 1 < nodes.length && nodes[i + 1].type === 'text'; i++) {
+        node.content += nodes[i + 1].content;
+      }
+      result.push(node);
+    } else if (node.type === 'paragraph') {
+      // Flatten paragraphs
+      if (i !== 0) result.push({ type: 'text', content: '\n' });
+      node.content.map((node: SimpleMarkdown.SingleASTNode) =>
+        result.push(node)
+      );
+    } else if (Array.isArray(node.content)) {
+      node.content = cleanUpNodes(node.content);
+      result.push(node);
+    } else result.push(node);
+  }
+
+  return result;
+};
+
+const createVueParser = (rules: VueRules) => {
   const parser = SimpleMarkdown.parserFor(rules);
   return (content: string) => {
-    const parse = function (source: string) {
-      const blockSource = source + '\n\n';
-      return parser(blockSource, { inline: false });
-    };
-    // @ts-ignore
-    const htmlOutput = SimpleMarkdown.htmlFor(
-      // @ts-ignore
-      SimpleMarkdown.ruleOutput(rules, 'html')
+    const parsedContent = cleanUpNodes(
+      parser(content.trim(), { inline: false })
     );
-    return htmlOutput(parse(content.trim())).trim();
-    // return parse(content);
+
+    // SimpleMarkdown has a quirk where the last element will be a newline.
+    parsedContent.pop();
+
+    console.log({ content: parsedContent });
+    return (createElement: Vue.CreateElement) =>
+      vueFor(rules)(parsedContent, { e: createElement });
   };
 };
 
 // Use rules that are not dependent on the `link` rule
-const defaultMessageRules: HtmlRules = Object.assign({}, defaultRules, {
+const defaultMessageRules: VueRules = Object.assign({}, defaultRules, {
   autolink: {
     ...SimpleMarkdown.defaultRules.autolink,
     parse(capture: SimpleMarkdown.Capture) {
@@ -153,13 +348,26 @@ const defaultMessageRules: HtmlRules = Object.assign({}, defaultRules, {
         content: capture[1],
       };
     },
-    html(node: SimpleMarkdown.SingleASTNode) {
+    vue(
+      node: SimpleMarkdown.SingleASTNode,
+      _: unknown,
+      { e }: { e: Vue.CreateElement }
+    ) {
       const url = new URL(node.content);
-      return `<a class="anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB" title="${url.toString()}" href="${url.toString()}" rel="noreferrer noopener" target="_blank" role="button" tabindex="0">${url.toString()}</a>`;
+      return e(
+        MDAnchor,
+        {
+          props: {
+            href: url.toString(),
+            title: url.toString(),
+          },
+        },
+        url.toString()
+      );
     },
   },
 });
 delete defaultMessageRules.link;
 
-export const defaultParser = createParser(defaultRules);
-export const messageParser = createParser(defaultMessageRules);
+export const defaultParser = createVueParser(defaultRules);
+export const messageParser = createVueParser(defaultMessageRules);

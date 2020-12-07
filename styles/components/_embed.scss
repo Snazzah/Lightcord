@@ -150,12 +150,8 @@
 
     .embed-footer {
       white-space: initial;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
+      @include display-flex;
+      @include alignItems-center;
       grid-row: auto/auto;
       grid-column: 1/1;
 

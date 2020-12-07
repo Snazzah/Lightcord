@@ -48,7 +48,7 @@
         </span>
       </h2>
       <div class="markup message-content">
-        <span v-if="source.content" v-html="parsedMessage" /><time
+        <MDRender v-if="source.content" :content="parsedMessage" /><time
           v-if="source.editedTimestamp"
           v-tippy
           :datetime="new Date(source.editedTimestamp).toISOString()"
@@ -60,7 +60,7 @@
           (edited)
         </time>
       </div>
-      <div class="extras-container">
+      <div v-if="source.embeds.length" class="extras-container">
         <message-embed
           v-for="embed in source.embeds"
           :key="JSON.stringify(embed)"
@@ -74,11 +74,12 @@
 <script>
 import Vue from 'vue';
 import moment from 'moment';
-import { messageParser } from '~/assets/markdownParser';
+import { MDRender, messageParser } from '~/assets/markdownParser';
 import { SYSTEM_USER_IDS } from '~/assets/constants';
 
 export default Vue.extend({
   name: 'Message',
+  components: { MDRender },
   props: {
     source: {
       type: Object,

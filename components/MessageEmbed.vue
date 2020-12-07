@@ -1,7 +1,7 @@
 <template>
   <div v-if="source.type === 'image'" class="embed markup" aria-hidden="false">
     <a
-      class="image-wrapper imageZoom-1n-ADA clickable-3Ya1ho embedWrapper-lXpS3L embed-media embedImage-2W1cML no-margin"
+      class="image-wrapper embed-wrapper embed-media embed-image no-margin"
       tabindex="0"
       :href="source.url"
       rel="noreferrer noopener"
@@ -11,7 +11,9 @@
     >
       <img
         alt=""
-        :src="source.thumbnail.proxy_url + `?width=${clampedSize[0]}&amp;height=${clampedSize[1]}`"
+        :src="
+          proxyURL(source.thumbnail.proxy_url, clampedSize[0], clampedSize[1])
+        "
         :style="`width: ${clampedSize[0]}px; height: ${clampedSize[1]}px`"
       />
     </a>
@@ -73,10 +75,10 @@
         </a>
       </div>
       <div v-else-if="source.title" class="embed-title">{{ source.title }}</div>
-      <div
+      <MDRender
         v-if="source.description"
         class="embed-description"
-        v-html="parsedDescription"
+        :content="parsedDescription"
       />
       <div v-if="source.footer" class="embed-footer">
         <img
@@ -97,11 +99,12 @@
 <script>
 import Vue from 'vue';
 import moment from 'moment';
-import { defaultParser } from '~/assets/markdownParser';
+import { MDRender, defaultParser } from '~/assets/markdownParser';
 import { clampSize } from '~/assets/constants';
 
 export default Vue.extend({
   name: 'MessageEmbed',
+  components: { MDRender },
   props: {
     source: {
       type: Object,
@@ -117,7 +120,7 @@ export default Vue.extend({
     parsedDescription() {
       return this.source.description
         ? defaultParser(this.source.description)
-        : '';
+        : null;
     },
     clampedSize() {
       return this.source.type === 'image'
@@ -127,6 +130,11 @@ export default Vue.extend({
             this.source.thumbnail.height
           )
         : [0, 0];
+    },
+  },
+  methods: {
+    proxyURL(url, w, h) {
+      return url + `?width=${w}&height=${h}`;
     },
   },
 });
