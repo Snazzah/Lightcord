@@ -21,13 +21,14 @@ Feel free to PR to **this** branch (`v2`) as I try to map out what needs to be d
     - [ ] Settings modal
   - Channels
     - [x] Scroller rendering
-    - [ ] No text channels fallback
+    - [x] No text channels fallback
     - [x] Collapsable Category Channels
     - Text channels
-      - [ ] Base text channel
-      - [ ] Message rendering
-      - [ ] Embed rendering
+      - [x] Base text channel
+      - [x] Message rendering
+      - [x] Embed rendering
       - [ ] Show typing
+      - [ ] Proper message scrolling
 
 ## Resources Used
 - [eris](http://github.com/abalabahaha/eris) <small>used for the Discord API</small>

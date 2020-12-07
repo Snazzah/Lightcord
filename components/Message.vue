@@ -1,31 +1,72 @@
 <template>
   <!-- <span>{{ source.content }}</span> -->
   <div class="message cozy group-start" role="listitem">
-    <div class="message-contents">
+    <div class="message-contents" role="document">
       <img
-        :src="source.author.dynamicAvatarURL('jpg', 128)"
+        :src="source.author.dynamicAvatarURL('png', 128)"
         aria-hidden="true"
         class="avatar"
         alt=" "
       />
       <h2 class="header">
         <span class="header-text">
-          <!-- eslint-disable -->
           <span
             class="username"
             aria-expanded="false"
             role="button"
             tabindex="0"
-            :style="source.member ? `color: #${colorRole.color.toString(16)}` : ''"
-          >{{ source.member && source.member.nick ? source.member.nick : source.author.username }}</span><span v-if="source.author.system" class="bot-tag regular">
+            :style="
+              source.member && colorRole
+                ? `color: #${colorRole.color.toString(16)}`
+                : ''
+            "
+          >
+            {{
+              source.member && source.member.nick
+                ? source.member.nick
+                : source.author.username
+            }}
+          </span>
+          <span v-if="isFromSystemUser" class="bot-tag regular">
             <span class="text">SYSTEM</span>
-          </span><span v-else-if="source.author.bot" class="bot-tag regular">
-            <svg-verified-bot-tick v-if="verifiedBot" v-tippy content="Verified Bot" />
+          </span>
+          <span v-else-if="source.author.bot" class="bot-tag regular">
+            <svg-verified-bot-tick
+              v-if="verifiedBot"
+              v-tippy
+              content="Verified Bot"
+            />
             <span class="text">BOT</span>
           </span>
-        </span><span v-tippy="{ delay: [1000, 0] }" :content="fullTimestamp" class="timestamp"><span :aria-label="timestamp">{{ timestamp }}</span></span>
+        </span>
+        <span
+          v-tippy="{ delay: [1000, 0] }"
+          :content="fullTimestamp"
+          class="timestamp"
+        >
+          <span :aria-label="timestamp">{{ timestamp }}</span>
+        </span>
       </h2>
-      <div class="markup message-content">{{ source.content }}</div>
+      <div class="markup message-content">
+        <span v-if="source.content" v-html="parsedMessage" /><time
+          v-if="source.editedTimestamp"
+          v-tippy
+          :datetime="new Date(source.editedTimestamp).toISOString()"
+          class="edited"
+          role="note"
+          :aria-label="editedTimestamp"
+          :content="editedTimestamp"
+        >
+          (edited)
+        </time>
+      </div>
+      <div class="extras-container">
+        <message-embed
+          v-for="embed in source.embeds"
+          :key="JSON.stringify(embed)"
+          :source="embed"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -33,8 +74,11 @@
 <script>
 import Vue from 'vue';
 import moment from 'moment';
+import { messageParser } from '~/assets/markdownParser';
+import { SYSTEM_USER_IDS } from '~/assets/constants';
 
 export default Vue.extend({
+  name: 'Message',
   props: {
     source: {
       type: Object,
@@ -43,15 +87,14 @@ export default Vue.extend({
   },
   data() {
     return {
-      app: this.$parent.$parent.$parent,
+      app: this.$parent.$parent.$parent.$parent.$parent,
     };
   },
   computed: {
-    // color: rgb(25, 184, 184)
     colorRole() {
       return this.source.member
-        ? this.source.chanel.guild.roles
-            .filter((r) => this.source.member.roles.has(r))
+        ? this.source.channel.guild.roles
+            .filter((r) => this.source.member.roles.includes(r.id))
             .find((role) => role.color !== 0)
         : null;
     },
@@ -65,6 +108,15 @@ export default Vue.extend({
     },
     fullTimestamp() {
       return moment(this.source.createdAt).format('LLLL');
+    },
+    editedTimestamp() {
+      return moment(this.source.editedTimestamp).format('LLLL');
+    },
+    parsedMessage() {
+      return messageParser(this.source.content);
+    },
+    isFromSystemUser() {
+      return SYSTEM_USER_IDS.includes(this.source.author.id);
     },
   },
 });
