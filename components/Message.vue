@@ -1,5 +1,9 @@
 <template>
-  <div class="message cozy group-start" role="listitem">
+  <div
+    class="message cozy group-start"
+    :class="mentioned ? 'mentioned' : ''"
+    role="listitem"
+  >
     <div class="message-contents" role="document">
       <img
         :src="source.author.dynamicAvatarURL('png', 128)"
@@ -117,6 +121,20 @@ export default Vue.extend({
     },
     isFromSystemUser() {
       return SYSTEM_USER_IDS.includes(this.source.author.id);
+    },
+    mentioned() {
+      return (
+        this.source.mentionEveryone ||
+        (this.source.roleMentions &&
+          this.source.guildID &&
+          this.source.channel.guild.members
+            .get(this.$discord.client.user.id)
+            .roles.filter((id) => this.source.roleMentions.includes(id))
+            .length > 0) ||
+        this.source.mentions
+          .map((user) => user.id)
+          .includes(this.$discord.client.user.id)
+      );
     },
   },
 });

@@ -60,6 +60,9 @@
     }
 
     &.mentioned {
+      position: relative;
+      background-color: var(--background-mentioned);
+
       .mention {
         border-radius: 0;
         padding: 0;
@@ -69,6 +72,22 @@
           color: #7289da;
           text-decoration: underline;
         }
+      }
+
+      &:hover {
+        background-color: var(--background-mentioned-hover);
+      }
+
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        pointer-events: none;
+        width: 2px;
+        background-color: #faa61a;
       }
     }
 
