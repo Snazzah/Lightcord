@@ -10,6 +10,10 @@
     padding-bottom: .125rem;
     padding-right: 48px!important;
 
+    &:hover {
+      background-color: var(--background-message-hover);
+    }
+
     &.group-start {
       margin-top: 1.0625rem;
     }
@@ -55,6 +59,19 @@
       }
     }
 
+    &.mentioned {
+      .mention {
+        border-radius: 0;
+        padding: 0;
+        background-color: transparent!important;
+
+        &.interactive:hover {
+          color: #7289da;
+          text-decoration: underline;
+        }
+      }
+    }
+
     .avatar {
       position: absolute;
       left: 16px;
@@ -64,13 +81,8 @@
       border-radius: 50%;
       overflow: hidden;
       cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      -webkit-box-flex: 0;
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
+      @include userSelect-none;
+      @include flex-0-0-auto;
       pointer-events: none;
       z-index: 1;
     }

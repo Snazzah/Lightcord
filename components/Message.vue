@@ -1,5 +1,4 @@
 <template>
-  <!-- <span>{{ source.content }}</span> -->
   <div class="message cozy group-start" role="listitem">
     <div class="message-contents" role="document">
       <img
@@ -17,7 +16,7 @@
             tabindex="0"
             :style="
               source.member && colorRole
-                ? `color: #${colorRole.color.toString(16)}`
+                ? `color: #${colorRole.color.toString(16).padStart(6, '0')}`
                 : ''
             "
           >
@@ -33,15 +32,13 @@
           <span v-else-if="source.author.bot" class="bot-tag regular">
             <svg-verified-bot-tick
               v-if="verifiedBot"
-              v-tippy
-              content="Verified Bot"
+              v-tippy="{ content: 'Verified Bot' }"
             />
             <span class="text">BOT</span>
           </span>
         </span>
         <span
-          v-tippy="{ delay: [1000, 0] }"
-          :content="fullTimestamp"
+          v-tippy="{ delay: [1000, 0], content: fullTimestamp }"
           class="timestamp"
         >
           <span :aria-label="timestamp">{{ timestamp }}</span>
@@ -50,20 +47,19 @@
       <div class="markup message-content">
         <MDRender v-if="source.content" :content="parsedMessage" /><time
           v-if="source.editedTimestamp"
-          v-tippy
+          v-tippy="{ content: editedTimestamp }"
           :datetime="new Date(source.editedTimestamp).toISOString()"
           class="edited"
           role="note"
           :aria-label="editedTimestamp"
-          :content="editedTimestamp"
         >
           (edited)
         </time>
       </div>
       <div v-if="source.embeds.length" class="extras-container">
         <message-embed
-          v-for="embed in source.embeds"
-          :key="JSON.stringify(embed)"
+          v-for="(embed, i) in source.embeds"
+          :key="i"
           :source="embed"
         />
       </div>
@@ -88,7 +84,8 @@ export default Vue.extend({
   },
   data() {
     return {
-      app: this.$parent.$parent.$parent.$parent.$parent,
+      app: window.LightcordApp,
+      channelPage: this.$parent.$parent.$parent,
     };
   },
   computed: {
@@ -114,7 +111,9 @@ export default Vue.extend({
       return moment(this.source.editedTimestamp).format('LLLL');
     },
     parsedMessage() {
-      return messageParser(this.source.content);
+      return messageParser(this.source.content, {
+        channelPage: this.channelPage,
+      });
     },
     isFromSystemUser() {
       return SYSTEM_USER_IDS.includes(this.source.author.id);

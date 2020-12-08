@@ -1,13 +1,22 @@
 import SimpleMarkdown from 'simple-markdown';
 import hljs from 'highlight.js';
 import Vue from 'vue';
-import { MDAnchor } from './markdownRenders';
+import {
+  translateSurrogatesToInlineEmoji,
+  convertNameToSurrogate,
+  EMOJI_NAME_AND_DIVERSITY_RE,
+} from './markdownEmoji';
+import {
+  MDAnchor,
+  MDCustomEmoji,
+  MDEmoji,
+  MDSpoiler,
+  MDMention,
+  MDRoleMention,
+  MDChannelMention,
+} from './markdownElements';
 
-interface CodeBlockNode {
-  lang?: string;
-  content?: string;
-}
-
+// #region typings
 type VueOutput = SimpleMarkdown.Output<Vue.VNodeChildren | string>;
 type VueNodeOutput = SimpleMarkdown.NodeOutput<Vue.VNodeChildren | string>;
 interface VueOutputRule {
@@ -40,6 +49,7 @@ interface VueRules {
 
 interface DefaultRules extends VueRules {
   Array: DefaultVueArrayRule;
+  newline: VueInRule;
   codeBlock: VueInOutRule;
   blockQuote: VueInOutRule;
   paragraph: VueInOutRule;
@@ -51,21 +61,17 @@ interface DefaultRules extends VueRules {
   strong: VueInOutRule;
   u: VueInOutRule;
   del: VueInOutRule;
+  spoiler: VueInOutRule;
+  emoji: VueInOutRule;
+  customEmoji: VueInOutRule;
   inlineCode: VueInOutRule;
+  emoticon: VueInRule;
+  mention: VueInOutRule;
+  roleMention: VueInOutRule;
+  channelMention: VueInOutRule;
   text: VueInOutRule;
 }
-
-const blockRegex = function (regex: RegExp) {
-  const match = function (source: string, state: { inline?: boolean }) {
-    if (!state.inline) {
-      return null;
-    } else {
-      return regex.exec(source);
-    }
-  };
-  match.regex = regex;
-  return match;
-};
+// #endregion
 
 const defaultRules: DefaultRules = {
   Array: {
@@ -94,22 +100,16 @@ const defaultRules: DefaultRules = {
   },
   codeBlock: {
     order: SimpleMarkdown.defaultRules.codeBlock.order,
-    match: blockRegex(/^\n?```([^\s`]*)(?:\n([\s\S]*?)|)\n?```/),
-    parse(capture) {
-      const onlyOneLine = !capture[2];
-      const lang = hljs.getLanguage(capture[1]);
-      const result: CodeBlockNode = {
-        content: capture[2] || capture[1],
-      };
-      if (lang && !onlyOneLine) {
-        result.lang = capture[1];
-      }
-      return result;
+    match(source) {
+      return /^```(([A-Za-z0-9-]+?)\n+)?\n*([^]+?)\n*```/.exec(source);
     },
-    vue(node, _, { e }) {
-      return e('pre', [
+    parse(capture) {
+      return { lang: (capture[2] || '').trim(), content: capture[3] || '' };
+    },
+    vue(node, _, { h }) {
+      return h('pre', [
         node.lang
-          ? e(
+          ? h(
               'code',
               {
                 attrs: {
@@ -124,7 +124,7 @@ const defaultRules: DefaultRules = {
               },
               node.content
             )
-          : e(
+          : h(
               'code',
               {
                 attrs: {
@@ -138,11 +138,65 @@ const defaultRules: DefaultRules = {
   },
   blockQuote: {
     order: SimpleMarkdown.defaultRules.blockQuote.order,
-    match: SimpleMarkdown.blockRegex(/^\n(>[^\n]+([^\n]+)*)+/),
-    parse: SimpleMarkdown.defaultRules.blockQuote.parse,
+    match(source, state) {
+      const { prevCapture, inQuote, nested } = state;
+      const regex = /^( *>>> +([\s\S]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/;
+      const lookbehindRegex = /^$|\n *$/;
+      return !lookbehindRegex.test(prevCapture != null ? prevCapture[0] : '') ||
+        inQuote ||
+        nested
+        ? null
+        : regex.exec(source);
+    },
+    parse(capture, parse, state) {
+      const tripleArrowRegex = /^ *>>> ?/;
+      const singleArrowRegex = /^ *> ?/gm;
+      const dirtyContent = capture[0];
+      const usingTripleArrow = Boolean(tripleArrowRegex.exec(dirtyContent));
+      const cleaningRegex = usingTripleArrow
+        ? tripleArrowRegex
+        : singleArrowRegex;
+      const content = dirtyContent.replace(cleaningRegex, '');
+      const inQuote = state.inQuote || false;
+      const inline = state.inline || false;
+      state.inQuote = true;
+      if (!usingTripleArrow) state.inline = true;
+      const parsedContent = parse(content, state);
+      state.inQuote = inQuote;
+      state.inline = inline;
+      if (parsedContent.length === 0)
+        parsedContent.push({
+          type: 'text',
+          content: ' ',
+        });
+      return {
+        content: parsedContent,
+        type: 'blockQuote',
+      };
+    },
     vue(node, output, state) {
-      // @TODO change regex and actually use blockquotes
-      return state.e('span', output(node.content, state));
+      return state.h(
+        'div',
+        {
+          attrs: {
+            class: 'blockquote-container',
+          },
+        },
+        [
+          state.h('div', {
+            attrs: {
+              class: 'blockquote-divider',
+            },
+          }),
+          state.h('blockquote', output(node.content, state)),
+        ]
+      );
+    },
+  },
+  newline: {
+    ...SimpleMarkdown.defaultRules.newline,
+    vue() {
+      return '\n';
     },
   },
   paragraph: {
@@ -158,6 +212,7 @@ const defaultRules: DefaultRules = {
   },
   autolink: {
     ...SimpleMarkdown.defaultRules.autolink,
+    match: SimpleMarkdown.inlineRegex(/^<(https?:\/\/[^ >]+)>/),
     vue: null,
   },
   url: {
@@ -168,8 +223,8 @@ const defaultRules: DefaultRules = {
   },
   link: {
     ...SimpleMarkdown.defaultRules.link,
-    vue(node, output, { e }) {
-      return e(
+    vue(node, output, state) {
+      return state.h(
         MDAnchor,
         {
           props: {
@@ -177,39 +232,39 @@ const defaultRules: DefaultRules = {
             title: node.title,
           },
         },
-        output(node.content, { e })
+        output(node.content, state)
       );
     },
   },
   em: {
     ...SimpleMarkdown.defaultRules.em,
     vue(node, output, state) {
-      return state.e('i', output(node.content, state));
+      return state.h('i', output(node.content, state));
     },
   },
   strong: {
     ...SimpleMarkdown.defaultRules.strong,
     vue(node, output, state) {
-      return state.e('b', output(node.content, state));
+      return state.h('b', output(node.content, state));
     },
   },
   u: {
     ...SimpleMarkdown.defaultRules.u,
     vue(node, output, state) {
-      return state.e('u', output(node.content, state));
+      return state.h('u', output(node.content, state));
     },
   },
   del: {
     ...SimpleMarkdown.defaultRules.del,
     vue(node, output, state) {
-      return state.e('del', output(node.content, state));
+      return state.h('s', output(node.content, state));
     },
   },
   inlineCode: {
     ...SimpleMarkdown.defaultRules.inlineCode,
-    match: SimpleMarkdown.inlineRegex(/^(`)([\s\S]*?[^`])\1(?!`)/),
-    vue(node, _, { e }) {
-      return e(
+    match: SimpleMarkdown.inlineRegex(/^(`{1,2})([\s\S]*?[^`])\1(?!`)/),
+    vue(node, _, { h }) {
+      return h(
         'code',
         {
           attrs: {
@@ -220,14 +275,120 @@ const defaultRules: DefaultRules = {
       );
     },
   },
+  emoji: {
+    order: SimpleMarkdown.defaultRules.text.order,
+    match(source) {
+      const capture = EMOJI_NAME_AND_DIVERSITY_RE.exec(source);
+
+      // Check if it is a valid emoji
+      if (capture && !convertNameToSurrogate(capture[1])) return null;
+
+      return capture;
+    },
+    parse(capture) {
+      const name = capture[1];
+      const surrogate = convertNameToSurrogate(name);
+      return { name, surrogate };
+    },
+    vue(node, _, { h }) {
+      return h(MDEmoji, {
+        props: node,
+      });
+    },
+  },
+  customEmoji: {
+    order: SimpleMarkdown.defaultRules.text.order,
+    match: SimpleMarkdown.inlineRegex(/^<(a)?:(\w+):(\d+)>/),
+    parse(capture) {
+      return {
+        animated: !!capture[1],
+        name: capture[2],
+        id: capture[3],
+      };
+    },
+    vue(node, _, { h }) {
+      return h(MDCustomEmoji, {
+        props: node,
+      });
+    },
+  },
+  mention: {
+    order: SimpleMarkdown.defaultRules.text.order,
+    match: SimpleMarkdown.inlineRegex(/^<@!?(\d+)>/),
+    parse(capture) {
+      return { match: capture[0], id: capture[1] };
+    },
+    vue(node, _, { h, channelPage }) {
+      return h(MDMention, {
+        props: { ...node, channelPage },
+      });
+    },
+  },
+  roleMention: {
+    order: SimpleMarkdown.defaultRules.text.order,
+    match: SimpleMarkdown.inlineRegex(/^<@&(\d+)>/),
+    parse(capture) {
+      return { id: capture[1] };
+    },
+    vue(node, _, { h, channelPage }) {
+      return h(MDRoleMention, {
+        props: { ...node, channelPage },
+      });
+    },
+  },
+  channelMention: {
+    order: SimpleMarkdown.defaultRules.text.order,
+    match: SimpleMarkdown.inlineRegex(/^<#(\d+)>/),
+    parse(capture) {
+      return { id: capture[1] };
+    },
+    vue(node, _, { h, channelPage }) {
+      return h(MDChannelMention, {
+        props: { ...node, channelPage },
+      });
+    },
+  },
+  emoticon: {
+    order: SimpleMarkdown.defaultRules.text.order,
+    match(source) {
+      return /^(¯\\_\(ツ\)_\/¯)/.exec(source);
+    },
+    parse(capture) {
+      return { type: 'text', content: capture[1] };
+    },
+    vue: null,
+  },
+  spoiler: {
+    order: SimpleMarkdown.defaultRules.text.order,
+    match: SimpleMarkdown.inlineRegex(/^\|\|((?:\\[\s\S]|[^\\])+?)\|\|(?!\|)/),
+    parse: SimpleMarkdown.defaultRules.em.parse,
+    vue(node, output, state) {
+      return state.h(MDSpoiler, output(node.content, state));
+    },
+  },
   text: {
     ...SimpleMarkdown.defaultRules.text,
+    parse(capture, recurseParse, state) {
+      return state.nested
+        ? {
+            content: capture[0],
+          }
+        : recurseParse(translateSurrogatesToInlineEmoji(capture[0]), {
+            ...state,
+            nested: true,
+          });
+    },
     vue(node) {
       return node.content;
     },
   },
 };
+/*
 
+      , G = /^<@!?(\d+)>/
+      , x = /^<@&(\d+)>/
+      , V = /^<#(\d+)>/
+      */
 export const MDRender = Vue.component('md-render', {
   props: {
     tag: {
@@ -240,28 +401,18 @@ export const MDRender = Vue.component('md-render', {
     },
   },
 
-  render(e) {
+  render(h) {
     const { tag, content } = (this as unknown) as {
       tag: string;
       content: (createElement: Vue.CreateElement) => Vue.VNodeChildren;
     };
 
-    const children = content(e);
-
-    console.log(children, this.$slots);
+    const children = content(h);
 
     // @ts-ignore
     if (this.$slots.default) children.push(this.$slots.default);
 
-    return e(
-      tag,
-      {
-        attrs: {
-          class: 'md-render',
-        },
-      },
-      children
-    );
+    return h(tag, children);
   },
 });
 
@@ -297,12 +448,6 @@ const cleanUpNodes = (nodes: SimpleMarkdown.SingleASTNode[]) => {
         node.content += nodes[i + 1].content;
       }
       result.push(node);
-    } else if (node.type === 'paragraph') {
-      // Flatten paragraphs
-      if (i !== 0) result.push({ type: 'text', content: '\n' });
-      node.content.map((node: SimpleMarkdown.SingleASTNode) =>
-        result.push(node)
-      );
     } else if (Array.isArray(node.content)) {
       node.content = cleanUpNodes(node.content);
       result.push(node);
@@ -312,24 +457,46 @@ const cleanUpNodes = (nodes: SimpleMarkdown.SingleASTNode[]) => {
   return result;
 };
 
-const createVueParser = (rules: VueRules) => {
+const jumboify = (nodes: SimpleMarkdown.SingleASTNode[]) => {
+  const nonEmojiNodes = nodes.some(
+    (node) =>
+      node.type !== 'emoji' &&
+      node.type !== 'customEmoji' &&
+      (typeof node.content !== 'string' || node.content.trim() !== '')
+  );
+
+  if (nonEmojiNodes) return nodes;
+
+  const maximum = 27;
+  let count = 0;
+
+  nodes.forEach((node) => {
+    if (node.type === 'emoji' || node.type === 'customEmoji') count += 1;
+    if (count > maximum) return false;
+  });
+
+  if (count < maximum) nodes.forEach((node) => (node.jumboable = true));
+
+  return nodes;
+};
+
+const createVueParser = (
+  rules: VueRules,
+  postParse = (nodes: SimpleMarkdown.SingleASTNode[]) => nodes
+) => {
   const parser = SimpleMarkdown.parserFor(rules);
-  return (content: string) => {
-    const parsedContent = cleanUpNodes(
-      parser(content.trim(), { inline: false })
+  return (content: string, state?: SimpleMarkdown.OptionalState) => {
+    const parsedContent = postParse(
+      cleanUpNodes(parser(content.trim(), { ...state, inline: true }))
     );
 
-    // SimpleMarkdown has a quirk where the last element will be a newline.
-    parsedContent.pop();
-
-    console.log({ content: parsedContent });
     return (createElement: Vue.CreateElement) =>
-      vueFor(rules)(parsedContent, { e: createElement });
+      vueFor(rules)(parsedContent, { h: createElement, ...state });
   };
 };
 
 // Use rules that are not dependent on the `link` rule
-const defaultMessageRules: VueRules = Object.assign({}, defaultRules, {
+const messageRules: VueRules = Object.assign({}, defaultRules, {
   autolink: {
     ...SimpleMarkdown.defaultRules.autolink,
     parse(capture: SimpleMarkdown.Capture) {
@@ -351,10 +518,10 @@ const defaultMessageRules: VueRules = Object.assign({}, defaultRules, {
     vue(
       node: SimpleMarkdown.SingleASTNode,
       _: unknown,
-      { e }: { e: Vue.CreateElement }
+      { h }: { h: Vue.CreateElement }
     ) {
       const url = new URL(node.content);
-      return e(
+      return h(
         MDAnchor,
         {
           props: {
@@ -367,7 +534,20 @@ const defaultMessageRules: VueRules = Object.assign({}, defaultRules, {
     },
   },
 });
-delete defaultMessageRules.link;
+delete messageRules.link;
 
-export const defaultParser = createVueParser(defaultRules);
-export const messageParser = createVueParser(defaultMessageRules);
+const limitedRules = {
+  Array: defaultRules.Array,
+  paragraph: defaultRules.paragraph,
+  newline: defaultRules.newline,
+  em: defaultRules.em,
+  strong: defaultRules.strong,
+  u: defaultRules.u,
+  del: defaultRules.del,
+  inlineCode: defaultRules.inlineCode,
+  text: defaultRules.text,
+};
+
+export const defaultParser = createVueParser(defaultRules, jumboify);
+export const messageParser = createVueParser(messageRules, jumboify);
+export const limitedParser = createVueParser(limitedRules);

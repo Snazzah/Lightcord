@@ -95,6 +95,88 @@
         white-space: pre-wrap;
       }
     }
+
+    .emoji-container {
+      display: inline-block;
+      cursor: pointer;
+
+      .emoji {
+        @include objectFit-contain;
+        width: 1.375em;
+        height: 1.375em;
+        vertical-align: bottom;
+
+        &.jumboable {
+          width: 3rem;
+          height: 3rem;
+          min-height: 3rem;
+        }
+      }
+    }
+
+    .blockquote-container {
+      @include display-flex;
+
+      .blockquote-divider {
+        background-color: var(--interactive-muted);
+        width: 4px;
+        border-radius: 4px;
+      }
+
+      blockquote {
+        padding: 0 8px 0 12px;
+        @include boxSizing-borderBox;
+        text-indent: 0;
+      }
+    }
+
+    .spoiler-text {
+      border-radius: 3px;
+      -webkit-transition: all .1s ease;
+      transition: all .1s ease;
+
+      .theme-dark & {
+        background-color: hsla(0,0%,100%,.1);
+      }
+
+      .theme-light & {
+        background-color: rgba(0,0,0,.1);
+      }
+
+      .inline-content {
+        opacity: 1;
+        -webkit-transition: all .1s ease;
+        transition: all .1s ease;
+      }
+
+      &.hidden {
+        .theme-dark & {
+          background-color: #202225;
+        }
+
+        .theme-light & {
+          background-color: #b9bbbe;
+        }
+
+        cursor: pointer;
+
+        &:hover {
+          .theme-dark & {
+            background-color: rgba(32,34,37,.8);
+          }
+
+          .theme-light & {
+            background-color: rgba(185,187,190,.8);
+          }
+        }
+
+        .inline-content {
+          cursor: pointer;
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+    }
   }
 
   .hljs {
@@ -154,5 +236,29 @@
 
   .clickable {
     cursor: pointer;
+  }
+
+  .mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    border-radius: 3px;
+    padding: 0 2px;
+    font-weight: 500;
+    unicode-bidi: -moz-plaintext;
+    unicode-bidi: plaintext;
+    color: #7289da;
+    background: rgba(114,137,218,.1);
+    position: relative;
+
+    &.interactive {
+      -webkit-transition: background-color 50ms ease-out,color 50ms ease-out;
+      transition: background-color 50ms ease-out,color 50ms ease-out;
+      cursor: pointer;
+
+      &:hover {
+        color: #fff;
+        background-color: #7289da;
+      }
+    }
   }
 }

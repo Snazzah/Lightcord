@@ -32,6 +32,7 @@
     "opusscript": "https://github.com/abalabahaha/opusscript",
     "sass-loader": "^10.0.3",
     "simple-markdown": "^0.7.2",
+    "twemoji": "^13.0.1",
     "vue-tippy": "^4.6.0",
     "vue-virtual-scroll-list": "^2.3.1",
     "vue2-animate": "^2.1.4"
@@ -42,6 +43,7 @@
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-config-typescript": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
+    "@types/twemoji": "^12.1.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.5.0",
     "eslint-plugin-nuxt": "^1.0.0",

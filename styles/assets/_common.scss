@@ -151,6 +151,21 @@
   appearance: none;
 }
 
+@mixin objectFit-cover {
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+@mixin objectFit-contain {
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+@mixin objectFit-fill {
+  -o-object-fit: fill;
+  object-fit: fill;
+}
+
 .marginTop-20 { margin-top: 20px; }
 .marginTop-40 { margin-top: 40px; }
 .marginBottom-20 { margin-bottom: 20px; }

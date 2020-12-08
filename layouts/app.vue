@@ -325,6 +325,8 @@ export default Vue.extend({
   },
   created() {
     if (!this.$discord.client) return;
+    // eslint-disable-next-line nuxt/no-globals-in-created
+    window.LightcordApp = this;
     const self = this;
     function updateTicker(prop) {
       return () => {

@@ -158,6 +158,21 @@ export default Vue.extend({
 
       return this.app.channelMessages[this.$route.params.channelID] || [];
     },
+    members() {
+      ((_, __) => {})(this.app.guildEventTicker, this.ticker);
+
+      return this.guild() ? this.guild().members : null;
+    },
+    roles() {
+      ((_, __) => {})(this.app.guildEventTicker, this.ticker);
+
+      return this.guild() ? this.guild().roles : null;
+    },
+    channels() {
+      ((_, __) => {})(this.app.guildEventTicker, this.ticker);
+
+      return this.guild() ? this.guild().channels : null;
+    },
   },
   async mounted() {
     if (!this.guild() || this.guild().unavailable)
