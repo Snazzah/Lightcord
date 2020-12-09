@@ -32,6 +32,13 @@ declare module '@nuxt/types' {
   }
 }
 
+// Put this plugin into the browser window
+declare global {
+  interface Window {
+    Discord: DiscordPlugin;
+  }
+}
+
 const discordPlugin: Plugin = (context, inject) => {
   const Discord: DiscordPlugin = {
     init(opts: LoadArgumentsOpts) {
@@ -117,8 +124,7 @@ const discordPlugin: Plugin = (context, inject) => {
   };
   inject('discord', Discord);
   context.$discord = Discord;
-  if (process.browser)
-    (window as { Discord?: DiscordPlugin }).Discord = Discord;
+  if (process.browser) window.Discord = Discord;
 };
 
 export default discordPlugin;

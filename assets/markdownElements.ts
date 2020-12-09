@@ -2,6 +2,12 @@ import Vue from 'vue';
 import Eris from 'eris';
 import { getEmojiURL } from './markdownEmoji';
 
+declare global {
+  interface Window {
+    LightcordApp: any;
+  }
+}
+
 export const MDAnchor = Vue.component('md-anchor', {
   props: {
     href: {
@@ -21,7 +27,6 @@ export const MDAnchor = Vue.component('md-anchor', {
       'a',
       {
         attrs: {
-          class: 'anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB',
           href,
           title,
           rel: 'noreferrer noopener',
@@ -285,6 +290,8 @@ export const MDRoleMention = Vue.component('md-role-mention', {
       );
     },
     role() {
+      ((_) => {})(window.LightcordApp.guildEventTicker);
+
       return (
         (this.channelPage &&
           (this.channelPage as any).roles &&
@@ -346,6 +353,8 @@ export const MDChannelMention = Vue.component('md-channel-mention', {
       );
     },
     channel() {
+      ((_) => {})(window.LightcordApp.guildEventTicker);
+
       return (
         (this.channelPage &&
           (this.channelPage as any).channels &&
