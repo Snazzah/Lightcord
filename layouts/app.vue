@@ -120,13 +120,21 @@
                   />
                 </foreignObject>
                 <!-- Online Status -->
-                <svg-userarea-offline v-if="clientProps.status === 'online'" />
+                <svg-userarea-online
+                  v-if="clientProps.presence.status === 'online'"
+                />
                 <!-- Idle Status -->
-                <svg-userarea-idle v-if="clientProps.status === 'idle'" />
+                <svg-userarea-idle
+                  v-if="clientProps.presence.status === 'idle'"
+                />
                 <!-- DnD Status -->
-                <svg-userarea-dnd v-if="clientProps.status === 'dnd'" />
+                <svg-userarea-dnd
+                  v-if="clientProps.presence.status === 'dnd'"
+                />
                 <!-- Offline Status -->
-                <svg-userarea-offline v-if="clientProps.status === 'offline'" />
+                <svg-userarea-offline
+                  v-if="clientProps.presence.status === 'offline'"
+                />
               </svg>
             </div>
           </div>
@@ -185,6 +193,7 @@ export default Vue.extend({
       collapsedCategoryChannels: [],
       lastVisitedChannels: {},
       channelMessages: {},
+      lastSetStatus: 'online',
 
       // Settings
       theme: 'dark',
@@ -293,14 +302,21 @@ export default Vue.extend({
     clientProps() {
       ((_) => {})(this.uptime);
 
-      return this.$discord.client
-        ? {
-            status: this.$discord.client.presence.status,
+      if (!this.$discord.client) return {};
+
+      let presence = this.$discord.client.presence;
+
+      if ((this.$discord.client.options.intents & (1 << 8)) !== 1 << 8)
+        presence = {
+          status: this.lastSetStatus,
+        };
+
+      return {
+        presence,
             username: this.$discord.client.user.username,
             discriminator: this.$discord.client.user.discriminator,
             avatar: this.$discord.client.user.dynamicAvatarURL('png', 64),
-          }
-        : {};
+      };
     },
   },
   mounted() {
