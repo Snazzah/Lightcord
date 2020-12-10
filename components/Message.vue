@@ -1,17 +1,30 @@
 <template>
   <div
-    class="message cozy group-start"
-    :class="mentioned ? 'mentioned' : ''"
-    role="listitem"
+    class="message cozy"
+    :class="
+      [!minifyMessage ? 'group-start' : '', mentioned ? 'mentioned' : '']
+        .filter((v) => !!v)
+        .join(' ')
+    "
   >
     <div class="message-contents" role="document">
+      <span v-if="minifyMessage" class="timestamp alt visible-on-hover">
+        <span
+          v-tippy="{ delay: [1000, 0], content: fullTimestamp }"
+          :aria-label="shortTimestamp"
+        >
+          <i class="separator" aria-hidden="true">[</i>{{ shortTimestamp }}
+          <i class="separator" aria-hidden="true">] </i>
+        </span>
+      </span>
       <img
+        v-if="!minifyMessage"
         :src="source.author.dynamicAvatarURL('png', 128)"
         aria-hidden="true"
         class="avatar"
         alt=" "
       />
-      <h2 class="header">
+      <h2 v-if="!minifyMessage" class="header">
         <span class="header-text">
           <span
             class="username"
@@ -85,6 +98,10 @@ export default Vue.extend({
       type: Object,
       required: true,
     },
+    index: {
+      type: Number,
+      default: -1,
+    },
   },
   data() {
     return {
@@ -107,6 +124,9 @@ export default Vue.extend({
     },
     timestamp() {
       return moment(this.source.createdAt).calendar();
+    },
+    shortTimestamp() {
+      return moment(this.source.createdAt).format('LT');
     },
     fullTimestamp() {
       return moment(this.source.createdAt).format('LLLL');
@@ -134,6 +154,22 @@ export default Vue.extend({
         this.source.mentions
           .map((user) => user.id)
           .includes(this.$discord.client.user.id)
+      );
+    },
+    previousMessage() {
+      if (this.index === -1) return null;
+      return this.$parent.$parent.dataSources[this.index - 1];
+    },
+    minifyMessage() {
+      if (!this.previousMessage) return false;
+      return (
+        // Made by the same person
+        this.previousMessage.author.id === this.source.author.id &&
+        // Are not 5 minutes apart
+        this.source.createdAt - this.previousMessage.createdAt <
+          1000 * 60 * 5 &&
+        // Does not have a reply
+        !this.source.messageReference
       );
     },
   },

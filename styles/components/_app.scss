@@ -222,6 +222,10 @@
 }
 
 .scroller.large-scrollbar {
+  &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track {
+    visibility: visible;
+  }
+
   &::-webkit-scrollbar {
     width: 16px;
     height: 16px;
