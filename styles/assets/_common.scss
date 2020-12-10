@@ -81,6 +81,12 @@
   justify-content: stretch;
 }
 
+@mixin justifyContent-spaceBetween {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
 @mixin alignItems-center {
   -webkit-box-align: center;
   -ms-flex-align: center;

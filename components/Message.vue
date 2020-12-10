@@ -73,7 +73,15 @@
           (edited)
         </time>
       </div>
-      <div v-if="source.embeds.length" class="extras-container">
+      <div
+        v-if="source.embeds.length || source.attachments.length"
+        class="extras-container"
+      >
+        <message-attachment
+          v-for="(attachment, i) in source.attachments"
+          :key="i"
+          :source="attachment"
+        />
         <message-embed
           v-for="(embed, i) in source.embeds"
           :key="i"
@@ -169,7 +177,11 @@ export default Vue.extend({
         this.source.createdAt - this.previousMessage.createdAt <
           1000 * 60 * 5 &&
         // Does not have a reply
-        !this.source.messageReference
+        !this.source.messageReference &&
+        // Message type is the same
+        this.previousMessage.type === this.source.type &&
+        // Message type is 0 (normal)
+        this.source.type === 0
       );
     },
   },

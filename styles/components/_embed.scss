@@ -69,18 +69,6 @@
       }
     }
 
-    .image-wrapper {
-      display: block;
-      position: relative;
-      @include userSelect-text;
-      overflow: hidden;
-      border-radius: 3px;
-
-      img {
-        position: absolute;
-      }
-    }
-
     .image-zoom {
       cursor: nesw-resize;
       cursor: -webkit-zoom-in;
@@ -307,8 +295,8 @@
           @include flex-0-0-auto;
           opacity: .6;
           cursor: pointer;
-          -webkit-transition: opacity .25s,color .25s;
-          transition: opacity .25s,color .25s;
+          -webkit-transition: opacity .25s, color .25s;
+          transition: opacity .25s, color .25s;
           @include display-flex;
           @include alignItems-center;
 
@@ -333,6 +321,18 @@
           }
         }
       }
+    }
+  }
+
+  .image-wrapper {
+    display: block;
+    position: relative;
+    @include userSelect-text;
+    overflow: hidden;
+    border-radius: 3px;
+
+    img {
+      position: absolute;
     }
   }
 }

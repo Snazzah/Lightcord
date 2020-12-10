@@ -40,34 +40,56 @@ export const SUPPORTED_IFRAME_URLS = [
         protocol: "https://open.spotify.com"
     }];
 
-    t.SPOTIFY_HOSTNAMES = ["open.spotify.com", "www.spotify.com"];
-    var Qn = "https://api.spotify.com/v1"
-      , Jn = function(e) {
-        return "?utm_source=discord&utm_medium=" + e
+    t.SlashCommands = [{
+        name: "tableflip",
+        commandPreview: "(╯°□°）╯︵ ┻━┻"
+    }, {
+        name: "unflip",
+        commandPreview: "┬─┬ ノ( ゜-゜ノ)"
+    }, {
+        name: "shrug",
+        commandPreview: "¯\\_(ツ)_/¯"
+    }],
+
+            n.handlePasteItem = function(e, t) {
+                var r = n.props
+                  , a = r.channel
+                  , o = r.canPasteFiles
+                  , i = r.shouldUploadLongMessages
+                  , l = r.promptToUpload;
+                if (null == l || !a.isPrivate() && !o || a.isPrivate() && a.isManaged())
+                    return !1;
+                var u = function(e, t) {
+                    return l(e, a, !1, !0, t)
+                };
+                switch (t.type) {
+                case "image/png":
+                    e.preventDefault();
+                    var s = t.getAsFile();
+                    return null != s && (n.saveCurrentText(),
+                    2 === e.clipboardData.items.length ? e.clipboardData.items[0].getAsString((function(e) {
+                        u([(0,
+                        p.makeFile)(s, n.extractFileName(e))])
                     }
-        WEB_OPEN: function(e, t, n) {
-            return void 0 === n && (n = "desktop"),
-            "https://open.spotify.com/" + encodeURIComponent(e) + "/" + encodeURIComponent(t) + Jn(n)
-        },
-        EMBED: function(e, t) {
-            return void 0 === t && (t = "desktop"),
-            "https://open.spotify.com/embed" + e + Jn(t)
-        },
-
-
-    function f(e) {
-        var t = (0,
-        s.getHostname)(e);
-        switch (t) {
-        case window.GLOBAL_ENV.CDN_HOST:
-        case window.GLOBAL_ENV.INVITE_HOST:
-        case window.GLOBAL_ENV.GIFT_CODE_HOST:
-        case window.GLOBAL_ENV.GUILD_TEMPLATE_HOST:
-        case location.hostname:
-            return !0;
-        default:
-            return u.SPOTIFY_HOSTNAMES.includes(t) || a.default.isDiscordHostname(t) || l.has(t)
+                    )) : u([(0,
+                    p.makeFile)(s)]),
+                    !0);
+                case "text/plain":
+                    if (!0 === i) {
+                        var d = e.clipboardData.getData("text/plain");
+                        if (d.length > _.MAX_MESSAGE_LENGTH) {
+                            e.preventDefault();
+                            var f = new Blob([d],{
+                                type: "text/plain"
+                            });
+                            return u([(0,
+                            p.makeFile)(f, "message.txt")], !0),
+                            !0
+                        }
+                    }
+                    return !1
                 }
+                return !1
             }
 */
 
@@ -79,4 +101,79 @@ const discordHostnameRegex = /(?:^|\.)(?:discordapp|discord)\.com$/i;
 
 export function isDiscordHostname(hostname: string) {
   return hostname !== null && discordHostnameRegex.test(hostname);
+}
+
+interface FileClassType {
+  reType?: RegExp;
+  reName?: RegExp;
+  class: string;
+}
+
+export const FILE_CLASSES: FileClassType[] = [
+  {
+    reType: /^image\/vnd.adobe.photoshop/,
+    class: 'photoshop',
+  },
+  {
+    reType: /^image\/svg\+xml/,
+    class: 'webcode',
+  },
+  {
+    reType: /^image\//,
+    class: 'image',
+  },
+  {
+    reType: /^video\//,
+    class: 'video',
+  },
+  {
+    reName: /\.pdf$/,
+    class: 'acrobat',
+  },
+  {
+    reName: /\.ae/,
+    class: 'ae',
+  },
+  {
+    reName: /\.sketch$/,
+    class: 'sketch',
+  },
+  {
+    reName: /\.ai$/,
+    class: 'ai',
+  },
+  {
+    reName: /\.(?:rar|zip|7z|tar|tar\.gz)$/,
+    class: 'archive',
+  },
+  {
+    reName: /\.(?:c\+\+|cpp|cc|c|h|hpp|mm|m|json|js|rb|rake|py|asm|fs|pyc|dtd|cgi|bat|rss|java|graphml|idb|lua|o|gml|prl|sls|conf|cmake|make|sln|vbe|cxx|wbf|vbs|r|wml|php|bash|applescript|fcgi|yaml|ex|exs|sh|ml|actionscript)$/,
+    class: 'code',
+  },
+  {
+    reName: /\.(?:txt|rtf|doc|docx|md|pages|ppt|pptx|pptm|key|log)$/,
+    class: 'document',
+  },
+  {
+    reName: /\.(?:xls|xlsx|numbers|csv)$/,
+    class: 'spreadsheet',
+  },
+  {
+    reName: /\.(?:html|xhtml|htm|js|xml|xls|xsd|css|styl)$/,
+    class: 'webcode',
+  },
+  {
+    reName: /\.(?:mp3|ogg|wav|flac)$/,
+    class: 'audio',
+  },
+];
+
+export function getFileClass(name: string, type?: string) {
+  name = name ? name.toLowerCase() : '';
+  const fileClass = FILE_CLASSES.find((n: FileClassType) => {
+    return n.reType && type
+      ? n.reType.test(type)
+      : !(!n.reName || !name) && n.reName.test(name);
+  });
+  return fileClass ? fileClass.class : 'unknown';
 }
