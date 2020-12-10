@@ -47,7 +47,7 @@
             ref="vsl"
             class="scroller large-scrollbar"
             :data-key="'id'"
-            :data-sources="messages"
+            :data-sources="messages.concat()"
             :data-component="messageComponent"
             :estimate-size="50"
             :keeps="100"
@@ -154,7 +154,7 @@ export default Vue.extend({
         : !defaultPerm;
     },
     messages() {
-      ((_) => {})(this.ticker);
+      ((_, __) => {})(this.app.messageEventTicker, this.ticker);
 
       return this.app.channelMessages[this.$route.params.channelID] || [];
     },
@@ -197,9 +197,7 @@ export default Vue.extend({
           userIDs: uncachedMembers,
         });
 
-        for (const member of members) {
-          this.guild().members.add(member, this);
-        }
+        for (const member of members) this.guild().members.add(member);
 
         messages = messages.map((message) => {
           const member = members.find(
@@ -212,7 +210,7 @@ export default Vue.extend({
 
       this.app.channelMessages[
         this.$route.params.channelID
-      ] = messages.reverse();
+      ] = messages.concat().reverse();
       if (messages.length !== 50) this.canLoadMore = false;
 
       this.loadingMessages = false;

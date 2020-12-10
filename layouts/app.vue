@@ -202,6 +202,7 @@ export default Vue.extend({
       // Tickers
       uptime: 0,
       guildEventTicker: 0,
+      messageEventTicker: 0,
     };
   },
   computed: {
@@ -313,9 +314,9 @@ export default Vue.extend({
 
       return {
         presence,
-            username: this.$discord.client.user.username,
-            discriminator: this.$discord.client.user.discriminator,
-            avatar: this.$discord.client.user.dynamicAvatarURL('png', 64),
+        username: this.$discord.client.user.username,
+        discriminator: this.$discord.client.user.discriminator,
+        avatar: this.$discord.client.user.dynamicAvatarURL('png', 64),
       };
     },
   },
@@ -346,7 +347,7 @@ export default Vue.extend({
     const self = this;
     function updateTicker(prop) {
       return () => {
-        self[prop] = self.$discord.client ? self.$discord.client.uptime : 0;
+        self[prop] = self.$discord.client ? self.$discord.client.uptime : -1;
       };
     }
 
@@ -363,9 +364,14 @@ export default Vue.extend({
     // deepscan-disable-next-line VUE_MISSING_CLEANUP_IN_LIFECYCLE
     setInterval(updateTicker('uptime'), 1000);
 
+    // #region Guild Tickers
     this.$discord.client.on('guildCreate', updateTicker('guildEventTicker'));
     this.$discord.client.on('guildDelete', updateTicker('guildEventTicker'));
     this.$discord.client.on('guildUpdate', updateTicker('guildEventTicker'));
+    this.$discord.client.on(
+      'guildUnavailable',
+      updateTicker('guildEventTicker')
+    );
     this.$discord.client.on(
       'guildRoleCreate',
       updateTicker('guildEventTicker')
@@ -381,6 +387,77 @@ export default Vue.extend({
     this.$discord.client.on('channelCreate', updateTicker('guildEventTicker'));
     this.$discord.client.on('channelDelete', updateTicker('guildEventTicker'));
     this.$discord.client.on('channelUpdate', updateTicker('guildEventTicker'));
+    // #endregion
+
+    // #region Message Tickers
+    this.$discord.client.on('messageCreate', async (message) => {
+      if (message.channel.id in this.channelMessages) {
+        // Cache new members
+        if (
+          message.channel.guild &&
+          !message.channel.guild.members.has(message.author.id)
+        ) {
+          const member = await message.channel.guild.fetchMembers({
+            userIDs: [message.author.id],
+          });
+
+          message.channel.guild.members.add(member);
+          message.member = member;
+        }
+
+        // Push message to cache
+        this.channelMessages[message.channel.id].push(message);
+        updateTicker('messageEventTicker')();
+      }
+    });
+
+    this.$discord.client.on('messageUpdate', (message) => {
+      if (
+        message.channel.id in this.channelMessages &&
+        this.channelMessages[message.channel.id]
+          .map((message) => message.id)
+          .includes(message.id)
+      ) {
+        for (const i in this.channelMessages[message.channel.id]) {
+          if (this.channelMessages[message.channel.id][i].id === message.id)
+            this.channelMessages[message.channel.id].splice(i, 1, message);
+        }
+        updateTicker('messageEventTicker')();
+      }
+    });
+
+    this.$discord.client.on('messageDelete', (message) => {
+      if (
+        message.channel.id in this.channelMessages &&
+        this.channelMessages[message.channel.id]
+          .map((message) => message.id)
+          .includes(message.id)
+      ) {
+        for (const i in this.channelMessages[message.channel.id]) {
+          if (this.channelMessages[message.channel.id][i].id === message.id)
+            this.channelMessages[message.channel.id].splice(i, 1);
+        }
+        updateTicker('messageEventTicker')();
+      }
+    });
+
+    this.$discord.client.on('messageDeleteBulk', (messages) => {
+      for (const message of messages) {
+        if (
+          message.channel.id in this.channelMessages &&
+          this.channelMessages[message.channel.id]
+            .map((message) => message.id)
+            .includes(message.id)
+        ) {
+          for (const i in this.channelMessages[message.channel.id]) {
+            if (this.channelMessages[message.channel.id][i].id === message.id)
+              this.channelMessages[message.channel.id].splice(i, 1);
+          }
+        }
+      }
+      updateTicker('messageEventTicker')();
+    });
+    // #endregion
   },
   methods: {
     updateTheme() {
