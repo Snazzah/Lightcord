@@ -434,7 +434,8 @@ import {
   defaultParser,
   limitedParser,
 } from '~/assets/markdownParser';
-import { SUPPORTED_IFRAME_URLS, getRatio } from '~/assets/constants';
+import { SUPPORTED_IFRAME_URLS } from '~/assets/constants';
+import { getRatio } from '~/assets/util';
 
 export default Vue.extend({
   name: 'MessageEmbed',

@@ -7,38 +7,6 @@ export const SYSTEM_USER_IDS = [
 // IDs that shouldn't be fetched while caching uncached members.
 export const UNCACHEABLE_IDS = [...SYSTEM_USER_IDS];
 
-export const proxyURL = (url: string) => {
-  return (
-    'https://external-content.duckduckgo.com/iu/?u=' +
-    encodeURIComponent(url) +
-    '&f=1'
-  );
-};
-
-export const clampSize = (clamp: number, w: number, h: number) => {
-  if (w <= clamp && h <= clamp) return [w, h];
-  clamp = Math.round(clamp);
-  const taller = w < h;
-  const ratio = taller ? h / w : w / h;
-  const newDimension = Math.round(clamp / ratio);
-  return taller ? [newDimension, clamp] : [clamp, newDimension];
-};
-
-export const getRatio = (
-  width: number,
-  height: number,
-  maxWidth: number,
-  maxHeight: number
-) => {
-  let initialRatio = 1;
-  if (width > maxWidth) initialRatio = maxWidth / width;
-  // width = Math.round(width * initialRatio);
-  height = Math.round(height * initialRatio);
-  let heightRatio = 1;
-  if (height > maxHeight) heightRatio = maxHeight / height;
-  return Math.min(initialRatio * heightRatio, 1);
-};
-
 export const SUPPORTED_IFRAME_URLS = [
   'twitter.com',
   'player.twitch.tv',
@@ -76,7 +44,7 @@ export const SUPPORTED_IFRAME_URLS = [
     var Qn = "https://api.spotify.com/v1"
       , Jn = function(e) {
         return "?utm_source=discord&utm_medium=" + e
-    }
+                    }
         WEB_OPEN: function(e, t, n) {
             return void 0 === n && (n = "desktop"),
             "https://open.spotify.com/" + encodeURIComponent(e) + "/" + encodeURIComponent(t) + Jn(n)
@@ -99,8 +67,8 @@ export const SUPPORTED_IFRAME_URLS = [
             return !0;
         default:
             return u.SPOTIFY_HOSTNAMES.includes(t) || a.default.isDiscordHostname(t) || l.has(t)
-        }
-    }
+                }
+            }
 */
 
 export const GIFT_CODE_HOST = 'discord.gift';
