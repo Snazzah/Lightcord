@@ -151,7 +151,7 @@
               </div>
               <a
                 class="icon-wrapper"
-                href="https://www.youtube.com/watch?v=LqdhDh6spdE"
+                :href="source.url"
                 rel="noreferrer noopener"
                 target="_blank"
                 role="button"
@@ -405,7 +405,7 @@
               </div>
               <a
                 class="icon-wrapper"
-                href="https://www.youtube.com/watch?v=LqdhDh6spdE"
+                :href="source.url"
                 rel="noreferrer noopener"
                 target="_blank"
                 role="button"

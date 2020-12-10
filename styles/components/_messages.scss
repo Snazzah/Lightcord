@@ -177,8 +177,7 @@
     }
 
     .extras-container {
-      // display: grid;
-      display: inline-grid;
+      display: grid;
       grid-auto-flow: row;
       grid-row-gap: .25rem;
       text-indent: 0;
@@ -188,7 +187,8 @@
       padding-bottom: .125rem;
 
       & > * {
-        @include alignItems-flexStart;
+        justify-self: start;
+        -ms-flex-item-align: start;
         align-self: start;
       }
     }
